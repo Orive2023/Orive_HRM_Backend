@@ -1,5 +1,9 @@
 package com.orive.Organisation.Repository;
 
-public class DesignationRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.orive.Organisation.Entity.DesignationEntity;
+
+public interface DesignationRepository extends JpaRepository<DesignationEntity, Long>{
 
 }

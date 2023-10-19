@@ -19,7 +19,7 @@ import com.orive.Organisation.Repository.DepartmentRepository;
 @Service
 public class DepartmentService {
 
-private static final Logger logger=LoggerFactory.getLogger(DepartmentService.class);
+    private static final Logger logger=LoggerFactory.getLogger(DepartmentService.class);
 	
 	@Autowired
 	private DepartmentRepository departmentRepository;
