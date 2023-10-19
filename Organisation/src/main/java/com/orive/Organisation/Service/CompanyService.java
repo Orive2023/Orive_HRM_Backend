@@ -54,9 +54,6 @@ public class CompanyService {
         }
     }
     
-    
- 
-    
  // Update list by id
     public CompanyDto updateCompany(Long companyId, CompanyDto companyDto) {
         Optional<CompanyEntity> existingCompanyOptional = companyRepository.findById(companyId);
@@ -72,9 +69,6 @@ public class CompanyService {
         }
     }
     
-   
-
-
     // Delete
     public void deleteCompany(Long companyId) {
     	companyRepository.deleteById(companyId);
@@ -86,9 +80,7 @@ public class CompanyService {
 	 {
 		 return companyRepository.count();
 	 }
-	
-	
-	
+    
 	// Helper method to convert CompanyDTo to Company entity
     private CompanyEntity convertToEntity(CompanyDto companyDto)
     {
