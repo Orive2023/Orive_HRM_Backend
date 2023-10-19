@@ -25,7 +25,7 @@ import lombok.ToString;
 public class CompanyEntity {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long companyId;
 
 	@Column(name = "company_name")

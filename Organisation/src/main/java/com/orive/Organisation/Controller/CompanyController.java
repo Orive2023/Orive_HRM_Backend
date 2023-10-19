@@ -32,59 +32,59 @@ public class CompanyController {
   
   	// Create a new Company
       @PostMapping("/create/company")
-      public ResponseEntity<CompanyDto> createSupplier(@RequestBody CompanyDto supplierDTO) {
-    	  CompanyDto createdSupplier = companyService.createCompany(supplierDTO);
-          logger.info("Created supplier with name: {}", createdSupplier.getCompanyName());
-          return new ResponseEntity<>(createdSupplier, HttpStatus.CREATED);
+      public ResponseEntity<CompanyDto> createCompany(@RequestBody CompanyDto companyDto) {
+    	  CompanyDto createdCompany = companyService.createCompany(companyDto);
+          logger.info("Created company with name: {}", createdCompany.getCompanyName());
+          return new ResponseEntity<>(createdCompany, HttpStatus.CREATED);
       }
 
-      // Get all suppliers
+      // Get all companies
       
       @GetMapping("/get/company")
-      public ResponseEntity<List<CompanyDto>> getAllSuppliers() {
-          List<CompanyDto> suppliers = companyService.getAllCompany();
-          logger.info("Retrieved {} suppliers from the database", suppliers.size());
-          return new ResponseEntity<>(suppliers, HttpStatus.OK);
+      public ResponseEntity<List<CompanyDto>> getAllCompany() {
+          List<CompanyDto> companies = companyService.getAllCompany();
+          logger.info("Retrieved {} companies from the database", companies.size());
+          return new ResponseEntity<>(companies, HttpStatus.OK);
       }
 
-      // Get supplier by ID
+      // Get company by ID
       @GetMapping("/get/{companyId}")
-      public ResponseEntity<CompanyDto> getSupplierById(@PathVariable Long companyId) {
-          Optional<CompanyDto> supplier = companyService.getCompanyById(companyId);
-          if (supplier.isPresent()) {
-              logger.info("Retrieved supplier with ID: {}", companyId);
-              return new ResponseEntity<>(supplier.get(), HttpStatus.OK);
+      public ResponseEntity<CompanyDto> getCompanyById(@PathVariable Long companyId) {
+          Optional<CompanyDto> company = companyService.getCompanyById(companyId);
+          if (company.isPresent()) {
+              logger.info("Retrieved compay with ID: {}", companyId);
+              return new ResponseEntity<>(company.get(), HttpStatus.OK);
           } else {
-              logger.warn("Supplier with ID {} not found", companyId);
+              logger.warn("company with ID {} not found", companyId);
               return new ResponseEntity<>(HttpStatus.NOT_FOUND);
           }
       }
 
-      // Update supplier by ID
+      // Update company by ID
       @PutMapping("/update/{companyId}")
-      public ResponseEntity<CompanyDto> updateSupplier(@PathVariable Long companyId, @RequestBody CompanyDto updatedSupplierDTO) {
-    	  CompanyDto updatedSupplier = companyService.updateCompany(companyId, updatedSupplierDTO);
-          if (updatedSupplier != null) {
-              logger.info("Updated supplier with ID: {}", companyId);
-              return new ResponseEntity<>(updatedSupplier, HttpStatus.OK);
+      public ResponseEntity<CompanyDto> updateCompany(@PathVariable Long companyId, @RequestBody CompanyDto updatedCompanyDTO) {
+    	  CompanyDto updatedCompany = companyService.updateCompany(companyId, updatedCompanyDTO);
+          if (updatedCompany != null) {
+              logger.info("Updated company with ID: {}", companyId);
+              return new ResponseEntity<>(updatedCompany, HttpStatus.OK);
           } else {
-              logger.warn("Supplier with ID {} not found for update", companyId);
+              logger.warn("Company with ID {} not found for update", companyId);
               return new ResponseEntity<>(HttpStatus.NOT_FOUND);
           }
       }
       
 
 
-      // Delete supplier by ID
+      // Delete Company by ID
       @DeleteMapping("/delete/{companyId}")
-      public ResponseEntity<Void> deleteSupplier(@PathVariable Long companyId) {
+      public ResponseEntity<Void> deleteCompany(@PathVariable Long companyId) {
     	  companyService.deleteCompany(companyId);
-          logger.info("Deleted supplier with ID: {}", companyId);
+          logger.info("Deleted company with ID: {}", companyId);
           return new ResponseEntity<>(HttpStatus.NO_CONTENT);
       }
   	    
-  	    @GetMapping("/count/supplier")
-  	    public long countSupplier()
+  	    @GetMapping("/count/company")
+  	    public long countCompany()
   	    {
   	    	return companyService.countCompany();
   	    }

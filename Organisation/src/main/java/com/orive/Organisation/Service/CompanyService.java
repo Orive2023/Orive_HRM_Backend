@@ -28,28 +28,28 @@ public class CompanyService {
 	
 	// Create
     public CompanyDto createCompany(CompanyDto companyDto) {
-    	CompanyEntity supplierEntity = convertToEntity(companyDto);
-        CompanyEntity savedSupplier = companyRepository.save(supplierEntity);
-        logger.info("Created supplier with ID: {}", savedSupplier.getCompanyId());
-        return convertToDTO(savedSupplier);
+    	CompanyEntity companyEntity = convertToEntity(companyDto);
+        CompanyEntity savedCompany = companyRepository.save(companyEntity);
+        logger.info("Created Company with ID: {}", savedCompany.getCompanyId());
+        return convertToDTO(savedCompany);
     }
 
     // Read
     public List<CompanyDto> getAllCompany() {
-        List<CompanyEntity> suppliers = companyRepository.findAll();
-        logger.info("Retrieved {} suppliers from the database", suppliers.size());
-        return suppliers.stream()
+        List<CompanyEntity> companyEntities = companyRepository.findAll();
+        logger.info("Retrieved {} company from the database", companyEntities.size());
+        return companyEntities.stream()
                 .map(this::convertToDTO)
                 .collect(Collectors.toList());
     }
     
     //get by CompanyId
     public Optional<CompanyDto> getCompanyById(Long companyId) {
-        Optional<CompanyEntity> supplier = companyRepository.findById(companyId);
-        if (supplier.isPresent()) {
-            return Optional.of(convertToDTO(supplier.get()));
+        Optional<CompanyEntity> company = companyRepository.findById(companyId);
+        if (company.isPresent()) {
+            return Optional.of(convertToDTO(company.get()));
         } else {
-            logger.warn("Supplier with ID {} not found", companyId);
+            logger.warn("Company with ID {} not found", companyId);
             return Optional.empty();
         }
     }
@@ -59,15 +59,15 @@ public class CompanyService {
     
  // Update list by id
     public CompanyDto updateCompany(Long companyId, CompanyDto companyDto) {
-        Optional<CompanyEntity> existingSupplierOptional = companyRepository.findById(companyId);
-        if (existingSupplierOptional.isPresent()) {
-        	CompanyEntity existingSupplier = existingSupplierOptional.get();
-            modelMapper.map(companyDto, existingSupplier);
-            CompanyEntity updatedSupplier = companyRepository.save(existingSupplier);
-            logger.info("Updated supplier with ID: {}", updatedSupplier.getCompanyId());
-            return convertToDTO(updatedSupplier);
+        Optional<CompanyEntity> existingCompanyOptional = companyRepository.findById(companyId);
+        if (existingCompanyOptional.isPresent()) {
+        	CompanyEntity existingCompany = existingCompanyOptional.get();
+            modelMapper.map(companyDto, existingCompanyOptional);
+            CompanyEntity updatedCompany = companyRepository.save(existingCompany);
+            logger.info("Updated company with ID: {}", updatedCompany.getCompanyId());
+            return convertToDTO(updatedCompany);
         } else {
-            logger.warn("Supplier with ID {} not found for update", companyId);
+            logger.warn("Company with ID {} not found for update", companyId);
             return null;
         }
     }
@@ -78,10 +78,10 @@ public class CompanyService {
     // Delete
     public void deleteCompany(Long companyId) {
     	companyRepository.deleteById(companyId);
-        logger.info("Deleted supplier with ID: {}", companyId);
+        logger.info("Deleted company with ID: {}", companyId);
     }
 
-    //count the total supplierlist
+    //count the total company
     public long countCompany()
 	 {
 		 return companyRepository.count();

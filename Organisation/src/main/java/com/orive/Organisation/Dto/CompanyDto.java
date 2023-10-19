@@ -18,7 +18,7 @@ import lombok.ToString;
 public class CompanyDto {
 
 	
-	private Long companyId;
+//	private Long companyId;
 	private String companyName;
 	private String companyType;
 	private String legalOrTrandingName;
@@ -28,5 +28,5 @@ public class CompanyDto {
 	private String website;
 	private String taxNumberOrEin;
 	private String address;
-	private byte[] companyLogo;
+//	private byte[] companyLogo;
 }
