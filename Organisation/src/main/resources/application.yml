@@ -5,7 +5,7 @@ spring:
     password: Orive@123
     driver-class-name: com.mysql.cj.jdbc.Driver
   application:
-    name: COMPANY-SERVICE
+    name: ORGANISATION-SERVICE
 
 
   jpa:
