@@ -26,7 +26,7 @@ public class CompanyEntity {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int companyId;
+	private Long companyId;
 
 	@Column(name = "company_name")
 	private String companyName;
