@@ -1,4 +1,7 @@
-package com.orive.Employee.Entity;
+package com.orive.project.Entity;
+
+import java.util.Date;
+import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -18,45 +21,39 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "travels")
-public class TravelsEntity {
-	
+@Table(name = "projects")
+public class ProjectEntity {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long travelId;
+	private long projectsId;
 	
-	@Column(name = "employee_name")
-	private String employeeName;
+	@Column(name = "title")
+	private String title;
 	
-
+	@Column(name = "client_name")
+	private String clientName;
+	
+	@Column(name = "company_name")
+	private String companyName;
+	
 	@Column(name = "start_date")
 	private String startDate;
 	
-	
-	@Column(name = "end_date")
+	@Column(name = "end_date" )
 	private String endDate;
 	
-	@Column(name = "purpose_of_visit")
-	private String purposeOfVisit;
+	@Column(name = "priority")
+	private String priority;
 	
-	@Column(name = "place_of_visit")
-	private String placeOfVisit;
+	@Column(name = "project_managers")
+	private String projectManagers;
 	
-	@Column(name = "travel_mode")
-	private String travelMode;
-	
-
-	@Column(name = "arrangement_type")
-	private String arrangementType;
-	
-	@Column(name = "expected_travel_budget")
-	private double expectedTravelBudget;
-	
-	@Column(name = "actual_travel_budget")
-	private double actualTravelBudget;
+	@Column(name = "summary")
+	private String summary;
 	
 	@Column(name = "description")
 	private String description;
+	
 
 }
