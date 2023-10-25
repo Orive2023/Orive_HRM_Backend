@@ -11,9 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.orive.Employee.Dto.ComplaintsDto;
-import com.orive.Employee.Dto.PromotionsDto;
 import com.orive.Employee.Entity.ComplaintsEntity;
-import com.orive.Employee.Entity.PromotionsEntity;
 import com.orive.Employee.Repository.ComplaintsRepository;
 
 @Service
