@@ -1,0 +1,97 @@
+package com.orive.Payroll.Controller;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.orive.Payroll.Dto.AdvanceSaleryDto;
+import com.orive.Payroll.Dto.HourlyWagesDto;
+import com.orive.Payroll.Service.AdvanceSaleryService;
+
+
+
+@RestController
+@RequestMapping(value = "advancesalery")
+public class AdvanceSaleryController {
+	
+	private static final Logger logger = LoggerFactory.getLogger(AdvanceSaleryController.class);
+
+    @Autowired
+    private AdvanceSaleryService advanceSaleryService;
+    
+    
+ // Create a new AdvanceSalery
+    @PostMapping("/create/advancesalery")
+    public ResponseEntity<AdvanceSaleryDto> createAdvanceSalery(@RequestBody AdvanceSaleryDto advanceSaleryDto ) {
+    	AdvanceSaleryDto createdadvanceSalery = advanceSaleryService.createAdvanceSalery(advanceSaleryDto);
+        logger.info("Created AdvanceSalery with name: {}", createdadvanceSalery.getAdvanceSaleryId());
+        return new ResponseEntity<>(createdadvanceSalery, HttpStatus.CREATED);
+    }
+
+    // Get all AdvanceSalery
+    
+    @GetMapping("/get/advancesalery")
+    public ResponseEntity<List<AdvanceSaleryDto>> getAllAdvanceSalery() {
+        List<AdvanceSaleryDto> advanceSalery = advanceSaleryService.getAllAdvanceSalerys();
+        logger.info("Retrieved {} AdvanceSalery from the database", advanceSalery.size());
+        return new ResponseEntity<>(advanceSalery, HttpStatus.OK);
+    }
+
+    // Get AdvanceSalery by ID
+    @GetMapping("/get/{advancesaleryId}")
+    public ResponseEntity<AdvanceSaleryDto> getAdvanceSaleryById(@PathVariable Long advanceSaleryId) {
+        Optional<AdvanceSaleryDto> advanceSalery = advanceSaleryService.getAdvanceSaleryById(advanceSaleryId);
+        if (advanceSalery.isPresent()) {
+            logger.info("Retrieved AdvanceSalery with ID: {}", advanceSaleryId);
+            return new ResponseEntity<>(advanceSalery.get(), HttpStatus.OK);
+        } else {
+            logger.warn("AdvanceSalery with ID {} not found", advanceSaleryId);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    // Update AdvanceSalery by ID
+    @PutMapping("/update/{advancesaleryId}")
+    public ResponseEntity<AdvanceSaleryDto> updateAdvanceSalery(@PathVariable Long advanceSaleryId, @RequestBody AdvanceSaleryDto updatedAdvanceSaleryDto) {
+    	AdvanceSaleryDto updatedAdvanceSalery = advanceSaleryService.updateAdvanceSalery(advanceSaleryId, updatedAdvanceSaleryDto);
+        if (updatedAdvanceSalery != null) {
+            logger.info("Updated AdvanceSalery with ID: {}", advanceSaleryId);
+            return new ResponseEntity<>(updatedAdvanceSalery, HttpStatus.OK);
+        } else {
+            logger.warn("AdvanceSalery with ID {} not found for update", advanceSaleryId);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+    
+
+
+    // Delete AdvanceSalery by ID
+    @DeleteMapping("/delete/{advancesaleryId}")
+    public ResponseEntity<Void> deleteAdvanceSalery(@PathVariable Long advanceSaleryId) {
+  	  advanceSaleryService.deleteAdvanceSalery(advanceSaleryId);
+        logger.info("Deleted AdvanceSalery with ID: {}", advanceSaleryId);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+	    
+	    @GetMapping("/count/advancesalery")
+	    public long AdvanceSalery()
+	    {
+	    	return advanceSaleryService.countAdvanceSalery();
+	    }
+
+
+
+}

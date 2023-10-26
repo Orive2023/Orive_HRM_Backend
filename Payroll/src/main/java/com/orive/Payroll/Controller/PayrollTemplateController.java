@@ -32,60 +32,60 @@ public class PayrollTemplateController {
     private PayrollTemplateService payrollTemplateService;
 
   
-  	// Create a new Company
-      @PostMapping("/create/payrollTemplate")
-      public ResponseEntity<PayrollTemplateDto> createPayRollTemplate(@RequestBody PayrollTemplateDto companyDto) {
-    	  PayrollTemplateDto createdCompany = payrollTemplateService.createPayrollTemplate(companyDto);
-          logger.info("Created company with name: {}", createdCompany.getTemplateName());
-          return new ResponseEntity<>(createdCompany, HttpStatus.CREATED);
+  	// Create a new payrollTemplate
+      @PostMapping("/create/payrolltemplate")
+      public ResponseEntity<PayrollTemplateDto> createPayRollTemplate(@RequestBody PayrollTemplateDto payrollTemplateDto) {
+    	  PayrollTemplateDto createdpayrollTemplate = payrollTemplateService.createPayrollTemplate(payrollTemplateDto);
+          logger.info("Created PayrollTemplate with name: {}", createdpayrollTemplate.getTemplateName());
+          return new ResponseEntity<>(createdpayrollTemplate, HttpStatus.CREATED);
       }
 
-      // Get all companies
+      // Get all PayrollTemplate
       
-      @GetMapping("/get/payrollTemplate")
+      @GetMapping("/get/payrolltemplate")
       public ResponseEntity<List<PayrollTemplateDto>> getAllPayRollTemplate() {
-          List<PayrollTemplateDto> companies = payrollTemplateService.getAllPayrollTemplate();
-          logger.info("Retrieved {} companies from the database", companies.size());
-          return new ResponseEntity<>(companies, HttpStatus.OK);
+          List<PayrollTemplateDto> payrollTemplate = payrollTemplateService.getAllPayrollTemplate();
+          logger.info("Retrieved {} PayrollTemplate from the database", payrollTemplate.size());
+          return new ResponseEntity<>(payrollTemplate, HttpStatus.OK);
       }
 
-      // Get company by ID
-      @GetMapping("/get/{PayRollTemplateId}")
+      // Get PayrollTemplate by ID
+      @GetMapping("/get/{payrolltemplateId}")
       public ResponseEntity<PayrollTemplateDto> getPayRollTemplateById(@PathVariable Long PayRollTemplateId) {
-          Optional<PayrollTemplateDto> company = payrollTemplateService.getPayrollTemplateById(PayRollTemplateId);
-          if (company.isPresent()) {
-              logger.info("Retrieved compay with ID: {}", PayRollTemplateId);
-              return new ResponseEntity<>(company.get(), HttpStatus.OK);
+          Optional<PayrollTemplateDto> payrollTemplate = payrollTemplateService.getPayrollTemplateById(PayRollTemplateId);
+          if (payrollTemplate.isPresent()) {
+              logger.info("Retrieved PayrollTemplate with ID: {}", PayRollTemplateId);
+              return new ResponseEntity<>(payrollTemplate.get(), HttpStatus.OK);
           } else {
-              logger.warn("company with ID {} not found", PayRollTemplateId);
+              logger.warn("PayrollTemplate with ID {} not found", PayRollTemplateId);
               return new ResponseEntity<>(HttpStatus.NOT_FOUND);
           }
       }
 
-      // Update company by ID
-      @PutMapping("/update/{PayRollTemplateId}")
-      public ResponseEntity<PayrollTemplateDto> updatePayRollTemplate(@PathVariable Long PayRollTemplateId, @RequestBody PayrollTemplateDto updatedCompanyDTO) {
-    	  PayrollTemplateDto updatedCompany = payrollTemplateService.updatePayrollTemplate(PayRollTemplateId, updatedCompanyDTO);
-          if (updatedCompany != null) {
-              logger.info("Updated company with ID: {}", PayRollTemplateId);
-              return new ResponseEntity<>(updatedCompany, HttpStatus.OK);
+      // Update PayrollTemplate by ID
+      @PutMapping("/update/{payrolltemplateId}")
+      public ResponseEntity<PayrollTemplateDto> updatePayRollTemplate(@PathVariable Long PayRollTemplateId, @RequestBody PayrollTemplateDto updatedPayrollTemplateDto) {
+    	  PayrollTemplateDto updatedPayrollTemplate = payrollTemplateService.updatePayrollTemplate(PayRollTemplateId, updatedPayrollTemplateDto);
+          if (updatedPayrollTemplate != null) {
+              logger.info("Updated PayrollTemplate with ID: {}", PayRollTemplateId);
+              return new ResponseEntity<>(updatedPayrollTemplate, HttpStatus.OK);
           } else {
-              logger.warn("Company with ID {} not found for update", PayRollTemplateId);
+              logger.warn("PayrollTemplate with ID {} not found for update", PayRollTemplateId);
               return new ResponseEntity<>(HttpStatus.NOT_FOUND);
           }
       }
       
 
 
-      // Delete Company by ID
-      @DeleteMapping("/delete/{PayRollTemplateId}")
+      // Delete PayrollTemplate by ID
+      @DeleteMapping("/delete/{payrolltemplateId}")
       public ResponseEntity<Void> deletePayRollTemplate(@PathVariable Long PayRollTemplateId) {
     	  payrollTemplateService.deletePayrollTemplate(PayRollTemplateId);
-          logger.info("Deleted company with ID: {}", PayRollTemplateId);
+          logger.info("Deleted PayrollTemplate with ID: {}", PayRollTemplateId);
           return new ResponseEntity<>(HttpStatus.NO_CONTENT);
       }
   	    
-  	    @GetMapping("/count/payrollTemplate")
+  	    @GetMapping("/count/payrolltemplate")
   	    public long countPayRollTemplate()
   	    {
   	    	return payrollTemplateService.countPayrollTemplate();

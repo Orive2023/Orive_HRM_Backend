@@ -29,44 +29,44 @@ private static final Logger logger=LoggerFactory.getLogger(PayrollTemplateServic
 	
 	
 	// Create
-    public PayrollTemplateDto createPayrollTemplate(PayrollTemplateDto companyDto) {
-    	PayRollTemplateEntity companyEntity = convertToEntity(companyDto);
-    	PayRollTemplateEntity savedCompany = payrollTemplateRepository.save(companyEntity);
-        logger.info("Created Company with ID: {}", savedCompany.getPayRollTemplateId());
-        return convertToDTO(savedCompany);
+    public PayrollTemplateDto createPayrollTemplate(PayrollTemplateDto payrollTemplateDto) {
+    	PayRollTemplateEntity  payrollTemplateEntity = convertToEntity(payrollTemplateDto);
+    	PayRollTemplateEntity savedPayrollTemplate = payrollTemplateRepository.save(payrollTemplateEntity);
+        logger.info("Created PayrollTemplate with ID: {}", savedPayrollTemplate.getPayRollTemplateId());
+        return convertToDTO(savedPayrollTemplate);
     }
 
     // Read
     public List<PayrollTemplateDto> getAllPayrollTemplate() {
-        List<PayRollTemplateEntity> companyEntities = payrollTemplateRepository.findAll();
-        logger.info("Retrieved {} company from the database", companyEntities.size());
-        return companyEntities.stream()
+        List<PayRollTemplateEntity> payrollTemplateEntities = payrollTemplateRepository.findAll();
+        logger.info("Retrieved {} PayrollTemplate from the database", payrollTemplateEntities.size());
+        return payrollTemplateEntities.stream()
                 .map(this::convertToDTO)
                 .collect(Collectors.toList());
     }
     
-    //get by CompanyId
+    //get by PayrollTemplateId
     public Optional<PayrollTemplateDto> getPayrollTemplateById(Long PayRollTemplateId) {
-        Optional<PayRollTemplateEntity> company = payrollTemplateRepository.findById(PayRollTemplateId);
-        if (company.isPresent()) {
-            return Optional.of(convertToDTO(company.get()));
+        Optional<PayRollTemplateEntity> payrollTemplate = payrollTemplateRepository.findById(PayRollTemplateId);
+        if (payrollTemplate.isPresent()) {
+            return Optional.of(convertToDTO(payrollTemplate.get()));
         } else {
-            logger.warn("Company with ID {} not found", PayRollTemplateId);
+            logger.warn("PayrollTemplate with ID {} not found", PayRollTemplateId);
             return Optional.empty();
         }
     }
     
  // Update list by id
-    public PayrollTemplateDto updatePayrollTemplate(Long PayRollTemplateId, PayrollTemplateDto companyDto) {
-        Optional<PayRollTemplateEntity> existingCompanyOptional = payrollTemplateRepository.findById(PayRollTemplateId);
-        if (existingCompanyOptional.isPresent()) {
-        	PayRollTemplateEntity existingCompany = existingCompanyOptional.get();
-            modelMapper.map(companyDto, existingCompanyOptional);
-            PayRollTemplateEntity updatedCompany = payrollTemplateRepository.save(existingCompany);
-            logger.info("Updated company with ID: {}", updatedCompany.getPayRollTemplateId());
-            return convertToDTO(updatedCompany);
+    public PayrollTemplateDto updatePayrollTemplate(Long PayRollTemplateId, PayrollTemplateDto payrollTemplateDto) {
+        Optional<PayRollTemplateEntity> existingPayRollTemplateOptional = payrollTemplateRepository.findById(PayRollTemplateId);
+        if (existingPayRollTemplateOptional.isPresent()) {
+        	PayRollTemplateEntity existingPayrollTemplate= existingPayRollTemplateOptional.get();
+            modelMapper.map(payrollTemplateDto, existingPayRollTemplateOptional);
+            PayRollTemplateEntity updatedPayrollTemplate = payrollTemplateRepository.save(existingPayrollTemplate);
+            logger.info("Updated PayrollTemplate with ID: {}", updatedPayrollTemplate.getPayRollTemplateId());
+            return convertToDTO(updatedPayrollTemplate);
         } else {
-            logger.warn("Company with ID {} not found for update", PayRollTemplateId);
+            logger.warn("PayrollTemplate with ID {} not found for update", PayRollTemplateId);
             return null;
         }
     }
@@ -74,22 +74,22 @@ private static final Logger logger=LoggerFactory.getLogger(PayrollTemplateServic
     // Delete
     public void deletePayrollTemplate(Long PayRollTemplateId) {
     	payrollTemplateRepository.deleteById(PayRollTemplateId);
-        logger.info("Deleted company with ID: {}", PayRollTemplateId);
+        logger.info("Deleted PayrollTemplate with ID: {}", PayRollTemplateId);
     }
 
-    //count the total company
+    //count the total PayrollTemplate
     public long countPayrollTemplate()
 	 {
 		 return payrollTemplateRepository.count();
 	 }
     
-	// Helper method to convert CompanyDTo to Company entity
+	// Helper method to convert PayrollTemplateDTo to PayrollTemplateEntity
     private PayRollTemplateEntity convertToEntity(PayrollTemplateDto companyDto)
     {
     	return modelMapper.map(companyDto, PayRollTemplateEntity.class);
     }
 
-    // Helper method to convert Company Entity entity to CompanyDTo
+    // Helper method to convert PayrollTemplateEntity entity to PayrollTemplateDTo
     private PayrollTemplateDto convertToDTO(PayRollTemplateEntity companyEntity) {
         return modelMapper.map(companyEntity, PayrollTemplateDto.class);
     } 

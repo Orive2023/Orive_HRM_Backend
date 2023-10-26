@@ -23,7 +23,6 @@ public class WarningsEntity {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	
 	private Long warningsId;
 	
 	@Column(name = "warning_to_employee")
