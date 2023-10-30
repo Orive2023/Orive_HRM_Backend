@@ -51,7 +51,7 @@ public class EmployeeLastLoginController {
 		  }
 
 		  // Get EmployeeLastLogin by ID
-		  @GetMapping("/get/{employees_last_loginId}")
+		  @GetMapping("/get/{employeesLastLoginId}")
 		  public ResponseEntity<EmployeesLastLoginDto> getEmployeesLastLoginDtoId(@PathVariable Long employeesLastLoginId) {
 		      Optional<EmployeesLastLoginDto> employeesLastLogins = employeesLastLoginService.getEmployeesLastLoginById(employeesLastLoginId);
 		      if (employeesLastLogins.isPresent()) {
@@ -64,7 +64,7 @@ public class EmployeeLastLoginController {
 		  }
 
 		  // Update EmployeeLastLogin by ID
-		  @PutMapping("/update/{employees_last_loginId}")
+		  @PutMapping("/update/{employeesLastLoginId}")
 		  public ResponseEntity<EmployeesLastLoginDto> updateEmployeesLastLogins(@PathVariable Long employeesLastLoginId, @RequestBody EmployeesLastLoginDto updatedEmployeesLastLoginDto) {
 			  EmployeesLastLoginDto updatedEmployeesLastLogins = employeesLastLoginService.updateEmployeesLastLogin(employeesLastLoginId, updatedEmployeesLastLoginDto);
 		      if (updatedEmployeesLastLogins != null) {
@@ -77,7 +77,7 @@ public class EmployeeLastLoginController {
 		  }
 		  
 		  // Delete EmployeeLastLogin by ID
-		  @DeleteMapping("/delete/{employees_last_loginId}")
+		  @DeleteMapping("/delete/{employeesLastLoginId}")
 		  public ResponseEntity<Void> deleteEmployeeLastLogins(@PathVariable Long employeesLastLoginId) {
 			   employeesLastLoginService.deleteEmployeesLastLogin(employeesLastLoginId);
 		      logger.info("Deleted EmployeeLastLogin with ID: {}", employeesLastLoginId);

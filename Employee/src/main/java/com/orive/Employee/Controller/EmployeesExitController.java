@@ -51,7 +51,7 @@ public class EmployeesExitController {
 	  }
 
 	  // Get EmployeeExit by ID
-	  @GetMapping("/get/{employee_exitId}")
+	  @GetMapping("/get/{employeesExitId}")
 	  public ResponseEntity<EmployeesExitDto> getEmployeesExitDtoId(@PathVariable Long employeesExitId) {
 	      Optional<EmployeesExitDto> employeesExit = employeesExitService.getEmployeesExitById(employeesExitId);
 	      if (employeesExit.isPresent()) {
@@ -64,7 +64,7 @@ public class EmployeesExitController {
 	  }
 
 	  // Update EmployeeExit by ID
-	  @PutMapping("/update/{employee_exitId}")
+	  @PutMapping("/update/{employeesExitId}")
 	  public ResponseEntity<EmployeesExitDto> updateEmployeesExit(@PathVariable Long employeesExitId, @RequestBody EmployeesExitDto updatedEmployeesExitDto) {
 		  EmployeesExitDto updatedEmployeesExit = employeesExitService.updateEmployeesExit(employeesExitId, updatedEmployeesExitDto);
 	      if (updatedEmployeesExit != null) {
@@ -77,7 +77,7 @@ public class EmployeesExitController {
 	  }
 	  
 	  // Delete EmployeeExit by ID
-	  @DeleteMapping("/delete/{employee_exitId}")
+	  @DeleteMapping("/delete/{employeesExitId}")
 	  public ResponseEntity<Void> deleteEmployeesExits(@PathVariable Long employeesExitId) {
 		   employeesExitService.deleteEmployeeExit(employeesExitId);
 	      logger.info("Deleted EmployeeExit with ID: {}", employeesExitId);

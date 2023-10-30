@@ -49,7 +49,7 @@ public class DesignationController {
       }
 
       // Get company by ID
-      @GetMapping("/get/{locationId}")
+      @GetMapping("/get/{designationId}")
       public ResponseEntity<DesignationDto> getDesignationById(@PathVariable Long designationId) {
           Optional<DesignationDto> company = designationService.getDesignationById(designationId);
           if (company.isPresent()) {

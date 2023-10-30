@@ -51,7 +51,7 @@ public class AdvanceSaleryController {
     }
 
     // Get AdvanceSalery by ID
-    @GetMapping("/get/{advancesaleryId}")
+    @GetMapping("/get/{advanceSaleryId}")
     public ResponseEntity<AdvanceSaleryDto> getAdvanceSaleryById(@PathVariable Long advanceSaleryId) {
         Optional<AdvanceSaleryDto> advanceSalery = advanceSaleryService.getAdvanceSaleryById(advanceSaleryId);
         if (advanceSalery.isPresent()) {
@@ -64,7 +64,7 @@ public class AdvanceSaleryController {
     }
 
     // Update AdvanceSalery by ID
-    @PutMapping("/update/{advancesaleryId}")
+    @PutMapping("/update/{advanceSaleryId}")
     public ResponseEntity<AdvanceSaleryDto> updateAdvanceSalery(@PathVariable Long advanceSaleryId, @RequestBody AdvanceSaleryDto updatedAdvanceSaleryDto) {
     	AdvanceSaleryDto updatedAdvanceSalery = advanceSaleryService.updateAdvanceSalery(advanceSaleryId, updatedAdvanceSaleryDto);
         if (updatedAdvanceSalery != null) {
@@ -79,7 +79,7 @@ public class AdvanceSaleryController {
 
 
     // Delete AdvanceSalery by ID
-    @DeleteMapping("/delete/{advancesaleryId}")
+    @DeleteMapping("/delete/{advanceSaleryId}")
     public ResponseEntity<Void> deleteAdvanceSalery(@PathVariable Long advanceSaleryId) {
   	  advanceSaleryService.deleteAdvanceSalery(advanceSaleryId);
         logger.info("Deleted AdvanceSalery with ID: {}", advanceSaleryId);

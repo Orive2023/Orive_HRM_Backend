@@ -50,7 +50,7 @@ public class JobInterviewController {
 	  }
 
 	  // Get JobInterview by ID
-	  @GetMapping("/get/{jobinterviewId}")
+	  @GetMapping("/get/{jobInterviewId}")
 	  public ResponseEntity<JobInterviewDto> getJobInterviewId(@PathVariable Long jobInterviewId) {
 	      Optional<JobInterviewDto> jobInterview = jobInterviewService.getJobInterviewId(jobInterviewId);
 	      if (jobInterview.isPresent()) {
@@ -63,7 +63,7 @@ public class JobInterviewController {
 	  }
 
 	  // Update JobInterview by ID
-	  @PutMapping("/update/{jobinterviewId}")
+	  @PutMapping("/update/{jobInterviewId}")
 	  public ResponseEntity<JobInterviewDto> updateJobInterview(@PathVariable Long jobInterviewId, @RequestBody JobInterviewDto updatedJobInterviewDto) {
 		  JobInterviewDto updatedJobInterview = jobInterviewService.updateJobInterview(jobInterviewId, updatedJobInterviewDto);
 	      if (updatedJobInterview != null) {
@@ -76,7 +76,7 @@ public class JobInterviewController {
 	  }
 	  
 	  // Delete JobInterview by ID
-	  @DeleteMapping("/delete/{jobinterviewId}")
+	  @DeleteMapping("/delete/{jobInterviewId}")
 	  public ResponseEntity<Void> deleteJobInterview(@PathVariable Long jobInterviewId) {
 		   jobInterviewService.deleteJobInterview(jobInterviewId);
 	      logger.info("Deleted JobInterview with ID: {}", jobInterviewId);

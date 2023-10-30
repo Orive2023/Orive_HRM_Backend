@@ -50,7 +50,7 @@ public class HourlyWagesController {
     }
 
     // Get HourlyWages by ID
-    @GetMapping("/get/{hourlywagesId}")
+    @GetMapping("/get/{hourlyWagesId}")
     public ResponseEntity<HourlyWagesDto> getHourlyWagesById(@PathVariable Long hourlyWagesId) {
         Optional<HourlyWagesDto> hourlyWages = hourlyWagesService.getHourlyWagesById(hourlyWagesId);
         if (hourlyWages.isPresent()) {
@@ -63,7 +63,7 @@ public class HourlyWagesController {
     }
 
     // Update HourlyWages by ID
-    @PutMapping("/update/{hourlywagesId}")
+    @PutMapping("/update/{hourlyWagesId}")
     public ResponseEntity<HourlyWagesDto> updateHourlyWages(@PathVariable Long hourlyWagesId, @RequestBody HourlyWagesDto updatedHourlyWagesDto) {
     	HourlyWagesDto updatedHourlyWages = hourlyWagesService.updateHourlyWages(hourlyWagesId, updatedHourlyWagesDto);
         if (updatedHourlyWages != null) {
@@ -78,7 +78,7 @@ public class HourlyWagesController {
 
 
     // Delete HourlyWages by ID
-    @DeleteMapping("/delete/{hourlywagesId}")
+    @DeleteMapping("/delete/{hourlyWagesId}")
     public ResponseEntity<Void> deleteHourlyWages(@PathVariable Long hourlyWagesId) {
   	  hourlyWagesService.deleteHourlyWages(hourlyWagesId);
         logger.info("Deleted HourlyWages with ID: {}", hourlyWagesId);

@@ -50,7 +50,7 @@ public class PayrollTemplateController {
       }
 
       // Get PayrollTemplate by ID
-      @GetMapping("/get/{payrolltemplateId}")
+      @GetMapping("/get/{PayRollTemplateId}")
       public ResponseEntity<PayrollTemplateDto> getPayRollTemplateById(@PathVariable Long PayRollTemplateId) {
           Optional<PayrollTemplateDto> payrollTemplate = payrollTemplateService.getPayrollTemplateById(PayRollTemplateId);
           if (payrollTemplate.isPresent()) {
@@ -63,7 +63,7 @@ public class PayrollTemplateController {
       }
 
       // Update PayrollTemplate by ID
-      @PutMapping("/update/{payrolltemplateId}")
+      @PutMapping("/update/{PayRollTemplateId}")
       public ResponseEntity<PayrollTemplateDto> updatePayRollTemplate(@PathVariable Long PayRollTemplateId, @RequestBody PayrollTemplateDto updatedPayrollTemplateDto) {
     	  PayrollTemplateDto updatedPayrollTemplate = payrollTemplateService.updatePayrollTemplate(PayRollTemplateId, updatedPayrollTemplateDto);
           if (updatedPayrollTemplate != null) {
@@ -78,7 +78,7 @@ public class PayrollTemplateController {
 
 
       // Delete PayrollTemplate by ID
-      @DeleteMapping("/delete/{payrolltemplateId}")
+      @DeleteMapping("/delete/{PayRollTemplateId}")
       public ResponseEntity<Void> deletePayRollTemplate(@PathVariable Long PayRollTemplateId) {
     	  payrollTemplateService.deletePayrollTemplate(PayRollTemplateId);
           logger.info("Deleted PayrollTemplate with ID: {}", PayRollTemplateId);

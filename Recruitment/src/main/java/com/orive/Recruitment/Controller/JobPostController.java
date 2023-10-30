@@ -48,7 +48,7 @@ public class JobPostController {
 		  }
 
 		  // Get JobPost by ID
-		  @GetMapping("/get/{jobpostId}")
+		  @GetMapping("/get/{jobPostId}")
 		  public ResponseEntity<JobPostDto> getJobPostDtoId(@PathVariable Long jobPostId) {
 		      Optional<JobPostDto> jobPost = jobPostService.getJobPostId(jobPostId);
 		      if (jobPost.isPresent()) {
@@ -61,7 +61,7 @@ public class JobPostController {
 		  }
 
 		  // Update JobPost by ID
-		  @PutMapping("/update/{jobpostId}")
+		  @PutMapping("/update/{jobPostId}")
 		  public ResponseEntity<JobPostDto> updateJobPost(@PathVariable Long jobPostId, @RequestBody JobPostDto updatedJobPostDto) {
 			  JobPostDto updatedJobPost = jobPostService.updateJobPost(jobPostId, updatedJobPostDto);
 		      if (updatedJobPost != null) {
@@ -74,7 +74,7 @@ public class JobPostController {
 		  }
 		  
 		  // Delete JobPost by ID
-		  @DeleteMapping("/delete/{jobpostId}")
+		  @DeleteMapping("/delete/{jobPostId}")
 		  public ResponseEntity<Void> deleteJobPost(@PathVariable Long jobPostId) {
 			   jobPostService.deleteJobPost(jobPostId);
 		      logger.info("Deleted JobPost with ID: {}", jobPostId);

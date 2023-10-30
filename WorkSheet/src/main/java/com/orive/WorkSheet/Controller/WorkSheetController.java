@@ -47,7 +47,7 @@ public class WorkSheetController {
 		  }
 
 		  // Get WorkSheet by ID
-		  @GetMapping("/get/{worksheetId}")
+		  @GetMapping("/get/{workSheetId}")
 		  public ResponseEntity<WorkSheetDto> getWorkSheetDtoId(@PathVariable Long workSheetId) {
 		      Optional<WorkSheetDto> workSheet = workSheetService.getWorkSheetId(workSheetId);
 		      if (workSheet.isPresent()) {
@@ -60,7 +60,7 @@ public class WorkSheetController {
 		  }
 
 		  // Update WorkSheet by ID
-		  @PutMapping("/update/{worksheetId}")
+		  @PutMapping("/update/{workSheetId}")
 		  public ResponseEntity<WorkSheetDto> updateWorkSheet(@PathVariable Long workSheetId, @RequestBody WorkSheetDto updatedWorkSheetDto) {
 			  WorkSheetDto updatedWorkSheet = workSheetService.updateWorkSheet(workSheetId, updatedWorkSheetDto);
 		      if (updatedWorkSheet != null) {
@@ -73,7 +73,7 @@ public class WorkSheetController {
 		  }
 		  
 		  // Delete WorkSheet by ID
-		  @DeleteMapping("/delete/{worksheetId}")
+		  @DeleteMapping("/delete/{workSheetId}")
 		  public ResponseEntity<Void> deleteWorkSheet(@PathVariable Long workSheetId) {
 			   workSheetService.deleteWorkSheet(workSheetId);
 		      logger.info("Deleted WorkSheet with ID: {}", workSheetId);
