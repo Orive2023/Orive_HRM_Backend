@@ -91,8 +91,6 @@ public class JobInterviewService {
  // Helper method to convert JobInterviewEntity entity to JobInterviewDTo
     private JobInterviewDto convertToDTO(JobInterviewEntity jobInterviewEntity) {
         return modelMapper.map(jobInterviewEntity, JobInterviewDto.class);
-    } 
-
-
+    }
 
 }

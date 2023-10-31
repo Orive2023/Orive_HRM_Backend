@@ -43,7 +43,7 @@ public class JobInterviewController {
 	  
 	  // Get all JobInterview
 	  @GetMapping("/get/jobinterview")
-	  public ResponseEntity<List<JobInterviewDto>> getAllJobJobInterview() {
+	  public ResponseEntity<List<JobInterviewDto>> getAllJobInterview() {
 	      List<JobInterviewDto> jobInterview = jobInterviewService.getAllJobInterview();
 	      logger.info("Retrieved {} JobInterview from the database", jobInterview.size());
 	      return new ResponseEntity<>(jobInterview, HttpStatus.OK);
