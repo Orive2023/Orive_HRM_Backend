@@ -12,7 +12,8 @@ import org.springframework.stereotype.Service;
 
 import com.orive.Recruitment.Dto.JobsListingFrontendDto;
 import com.orive.Recruitment.Entity.JobsListingFrontendEntity;
-import com.orive.Recruitment.Repository.JobsListingFrontendRepository;
+import com.orive.Recruitment.Repository.JobsListingFrontedRepository;
+
 
 @Service
 public class JobsListingFrontendService {
@@ -20,7 +21,7 @@ public class JobsListingFrontendService {
 	private static final Logger logger = LoggerFactory.getLogger(JobsListingFrontendService.class);
 	
 	@Autowired
-	private JobsListingFrontendRepository jobsListingFrontendRepository;
+	private JobsListingFrontedRepository jobsListingFrontedRepository;
 	
 	@Autowired
 	private ModelMapper modelMapper;
@@ -28,14 +29,14 @@ public class JobsListingFrontendService {
 	// Create
     public JobsListingFrontendDto createJobsListingFrontend (JobsListingFrontendDto jobsListingFrontendDto) {
     	JobsListingFrontendEntity  jobsListingFrontendEntity = convertToEntity(jobsListingFrontendDto);
-    	JobsListingFrontendEntity savedJobsListingFrontend = jobsListingFrontendRepository.save(jobsListingFrontendEntity);
+    	JobsListingFrontendEntity savedJobsListingFrontend = jobsListingFrontedRepository.save(jobsListingFrontendEntity);
         logger.info("Created JobsListingFrontend with ID: {}", savedJobsListingFrontend.getJobsListingFrontendId());
         return convertToDTO(savedJobsListingFrontend);
     }
 
     // Read
     public List<JobsListingFrontendDto> getAllJobsListingFrontend() {
-        List<JobsListingFrontendEntity>jobsListingFrontendEntities = jobsListingFrontendRepository.findAll();
+        List<JobsListingFrontendEntity>jobsListingFrontendEntities = jobsListingFrontedRepository.findAll();
         logger.info("Retrieved {} JobsListingFrontend from the database", jobsListingFrontendEntities.size());
         return jobsListingFrontendEntities.stream()
                 .map(this::convertToDTO)
@@ -44,7 +45,7 @@ public class JobsListingFrontendService {
     
     //get by JobsListingFrontendId
     public Optional<JobsListingFrontendDto> getJobsListingFrontendId(Long jobsListingFrontendId) {
-        Optional<JobsListingFrontendEntity> jobsListingFrontend = jobsListingFrontendRepository.findById(jobsListingFrontendId);
+        Optional<JobsListingFrontendEntity> jobsListingFrontend = jobsListingFrontedRepository.findById(jobsListingFrontendId);
         if (jobsListingFrontend.isPresent()) {
             return Optional.of(convertToDTO(jobsListingFrontend.get()));
         } else {
@@ -55,11 +56,11 @@ public class JobsListingFrontendService {
     
  // Update list by id
     public JobsListingFrontendDto updateJobsListingFrontend(Long jobsListingFrontendId, JobsListingFrontendDto jobsListingFrontendDto) {
-        Optional<JobsListingFrontendEntity> existingJobsListingFrontendOptional = jobsListingFrontendRepository.findById(jobsListingFrontendId);
+        Optional<JobsListingFrontendEntity> existingJobsListingFrontendOptional = jobsListingFrontedRepository.findById(jobsListingFrontendId);
         if (existingJobsListingFrontendOptional.isPresent()) {
         	JobsListingFrontendEntity existingJobsListingFrontend= existingJobsListingFrontendOptional.get();
             modelMapper.map(jobsListingFrontendDto, existingJobsListingFrontendOptional);
-            JobsListingFrontendEntity updatedJobsListingFrontend = jobsListingFrontendRepository.save(existingJobsListingFrontend);
+            JobsListingFrontendEntity updatedJobsListingFrontend = jobsListingFrontedRepository.save(existingJobsListingFrontend);
             logger.info("Updated JobsListingFrontend with ID: {}", updatedJobsListingFrontend.getJobsListingFrontendId());
             return convertToDTO(updatedJobsListingFrontend);
         } else {
@@ -70,14 +71,14 @@ public class JobsListingFrontendService {
     
     // Delete
     public void deleteJobsListingFrontend(Long jobsListingFrontendId) {
-    	jobsListingFrontendRepository.deleteById(jobsListingFrontendId);
+    	jobsListingFrontedRepository.deleteById(jobsListingFrontendId);
         logger.info("Deleted JobsListingFrontend with ID: {}", jobsListingFrontendId);
     }
 
     //count the total JobsListingFrontend
     public long countJobsListingFrontend()
 	 {
-		 return jobsListingFrontendRepository.count();
+		 return jobsListingFrontedRepository.count();
 	 }
     
 	// Helper method to convert JobsListingFrontendDTo to JobsListingFrontendEntity

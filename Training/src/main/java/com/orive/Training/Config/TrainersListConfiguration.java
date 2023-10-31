@@ -1,16 +1,16 @@
-package com.orive.TimeSheet.Configuration;
+package com.orive.Training.Config;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
 @Configuration
-public class TimeSheetConfiguration {
+public class TrainersListConfiguration {
 	
 	@Bean
 	public ModelMapper modelMapper()
 	{
 		return new ModelMapper();
 	}
+
 
 }

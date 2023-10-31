@@ -4,6 +4,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.orive.Recruitment.Entity.JobsListingFrontendEntity;
 
-public interface JobsListingFrontendRepository extends JpaRepository<JobsListingFrontendEntity, Long> {
+public interface JobsListingFrontedRepository extends JpaRepository<JobsListingFrontendEntity, Long> {
 
 }
