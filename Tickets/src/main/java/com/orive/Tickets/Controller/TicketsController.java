@@ -34,7 +34,7 @@ public class TicketsController {
 	  @PostMapping("/create/tickets")
 	  public ResponseEntity<TicketsDto> createTickets(@RequestBody TicketsDto ticketsDto) {
 		  TicketsDto createdTickets = ticketsService.createTickets(ticketsDto);
-	      logger.info("Created Tickets with id: {}", createdTickets.getTicketsId());
+	      logger.info("Created Tickets with id: {}", createdTickets.getTicketsCode());
 	      return new ResponseEntity<>(createdTickets, HttpStatus.CREATED);
 	  }
 

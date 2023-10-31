@@ -33,7 +33,7 @@ public class ResignationsController {
      @PostMapping("/create/resignations")
      public ResponseEntity<ResignationsDto> createResignations(@RequestBody ResignationsDto resignationsDto) {
     	 ResignationsDto createdResignation = resignationsService.createResignations(resignationsDto);
-         logger.info("Created resignations with id: {}", createdResignation.getResignationId());
+         logger.info("Created resignations with id: {}", createdResignation.getEmployeeName());
          return new ResponseEntity<>(createdResignation, HttpStatus.CREATED);
      }
 

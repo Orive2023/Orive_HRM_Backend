@@ -36,7 +36,7 @@ public class WarningsController {
 	  @PostMapping("/create/warnings")
 	  public ResponseEntity<WarningsDto> createWarnings(@RequestBody WarningsDto warningsDto) {
 		  WarningsDto createdWarnings = warningsService.createWarnings(warningsDto);
-	      logger.info("Created Warnings with id: {}", createdWarnings.getWarningsId());
+	      logger.info("Created Warnings with id: {}", createdWarnings.getWarningToEmployee());
 	      return new ResponseEntity<>(createdWarnings, HttpStatus.CREATED);
 	  }
 

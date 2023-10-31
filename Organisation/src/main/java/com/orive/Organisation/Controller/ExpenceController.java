@@ -36,7 +36,7 @@ public class ExpenceController {
       @PostMapping("/create/expence")
       public ResponseEntity<ExpenceDto> createExpence(@RequestBody ExpenceDto companyDto) {
     	  ExpenceDto createdCompany = expenceService.createExpence(companyDto);
-          logger.info("Created company with id: {}", createdCompany.getExpenceId());
+          logger.info("Created company with id: {}", createdCompany.getExpenceType());
           return new ResponseEntity<>(createdCompany, HttpStatus.CREATED);
       }
 

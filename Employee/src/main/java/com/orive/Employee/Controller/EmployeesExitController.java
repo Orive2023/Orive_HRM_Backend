@@ -37,7 +37,7 @@ public class EmployeesExitController {
 	  @PostMapping("/create/employee_exit")
 	  public ResponseEntity<EmployeesExitDto> createEmployeesExit(@RequestBody EmployeesExitDto employeesExitDto) {
 		  EmployeesExitDto createdEmployeesExit = employeesExitService.createEmployeesExit(employeesExitDto);
-	      logger.info("Created EmployeeExit with id: {}", createdEmployeesExit.getEmployeeExitId());
+	      logger.info("Created EmployeeExit with id: {}", createdEmployeesExit.getEmployeeToExit());
 	      return new ResponseEntity<>(createdEmployeesExit, HttpStatus.CREATED);
 	  }
 

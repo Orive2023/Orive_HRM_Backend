@@ -33,7 +33,7 @@ public class WorkSheetController {
 		  @PostMapping("/create/worksheet")
 		  public ResponseEntity<WorkSheetDto> createWorkSheet(@RequestBody WorkSheetDto workSheetDto) {
 			  WorkSheetDto createdWorkSheet = workSheetService.createWorkSheet(workSheetDto);
-		      logger.info("Created WorkSheet with id: {}", createdWorkSheet.getWorkSheetId());
+		      logger.info("Created WorkSheet with id: {}", createdWorkSheet.getWorkSheetTitle());
 		      return new ResponseEntity<>(createdWorkSheet, HttpStatus.CREATED);
 		  }
 

@@ -32,56 +32,56 @@ public class LeavesController {
     private LeavesService leavesService;
 
   
-  	// Create a new Company
+  	// Create a new Leaves
       @PostMapping("/create/leaves")
-      public ResponseEntity<LeaveDto> createLeaves(@RequestBody LeaveDto companyDto) {
-    	  LeaveDto createdCompany = leavesService.createLeaves(companyDto);
-          logger.info("Created company with name: {}", createdCompany.getEmployeeName());
-          return new ResponseEntity<>(createdCompany, HttpStatus.CREATED);
+      public ResponseEntity<LeaveDto> createLeaves(@RequestBody LeaveDto leaveDto) {
+    	  LeaveDto createdLeaves = leavesService.createLeaves(leaveDto);
+          logger.info("Created Leaves with name: {}", createdLeaves.getEmployeeName());
+          return new ResponseEntity<>(createdLeaves, HttpStatus.CREATED);
       }
 
-      // Get all companies
+      // Get all Leaves
       
       @GetMapping("/get/leaves")
       public ResponseEntity<List<LeaveDto>> getAllLeaves() {
-          List<LeaveDto> companies = leavesService.getAllLeaves();
-          logger.info("Retrieved {} companies from the database", companies.size());
-          return new ResponseEntity<>(companies, HttpStatus.OK);
+          List<LeaveDto> leaves = leavesService.getAllLeaves();
+          logger.info("Retrieved {} Leaves from the database", leaves.size());
+          return new ResponseEntity<>(leaves, HttpStatus.OK);
       }
 
-      // Get company by ID
+      // Get Leaves by ID
       @GetMapping("/get/{leaveId}")
       public ResponseEntity<LeaveDto> getLeavesById(@PathVariable Long leaveId) {
-          Optional<LeaveDto> company = leavesService.getLeavesById(leaveId);
-          if (company.isPresent()) {
-              logger.info("Retrieved compay with ID: {}", leaveId);
-              return new ResponseEntity<>(company.get(), HttpStatus.OK);
+          Optional<LeaveDto> leave = leavesService.getLeavesById(leaveId);
+          if (leave.isPresent()) {
+              logger.info("Retrieved Leaves with ID: {}", leaveId);
+              return new ResponseEntity<>(leave.get(), HttpStatus.OK);
           } else {
-              logger.warn("company with ID {} not found", leaveId);
+              logger.warn("Leaves with ID {} not found", leaveId);
               return new ResponseEntity<>(HttpStatus.NOT_FOUND);
           }
       }
 
-      // Update company by ID
+      // Update Leaves by ID
       @PutMapping("/update/{leaveId}")
-      public ResponseEntity<LeaveDto> updateLeaves(@PathVariable Long leaveId, @RequestBody LeaveDto updatedCompanyDTO) {
-    	  LeaveDto updatedCompany = leavesService.updateLeaves(leaveId, updatedCompanyDTO);
-          if (updatedCompany != null) {
-              logger.info("Updated company with ID: {}", leaveId);
-              return new ResponseEntity<>(updatedCompany, HttpStatus.OK);
+      public ResponseEntity<LeaveDto> updateLeaves(@PathVariable Long leaveId, @RequestBody LeaveDto updatedLeaveDto) {
+    	  LeaveDto updatedLeave = leavesService.updateLeaves(leaveId, updatedLeaveDto);
+          if (updatedLeave != null) {
+              logger.info("Updated Leaves with ID: {}", leaveId);
+              return new ResponseEntity<>(updatedLeave, HttpStatus.OK);
           } else {
-              logger.warn("Company with ID {} not found for update", leaveId);
+              logger.warn("Leaves with ID {} not found for update", leaveId);
               return new ResponseEntity<>(HttpStatus.NOT_FOUND);
           }
       }
       
 
 
-      // Delete Company by ID
+      // Delete Leaves by ID
       @DeleteMapping("/delete/{leaveId}")
       public ResponseEntity<Void> deleteLeaves(@PathVariable Long leaveId) {
     	  leavesService.deleteLeaves(leaveId);
-          logger.info("Deleted company with ID: {}", leaveId);
+          logger.info("Deleted Leaves with ID: {}", leaveId);
           return new ResponseEntity<>(HttpStatus.NO_CONTENT);
       }
   	    

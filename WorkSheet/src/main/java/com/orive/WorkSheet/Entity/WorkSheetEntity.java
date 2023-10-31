@@ -25,8 +25,8 @@ public class WorkSheetEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long workSheetId;
 	
-	@Column(name = "title")
-	private String title;
+	@Column(name = "woek_sheet_title")
+	private String workSheetTitle;
 	
 	@Column(name = "start_date")
 	private String startDate;

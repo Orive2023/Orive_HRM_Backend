@@ -29,44 +29,44 @@ public class HolidaysService {
 		
 		
 		// Create
-	    public HolidaysDto createHolidays(HolidaysDto companyDto) {
-	    	HolidaysEntity companyEntity = convertToEntity(companyDto);
-	    	HolidaysEntity savedCompany = holidaysRepository.save(companyEntity);
-	        logger.info("Created Company with ID: {}", savedCompany.getHolidaysId());
-	        return convertToDTO(savedCompany);
+	    public HolidaysDto createHolidays(HolidaysDto holidaysDto) {
+	    	HolidaysEntity holidaysEntity = convertToEntity(holidaysDto);
+	    	HolidaysEntity savedHolidays = holidaysRepository.save(holidaysEntity);
+	        logger.info("Created Holidays with ID: {}", savedHolidays.getHolidaysId());
+	        return convertToDTO(savedHolidays);
 	    }
 
 	    // Read
 	    public List<HolidaysDto> getAllHolidays() {
-	        List<HolidaysEntity> companyEntities = holidaysRepository.findAll();
-	        logger.info("Retrieved {} company from the database", companyEntities.size());
-	        return companyEntities.stream()
+	        List<HolidaysEntity> holidaysEntities = holidaysRepository.findAll();
+	        logger.info("Retrieved {} Holidays from the database", holidaysEntities.size());
+	        return holidaysEntities.stream()
 	                .map(this::convertToDTO)
 	                .collect(Collectors.toList());
 	    }
 	    
-	    //get by CompanyId
+	    //get by HolidaysId
 	    public Optional<HolidaysDto> getHolidaysById(Long holidaysId) {
-	        Optional<HolidaysEntity> company = holidaysRepository.findById(holidaysId);
-	        if (company.isPresent()) {
-	            return Optional.of(convertToDTO(company.get()));
+	        Optional<HolidaysEntity> holidays = holidaysRepository.findById(holidaysId);
+	        if (holidays.isPresent()) {
+	            return Optional.of(convertToDTO(holidays.get()));
 	        } else {
-	            logger.warn("Company with ID {} not found", holidaysId);
+	            logger.warn("Holidays with ID {} not found", holidaysId);
 	            return Optional.empty();
 	        }
 	    }
 	    
 	 // Update list by id
-	    public HolidaysDto updateHolidays(Long holidaysId, HolidaysDto companyDto) {
-	        Optional<HolidaysEntity> existingCompanyOptional = holidaysRepository.findById(holidaysId);
-	        if (existingCompanyOptional.isPresent()) {
-	        	HolidaysEntity existingCompany = existingCompanyOptional.get();
-	            modelMapper.map(companyDto, existingCompanyOptional);
-	            HolidaysEntity updatedCompany = holidaysRepository.save(existingCompany);
-	            logger.info("Updated company with ID: {}", updatedCompany.getHolidaysId());
-	            return convertToDTO(updatedCompany);
+	    public HolidaysDto updateHolidays(Long holidaysId, HolidaysDto holidaysDto) {
+	        Optional<HolidaysEntity> existingHolidayOptional = holidaysRepository.findById(holidaysId);
+	        if (existingHolidayOptional.isPresent()) {
+	        	HolidaysEntity existingHoliday = existingHolidayOptional.get();
+	            modelMapper.map(holidaysDto, existingHolidayOptional);
+	            HolidaysEntity updatedHoliday = holidaysRepository.save(existingHoliday);
+	            logger.info("Updated Holidays with ID: {}", updatedHoliday.getHolidaysId());
+	            return convertToDTO(updatedHoliday);
 	        } else {
-	            logger.warn("Company with ID {} not found for update", holidaysId);
+	            logger.warn("Holidays with ID {} not found for update", holidaysId);
 	            return null;
 	        }
 	    }
@@ -74,7 +74,7 @@ public class HolidaysService {
 	    // Delete
 	    public void deleteHolidays(Long holidaysId) {
 	    	holidaysRepository.deleteById(holidaysId);
-	        logger.info("Deleted company with ID: {}", holidaysId);
+	        logger.info("Deleted Holidays with ID: {}", holidaysId);
 	    }
 
 	    //count the total company
@@ -83,14 +83,14 @@ public class HolidaysService {
 			 return holidaysRepository.count();
 		 }
 	    
-		// Helper method to convert CompanyDTo to Company entity
-	    private HolidaysEntity convertToEntity(HolidaysDto companyDto)
+		// Helper method to convert HolidaysDTo to  Holidaysentity
+	    private HolidaysEntity convertToEntity(HolidaysDto holidaysDto)
 	    {
-	    	return modelMapper.map(companyDto, HolidaysEntity.class);
+	    	return modelMapper.map(holidaysDto, HolidaysEntity.class);
 	    }
 
-	    // Helper method to convert Company Entity entity to CompanyDTo
-	    private HolidaysDto convertToDTO(HolidaysEntity companyEntity) {
-	        return modelMapper.map(companyEntity, HolidaysDto.class);
+	    // Helper method to convert HolidaysEntity entity to HolidaysDTo
+	    private HolidaysDto convertToDTO(HolidaysEntity holidaysEntity) {
+	        return modelMapper.map(holidaysEntity, HolidaysDto.class);
 	    } 
 }

@@ -31,56 +31,55 @@ public class HolidaysController {
     private HolidaysService holidaysService;
 
   
-  	// Create a new Company
+  	// Create a new Holidays
       @PostMapping("/create/holidays")
-      public ResponseEntity<HolidaysDto> createHolidays(@RequestBody HolidaysDto companyDto) {
-    	  HolidaysDto createdCompany = holidaysService.createHolidays(companyDto);
-          logger.info("Created company with name: {}", createdCompany.getEventName());
-          return new ResponseEntity<>(createdCompany, HttpStatus.CREATED);
+      public ResponseEntity<HolidaysDto> createHolidays(@RequestBody HolidaysDto holidaysDto) {
+    	  HolidaysDto createdHoliday = holidaysService.createHolidays(holidaysDto);
+          logger.info("Created Holidays with name: {}", createdHoliday.getEventName());
+          return new ResponseEntity<>(createdHoliday, HttpStatus.CREATED);
       }
 
-      // Get all companies
-      
+      // Get all Holidays   
       @GetMapping("/get/holidays")
       public ResponseEntity<List<HolidaysDto>> getAllHolidays() {
-          List<HolidaysDto> companies = holidaysService.getAllHolidays();
-          logger.info("Retrieved {} companies from the database", companies.size());
-          return new ResponseEntity<>(companies, HttpStatus.OK);
+          List<HolidaysDto> holidays = holidaysService.getAllHolidays();
+          logger.info("Retrieved {} Holidays from the database", holidays.size());
+          return new ResponseEntity<>(holidays, HttpStatus.OK);
       }
 
-      // Get company by ID
+      // Get Holidays by ID
       @GetMapping("/get/{holidaysId}")
       public ResponseEntity<HolidaysDto> getHolidaysById(@PathVariable Long holidaysId) {
-          Optional<HolidaysDto> company = holidaysService.getHolidaysById(holidaysId);
-          if (company.isPresent()) {
-              logger.info("Retrieved compay with ID: {}", holidaysId);
-              return new ResponseEntity<>(company.get(), HttpStatus.OK);
+          Optional<HolidaysDto> holidays = holidaysService.getHolidaysById(holidaysId);
+          if (holidays.isPresent()) {
+              logger.info("Retrieved Holidays with ID: {}", holidaysId);
+              return new ResponseEntity<>(holidays.get(), HttpStatus.OK);
           } else {
-              logger.warn("company with ID {} not found", holidaysId);
+              logger.warn("Holidays with ID {} not found", holidaysId);
               return new ResponseEntity<>(HttpStatus.NOT_FOUND);
           }
       }
 
-      // Update company by ID
+      // Update Holidays by ID
       @PutMapping("/update/{holidaysId}")
-      public ResponseEntity<HolidaysDto> updateHolidays(@PathVariable Long holidaysId, @RequestBody HolidaysDto updatedCompanyDTO) {
-    	  HolidaysDto updatedCompany = holidaysService.updateHolidays(holidaysId, updatedCompanyDTO);
-          if (updatedCompany != null) {
-              logger.info("Updated company with ID: {}", holidaysId);
-              return new ResponseEntity<>(updatedCompany, HttpStatus.OK);
+      public ResponseEntity<HolidaysDto> updateHolidays(@PathVariable Long holidaysId, @RequestBody HolidaysDto updatedHolidaysDto) {
+    	  HolidaysDto updatedHolidays = holidaysService.updateHolidays(holidaysId, updatedHolidaysDto);
+          if (updatedHolidays != null) {
+              logger.info("Updated Holidays with ID: {}", holidaysId);
+              return new ResponseEntity<>(updatedHolidays, HttpStatus.OK);
           } else {
-              logger.warn("Company with ID {} not found for update", holidaysId);
+              logger.warn("Holidays with ID {} not found for update", holidaysId);
               return new ResponseEntity<>(HttpStatus.NOT_FOUND);
           }
       }
       
 
 
-      // Delete Company by ID
+      // Delete Holidays by ID
       @DeleteMapping("/delete/{holidaysId}")
       public ResponseEntity<Void> deleteHolidays(@PathVariable Long holidaysId) {
     	  holidaysService.deleteHolidays(holidaysId);
-          logger.info("Deleted company with ID: {}", holidaysId);
+          logger.info("Deleted Holidays with ID: {}", holidaysId);
           return new ResponseEntity<>(HttpStatus.NO_CONTENT);
       }
   	    

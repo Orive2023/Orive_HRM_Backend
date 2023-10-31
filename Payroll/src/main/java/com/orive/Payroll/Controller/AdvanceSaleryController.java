@@ -37,7 +37,7 @@ public class AdvanceSaleryController {
     @PostMapping("/create/advancesalery")
     public ResponseEntity<AdvanceSaleryDto> createAdvanceSalery(@RequestBody AdvanceSaleryDto advanceSaleryDto ) {
     	AdvanceSaleryDto createdadvanceSalery = advanceSaleryService.createAdvanceSalery(advanceSaleryDto);
-        logger.info("Created AdvanceSalery with name: {}", createdadvanceSalery.getAdvanceSaleryId());
+        logger.info("Created AdvanceSalery with name: {}", createdadvanceSalery.getEmployeeName());
         return new ResponseEntity<>(createdadvanceSalery, HttpStatus.CREATED);
     }
 

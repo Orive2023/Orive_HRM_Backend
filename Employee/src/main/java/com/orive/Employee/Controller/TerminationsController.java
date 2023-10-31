@@ -35,7 +35,7 @@ public class TerminationsController {
      @PostMapping("/create/terminations")
      public ResponseEntity<TerminationsDto> createTerminations(@RequestBody TerminationsDto terminationsDto) {
     	 TerminationsDto createdTerminations = terminationsService.createTerminations(terminationsDto);
-         logger.info("Created Terminations with name: {}", createdTerminations.getTerminationId());
+         logger.info("Created Terminations with name: {}", createdTerminations.getEmployeeName());
          return new ResponseEntity<>(createdTerminations, HttpStatus.CREATED);
      }
 

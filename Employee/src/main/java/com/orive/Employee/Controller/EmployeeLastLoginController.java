@@ -37,7 +37,7 @@ public class EmployeeLastLoginController {
 		  @PostMapping("/create/employees_last_login")
 		  public ResponseEntity<EmployeesLastLoginDto> createEmployeesLastLogin(@RequestBody EmployeesLastLoginDto employeesLastLoginDto) {
 			  EmployeesLastLoginDto createdEmployeesLastLogin = employeesLastLoginService.createEmployeesLastLogin(employeesLastLoginDto);
-		      logger.info("Created EmployeeLastLogin with id: {}", createdEmployeesLastLogin.getEmployeeLastLoginId());
+		      logger.info("Created EmployeeLastLogin with id: {}", createdEmployeesLastLogin.getEmployeeName());
 		      return new ResponseEntity<>(createdEmployeesLastLogin, HttpStatus.CREATED);
 		  }
 

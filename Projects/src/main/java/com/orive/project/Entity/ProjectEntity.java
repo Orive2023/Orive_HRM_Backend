@@ -28,8 +28,8 @@ public class ProjectEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long projectsId;
 	
-	@Column(name = "title")
-	private String title;
+	@Column(name = "project_title")
+	private String projectTitle;
 	
 	@Column(name = "client_name")
 	private String clientName;

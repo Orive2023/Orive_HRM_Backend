@@ -35,7 +35,7 @@ public class ComplaintsController {
   @PostMapping("/create/complaints")
   public ResponseEntity<ComplaintsDto> createComplaints(@RequestBody ComplaintsDto complaintsDto) {
 	  ComplaintsDto createdComplaints = complaintsService.createComplaints(complaintsDto);
-      logger.info("Created Complaints with id: {}", createdComplaints.getComplaintsId());
+      logger.info("Created Complaints with id: {}", createdComplaints.getComplaintFromEmployee());
       return new ResponseEntity<>(createdComplaints, HttpStatus.CREATED);
   }
 

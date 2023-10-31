@@ -36,7 +36,7 @@ public class ProjectController {
     @PostMapping("/create/projects")
     public ResponseEntity<ProjectDto> createProject(@RequestBody ProjectDto projectDto) {
   	  ProjectDto createdProject = projectService.createProject(projectDto);
-        logger.info("Created project with Id: {}", createdProject.getProjectsId());
+        logger.info("Created project with Id: {}", createdProject.getProjectTitle());
         return new ResponseEntity<>(createdProject, HttpStatus.CREATED);
     }
 

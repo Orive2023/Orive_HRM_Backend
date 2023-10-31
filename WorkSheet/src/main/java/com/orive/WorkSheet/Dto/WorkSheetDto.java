@@ -14,7 +14,7 @@ import lombok.ToString;
 public class WorkSheetDto {
 
     private Long workSheetId;
-	private String title;
+	private String workSheetTitle;
 	private String startDate;
 	private String endDate;
 	private double estimateHour;

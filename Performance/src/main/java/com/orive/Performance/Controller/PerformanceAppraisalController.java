@@ -35,7 +35,7 @@ public class PerformanceAppraisalController {
     @PostMapping("/create/performanceappraisal")
     public ResponseEntity<PerformanceAppraisalDto> createPerformanceAppraisal(@RequestBody PerformanceAppraisalDto performanceAppraisalDto) {
     	PerformanceAppraisalDto createdPerformanceAppraisal = performanceAppraisalService.createPerformanceAppraisal(performanceAppraisalDto);
-        logger.info("Created PerformanceAppraisal with name: {}", createdPerformanceAppraisal.getPerformanceAppraisalId());
+        logger.info("Created PerformanceAppraisal with name: {}", createdPerformanceAppraisal.getEmployeeName());
         return new ResponseEntity<>(createdPerformanceAppraisal, HttpStatus.CREATED);
     }
 
@@ -43,7 +43,7 @@ public class PerformanceAppraisalController {
     
     @GetMapping("/get/performanceappraisal")
     public ResponseEntity<List<PerformanceAppraisalDto>> getAllPerformanceAppraisal() {
-        List<PerformanceAppraisalDto> performanceAppraisal = performanceAppraisalService.getAllTerminationsPerformanceAppraisal();
+        List<PerformanceAppraisalDto> performanceAppraisal = performanceAppraisalService.getAllPerformanceAppraisal();
         logger.info("Retrieved {} PerformanceAppraisal from the database", performanceAppraisal.size());
         return new ResponseEntity<>(performanceAppraisal, HttpStatus.OK);
     }

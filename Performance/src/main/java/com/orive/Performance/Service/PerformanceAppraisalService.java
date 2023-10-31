@@ -35,7 +35,7 @@ public class PerformanceAppraisalService {
 	    }
 
     // Read
-    public List<PerformanceAppraisalDto> getAllTerminationsPerformanceAppraisal() {
+    public List<PerformanceAppraisalDto> getAllPerformanceAppraisal() {
         List<PerformanceAppraisalEntity> performanceAppraisalEntities = performanceAppraisalRepository.findAll();
         logger.info("Retrieved {} PerformanceAppraisal from the database", performanceAppraisalEntities.size());
         return performanceAppraisalEntities.stream()

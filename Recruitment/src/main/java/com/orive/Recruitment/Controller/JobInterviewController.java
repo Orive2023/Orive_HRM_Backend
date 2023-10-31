@@ -36,7 +36,7 @@ public class JobInterviewController {
 	  @PostMapping("/create/jobinterview")
 	  public ResponseEntity<JobInterviewDto> createJobInterviews(@RequestBody JobInterviewDto jobInterviewDto) {
 		  JobInterviewDto createdJobInterview = jobInterviewService.createJobInterview(jobInterviewDto);
-	      logger.info("Created JobInterview with id: {}", createdJobInterview.getJobInterviewId());
+	      logger.info("Created JobInterview with id: {}", createdJobInterview.getJobTitle());
 	      return new ResponseEntity<>(createdJobInterview, HttpStatus.CREATED);
 	  }
 

@@ -35,7 +35,7 @@ public class PromotionsController {
    @PostMapping("/create/promotions")
    public ResponseEntity<PromotionsDto> createPromotions(@RequestBody PromotionsDto promotionsDto) {
 	   PromotionsDto createdPromotions = promotionsService.createPromotions(promotionsDto);
-       logger.info("Created Promotions with id: {}", createdPromotions.getPromotionsId());
+       logger.info("Created Promotions with id: {}", createdPromotions.getEmployeeName());
        return new ResponseEntity<>(createdPromotions, HttpStatus.CREATED);
    }
 

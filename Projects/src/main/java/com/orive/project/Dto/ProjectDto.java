@@ -17,7 +17,7 @@ import lombok.ToString;
 public class ProjectDto {
 	
 	private long projectsId;
-	private String title;
+	private String projectTitle;
 	private String clientName;
 	private String companyName;
 	private String startDate;

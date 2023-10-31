@@ -31,52 +31,52 @@ public class OfficeShiftsController {
     private OfficeShiftsService officeShiftsService;
 
   
-  	// Create a new Company
+  	// Create a new OfficeShifts
       @PostMapping("/create/officeShifts")
-      public ResponseEntity<OfficeShiftsDto> createOfficeShifts(@RequestBody OfficeShiftsDto companyDto) {
-    	  OfficeShiftsDto createdCompany = officeShiftsService.createOfficeShifts(companyDto);
-          logger.info("Created company with name: {}", createdCompany.getShiftName());
-          return new ResponseEntity<>(createdCompany, HttpStatus.CREATED);
+      public ResponseEntity<OfficeShiftsDto> createOfficeShifts(@RequestBody OfficeShiftsDto officeShiftsDto) {
+    	  OfficeShiftsDto createdOfficeShifts = officeShiftsService.createOfficeShifts(officeShiftsDto);
+          logger.info("Created OfficeShifts with name: {}", createdOfficeShifts.getShiftName());
+          return new ResponseEntity<>(createdOfficeShifts, HttpStatus.CREATED);
       }
 
-      // Get all companies
+      // Get all OfficeShifts
       
       @GetMapping("/get/officeShifts")
       public ResponseEntity<List<OfficeShiftsDto>> getAllOfficeShifts() {
-          List<OfficeShiftsDto> companies = officeShiftsService.getAllOfficeShifts();
-          logger.info("Retrieved {} companies from the database", companies.size());
-          return new ResponseEntity<>(companies, HttpStatus.OK);
+          List<OfficeShiftsDto> officeShifts = officeShiftsService.getAllOfficeShifts();
+          logger.info("Retrieved {} OfficeShifts from the database", officeShifts.size());
+          return new ResponseEntity<>(officeShifts, HttpStatus.OK);
       }
 
-      // Get company by ID
+      // Get OfficeShifts by ID
       @GetMapping("/get/{OfficeShiftsId}")
       public ResponseEntity<OfficeShiftsDto> getOfficeShiftsById(@PathVariable Long OfficeShiftsId) {
-          Optional<OfficeShiftsDto> company = officeShiftsService.getOfficeShiftsById(OfficeShiftsId);
-          if (company.isPresent()) {
-              logger.info("Retrieved compay with ID: {}", OfficeShiftsId);
-              return new ResponseEntity<>(company.get(), HttpStatus.OK);
+          Optional<OfficeShiftsDto> officeShifts = officeShiftsService.getOfficeShiftsById(OfficeShiftsId);
+          if (officeShifts.isPresent()) {
+              logger.info("Retrieved OfficeShifts with ID: {}", OfficeShiftsId);
+              return new ResponseEntity<>(officeShifts.get(), HttpStatus.OK);
           } else {
-              logger.warn("company with ID {} not found", OfficeShiftsId);
+              logger.warn("OfficeShifts with ID {} not found", OfficeShiftsId);
               return new ResponseEntity<>(HttpStatus.NOT_FOUND);
           }
       }
 
-      // Update company by ID
+      // Update OfficeShifts by ID
       @PutMapping("/update/{OfficeShiftsId}")
-      public ResponseEntity<OfficeShiftsDto> updateOfficeShifts(@PathVariable Long OfficeShiftsId, @RequestBody OfficeShiftsDto updatedCompanyDTO) {
-    	  OfficeShiftsDto updatedCompany = officeShiftsService.updateOfficeShifts(OfficeShiftsId, updatedCompanyDTO);
-          if (updatedCompany != null) {
-              logger.info("Updated company with ID: {}", OfficeShiftsId);
-              return new ResponseEntity<>(updatedCompany, HttpStatus.OK);
+      public ResponseEntity<OfficeShiftsDto> updateOfficeShifts(@PathVariable Long OfficeShiftsId, @RequestBody OfficeShiftsDto updatedOfficeShiftsDTO) {
+    	  OfficeShiftsDto updatedOfficeShifts = officeShiftsService.updateOfficeShifts(OfficeShiftsId, updatedOfficeShiftsDTO);
+          if (updatedOfficeShifts != null) {
+              logger.info("Updated OfficeShifts with ID: {}", OfficeShiftsId);
+              return new ResponseEntity<>(updatedOfficeShifts, HttpStatus.OK);
           } else {
-              logger.warn("Company with ID {} not found for update", OfficeShiftsId);
+              logger.warn("OfficeShifts with ID {} not found for update", OfficeShiftsId);
               return new ResponseEntity<>(HttpStatus.NOT_FOUND);
           }
       }
       
 
 
-      // Delete Company by ID
+      // Delete OfficeShifts by ID
       @DeleteMapping("/delete/{OfficeShiftsId}")
       public ResponseEntity<Void> deleteOfficeShifts(@PathVariable Long OfficeShiftsId) {
     	  officeShiftsService.deleteOfficeShifts(OfficeShiftsId);

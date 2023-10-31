@@ -27,44 +27,44 @@ private static final Logger logger=LoggerFactory.getLogger(LeavesService.class);
 	
 	
 	// Create
-    public LeaveDto createLeaves(LeaveDto companyDto) {
-    	LeavesEntity companyEntity = convertToEntity(companyDto);
-    	LeavesEntity savedCompany = leavesRepository.save(companyEntity);
-        logger.info("Created Company with ID: {}", savedCompany.getLeaveId());
+    public LeaveDto createLeaves(LeaveDto leaveDto) {
+    	LeavesEntity leavesEntity = convertToEntity(leaveDto);
+    	LeavesEntity savedCompany = leavesRepository.save(leavesEntity);
+        logger.info("Created Leaves with ID: {}", savedCompany.getLeaveId());
         return convertToDTO(savedCompany);
     }
 
     // Read
     public List<LeaveDto> getAllLeaves() {
-        List<LeavesEntity> companyEntities = leavesRepository.findAll();
-        logger.info("Retrieved {} company from the database", companyEntities.size());
-        return companyEntities.stream()
+        List<LeavesEntity> leavesEntities = leavesRepository.findAll();
+        logger.info("Retrieved {} Leaves from the database", leavesEntities.size());
+        return leavesEntities.stream()
                 .map(this::convertToDTO)
                 .collect(Collectors.toList());
     }
     
-    //get by CompanyId
+    //get by LeavesId
     public Optional<LeaveDto> getLeavesById(Long leaveId) {
-        Optional<LeavesEntity> company = leavesRepository.findById(leaveId);
-        if (company.isPresent()) {
-            return Optional.of(convertToDTO(company.get()));
+        Optional<LeavesEntity> leaves = leavesRepository.findById(leaveId);
+        if (leaves.isPresent()) {
+            return Optional.of(convertToDTO(leaves.get()));
         } else {
-            logger.warn("Company with ID {} not found", leaveId);
+            logger.warn("Leaves with ID {} not found", leaveId);
             return Optional.empty();
         }
     }
     
  // Update list by id
-    public LeaveDto updateLeaves(Long leaveId, LeaveDto companyDto) {
-        Optional<LeavesEntity> existingCompanyOptional = leavesRepository.findById(leaveId);
-        if (existingCompanyOptional.isPresent()) {
-        	LeavesEntity existingCompany = existingCompanyOptional.get();
-            modelMapper.map(companyDto, existingCompanyOptional);
-            LeavesEntity updatedCompany = leavesRepository.save(existingCompany);
-            logger.info("Updated company with ID: {}", updatedCompany.getLeaveId());
-            return convertToDTO(updatedCompany);
+    public LeaveDto updateLeaves(Long leaveId, LeaveDto leaveDto) {
+        Optional<LeavesEntity> existingLeavesOptional = leavesRepository.findById(leaveId);
+        if (existingLeavesOptional.isPresent()) {
+        	LeavesEntity existingLeave = existingLeavesOptional.get();
+            modelMapper.map(leaveDto, existingLeavesOptional);
+            LeavesEntity updatedLeave = leavesRepository.save(existingLeave);
+            logger.info("Updated Leaves with ID: {}", updatedLeave.getLeaveId());
+            return convertToDTO(updatedLeave);
         } else {
-            logger.warn("Company with ID {} not found for update", leaveId);
+            logger.warn("Leaves with ID {} not found for update", leaveId);
             return null;
         }
     }
@@ -72,23 +72,23 @@ private static final Logger logger=LoggerFactory.getLogger(LeavesService.class);
     // Delete
     public void deleteLeaves(Long leaveId) {
     	leavesRepository.deleteById(leaveId);
-        logger.info("Deleted company with ID: {}", leaveId);
+        logger.info("Deleted Leaves with ID: {}", leaveId);
     }
 
-    //count the total company
+    //count the total Leaves
     public long countLeaves()
 	 {
 		 return leavesRepository.count();
 	 }
     
-	// Helper method to convert CompanyDTo to Company entity
-    private LeavesEntity convertToEntity(LeaveDto companyDto)
+	// Helper method to convert LeavesDTo to LeavesEntity
+    private LeavesEntity convertToEntity(LeaveDto leaveDto)
     {
-    	return modelMapper.map(companyDto, LeavesEntity.class);
+    	return modelMapper.map(leaveDto, LeavesEntity.class);
     }
 
-    // Helper method to convert Company Entity entity to CompanyDTo
-    private LeaveDto convertToDTO(LeavesEntity companyEntity) {
-        return modelMapper.map(companyEntity, LeaveDto.class);
+    // Helper method to convert LeavesEntity entity to LeavesEntity
+    private LeaveDto convertToDTO(LeavesEntity leavesEntity) {
+        return modelMapper.map(leavesEntity, LeaveDto.class);
     } 
 }

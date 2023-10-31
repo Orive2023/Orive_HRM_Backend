@@ -34,7 +34,7 @@ public class JobPostController {
 		  @PostMapping("/create/jobpost")
 		  public ResponseEntity<JobPostDto> createJobPosts(@RequestBody JobPostDto jobPostDto) {
 			  JobPostDto createdJobPost = jobPostService.createJobPost(jobPostDto);
-		      logger.info("Created JobPost with id: {}", createdJobPost.getJobPostId());
+		      logger.info("Created JobPost with id: {}", createdJobPost.getJobTitle());
 		      return new ResponseEntity<>(createdJobPost, HttpStatus.CREATED);
 		  }
 

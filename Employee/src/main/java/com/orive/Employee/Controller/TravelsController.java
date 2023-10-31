@@ -34,7 +34,7 @@ public class TravelsController {
     @PostMapping("/create/travels")
     public ResponseEntity<TravelsDto> createResignations(@RequestBody TravelsDto travelsDto) {
     	TravelsDto createdTravel = travelsService.createTravels(travelsDto);
-        logger.info("Created Travels with id: {}", createdTravel.getTravelId());
+        logger.info("Created Travels with id: {}", createdTravel.getEmployeeName());
         return new ResponseEntity<>(createdTravel, HttpStatus.CREATED);
     }
 

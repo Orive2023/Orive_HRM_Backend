@@ -29,44 +29,44 @@ public class OfficeShiftsService {
 		
 		
 		// Create
-	    public OfficeShiftsDto createOfficeShifts(OfficeShiftsDto companyDto) {
-	    	OfficeShiftsEntity companyEntity = convertToEntity(companyDto);
-	    	OfficeShiftsEntity savedCompany = officeShiftsRepository.save(companyEntity);
-	        logger.info("Created Company with ID: {}", savedCompany.getOfficeShiftsId());
-	        return convertToDTO(savedCompany);
+	    public OfficeShiftsDto createOfficeShifts(OfficeShiftsDto officeShiftsDto) {
+	    	OfficeShiftsEntity officeShiftsEntity = convertToEntity(officeShiftsDto);
+	    	OfficeShiftsEntity savedOfficeShifts = officeShiftsRepository.save(officeShiftsEntity);
+	        logger.info("Created OfficeShifts with ID: {}", savedOfficeShifts.getOfficeShiftsId());
+	        return convertToDTO(savedOfficeShifts);
 	    }
 
 	    // Read
 	    public List<OfficeShiftsDto> getAllOfficeShifts() {
-	        List<OfficeShiftsEntity> companyEntities = officeShiftsRepository.findAll();
-	        logger.info("Retrieved {} company from the database", companyEntities.size());
-	        return companyEntities.stream()
+	        List<OfficeShiftsEntity> officeShiftsEntities = officeShiftsRepository.findAll();
+	        logger.info("Retrieved {} OfficeShifts from the database", officeShiftsEntities.size());
+	        return officeShiftsEntities.stream()
 	                .map(this::convertToDTO)
 	                .collect(Collectors.toList());
 	    }
 	    
-	    //get by CompanyId
+	    //get by OfficeShiftId
 	    public Optional<OfficeShiftsDto> getOfficeShiftsById(Long OfficeShiftsId) {
-	        Optional<OfficeShiftsEntity> company = officeShiftsRepository.findById(OfficeShiftsId);
-	        if (company.isPresent()) {
-	            return Optional.of(convertToDTO(company.get()));
+	        Optional<OfficeShiftsEntity> OfficeShifts = officeShiftsRepository.findById(OfficeShiftsId);
+	        if (OfficeShifts.isPresent()) {
+	            return Optional.of(convertToDTO(OfficeShifts.get()));
 	        } else {
-	            logger.warn("Company with ID {} not found", OfficeShiftsId);
+	            logger.warn("OfficeShifts with ID {} not found", OfficeShiftsId);
 	            return Optional.empty();
 	        }
 	    }
 	    
 	 // Update list by id
-	    public OfficeShiftsDto updateOfficeShifts(Long OfficeShiftsId, OfficeShiftsDto companyDto) {
-	        Optional<OfficeShiftsEntity> existingCompanyOptional = officeShiftsRepository.findById(OfficeShiftsId);
-	        if (existingCompanyOptional.isPresent()) {
-	        	OfficeShiftsEntity existingCompany = existingCompanyOptional.get();
-	            modelMapper.map(companyDto, existingCompanyOptional);
-	            OfficeShiftsEntity updatedCompany = officeShiftsRepository.save(existingCompany);
-	            logger.info("Updated company with ID: {}", updatedCompany.getOfficeShiftsId());
-	            return convertToDTO(updatedCompany);
+	    public OfficeShiftsDto updateOfficeShifts(Long OfficeShiftsId, OfficeShiftsDto officeShiftsDto) {
+	        Optional<OfficeShiftsEntity> existingofficeShiftsOptional = officeShiftsRepository.findById(OfficeShiftsId);
+	        if (existingofficeShiftsOptional.isPresent()) {
+	        	OfficeShiftsEntity existingOfficeShifts = existingofficeShiftsOptional.get();
+	            modelMapper.map(officeShiftsDto, existingofficeShiftsOptional);
+	            OfficeShiftsEntity updatedOfficeShifts = officeShiftsRepository.save(existingOfficeShifts);
+	            logger.info("Updated OfficeShifts with ID: {}", updatedOfficeShifts.getOfficeShiftsId());
+	            return convertToDTO(updatedOfficeShifts);
 	        } else {
-	            logger.warn("Company with ID {} not found for update", OfficeShiftsId);
+	            logger.warn("OfficeShifts with ID {} not found for update", OfficeShiftsId);
 	            return null;
 	        }
 	    }
@@ -74,23 +74,23 @@ public class OfficeShiftsService {
 	    // Delete
 	    public void deleteOfficeShifts(Long OfficeShiftsId) {
 	    	officeShiftsRepository.deleteById(OfficeShiftsId);
-	        logger.info("Deleted company with ID: {}", OfficeShiftsId);
+	        logger.info("Deleted OfficeShifts with ID: {}", OfficeShiftsId);
 	    }
 
-	    //count the total company
+	    //count the total OfficeShifts
 	    public long countOfficeShifts()
 		 {
 			 return officeShiftsRepository.count();
 		 }
 	    
-		// Helper method to convert CompanyDTo to Company entity
-	    private OfficeShiftsEntity convertToEntity(OfficeShiftsDto companyDto)
+		// Helper method to convert OfficeShiftsDTo to  OfficeShiftsEntity
+	    private OfficeShiftsEntity convertToEntity(OfficeShiftsDto officeShiftsDto)
 	    {
-	    	return modelMapper.map(companyDto, OfficeShiftsEntity.class);
+	    	return modelMapper.map(officeShiftsDto, OfficeShiftsEntity.class);
 	    }
 
-	    // Helper method to convert Company Entity entity to CompanyDTo
-	    private OfficeShiftsDto convertToDTO(OfficeShiftsEntity companyEntity) {
-	        return modelMapper.map(companyEntity, OfficeShiftsDto.class);
+	    // Helper method to convert OfficeShiftsEntity to OfficeShiftsDTo
+	    private OfficeShiftsDto convertToDTO(OfficeShiftsEntity officeShiftsEntity) {
+	        return modelMapper.map(officeShiftsEntity, OfficeShiftsDto.class);
 	    } 
 }
