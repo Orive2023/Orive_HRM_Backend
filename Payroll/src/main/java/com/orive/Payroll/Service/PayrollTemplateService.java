@@ -89,7 +89,7 @@ private static final Logger logger=LoggerFactory.getLogger(PayrollTemplateServic
     	return modelMapper.map(companyDto, PayRollTemplateEntity.class);
     }
 
-    // Helper method to convert PayrollTemplateEntity entity to PayrollTemplateDTo
+    // Helper method to convert PayrollTemplateEntity  to PayrollTemplateDTo
     private PayrollTemplateDto convertToDTO(PayRollTemplateEntity companyEntity) {
         return modelMapper.map(companyEntity, PayrollTemplateDto.class);
     } 
