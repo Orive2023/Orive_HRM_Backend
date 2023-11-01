@@ -29,44 +29,44 @@ public class PoliciesService {
 	
 	
 	// Create
-    public PoliciesDto createPolicies(PoliciesDto companyDto) {
-    	PoliciesEntity companyEntity = convertToEntity(companyDto);
-    	PoliciesEntity savedCompany = policiesRepository.save(companyEntity);
-        logger.info("Created Company with ID: {}", savedCompany.getPoliciesId());
-        return convertToDTO(savedCompany);
+    public PoliciesDto createPolicies(PoliciesDto policiesDto) {
+    	PoliciesEntity policiesEntity = convertToEntity(policiesDto);
+    	PoliciesEntity savedPolicies = policiesRepository.save(policiesEntity);
+        logger.info("Created Policies with ID: {}", savedPolicies.getPoliciesId());
+        return convertToDTO(savedPolicies);
     }
 
     // Read
     public List<PoliciesDto> getAllPolicies() {
-        List<PoliciesEntity> companyEntities = policiesRepository.findAll();
-        logger.info("Retrieved {} company from the database", companyEntities.size());
-        return companyEntities.stream()
+        List<PoliciesEntity> policiesEntities = policiesRepository.findAll();
+        logger.info("Retrieved {} Policies from the database", policiesEntities.size());
+        return policiesEntities.stream()
                 .map(this::convertToDTO)
                 .collect(Collectors.toList());
     }
     
-    //get by CompanyId
+    //get by PoliciesId
     public Optional<PoliciesDto> getPoliciesById(Long policiesId) {
-        Optional<PoliciesEntity> company = policiesRepository.findById(policiesId);
-        if (company.isPresent()) {
-            return Optional.of(convertToDTO(company.get()));
+        Optional<PoliciesEntity> policies = policiesRepository.findById(policiesId);
+        if (policies.isPresent()) {
+            return Optional.of(convertToDTO(policies.get()));
         } else {
-            logger.warn("Company with ID {} not found", policiesId);
+            logger.warn("Policies with ID {} not found", policiesId);
             return Optional.empty();
         }
     }
     
  // Update list by id
-    public PoliciesDto updatePolicies(Long policiesId, PoliciesDto companyDto) {
-        Optional<PoliciesEntity> existingCompanyOptional = policiesRepository.findById(policiesId);
-        if (existingCompanyOptional.isPresent()) {
-        	PoliciesEntity existingCompany = existingCompanyOptional.get();
-            modelMapper.map(companyDto, existingCompanyOptional);
-            PoliciesEntity updatedCompany = policiesRepository.save(existingCompany);
-            logger.info("Updated company with ID: {}", updatedCompany.getPoliciesId());
-            return convertToDTO(updatedCompany);
+    public PoliciesDto updatePolicies(Long policiesId, PoliciesDto policiesDto) {
+        Optional<PoliciesEntity> existingPoliciesOptional = policiesRepository.findById(policiesId);
+        if (existingPoliciesOptional.isPresent()) {
+        	PoliciesEntity existingPolicies = existingPoliciesOptional.get();
+            modelMapper.map(policiesDto, existingPoliciesOptional);
+            PoliciesEntity updatedPolicies = policiesRepository.save(existingPolicies);
+            logger.info("Updated Policies with ID: {}", updatedPolicies.getPoliciesId());
+            return convertToDTO(updatedPolicies);
         } else {
-            logger.warn("Company with ID {} not found for update", policiesId);
+            logger.warn("Policies with ID {} not found for update", policiesId);
             return null;
         }
     }
@@ -74,23 +74,23 @@ public class PoliciesService {
     // Delete
     public void deletePolicies(Long policiesId) {
     	policiesRepository.deleteById(policiesId);
-        logger.info("Deleted company with ID: {}", policiesId);
+        logger.info("Deleted Policies with ID: {}", policiesId);
     }
 
-    //count the total company
+    //count the total Policies
     public long countPolicies()
 	 {
 		 return policiesRepository.count();
 	 }
     
-	// Helper method to convert CompanyDTo to Company entity
-    private PoliciesEntity convertToEntity(PoliciesDto companyDto)
+	// Helper method to convert PoliciesDTo to PoliciesEntity
+    private PoliciesEntity convertToEntity(PoliciesDto policiesDto)
     {
-    	return modelMapper.map(companyDto, PoliciesEntity.class);
+    	return modelMapper.map(policiesDto, PoliciesEntity.class);
     }
 
-    // Helper method to convert Company Entity entity to CompanyDTo
-    private PoliciesDto convertToDTO(PoliciesEntity companyEntity) {
-        return modelMapper.map(companyEntity, PoliciesDto.class);
+    // Helper method to convert PoliciesEntity to PoliciesDTo
+    private PoliciesDto convertToDTO(PoliciesEntity policiesEntity) {
+        return modelMapper.map(policiesEntity, PoliciesDto.class);
     }
 }

@@ -32,56 +32,55 @@ public class DepartmentController {
     private DepartmentService departmentService;
 
   
-  	// Create a new Company
+  	// Create a new Department
       @PostMapping("/create/department")
-      public ResponseEntity<DepartmentDto> createDepartment(@RequestBody DepartmentDto companyDto) {
-    	  DepartmentDto createdCompany = departmentService.createDepartment(companyDto);
-          logger.info("Created company with name: {}", createdCompany.getCompanyName());
-          return new ResponseEntity<>(createdCompany, HttpStatus.CREATED);
+      public ResponseEntity<DepartmentDto> createDepartment(@RequestBody DepartmentDto departmentDto) {
+    	  DepartmentDto createdDepartment = departmentService.createDepartment(departmentDto);
+          logger.info("Created Department with name: {}", createdDepartment.getCompanyName());
+          return new ResponseEntity<>(createdDepartment, HttpStatus.CREATED);
       }
 
-      // Get all companies
-      
+      // Get all Department     
       @GetMapping("/get/department")
       public ResponseEntity<List<DepartmentDto>> getAllDepartment() {
-          List<DepartmentDto> companies = departmentService.getAllDepartment();
-          logger.info("Retrieved {} companies from the database", companies.size());
-          return new ResponseEntity<>(companies, HttpStatus.OK);
+          List<DepartmentDto> department = departmentService.getAllDepartment();
+          logger.info("Retrieved {} Department from the database", department.size());
+          return new ResponseEntity<>(department, HttpStatus.OK);
       }
 
-      // Get company by ID
+      // Get Department by ID
       @GetMapping("/get/{departmentId}")
       public ResponseEntity<DepartmentDto> getDepartmentById(@PathVariable Long departmentId) {
-          Optional<DepartmentDto> company = departmentService.getDepartmentById(departmentId);
-          if (company.isPresent()) {
-              logger.info("Retrieved compay with ID: {}", departmentId);
-              return new ResponseEntity<>(company.get(), HttpStatus.OK);
+          Optional<DepartmentDto> department = departmentService.getDepartmentById(departmentId);
+          if (department.isPresent()) {
+              logger.info("Retrieved Department with ID: {}", departmentId);
+              return new ResponseEntity<>(department.get(), HttpStatus.OK);
           } else {
-              logger.warn("company with ID {} not found", departmentId);
+              logger.warn("Department with ID {} not found", departmentId);
               return new ResponseEntity<>(HttpStatus.NOT_FOUND);
           }
       }
 
-      // Update company by ID
+      // Update Department by ID
       @PutMapping("/update/{departmentId}")
-      public ResponseEntity<DepartmentDto> updateDepartment(@PathVariable Long departmentId, @RequestBody DepartmentDto updatedCompanyDTO) {
-    	  DepartmentDto updatedCompany = departmentService.updateDepartment(departmentId, updatedCompanyDTO);
-          if (updatedCompany != null) {
-              logger.info("Updated company with ID: {}", departmentId);
-              return new ResponseEntity<>(updatedCompany, HttpStatus.OK);
+      public ResponseEntity<DepartmentDto> updateDepartment(@PathVariable Long departmentId, @RequestBody DepartmentDto updatedDepartmentDto) {
+    	  DepartmentDto updatedDepartment = departmentService.updateDepartment(departmentId, updatedDepartmentDto);
+          if (updatedDepartment != null) {
+              logger.info("Updated Department with ID: {}", departmentId);
+              return new ResponseEntity<>(updatedDepartment, HttpStatus.OK);
           } else {
-              logger.warn("Company with ID {} not found for update", departmentId);
+              logger.warn("Department with ID {} not found for update", departmentId);
               return new ResponseEntity<>(HttpStatus.NOT_FOUND);
           }
       }
       
 
 
-      // Delete Company by ID
+      // Delete Department by ID
       @DeleteMapping("/delete/{departmentId}")
       public ResponseEntity<Void> deleteDepartment(@PathVariable Long departmentId) {
     	  departmentService.deleteDepartment(departmentId);
-          logger.info("Deleted company with ID: {}", departmentId);
+          logger.info("Deleted Department with ID: {}", departmentId);
           return new ResponseEntity<>(HttpStatus.NO_CONTENT);
       }
   	    

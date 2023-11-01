@@ -10,9 +10,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.orive.Organisation.Dto.AnnoucementsDto;
-import com.orive.Organisation.Entity.AnnoucementsEntity;
-import com.orive.Organisation.Repository.AnnoucementsRepository;
+import com.orive.Organisation.Dto.AnnoucementDto;
+
+import com.orive.Organisation.Entity.AnnoucementEntity;
+
+import com.orive.Organisation.Repository.AnnoucementRepository;
 
 
 
@@ -22,75 +24,75 @@ public class AnnoucementService {
     private static final Logger logger=LoggerFactory.getLogger(AnnoucementService.class);
 	
 	@Autowired
-	private AnnoucementsRepository annoucementsRepository;
+	private AnnoucementRepository annoucementsRepository;
 	
 	@Autowired
 	private ModelMapper modelMapper;
 	
 	
 	// Create
-    public AnnoucementsDto createAnnouncements(AnnoucementsDto companyDto) {
-    	AnnoucementsEntity companyEntity = convertToEntity(companyDto);
-    	AnnoucementsEntity savedCompany = annoucementsRepository.save(companyEntity);
-        logger.info("Created Company with ID: {}", savedCompany.getAnnouncementsId());
-        return convertToDTO(savedCompany);
+    public AnnoucementDto createAnnouncements(AnnoucementDto annoucementDto) {
+    	AnnoucementEntity annoucementEntity = convertToEntity(annoucementDto);
+    	AnnoucementEntity savedAnnoucement = annoucementsRepository.save(annoucementEntity);
+        logger.info("Created Annoucement with ID: {}", savedAnnoucement.getAnnouncementsId());
+        return convertToDTO(savedAnnoucement);
     }
 
     // Read
-    public List<AnnoucementsDto> getAllAnnouncements() {
-        List<AnnoucementsEntity> companyEntities = annoucementsRepository.findAll();
-        logger.info("Retrieved {} company from the database", companyEntities.size());
-        return companyEntities.stream()
+    public List<AnnoucementDto> getAllAnnouncements() {
+        List<AnnoucementEntity> announcementEntities = annoucementsRepository.findAll();
+        logger.info("Retrieved {} Annoucement from the database", announcementEntities.size());
+        return announcementEntities.stream()
                 .map(this::convertToDTO)
                 .collect(Collectors.toList());
     }
     
-    //get by CompanyId
-    public Optional<AnnoucementsDto> getAnnouncementsById(Long announcementsId) {
-        Optional<AnnoucementsEntity> company = annoucementsRepository.findById(announcementsId);
-        if (company.isPresent()) {
-            return Optional.of(convertToDTO(company.get()));
+    //get by AnnoucementsId
+    public Optional<AnnoucementDto> getAnnouncementsById(Long announcementId) {
+        Optional<AnnoucementEntity> announcement = annoucementsRepository.findById(announcementId);
+        if (announcement.isPresent()) {
+            return Optional.of(convertToDTO(announcement.get()));
         } else {
-            logger.warn("Company with ID {} not found", announcementsId);
+            logger.warn("Annoucements with ID {} not found", announcementId);
             return Optional.empty();
         }
     }
     
  // Update list by id
-    public AnnoucementsDto updateAnnouncements(Long announcementsId, AnnoucementsDto companyDto) {
-        Optional<AnnoucementsEntity> existingCompanyOptional = annoucementsRepository.findById(announcementsId);
-        if (existingCompanyOptional.isPresent()) {
-        	AnnoucementsEntity existingCompany = existingCompanyOptional.get();
-            modelMapper.map(companyDto, existingCompanyOptional);
-            AnnoucementsEntity updatedCompany = annoucementsRepository.save(existingCompany);
-            logger.info("Updated company with ID: {}", updatedCompany.getAnnouncementsId());
-            return convertToDTO(updatedCompany);
+    public AnnoucementDto updateAnnouncement(Long announcementId, AnnoucementDto annoucementDto) {
+        Optional<AnnoucementEntity> existingAnnoucementOptional = annoucementsRepository.findById(announcementId);
+        if (existingAnnoucementOptional.isPresent()) {
+        	AnnoucementEntity existingAnnoucement = existingAnnoucementOptional.get();
+            modelMapper.map(annoucementDto, existingAnnoucementOptional);
+            AnnoucementEntity updatedAnnoucement = annoucementsRepository.save(existingAnnoucement);
+            logger.info("Updated Annoucement with ID: {}", updatedAnnoucement.getAnnouncementsId());
+            return convertToDTO(updatedAnnoucement);
         } else {
-            logger.warn("Company with ID {} not found for update", announcementsId);
+            logger.warn("Annoucement with ID {} not found for update", announcementId);
             return null;
         }
     }
     
     // Delete
-    public void deleteAnnouncements(Long announcementsId) {
-    	annoucementsRepository.deleteById(announcementsId);
-        logger.info("Deleted company with ID: {}", announcementsId);
+    public void deleteAnnouncement(Long announcementId) {
+    	annoucementsRepository.deleteById(announcementId);
+        logger.info("Deleted Annoucement with ID: {}", announcementId);
     }
 
-    //count the total company
-    public long countAnnouncements()
+    //count the total Annoucement
+    public long countAnnouncement()
 	 {
 		 return annoucementsRepository.count();
 	 }
     
-	// Helper method to convert CompanyDTo to Company entity
-    private AnnoucementsEntity convertToEntity(AnnoucementsDto companyDto)
+	// Helper method to convert AnnoucementDTo to AnnoucementEntity
+    private AnnoucementEntity convertToEntity(AnnoucementDto annoucementDto)
     {
-    	return modelMapper.map(companyDto, AnnoucementsEntity.class);
+    	return modelMapper.map(annoucementDto, AnnoucementEntity.class);
     }
 
-    // Helper method to convert Company Entity entity to CompanyDTo
-    private AnnoucementsDto convertToDTO(AnnoucementsEntity companyEntity) {
-        return modelMapper.map(companyEntity, AnnoucementsDto.class);
+    // Helper method to convert AnnoucementEntity entity to AnnoucementDTo
+    private AnnoucementDto convertToDTO(AnnoucementEntity annoucementEntity) {
+        return modelMapper.map(annoucementEntity, AnnoucementDto.class);
     } 
 }

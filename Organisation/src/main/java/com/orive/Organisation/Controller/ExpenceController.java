@@ -32,54 +32,54 @@ public class ExpenceController {
     private ExpenceService expenceService;
 
   
-  	// Create a new Company
+  	// Create a new Expence
       @PostMapping("/create/expence")
-      public ResponseEntity<ExpenceDto> createExpence(@RequestBody ExpenceDto companyDto) {
-    	  ExpenceDto createdCompany = expenceService.createExpence(companyDto);
-          logger.info("Created company with id: {}", createdCompany.getExpenceType());
-          return new ResponseEntity<>(createdCompany, HttpStatus.CREATED);
+      public ResponseEntity<ExpenceDto> createExpence(@RequestBody ExpenceDto expenceDto) {
+    	  ExpenceDto createdExpence = expenceService.createExpence(expenceDto);
+          logger.info("Created Expence with id: {}", createdExpence.getExpenceType());
+          return new ResponseEntity<>(createdExpence, HttpStatus.CREATED);
       }
 
-      // Get all companies
+      // Get all Expence
       @GetMapping("/get/expence")
       public ResponseEntity<List<ExpenceDto>> getAllExpence() {
-          List<ExpenceDto> companies = expenceService.getAllExpence();
-          logger.info("Retrieved {} companies from the database", companies.size());
-          return new ResponseEntity<>(companies, HttpStatus.OK);
+          List<ExpenceDto> expence = expenceService.getAllExpence();
+          logger.info("Retrieved {} Expence from the database", expence.size());
+          return new ResponseEntity<>(expence, HttpStatus.OK);
       }
 
-      // Get company by ID
+      // Get Expence by ID
       @GetMapping("/get/{expenceId}")
       public ResponseEntity<ExpenceDto> getExpenceById(@PathVariable Long expenceId) {
-          Optional<ExpenceDto> company = expenceService.getExpenceById(expenceId);
-          if (company.isPresent()) {
-              logger.info("Retrieved compay with ID: {}", expenceId);
-              return new ResponseEntity<>(company.get(), HttpStatus.OK);
+          Optional<ExpenceDto> expence = expenceService.getExpenceById(expenceId);
+          if (expence.isPresent()) {
+              logger.info("Retrieved Expence with ID: {}", expenceId);
+              return new ResponseEntity<>(expence.get(), HttpStatus.OK);
           } else {
-              logger.warn("company with ID {} not found", expenceId);
+              logger.warn("Expence with ID {} not found", expenceId);
               return new ResponseEntity<>(HttpStatus.NOT_FOUND);
           }
       }
 
-      // Update company by ID
+      // Update Expence by ID
       @PutMapping("/update/{expenceId}")
-      public ResponseEntity<ExpenceDto> updateExpence(@PathVariable Long expenceId, @RequestBody ExpenceDto updatedCompanyDTO) {
-    	  ExpenceDto updatedCompany = expenceService.updateExpence(expenceId, updatedCompanyDTO);
-          if (updatedCompany != null) {
-              logger.info("Updated company with ID: {}", expenceId);
-              return new ResponseEntity<>(updatedCompany, HttpStatus.OK);
+      public ResponseEntity<ExpenceDto> updateExpence(@PathVariable Long expenceId, @RequestBody ExpenceDto updatedExpenceDto) {
+    	  ExpenceDto updatedExpence = expenceService.updateExpence(expenceId, updatedExpenceDto);
+          if (updatedExpence != null) {
+              logger.info("Updated Expence with ID: {}", expenceId);
+              return new ResponseEntity<>(updatedExpence, HttpStatus.OK);
           } else {
-              logger.warn("Company with ID {} not found for update", expenceId);
+              logger.warn("Expence with ID {} not found for update", expenceId);
               return new ResponseEntity<>(HttpStatus.NOT_FOUND);
           }
       }
       
 
-      // Delete Company by ID
+      // Delete Expence by ID
       @DeleteMapping("/delete/{expenceId}")
       public ResponseEntity<Void> deleteExpence(@PathVariable Long expenceId) {
     	  expenceService.deleteExpence(expenceId);
-          logger.info("Deleted company with ID: {}", expenceId);
+          logger.info("Deleted Expence with ID: {}", expenceId);
           return new ResponseEntity<>(HttpStatus.NO_CONTENT);
       }
   	    

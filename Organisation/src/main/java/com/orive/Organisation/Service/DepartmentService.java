@@ -29,44 +29,44 @@ public class DepartmentService {
 	
 	
 	// Create
-    public DepartmentDto createDepartment(DepartmentDto companyDto) {
-    	DepartmentEntity companyEntity = convertToEntity(companyDto);
-    	DepartmentEntity savedCompany = departmentRepository.save(companyEntity);
-        logger.info("Created Company with ID: {}", savedCompany.getDepartmentId());
-        return convertToDTO(savedCompany);
+    public DepartmentDto createDepartment(DepartmentDto departmentDto) {
+    	DepartmentEntity departmentEntity = convertToEntity(departmentDto);
+    	DepartmentEntity savedDepartment = departmentRepository.save(departmentEntity);
+        logger.info("Created Department with ID: {}", savedDepartment.getDepartmentId());
+        return convertToDTO(savedDepartment);
     }
 
     // Read
     public List<DepartmentDto> getAllDepartment() {
-        List<DepartmentEntity> companyEntities = departmentRepository.findAll();
-        logger.info("Retrieved {} company from the database", companyEntities.size());
-        return companyEntities.stream()
+        List<DepartmentEntity> departmentEntities = departmentRepository.findAll();
+        logger.info("Retrieved {} Department from the database", departmentEntities.size());
+        return departmentEntities.stream()
                 .map(this::convertToDTO)
                 .collect(Collectors.toList());
     }
     
-    //get by CompanyId
+    //get by DepartmentId
     public Optional<DepartmentDto> getDepartmentById(Long departmentId) {
-        Optional<DepartmentEntity> company = departmentRepository.findById(departmentId);
-        if (company.isPresent()) {
-            return Optional.of(convertToDTO(company.get()));
+        Optional<DepartmentEntity> department = departmentRepository.findById(departmentId);
+        if (department.isPresent()) {
+            return Optional.of(convertToDTO(department.get()));
         } else {
-            logger.warn("Company with ID {} not found", departmentId);
+            logger.warn("Department with ID {} not found", departmentId);
             return Optional.empty();
         }
     }
     
  // Update list by id
-    public DepartmentDto updateDepartment(Long departmentId, DepartmentDto companyDto) {
-        Optional<DepartmentEntity> existingCompanyOptional = departmentRepository.findById(departmentId);
-        if (existingCompanyOptional.isPresent()) {
-        	DepartmentEntity existingCompany = existingCompanyOptional.get();
-            modelMapper.map(companyDto, existingCompanyOptional);
-            DepartmentEntity updatedCompany = departmentRepository.save(existingCompany);
-            logger.info("Updated company with ID: {}", updatedCompany.getDepartmentId());
-            return convertToDTO(updatedCompany);
+    public DepartmentDto updateDepartment(Long departmentId, DepartmentDto departmentDto) {
+        Optional<DepartmentEntity> existingDepartmentOptional = departmentRepository.findById(departmentId);
+        if (existingDepartmentOptional.isPresent()) {
+        	DepartmentEntity existingDepartment = existingDepartmentOptional.get();
+            modelMapper.map(departmentDto, existingDepartmentOptional);
+            DepartmentEntity updatedDepartment= departmentRepository.save(existingDepartment);
+            logger.info("Updated Department with ID: {}", updatedDepartment.getDepartmentId());
+            return convertToDTO(updatedDepartment);
         } else {
-            logger.warn("Company with ID {} not found for update", departmentId);
+            logger.warn("Department with ID {} not found for update", departmentId);
             return null;
         }
     }
@@ -74,23 +74,23 @@ public class DepartmentService {
     // Delete
     public void deleteDepartment(Long departmentId) {
     	departmentRepository.deleteById(departmentId);
-        logger.info("Deleted company with ID: {}", departmentId);
+        logger.info("Deleted Department with ID: {}", departmentId);
     }
 
-    //count the total company
+    //count the total Department
     public long countDepartment()
 	 {
 		 return departmentRepository.count();
 	 }
     
-	// Helper method to convert CompanyDTo to Company entity
-    private DepartmentEntity convertToEntity(DepartmentDto companyDto)
+	// Helper method to convert DepartmentDTo to DepartmentEntity
+    private DepartmentEntity convertToEntity(DepartmentDto departmentDto)
     {
-    	return modelMapper.map(companyDto, DepartmentEntity.class);
+    	return modelMapper.map(departmentDto, DepartmentEntity.class);
     }
 
-    // Helper method to convert Company Entity entity to CompanyDTo
-    private DepartmentDto convertToDTO(DepartmentEntity companyEntity) {
-        return modelMapper.map(companyEntity, DepartmentDto.class);
+    // Helper method to convert DepartmentEntity  to DepartmentDTo
+    private DepartmentDto convertToDTO(DepartmentEntity departmentEntity) {
+        return modelMapper.map(departmentEntity, DepartmentDto.class);
     } 
 }

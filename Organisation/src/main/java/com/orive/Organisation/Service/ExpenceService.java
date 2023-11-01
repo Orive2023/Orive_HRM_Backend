@@ -29,44 +29,44 @@ private static final Logger logger=LoggerFactory.getLogger(ExpenceService.class)
 	
 	
 	// Create
-    public ExpenceDto createExpence(ExpenceDto companyDto) {
-    	ExpenceEntity companyEntity = convertToEntity(companyDto);
-    	ExpenceEntity savedCompany = expenceRepository.save(companyEntity);
-        logger.info("Created Company with ID: {}", savedCompany.getExpenceId());
-        return convertToDTO(savedCompany);
+    public ExpenceDto createExpence(ExpenceDto expenceDto) {
+    	ExpenceEntity expenceEntity = convertToEntity(expenceDto);
+    	ExpenceEntity savedExpence = expenceRepository.save(expenceEntity);
+        logger.info("Created Expence with ID: {}", savedExpence.getExpenceId());
+        return convertToDTO(savedExpence);
     }
 
     // Read
     public List<ExpenceDto> getAllExpence() {
-        List<ExpenceEntity> companyEntities = expenceRepository.findAll();
-        logger.info("Retrieved {} company from the database", companyEntities.size());
-        return companyEntities.stream()
+        List<ExpenceEntity> expenceEntities = expenceRepository.findAll();
+        logger.info("Retrieved {} Expence from the database", expenceEntities.size());
+        return expenceEntities.stream()
                 .map(this::convertToDTO)
                 .collect(Collectors.toList());
     }
     
-    //get by CompanyId
+    //get by ExpenceId
     public Optional<ExpenceDto> getExpenceById(Long expenceId) {
-        Optional<ExpenceEntity> company = expenceRepository.findById(expenceId);
-        if (company.isPresent()) {
-            return Optional.of(convertToDTO(company.get()));
+        Optional<ExpenceEntity> expence = expenceRepository.findById(expenceId);
+        if (expence.isPresent()) {
+            return Optional.of(convertToDTO(expence.get()));
         } else {
-            logger.warn("Company with ID {} not found", expenceId);
+            logger.warn("Expence with ID {} not found", expenceId);
             return Optional.empty();
         }
     }
     
  // Update list by id
-    public ExpenceDto updateExpence(Long expenceId, ExpenceDto companyDto) {
-        Optional<ExpenceEntity> existingCompanyOptional = expenceRepository.findById(expenceId);
-        if (existingCompanyOptional.isPresent()) {
-        	ExpenceEntity existingCompany = existingCompanyOptional.get();
-            modelMapper.map(companyDto, existingCompanyOptional);
-            ExpenceEntity updatedCompany = expenceRepository.save(existingCompany);
-            logger.info("Updated company with ID: {}", updatedCompany.getExpenceId());
-            return convertToDTO(updatedCompany);
+    public ExpenceDto updateExpence(Long expenceId, ExpenceDto expenceDto) {
+        Optional<ExpenceEntity> existingExpenceOptional = expenceRepository.findById(expenceId);
+        if (existingExpenceOptional.isPresent()) {
+        	ExpenceEntity existingExpence = existingExpenceOptional.get();
+            modelMapper.map(expenceDto, existingExpenceOptional);
+            ExpenceEntity updatedExpence = expenceRepository.save(existingExpence);
+            logger.info("Updated Expence with ID: {}", updatedExpence.getExpenceId());
+            return convertToDTO(updatedExpence);
         } else {
-            logger.warn("Company with ID {} not found for update", expenceId);
+            logger.warn("Expence with ID {} not found for update", expenceId);
             return null;
         }
     }
@@ -74,23 +74,23 @@ private static final Logger logger=LoggerFactory.getLogger(ExpenceService.class)
     // Delete
     public void deleteExpence(Long expenceId) {
     	expenceRepository.deleteById(expenceId);
-        logger.info("Deleted company with ID: {}", expenceId);
+        logger.info("Deleted Expence with ID: {}", expenceId);
     }
 
-    //count the total company
+    //count the total Expence
     public long countExpence()
 	 {
 		 return expenceRepository.count();
 	 }
     
-	// Helper method to convert CompanyDTo to Company entity
-    private ExpenceEntity convertToEntity(ExpenceDto companyDto)
+	// Helper method to convert ExpenceDTo to ExpenceEntity
+    private ExpenceEntity convertToEntity(ExpenceDto expenceDto)
     {
-    	return modelMapper.map(companyDto, ExpenceEntity.class);
+    	return modelMapper.map(expenceDto, ExpenceEntity.class);
     }
 
-    // Helper method to convert Company Entity entity to CompanyDTo
-    private ExpenceDto convertToDTO(ExpenceEntity companyEntity) {
-        return modelMapper.map(companyEntity, ExpenceDto.class);
+    // Helper method to convert ExpenceEntity to ExpenceDTo
+    private ExpenceDto convertToDTO(ExpenceEntity  expenceEntity) {
+        return modelMapper.map(expenceEntity, ExpenceDto.class);
     } 
 }

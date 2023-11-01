@@ -27,44 +27,44 @@ public class LocationService {
 	
 	
 	// Create
-    public LocationDto createLocation(LocationDto companyDto) {
-    	LocationEntity companyEntity = convertToEntity(companyDto);
-    	LocationEntity savedCompany = locationRepository.save(companyEntity);
-        logger.info("Created Company with ID: {}", savedCompany.getLocationId());
-        return convertToDTO(savedCompany);
+    public LocationDto createLocation(LocationDto locationDto) {
+    	LocationEntity locationEntity = convertToEntity(locationDto);
+    	LocationEntity savedLocation = locationRepository.save(locationEntity);
+        logger.info("Created Location with ID: {}", savedLocation.getLocationId());
+        return convertToDTO(savedLocation);
     }
 
     // Read
     public List<LocationDto> getAllLocation() {
-        List<LocationEntity> companyEntities = locationRepository.findAll();
-        logger.info("Retrieved {} company from the database", companyEntities.size());
-        return companyEntities.stream()
+        List<LocationEntity> locationEntities = locationRepository.findAll();
+        logger.info("Retrieved {} Location from the database", locationEntities.size());
+        return locationEntities.stream()
                 .map(this::convertToDTO)
                 .collect(Collectors.toList());
     }
     
-    //get by CompanyId
+    //get by LocationId
     public Optional<LocationDto> getLocationById(Long locationId) {
-        Optional<LocationEntity> company = locationRepository.findById(locationId);
-        if (company.isPresent()) {
-            return Optional.of(convertToDTO(company.get()));
+        Optional<LocationEntity> location = locationRepository.findById(locationId);
+        if (location.isPresent()) {
+            return Optional.of(convertToDTO(location.get()));
         } else {
-            logger.warn("Company with ID {} not found", locationId);
+            logger.warn("Location with ID {} not found", locationId);
             return Optional.empty();
         }
     }
     
  // Update list by id
-    public LocationDto updateLocation(Long locationId, LocationDto companyDto) {
-        Optional<LocationEntity> existingCompanyOptional = locationRepository.findById(locationId);
-        if (existingCompanyOptional.isPresent()) {
-        	LocationEntity existingCompany = existingCompanyOptional.get();
-            modelMapper.map(companyDto, existingCompanyOptional);
-            LocationEntity updatedCompany = locationRepository.save(existingCompany);
-            logger.info("Updated company with ID: {}", updatedCompany.getLocationId());
-            return convertToDTO(updatedCompany);
+    public LocationDto updateLocation(Long locationId, LocationDto locationDto) {
+        Optional<LocationEntity> existingLocationOptional = locationRepository.findById(locationId);
+        if (existingLocationOptional.isPresent()) {
+        	LocationEntity existingLocation = existingLocationOptional.get();
+            modelMapper.map(locationDto, existingLocationOptional);
+            LocationEntity updatedLocation = locationRepository.save(existingLocation);
+            logger.info("Updated Location with ID: {}", updatedLocation.getLocationId());
+            return convertToDTO(updatedLocation);
         } else {
-            logger.warn("Company with ID {} not found for update", locationId);
+            logger.warn("Location with ID {} not found for update", locationId);
             return null;
         }
     }
@@ -72,23 +72,23 @@ public class LocationService {
     // Delete
     public void deleteLocation(Long locationId) {
     	locationRepository.deleteById(locationId);
-        logger.info("Deleted company with ID: {}", locationId);
+        logger.info("Deleted Location with ID: {}", locationId);
     }
 
-    //count the total company
+    //count the total Location
     public long countLocation()
 	 {
 		 return locationRepository.count();
 	 }
     
-	// Helper method to convert CompanyDTo to Company entity
-    private LocationEntity convertToEntity(LocationDto companyDto)
+	// Helper method to convert LocationDTo to LocationEntity
+    private LocationEntity convertToEntity(LocationDto locationDto)
     {
-    	return modelMapper.map(companyDto, LocationEntity.class);
+    	return modelMapper.map(locationDto, LocationEntity.class);
     }
 
-    // Helper method to convert Company Entity entity to CompanyDTo
-    private LocationDto convertToDTO(LocationEntity companyEntity) {
-        return modelMapper.map(companyEntity, LocationDto.class);
+    // Helper method to convert LocationEntity to LocationDTo
+    private LocationDto convertToDTO(LocationEntity locationEntity) {
+        return modelMapper.map(locationEntity, LocationDto.class);
     } 
 }

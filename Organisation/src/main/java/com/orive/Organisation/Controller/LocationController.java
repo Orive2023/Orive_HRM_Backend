@@ -30,56 +30,55 @@ public class LocationController {
     private LocationService locationService;
 
   
-  	// Create a new Company
+  	// Create a new Location
       @PostMapping("/create/location")
-      public ResponseEntity<LocationDto> createLocation(@RequestBody LocationDto companyDto) {
-    	  LocationDto createdCompany = locationService.createLocation(companyDto);
-          logger.info("Created company with name: {}", createdCompany.getCompanyName());
-          return new ResponseEntity<>(createdCompany, HttpStatus.CREATED);
+      public ResponseEntity<LocationDto> createLocation(@RequestBody LocationDto locationDto) {
+    	  LocationDto createdLocation = locationService.createLocation(locationDto);
+          logger.info("Created Location with name: {}", createdLocation.getCompanyName());
+          return new ResponseEntity<>(createdLocation, HttpStatus.CREATED);
       }
 
-      // Get all companies
-      
+      // Get all Location  
       @GetMapping("/get/location")
       public ResponseEntity<List<LocationDto>> getAllLocation() {
-          List<LocationDto> companies = locationService.getAllLocation();
-          logger.info("Retrieved {} companies from the database", companies.size());
-          return new ResponseEntity<>(companies, HttpStatus.OK);
+          List<LocationDto> location = locationService.getAllLocation();
+          logger.info("Retrieved {} Location from the database", location.size());
+          return new ResponseEntity<>(location, HttpStatus.OK);
       }
 
-      // Get company by ID
+      // Get Location by ID
       @GetMapping("/get/{locationId}")
       public ResponseEntity<LocationDto> getLocationById(@PathVariable Long locationId) {
-          Optional<LocationDto> company = locationService.getLocationById(locationId);
-          if (company.isPresent()) {
-              logger.info("Retrieved compay with ID: {}", locationId);
-              return new ResponseEntity<>(company.get(), HttpStatus.OK);
+          Optional<LocationDto> location = locationService.getLocationById(locationId);
+          if (location.isPresent()) {
+              logger.info("Retrieved Location with ID: {}", locationId);
+              return new ResponseEntity<>(location.get(), HttpStatus.OK);
           } else {
-              logger.warn("company with ID {} not found", locationId);
+              logger.warn("Location with ID {} not found", locationId);
               return new ResponseEntity<>(HttpStatus.NOT_FOUND);
           }
       }
 
-      // Update company by ID
+      // Update Location by ID
       @PutMapping("/update/{locationId}")
-      public ResponseEntity<LocationDto> updateLocation(@PathVariable Long locationId, @RequestBody LocationDto updatedCompanyDTO) {
-    	  LocationDto updatedCompany = locationService.updateLocation(locationId, updatedCompanyDTO);
-          if (updatedCompany != null) {
-              logger.info("Updated company with ID: {}", locationId);
-              return new ResponseEntity<>(updatedCompany, HttpStatus.OK);
+      public ResponseEntity<LocationDto> updateLocation(@PathVariable Long locationId, @RequestBody LocationDto updatedLocationDto) {
+    	  LocationDto updatedLocation = locationService.updateLocation(locationId, updatedLocationDto);
+          if (updatedLocation != null) {
+              logger.info("Updated Location with ID: {}", locationId);
+              return new ResponseEntity<>(updatedLocation, HttpStatus.OK);
           } else {
-              logger.warn("Company with ID {} not found for update", locationId);
+              logger.warn("Location with ID {} not found for update", locationId);
               return new ResponseEntity<>(HttpStatus.NOT_FOUND);
           }
       }
       
 
 
-      // Delete Company by ID
+      // Delete Location by ID
       @DeleteMapping("/delete/{locationId}")
       public ResponseEntity<Void> deleteLocation(@PathVariable Long locationId) {
     	  locationService.deleteLocation(locationId);
-          logger.info("Deleted company with ID: {}", locationId);
+          logger.info("Deleted Location with ID: {}", locationId);
           return new ResponseEntity<>(HttpStatus.NO_CONTENT);
       }
   	    

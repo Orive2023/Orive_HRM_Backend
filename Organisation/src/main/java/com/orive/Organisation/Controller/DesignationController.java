@@ -32,54 +32,54 @@ public class DesignationController {
     private DesignationService designationService;
 
   
-  	// Create a new Company
+  	// Create a new Designation
       @PostMapping("/create/designation")
-      public ResponseEntity<DesignationDto> createDesignation(@RequestBody DesignationDto companyDto) {
-    	  DesignationDto createdCompany = designationService.createDesignation(companyDto);
-          logger.info("Created company with name: {}", createdCompany.getDesignationName());
-          return new ResponseEntity<>(createdCompany, HttpStatus.CREATED);
+      public ResponseEntity<DesignationDto> createDesignation(@RequestBody DesignationDto designationDto) {
+    	  DesignationDto createdDesignation = designationService.createDesignation(designationDto);
+          logger.info("Created Designation with name: {}", createdDesignation.getDesignationName());
+          return new ResponseEntity<>(createdDesignation, HttpStatus.CREATED);
       }
 
-      // Get all companies
+      // Get all Designation
       @GetMapping("/get/designation")
       public ResponseEntity<List<DesignationDto>> getAllDesignation() {
-          List<DesignationDto> companies = designationService.getAllDesignation();
-          logger.info("Retrieved {} companies from the database", companies.size());
-          return new ResponseEntity<>(companies, HttpStatus.OK);
+          List<DesignationDto> designation = designationService.getAllDesignation();
+          logger.info("Retrieved {} Designation from the database", designation.size());
+          return new ResponseEntity<>(designation, HttpStatus.OK);
       }
 
-      // Get company by ID
+      // Get Designation by ID
       @GetMapping("/get/{designationId}")
       public ResponseEntity<DesignationDto> getDesignationById(@PathVariable Long designationId) {
-          Optional<DesignationDto> company = designationService.getDesignationById(designationId);
-          if (company.isPresent()) {
-              logger.info("Retrieved compay with ID: {}", designationId);
-              return new ResponseEntity<>(company.get(), HttpStatus.OK);
+          Optional<DesignationDto> designation = designationService.getDesignationById(designationId);
+          if (designation.isPresent()) {
+              logger.info("Retrieved Designation with ID: {}", designationId);
+              return new ResponseEntity<>(designation.get(), HttpStatus.OK);
           } else {
-              logger.warn("company with ID {} not found", designationId);
+              logger.warn("Designation with ID {} not found", designationId);
               return new ResponseEntity<>(HttpStatus.NOT_FOUND);
           }
       }
 
-      // Update company by ID
+      // Update Designation by ID
       @PutMapping("/update/{designationId}")
-      public ResponseEntity<DesignationDto> updateDesignation(@PathVariable Long designationId, @RequestBody DesignationDto updatedCompanyDTO) {
-    	  DesignationDto updatedCompany = designationService.updateDesignation(designationId, updatedCompanyDTO);
-          if (updatedCompany != null) {
-              logger.info("Updated company with ID: {}", designationId);
-              return new ResponseEntity<>(updatedCompany, HttpStatus.OK);
+      public ResponseEntity<DesignationDto> updateDesignation(@PathVariable Long designationId, @RequestBody DesignationDto updatedDesignationDto) {
+    	  DesignationDto updatedDesignation = designationService.updateDesignation(designationId, updatedDesignationDto);
+          if (updatedDesignation != null) {
+              logger.info("Updated Designation with ID: {}", designationId);
+              return new ResponseEntity<>(updatedDesignation, HttpStatus.OK);
           } else {
-              logger.warn("Company with ID {} not found for update", designationId);
+              logger.warn("Designation with ID {} not found for update", designationId);
               return new ResponseEntity<>(HttpStatus.NOT_FOUND);
           }
       }
       
 
-      // Delete Company by ID
+      // Delete Designation by ID
       @DeleteMapping("/delete/{designationId}")
       public ResponseEntity<Void> deleteDesignation(@PathVariable Long designationId) {
     	  designationService.deleteDesignation(designationId);
-          logger.info("Deleted company with ID: {}", designationId);
+          logger.info("Deleted Designation with ID: {}", designationId);
           return new ResponseEntity<>(HttpStatus.NO_CONTENT);
       }
   	    

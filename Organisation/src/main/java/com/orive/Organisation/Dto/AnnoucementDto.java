@@ -14,7 +14,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class AnnoucementsDto {
+public class AnnoucementDto {
 
     private Long announcementsId;
 	private String title;

@@ -17,12 +17,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.orive.Organisation.Dto.AnnoucementsDto;
+import com.orive.Organisation.Dto.AnnoucementDto;
 import com.orive.Organisation.Service.AnnoucementService;
 
 
 @RestController
-@RequestMapping(value = "announcements")
+@RequestMapping(value = "announcement")
 public class AnnoucementsController {
 
 	private static final Logger logger = LoggerFactory.getLogger(AnnoucementsController.class);
@@ -31,62 +31,62 @@ public class AnnoucementsController {
     private AnnoucementService annoucementService;
 
   
-  	// Create a new Company
-      @PostMapping("/create/announcements")
-      public ResponseEntity<AnnoucementsDto> createAnnoucement(@RequestBody AnnoucementsDto companyDto) {
-    	  AnnoucementsDto createdCompany = annoucementService.createAnnouncements(companyDto);
-          logger.info("Created company with name: {}", createdCompany.getCompanyName());
-          return new ResponseEntity<>(createdCompany, HttpStatus.CREATED);
+  	// Create a new Annoucement
+      @PostMapping("/create/announcement")
+      public ResponseEntity<AnnoucementDto> createAnnoucement(@RequestBody AnnoucementDto annoucementDto) {
+    	  AnnoucementDto createdAnnoucement = annoucementService.createAnnouncements(annoucementDto);
+          logger.info("Created Annoucement with name: {}", createdAnnoucement.getCompanyName());
+          return new ResponseEntity<>(createdAnnoucement, HttpStatus.CREATED);
       }
 
-      // Get all companies
+      // Get all Annoucement
       
-      @GetMapping("/get/announcements")
-      public ResponseEntity<List<AnnoucementsDto>> getAllAnnoucement() {
-          List<AnnoucementsDto> companies = annoucementService.getAllAnnouncements();
-          logger.info("Retrieved {} companies from the database", companies.size());
-          return new ResponseEntity<>(companies, HttpStatus.OK);
+      @GetMapping("/get/announcement")
+      public ResponseEntity<List<AnnoucementDto>> getAllAnnoucement() {
+          List<AnnoucementDto> announcement = annoucementService.getAllAnnouncements();
+          logger.info("Retrieved {} Annoucement from the database", announcement.size());
+          return new ResponseEntity<>(announcement, HttpStatus.OK);
       }
 
-      // Get company by ID
-      @GetMapping("/get/{announcementsId}")
-      public ResponseEntity<AnnoucementsDto> getAnnoucementById(@PathVariable Long announcementsId) {
-          Optional<AnnoucementsDto> company = annoucementService.getAnnouncementsById(announcementsId);
-          if (company.isPresent()) {
-              logger.info("Retrieved compay with ID: {}", announcementsId);
-              return new ResponseEntity<>(company.get(), HttpStatus.OK);
+      // Get Annoucement by ID
+      @GetMapping("/get/{announcementId}")
+      public ResponseEntity<AnnoucementDto> getAnnoucementById(@PathVariable Long announcementId) {
+          Optional<AnnoucementDto> announcement = annoucementService.getAnnouncementsById(announcementId);
+          if (announcement.isPresent()) {
+              logger.info("Retrieved Annoucement with ID: {}", announcementId);
+              return new ResponseEntity<>(announcement.get(), HttpStatus.OK);
           } else {
-              logger.warn("company with ID {} not found", announcementsId);
+              logger.warn("Annoucement with ID {} not found", announcementId);
               return new ResponseEntity<>(HttpStatus.NOT_FOUND);
           }
       }
 
-      // Update company by ID
-      @PutMapping("/update/{announcementsId}")
-      public ResponseEntity<AnnoucementsDto> updateAnnoucement(@PathVariable Long announcementsId, @RequestBody AnnoucementsDto updatedCompanyDTO) {
-    	  AnnoucementsDto updatedCompany = annoucementService.updateAnnouncements(announcementsId, updatedCompanyDTO);
-          if (updatedCompany != null) {
-              logger.info("Updated company with ID: {}", announcementsId);
-              return new ResponseEntity<>(updatedCompany, HttpStatus.OK);
+      // Update Annoucement by ID
+      @PutMapping("/update/{announcementId}")
+      public ResponseEntity<AnnoucementDto> updateAnnoucement(@PathVariable Long announcementId, @RequestBody AnnoucementDto updatedAnnoucementDTO) {
+    	  AnnoucementDto updatedAnnoucement= annoucementService.updateAnnouncement(announcementId, updatedAnnoucementDTO);
+          if (updatedAnnoucement != null) {
+              logger.info("Updated Annoucement with ID: {}", announcementId);
+              return new ResponseEntity<>(updatedAnnoucement, HttpStatus.OK);
           } else {
-              logger.warn("Company with ID {} not found for update", announcementsId);
+              logger.warn("Annoucement with ID {} not found for update", announcementId);
               return new ResponseEntity<>(HttpStatus.NOT_FOUND);
           }
       }
       
 
 
-      // Delete Company by ID
-      @DeleteMapping("/delete/{announcementsId}")
-      public ResponseEntity<Void> deleteAnnoucement(@PathVariable Long announcementsId) {
-    	  annoucementService.deleteAnnouncements(announcementsId);
-          logger.info("Deleted company with ID: {}", announcementsId);
+      // Delete Annoucement by ID
+      @DeleteMapping("/delete/{announcementId}")
+      public ResponseEntity<Void> deleteAnnoucement(@PathVariable Long announcementId) {
+    	  annoucementService.deleteAnnouncement(announcementId);
+          logger.info("Deleted Annoucement with ID: {}", announcementId);
           return new ResponseEntity<>(HttpStatus.NO_CONTENT);
       }
   	    
-  	    @GetMapping("/count/announcements")
+  	    @GetMapping("/count/announcement")
   	    public long countAnnoucement()
   	    {
-  	    	return annoucementService.countAnnouncements();
+  	    	return annoucementService.countAnnouncement();
   	    }
 }

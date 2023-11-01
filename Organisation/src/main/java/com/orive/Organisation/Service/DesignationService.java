@@ -25,44 +25,44 @@ public class DesignationService {
 	private ModelMapper modelMapper;
 	
 	// Create
-    public DesignationDto createDesignation(DesignationDto companyDto) {
-    	DesignationEntity companyEntity = convertToEntity(companyDto);
-    	DesignationEntity savedCompany = designationRepository.save(companyEntity);
-        logger.info("Created Company with ID: {}", savedCompany.getDesignationId());
-        return convertToDTO(savedCompany);
+    public DesignationDto createDesignation(DesignationDto designationDto) {
+    	DesignationEntity designationEntity = convertToEntity(designationDto);
+    	DesignationEntity savedDesignation = designationRepository.save(designationEntity);
+        logger.info("Created Designation with ID: {}", savedDesignation.getDesignationId());
+        return convertToDTO(savedDesignation);
     }
 
     // Read
     public List<DesignationDto> getAllDesignation() {
-        List<DesignationEntity> companyEntities = designationRepository.findAll();
-        logger.info("Retrieved {} company from the database", companyEntities.size());
-        return companyEntities.stream()
+        List<DesignationEntity> designationEntities = designationRepository.findAll();
+        logger.info("Retrieved {} Designation from the database", designationEntities.size());
+        return designationEntities.stream()
                 .map(this::convertToDTO)
                 .collect(Collectors.toList());
     }
     
-    //get by CompanyId
+    //get by DesignationId
     public Optional<DesignationDto> getDesignationById(Long designationId) {
-        Optional<DesignationEntity> company = designationRepository.findById(designationId);
-        if (company.isPresent()) {
-            return Optional.of(convertToDTO(company.get()));
+        Optional<DesignationEntity> designation = designationRepository.findById(designationId);
+        if (designation.isPresent()) {
+            return Optional.of(convertToDTO(designation.get()));
         } else {
-            logger.warn("Company with ID {} not found", designationId);
+            logger.warn("Designation with ID {} not found", designationId);
             return Optional.empty();
         }
     }
     
  // Update list by id
-    public DesignationDto updateDesignation(Long designationId, DesignationDto companyDto) {
-        Optional<DesignationEntity> existingCompanyOptional = designationRepository.findById(designationId);
-        if (existingCompanyOptional.isPresent()) {
-        	DesignationEntity existingCompany = existingCompanyOptional.get();
-            modelMapper.map(companyDto, existingCompanyOptional);
-            DesignationEntity updatedCompany = designationRepository.save(existingCompany);
-            logger.info("Updated company with ID: {}", updatedCompany.getDesignationId());
-            return convertToDTO(updatedCompany);
+    public DesignationDto updateDesignation(Long designationId, DesignationDto designationDto) {
+        Optional<DesignationEntity> existingDesignationOptional = designationRepository.findById(designationId);
+        if (existingDesignationOptional.isPresent()) {
+        	DesignationEntity existingDesignation = existingDesignationOptional.get();
+            modelMapper.map(designationDto, existingDesignationOptional);
+            DesignationEntity updatedDesignation = designationRepository.save(existingDesignation);
+            logger.info("Updated Designation with ID: {}", updatedDesignation.getDesignationId());
+            return convertToDTO(updatedDesignation);
         } else {
-            logger.warn("Company with ID {} not found for update", designationId);
+            logger.warn("Designation with ID {} not found for update", designationId);
             return null;
         }
     }
@@ -70,24 +70,24 @@ public class DesignationService {
     // Delete
     public void deleteDesignation(Long designationId) {
     	designationRepository.deleteById(designationId);
-        logger.info("Deleted company with ID: {}", designationId);
+        logger.info("Deleted Designation with ID: {}", designationId);
     }
 
-    //count the total company
+    //count the total Designation
     public long countDesignation()
 	 {
 		 return designationRepository.count();
 	 }
     
-	// Helper method to convert CompanyDTo to Company entity
-    private DesignationEntity convertToEntity(DesignationDto companyDto)
+	// Helper method to convert DesignationDTo to DesignationEntity
+    private DesignationEntity convertToEntity(DesignationDto designationDto)
     {
-    	return modelMapper.map(companyDto, DesignationEntity.class);
+    	return modelMapper.map(designationDto, DesignationEntity.class);
     }
 
-    // Helper method to convert Company Entity entity to CompanyDTo
-    private DesignationDto convertToDTO(DesignationEntity companyEntity) {
-        return modelMapper.map(companyEntity, DesignationDto.class);
+    // Helper method to convert DesignationEntity  to DesignationDTo
+    private DesignationDto convertToDTO(DesignationEntity designationEntity) {
+        return modelMapper.map(designationEntity, DesignationDto.class);
     } 
 	
 }

@@ -32,56 +32,55 @@ public class PoliciesController {
     private PoliciesService policiesService;
 
   
-  	// Create a new Company
+  	// Create a new Policies
       @PostMapping("/create/policies")
-      public ResponseEntity<PoliciesDto> createPolicies(@RequestBody PoliciesDto companyDto) {
-    	  PoliciesDto createdCompany = policiesService.createPolicies(companyDto);
-          logger.info("Created company with name: {}", createdCompany.getCompanyName());
-          return new ResponseEntity<>(createdCompany, HttpStatus.CREATED);
+      public ResponseEntity<PoliciesDto> createPolicies(@RequestBody PoliciesDto policiesDto) {
+    	  PoliciesDto createdPolicies = policiesService.createPolicies(policiesDto);
+          logger.info("Created Policies with name: {}", createdPolicies.getCompanyName());
+          return new ResponseEntity<>(createdPolicies, HttpStatus.CREATED);
       }
 
-      // Get all companies
-      
+      // Get all Policies  
       @GetMapping("/get/policies")
       public ResponseEntity<List<PoliciesDto>> getAllPolicies() {
-          List<PoliciesDto> companies = policiesService.getAllPolicies();
-          logger.info("Retrieved {} companies from the database", companies.size());
-          return new ResponseEntity<>(companies, HttpStatus.OK);
+          List<PoliciesDto> policies = policiesService.getAllPolicies();
+          logger.info("Retrieved {} Policies from the database", policies.size());
+          return new ResponseEntity<>(policies, HttpStatus.OK);
       }
 
-      // Get company by ID
+      // Get Policies by ID
       @GetMapping("/get/{policiesId}")
       public ResponseEntity<PoliciesDto> getPoliciesById(@PathVariable Long policiesId) {
-          Optional<PoliciesDto> company = policiesService.getPoliciesById(policiesId);
-          if (company.isPresent()) {
-              logger.info("Retrieved compay with ID: {}", policiesId);
-              return new ResponseEntity<>(company.get(), HttpStatus.OK);
+          Optional<PoliciesDto> policies = policiesService.getPoliciesById(policiesId);
+          if (policies.isPresent()) {
+              logger.info("Retrieved Policies with ID: {}", policiesId);
+              return new ResponseEntity<>(policies.get(), HttpStatus.OK);
           } else {
-              logger.warn("company with ID {} not found", policiesId);
+              logger.warn("Policies with ID {} not found", policiesId);
               return new ResponseEntity<>(HttpStatus.NOT_FOUND);
           }
       }
 
-      // Update company by ID
+      // Update Policies by ID
       @PutMapping("/update/{policiesId}")
-      public ResponseEntity<PoliciesDto> updatePolicies(@PathVariable Long policiesId, @RequestBody PoliciesDto updatedCompanyDTO) {
-    	  PoliciesDto updatedCompany = policiesService.updatePolicies(policiesId, updatedCompanyDTO);
-          if (updatedCompany != null) {
-              logger.info("Updated company with ID: {}", policiesId);
-              return new ResponseEntity<>(updatedCompany, HttpStatus.OK);
+      public ResponseEntity<PoliciesDto> updatePolicies(@PathVariable Long policiesId, @RequestBody PoliciesDto updatedPoliciesDto) {
+    	  PoliciesDto updatedPolicies = policiesService.updatePolicies(policiesId, updatedPoliciesDto);
+          if (updatedPolicies != null) {
+              logger.info("Updated Policies with ID: {}", policiesId);
+              return new ResponseEntity<>(updatedPolicies, HttpStatus.OK);
           } else {
-              logger.warn("Company with ID {} not found for update", policiesId);
+              logger.warn("Policies with ID {} not found for update", policiesId);
               return new ResponseEntity<>(HttpStatus.NOT_FOUND);
           }
       }
       
 
 
-      // Delete Company by ID
+      // Delete Policies by ID
       @DeleteMapping("/delete/{policiesId}")
       public ResponseEntity<Void> deletePolicies(@PathVariable Long policiesId) {
     	  policiesService.deletePolicies(policiesId);
-          logger.info("Deleted company with ID: {}", policiesId);
+          logger.info("Deleted Policies with ID: {}", policiesId);
           return new ResponseEntity<>(HttpStatus.NO_CONTENT);
       }
   	    
