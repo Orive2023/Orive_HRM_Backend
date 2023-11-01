@@ -39,8 +39,7 @@ public class OfficeShiftsController {
           return new ResponseEntity<>(createdOfficeShifts, HttpStatus.CREATED);
       }
 
-      // Get all OfficeShifts
-      
+      // Get all OfficeShifts   
       @GetMapping("/get/officeShifts")
       public ResponseEntity<List<OfficeShiftsDto>> getAllOfficeShifts() {
           List<OfficeShiftsDto> officeShifts = officeShiftsService.getAllOfficeShifts();
