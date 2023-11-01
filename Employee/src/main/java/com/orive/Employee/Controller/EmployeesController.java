@@ -31,60 +31,60 @@ public class EmployeesController {
     private EmployeesService employeesService;
 
   
-  	// Create a new Company
-      @PostMapping("/create/employees")
-      public ResponseEntity<EmployeesDto> createEmployees(@RequestBody EmployeesDto companyDto) {
-    	  EmployeesDto createdCompany = employeesService.createEmployees(companyDto);
-          logger.info("Created company with name: {}", createdCompany.getEmployeeName());
-          return new ResponseEntity<>(createdCompany, HttpStatus.CREATED);
+  	// Create a new Employees
+      @PostMapping("/create/employee")
+      public ResponseEntity<EmployeesDto> createEmployees(@RequestBody EmployeesDto employeesDto) {
+    	  EmployeesDto createdEmployees = employeesService.createEmployees(employeesDto);
+          logger.info("Created Employees with name: {}", createdEmployees.getEmployeeName());
+          return new ResponseEntity<>(createdEmployees, HttpStatus.CREATED);
       }
 
-      // Get all companies
+      // Get all Employees
       
-      @GetMapping("/get/employees")
+      @GetMapping("/get/employee")
       public ResponseEntity<List<EmployeesDto>> getAllEmployees() {
-          List<EmployeesDto> companies = employeesService.getAllEmployees();
-          logger.info("Retrieved {} companies from the database", companies.size());
-          return new ResponseEntity<>(companies, HttpStatus.OK);
+          List<EmployeesDto> employee = employeesService.getAllEmployees();
+          logger.info("Retrieved {} Employees from the database", employee.size());
+          return new ResponseEntity<>(employee, HttpStatus.OK);
       }
 
-      // Get company by ID
+      // Get Employees by ID
       @GetMapping("/get/{employeeId}")
       public ResponseEntity<EmployeesDto> getEmployeesById(@PathVariable Long employeeId) {
-          Optional<EmployeesDto> company = employeesService.getEmployeesById(employeeId);
-          if (company.isPresent()) {
-              logger.info("Retrieved compay with ID: {}", employeeId);
-              return new ResponseEntity<>(company.get(), HttpStatus.OK);
+          Optional<EmployeesDto> employee = employeesService.getEmployeesById(employeeId);
+          if (employee.isPresent()) {
+              logger.info("Retrieved Employees with ID: {}", employeeId);
+              return new ResponseEntity<>(employee.get(), HttpStatus.OK);
           } else {
-              logger.warn("company with ID {} not found", employeeId);
+              logger.warn("Employees with ID {} not found", employeeId);
               return new ResponseEntity<>(HttpStatus.NOT_FOUND);
           }
       }
 
-      // Update company by ID
+      // Update Employees by ID
       @PutMapping("/update/{employeeId}")
-      public ResponseEntity<EmployeesDto> updateEmployees(@PathVariable Long employeeId, @RequestBody EmployeesDto updatedCompanyDTO) {
-    	  EmployeesDto updatedCompany = employeesService.updateEmployees(employeeId, updatedCompanyDTO);
-          if (updatedCompany != null) {
-              logger.info("Updated company with ID: {}", employeeId);
-              return new ResponseEntity<>(updatedCompany, HttpStatus.OK);
+      public ResponseEntity<EmployeesDto> updateEmployees(@PathVariable Long employeeId, @RequestBody EmployeesDto updatedEmployeesDto) {
+    	  EmployeesDto updatedEmployees = employeesService.updateEmployees(employeeId, updatedEmployeesDto);
+          if (updatedEmployees != null) {
+              logger.info("Updated Employees with ID: {}", employeeId);
+              return new ResponseEntity<>(updatedEmployees, HttpStatus.OK);
           } else {
-              logger.warn("Company with ID {} not found for update", employeeId);
+              logger.warn("Employees with ID {} not found for update", employeeId);
               return new ResponseEntity<>(HttpStatus.NOT_FOUND);
           }
       }
       
 
 
-      // Delete Company by ID
+      // Delete Employees by ID
       @DeleteMapping("/delete/{employeeId}")
       public ResponseEntity<Void> deleteEmployees(@PathVariable Long employeeId) {
     	  employeesService.deleteEmployees(employeeId);
-          logger.info("Deleted company with ID: {}", employeeId);
+          logger.info("Deleted Employees with ID: {}", employeeId);
           return new ResponseEntity<>(HttpStatus.NO_CONTENT);
       }
   	    
-  	    @GetMapping("/count/employees")
+  	    @GetMapping("/count/employee")
   	    public long countEmployees()
   	    {
   	    	return employeesService.countEmployees();

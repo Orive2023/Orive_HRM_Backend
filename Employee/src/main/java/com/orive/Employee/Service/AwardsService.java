@@ -29,44 +29,44 @@ private static final Logger logger=LoggerFactory.getLogger(AwardsService.class);
 	
 	
 	// Create
-    public AwardsDto createAwards(AwardsDto companyDto) {
-    	AwardsEntity companyEntity = convertToEntity(companyDto);
-    	AwardsEntity savedCompany = awardsRepository.save(companyEntity);
-        logger.info("Created Company with ID: {}", savedCompany.getAwardId());
-        return convertToDTO(savedCompany);
+    public AwardsDto createAwards(AwardsDto awardsDto) {
+    	AwardsEntity awardsEntity = convertToEntity(awardsDto);
+    	AwardsEntity savedAwards = awardsRepository.save(awardsEntity);
+        logger.info("Created Award with ID: {}", savedAwards.getAwardId());
+        return convertToDTO(savedAwards);
     }
 
     // Read
     public List<AwardsDto> getAllAwards() {
-        List<AwardsEntity> companyEntities = awardsRepository.findAll();
-        logger.info("Retrieved {} company from the database", companyEntities.size());
-        return companyEntities.stream()
+        List<AwardsEntity> awardsEntities = awardsRepository.findAll();
+        logger.info("Retrieved {} Awards from the database", awardsEntities.size());
+        return awardsEntities.stream()
                 .map(this::convertToDTO)
                 .collect(Collectors.toList());
     }
     
-    //get by CompanyId
+    //get by AwardId
     public Optional<AwardsDto> getAwardsById(Long awardId) {
-        Optional<AwardsEntity> company = awardsRepository.findById(awardId);
-        if (company.isPresent()) {
-            return Optional.of(convertToDTO(company.get()));
+        Optional<AwardsEntity> award = awardsRepository.findById(awardId);
+        if (award.isPresent()) {
+            return Optional.of(convertToDTO(award.get()));
         } else {
-            logger.warn("Company with ID {} not found", awardId);
+            logger.warn("Awards with ID {} not found", awardId);
             return Optional.empty();
         }
     }
     
  // Update list by id
-    public AwardsDto updateAwards(Long awardId, AwardsDto companyDto) {
-        Optional<AwardsEntity> existingCompanyOptional = awardsRepository.findById(awardId);
-        if (existingCompanyOptional.isPresent()) {
-        	AwardsEntity existingCompany = existingCompanyOptional.get();
-            modelMapper.map(companyDto, existingCompanyOptional);
-            AwardsEntity updatedCompany = awardsRepository.save(existingCompany);
-            logger.info("Updated company with ID: {}", updatedCompany.getAwardId());
-            return convertToDTO(updatedCompany);
+    public AwardsDto updateAwards(Long awardId, AwardsDto awardsDto) {
+        Optional<AwardsEntity> existingAwardOptional = awardsRepository.findById(awardId);
+        if (existingAwardOptional.isPresent()) {
+        	AwardsEntity existingAward = existingAwardOptional.get();
+            modelMapper.map(awardsDto, existingAwardOptional);
+            AwardsEntity updatedAward = awardsRepository.save(existingAward);
+            logger.info("Updated Award with ID: {}", updatedAward.getAwardId());
+            return convertToDTO(updatedAward);
         } else {
-            logger.warn("Company with ID {} not found for update", awardId);
+            logger.warn("Award with ID {} not found for update", awardId);
             return null;
         }
     }
@@ -74,23 +74,23 @@ private static final Logger logger=LoggerFactory.getLogger(AwardsService.class);
     // Delete
     public void deleteAwards(Long awardId) {
     	awardsRepository.deleteById(awardId);
-        logger.info("Deleted company with ID: {}", awardId);
+        logger.info("Deleted Award with ID: {}", awardId);
     }
 
-    //count the total company
+    //count the total Award
     public long countAwards()
 	 {
 		 return awardsRepository.count();
 	 }
     
-	// Helper method to convert CompanyDTo to Company entity
-    private AwardsEntity convertToEntity(AwardsDto companyDto)
+	// Helper method to convert AwardDTo to AwardEntity
+    private AwardsEntity convertToEntity(AwardsDto awardsDto)
     {
-    	return modelMapper.map(companyDto, AwardsEntity.class);
+    	return modelMapper.map(awardsDto, AwardsEntity.class);
     }
 
-    // Helper method to convert Company Entity entity to CompanyDTo
-    private AwardsDto convertToDTO(AwardsEntity companyEntity) {
-        return modelMapper.map(companyEntity, AwardsDto.class);
+    // Helper method to convert AwardEntity to AwardDTo
+    private AwardsDto convertToDTO(AwardsEntity awardsEntity) {
+        return modelMapper.map(awardsEntity, AwardsDto.class);
     } 
 }

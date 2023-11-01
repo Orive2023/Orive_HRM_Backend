@@ -29,44 +29,44 @@ private static final Logger logger=LoggerFactory.getLogger(TransfersService.clas
 	
 	
 	// Create
-    public TransfersDto createTransfers(TransfersDto companyDto) {
-    	TransfersEntity companyEntity = convertToEntity(companyDto);
-    	TransfersEntity savedCompany = transfersRepository.save(companyEntity);
-        logger.info("Created Company with ID: {}", savedCompany.getTransferId());
-        return convertToDTO(savedCompany);
+    public TransfersDto createTransfers(TransfersDto transfersDto) {
+    	TransfersEntity transfersEntity = convertToEntity(transfersDto);
+    	TransfersEntity savedTransfer = transfersRepository.save(transfersEntity);
+        logger.info("Created Transfers with ID: {}", savedTransfer.getTransferId());
+        return convertToDTO(savedTransfer);
     }
 
     // Read
     public List<TransfersDto> getAllTransfers() {
-        List<TransfersEntity> companyEntities = transfersRepository.findAll();
-        logger.info("Retrieved {} company from the database", companyEntities.size());
-        return companyEntities.stream()
+        List<TransfersEntity> transfersEntities = transfersRepository.findAll();
+        logger.info("Retrieved {} Transfers from the database", transfersEntities.size());
+        return transfersEntities.stream()
                 .map(this::convertToDTO)
                 .collect(Collectors.toList());
     }
     
-    //get by CompanyId
+    //get by TransfersId
     public Optional<TransfersDto> getTransfersById(Long transferId) {
-        Optional<TransfersEntity> company = transfersRepository.findById(transferId);
-        if (company.isPresent()) {
-            return Optional.of(convertToDTO(company.get()));
+        Optional<TransfersEntity> transfer = transfersRepository.findById(transferId);
+        if (transfer.isPresent()) {
+            return Optional.of(convertToDTO(transfer.get()));
         } else {
-            logger.warn("Company with ID {} not found", transferId);
+            logger.warn("Transfers with ID {} not found", transferId);
             return Optional.empty();
         }
     }
     
  // Update list by id
-    public TransfersDto updateTransfers(Long transferId, TransfersDto companyDto) {
-        Optional<TransfersEntity> existingCompanyOptional = transfersRepository.findById(transferId);
-        if (existingCompanyOptional.isPresent()) {
-        	TransfersEntity existingCompany = existingCompanyOptional.get();
-            modelMapper.map(companyDto, existingCompanyOptional);
-            TransfersEntity updatedCompany = transfersRepository.save(existingCompany);
-            logger.info("Updated company with ID: {}", updatedCompany.getTransferId());
-            return convertToDTO(updatedCompany);
+    public TransfersDto updateTransfers(Long transferId, TransfersDto transfersDto) {
+        Optional<TransfersEntity> existingTransferOptional = transfersRepository.findById(transferId);
+        if (existingTransferOptional.isPresent()) {
+        	TransfersEntity existingTransfer = existingTransferOptional.get();
+            modelMapper.map(transfersDto, existingTransferOptional);
+            TransfersEntity updatedTransfer = transfersRepository.save(existingTransfer);
+            logger.info("Updated Transfers with ID: {}", updatedTransfer.getTransferId());
+            return convertToDTO(updatedTransfer);
         } else {
-            logger.warn("Company with ID {} not found for update", transferId);
+            logger.warn("Transfers with ID {} not found for update", transferId);
             return null;
         }
     }
@@ -74,23 +74,23 @@ private static final Logger logger=LoggerFactory.getLogger(TransfersService.clas
     // Delete
     public void deleteTransfers(Long transferId) {
     	transfersRepository.deleteById(transferId);
-        logger.info("Deleted company with ID: {}", transferId);
+        logger.info("Deleted Transfers with ID: {}", transferId);
     }
 
-    //count the total company
+    //count the total Transfers
     public long countTransfers()
 	 {
 		 return transfersRepository.count();
 	 }
     
-	// Helper method to convert CompanyDTo to Company entity
-    private TransfersEntity convertToEntity(TransfersDto companyDto)
+	// Helper method to convert TransfersDTo to TransfersEntity
+    private TransfersEntity convertToEntity(TransfersDto transfersDto)
     {
-    	return modelMapper.map(companyDto, TransfersEntity.class);
+    	return modelMapper.map(transfersDto, TransfersEntity.class);
     }
 
-    // Helper method to convert Company Entity entity to CompanyDTo
-    private TransfersDto convertToDTO(TransfersEntity companyEntity) {
-        return modelMapper.map(companyEntity, TransfersDto.class);
+    // Helper method to convert TransfersEntity  to TransfersDTo
+    private TransfersDto convertToDTO(TransfersEntity transfersEntity) {
+        return modelMapper.map(transfersEntity, TransfersDto.class);
     } 
 }

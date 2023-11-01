@@ -29,44 +29,44 @@ public class SetRolesService {
 	
 	
 	// Create
-    public SetRolesDto createRoles(SetRolesDto companyDto) {
-    	SetRolesEntity companyEntity = convertToEntity(companyDto);
-    	SetRolesEntity savedCompany = setRolesRepository.save(companyEntity);
-        logger.info("Created Company with ID: {}", savedCompany.getRolesId());
-        return convertToDTO(savedCompany);
+    public SetRolesDto createRoles(SetRolesDto setRolesDto) {
+    	SetRolesEntity setRolesEntity = convertToEntity(setRolesDto);
+    	SetRolesEntity savedSetRoles = setRolesRepository.save(setRolesEntity);
+        logger.info("Created SetRoles with ID: {}", savedSetRoles.getRolesId());
+        return convertToDTO(savedSetRoles);
     }
 
     // Read
     public List<SetRolesDto> getAllRoles() {
-        List<SetRolesEntity> companyEntities = setRolesRepository.findAll();
-        logger.info("Retrieved {} company from the database", companyEntities.size());
-        return companyEntities.stream()
+        List<SetRolesEntity> setRolesEntities = setRolesRepository.findAll();
+        logger.info("Retrieved {} SetRoles from the database", setRolesEntities.size());
+        return setRolesEntities.stream()
                 .map(this::convertToDTO)
                 .collect(Collectors.toList());
     }
     
-    //get by CompanyId
+    //get by SetRolesId
     public Optional<SetRolesDto> getRolesById(Long rolesId) {
-        Optional<SetRolesEntity> company = setRolesRepository.findById(rolesId);
-        if (company.isPresent()) {
-            return Optional.of(convertToDTO(company.get()));
+        Optional<SetRolesEntity> setRoles = setRolesRepository.findById(rolesId);
+        if (setRoles.isPresent()) {
+            return Optional.of(convertToDTO(setRoles.get()));
         } else {
-            logger.warn("Company with ID {} not found", rolesId);
+            logger.warn("SetRoles with ID {} not found", rolesId);
             return Optional.empty();
         }
     }
     
  // Update list by id
-    public SetRolesDto updateRoles(Long rolesId, SetRolesDto companyDto) {
-        Optional<SetRolesEntity> existingCompanyOptional = setRolesRepository.findById(rolesId);
-        if (existingCompanyOptional.isPresent()) {
-        	SetRolesEntity existingCompany = existingCompanyOptional.get();
-            modelMapper.map(companyDto, existingCompanyOptional);
-            SetRolesEntity updatedCompany = setRolesRepository.save(existingCompany);
-            logger.info("Updated company with ID: {}", updatedCompany.getRolesId());
-            return convertToDTO(updatedCompany);
+    public SetRolesDto updateRoles(Long rolesId, SetRolesDto setRolesDto) {
+        Optional<SetRolesEntity> existingSetRolesOptional = setRolesRepository.findById(rolesId);
+        if (existingSetRolesOptional.isPresent()) {
+        	SetRolesEntity existingSetRoles = existingSetRolesOptional.get();
+            modelMapper.map(setRolesDto, existingSetRolesOptional);
+            SetRolesEntity updatedSetRoles = setRolesRepository.save(existingSetRoles);
+            logger.info("Updated SetRoles with ID: {}", updatedSetRoles.getRolesId());
+            return convertToDTO(updatedSetRoles);
         } else {
-            logger.warn("Company with ID {} not found for update", rolesId);
+            logger.warn("SetRoles with ID {} not found for update", rolesId);
             return null;
         }
     }
@@ -74,23 +74,23 @@ public class SetRolesService {
     // Delete
     public void deleteRoles(Long rolesId) {
     	setRolesRepository.deleteById(rolesId);
-        logger.info("Deleted company with ID: {}", rolesId);
+        logger.info("Deleted SetRoles with ID: {}", rolesId);
     }
 
-    //count the total company
+    //count the total SetRoles
     public long countRoles()
 	 {
 		 return setRolesRepository.count();
 	 }
     
-	// Helper method to convert CompanyDTo to Company entity
-    private SetRolesEntity convertToEntity(SetRolesDto companyDto)
+	// Helper method to convert SetRolesDTo to SetRolesEntity
+    private SetRolesEntity convertToEntity(SetRolesDto setRolesDto)
     {
-    	return modelMapper.map(companyDto, SetRolesEntity.class);
+    	return modelMapper.map(setRolesDto, SetRolesEntity.class);
     }
 
-    // Helper method to convert Company Entity entity to CompanyDTo
-    private SetRolesDto convertToDTO(SetRolesEntity companyEntity) {
-        return modelMapper.map(companyEntity, SetRolesDto.class);
+    // Helper method to convert SetRolesEntity to SetRolesDTo
+    private SetRolesDto convertToDTO(SetRolesEntity setRolesEntity) {
+        return modelMapper.map(setRolesEntity, SetRolesDto.class);
     } 
 }

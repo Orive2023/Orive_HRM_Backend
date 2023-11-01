@@ -31,56 +31,55 @@ public class AwardsController {
     private AwardsService awardsService;
 
   
-  	// Create a new Company
+  	// Create a new Award
       @PostMapping("/create/awards")
-      public ResponseEntity<AwardsDto> createAwards(@RequestBody AwardsDto companyDto) {
-    	  AwardsDto createdCompany = awardsService.createAwards(companyDto);
-          logger.info("Created company with name: {}", createdCompany.getAwardName());
-          return new ResponseEntity<>(createdCompany, HttpStatus.CREATED);
+      public ResponseEntity<AwardsDto> createAwards(@RequestBody AwardsDto awardsDto) {
+    	  AwardsDto createdAward = awardsService.createAwards(awardsDto);
+          logger.info("Created Award with name: {}", createdAward.getAwardName());
+          return new ResponseEntity<>(createdAward, HttpStatus.CREATED);
       }
 
-      // Get all companies
-      
+      // Get all Award      
       @GetMapping("/get/awards")
       public ResponseEntity<List<AwardsDto>> getAllAwards() {
-          List<AwardsDto> companies = awardsService.getAllAwards();
-          logger.info("Retrieved {} companies from the database", companies.size());
-          return new ResponseEntity<>(companies, HttpStatus.OK);
+          List<AwardsDto> award = awardsService.getAllAwards();
+          logger.info("Retrieved {} Award from the database", award.size());
+          return new ResponseEntity<>(award, HttpStatus.OK);
       }
 
-      // Get company by ID
+      // Get Award by ID
       @GetMapping("/get/{awardId}")
       public ResponseEntity<AwardsDto> getAwardsById(@PathVariable Long awardId) {
-          Optional<AwardsDto> company = awardsService.getAwardsById(awardId);
-          if (company.isPresent()) {
-              logger.info("Retrieved compay with ID: {}", awardId);
-              return new ResponseEntity<>(company.get(), HttpStatus.OK);
+          Optional<AwardsDto> award = awardsService.getAwardsById(awardId);
+          if (award.isPresent()) {
+              logger.info("Retrieved Award with ID: {}", awardId);
+              return new ResponseEntity<>(award.get(), HttpStatus.OK);
           } else {
-              logger.warn("company with ID {} not found", awardId);
+              logger.warn("Award with ID {} not found", awardId);
               return new ResponseEntity<>(HttpStatus.NOT_FOUND);
           }
       }
 
-      // Update company by ID
+      // Update Award by ID
       @PutMapping("/update/{awardId}")
-      public ResponseEntity<AwardsDto> updateAwards(@PathVariable Long awardId, @RequestBody AwardsDto updatedCompanyDTO) {
-    	  AwardsDto updatedCompany = awardsService.updateAwards(awardId, updatedCompanyDTO);
-          if (updatedCompany != null) {
-              logger.info("Updated company with ID: {}", awardId);
-              return new ResponseEntity<>(updatedCompany, HttpStatus.OK);
+      public ResponseEntity<AwardsDto> updateAwards(@PathVariable Long awardId, @RequestBody AwardsDto updatedAwardsDto) {
+    	  AwardsDto updatedAward = awardsService.updateAwards(awardId, updatedAwardsDto);
+          if (updatedAward != null) {
+              logger.info("Updated Award with ID: {}", awardId);
+              return new ResponseEntity<>(updatedAward, HttpStatus.OK);
           } else {
-              logger.warn("Company with ID {} not found for update", awardId);
+              logger.warn("Award with ID {} not found for update", awardId);
               return new ResponseEntity<>(HttpStatus.NOT_FOUND);
           }
       }
       
 
 
-      // Delete Company by ID
+      // Delete Award by ID
       @DeleteMapping("/delete/{awardId}")
       public ResponseEntity<Void> deleteAwards(@PathVariable Long awardId) {
     	  awardsService.deleteAwards(awardId);
-          logger.info("Deleted company with ID: {}", awardId);
+          logger.info("Deleted Award with ID: {}", awardId);
           return new ResponseEntity<>(HttpStatus.NO_CONTENT);
       }
   	    

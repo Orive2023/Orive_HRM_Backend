@@ -32,56 +32,55 @@ public class SetRolesController {
     private SetRolesService setRolesService;
 
   
-  	// Create a new Company
+  	// Create a new SetRoles
       @PostMapping("/create/setRoles")
-      public ResponseEntity<SetRolesDto> createRoles(@RequestBody SetRolesDto companyDto) {
-    	  SetRolesDto createdCompany = setRolesService.createRoles(companyDto);
-          logger.info("Created company with name: {}", createdCompany.getRoleName());
-          return new ResponseEntity<>(createdCompany, HttpStatus.CREATED);
+      public ResponseEntity<SetRolesDto> createRoles(@RequestBody SetRolesDto setRolesDto) {
+    	  SetRolesDto createdSetRoles = setRolesService.createRoles(setRolesDto);
+          logger.info("Created SetRoles with name: {}", createdSetRoles.getRoleName());
+          return new ResponseEntity<>(createdSetRoles, HttpStatus.CREATED);
       }
 
-      // Get all companies
-      
+      // Get all SetRoles   
       @GetMapping("/get/setRoles")
       public ResponseEntity<List<SetRolesDto>> getAllRoles() {
-          List<SetRolesDto> companies = setRolesService.getAllRoles();
-          logger.info("Retrieved {} companies from the database", companies.size());
-          return new ResponseEntity<>(companies, HttpStatus.OK);
+          List<SetRolesDto> setRoles = setRolesService.getAllRoles();
+          logger.info("Retrieved {} SetRoles from the database", setRoles.size());
+          return new ResponseEntity<>(setRoles, HttpStatus.OK);
       }
 
-      // Get company by ID
+      // Get SetRoles by ID
       @GetMapping("/get/{rolesId}")
       public ResponseEntity<SetRolesDto> getRolesById(@PathVariable Long rolesId) {
-          Optional<SetRolesDto> company = setRolesService.getRolesById(rolesId);
-          if (company.isPresent()) {
-              logger.info("Retrieved compay with ID: {}", rolesId);
-              return new ResponseEntity<>(company.get(), HttpStatus.OK);
+          Optional<SetRolesDto> setRoles = setRolesService.getRolesById(rolesId);
+          if (setRoles.isPresent()) {
+              logger.info("Retrieved SetRoles with ID: {}", rolesId);
+              return new ResponseEntity<>(setRoles.get(), HttpStatus.OK);
           } else {
-              logger.warn("company with ID {} not found", rolesId);
+              logger.warn("SetRoles with ID {} not found", rolesId);
               return new ResponseEntity<>(HttpStatus.NOT_FOUND);
           }
       }
 
-      // Update company by ID
+      // Update SetRoles by ID
       @PutMapping("/update/{rolesId}")
-      public ResponseEntity<SetRolesDto> updateRoles(@PathVariable Long rolesId, @RequestBody SetRolesDto updatedCompanyDTO) {
-    	  SetRolesDto updatedCompany = setRolesService.updateRoles(rolesId, updatedCompanyDTO);
-          if (updatedCompany != null) {
-              logger.info("Updated company with ID: {}", rolesId);
-              return new ResponseEntity<>(updatedCompany, HttpStatus.OK);
+      public ResponseEntity<SetRolesDto> updateRoles(@PathVariable Long rolesId, @RequestBody SetRolesDto updatedSetRolesDto) {
+    	  SetRolesDto updatedSetRoles= setRolesService.updateRoles(rolesId, updatedSetRolesDto);
+          if (updatedSetRoles != null) {
+              logger.info("Updated SetRoles with ID: {}", rolesId);
+              return new ResponseEntity<>(updatedSetRoles, HttpStatus.OK);
           } else {
-              logger.warn("Company with ID {} not found for update", rolesId);
+              logger.warn("SetRoles with ID {} not found for update", rolesId);
               return new ResponseEntity<>(HttpStatus.NOT_FOUND);
           }
       }
       
 
 
-      // Delete Company by ID
+      // Delete SetRoles by ID
       @DeleteMapping("/delete/{rolesId}")
       public ResponseEntity<Void> deleteRoles(@PathVariable Long rolesId) {
     	  setRolesService.deleteRoles(rolesId);
-          logger.info("Deleted company with ID: {}", rolesId);
+          logger.info("Deleted SetRoles with ID: {}", rolesId);
           return new ResponseEntity<>(HttpStatus.NO_CONTENT);
       }
   	    

@@ -27,44 +27,44 @@ public class EmployeesService {
 		
 		
 		// Create
-	    public EmployeesDto createEmployees(EmployeesDto companyDto) {
-	    	EmployeesEntity companyEntity = convertToEntity(companyDto);
-	    	EmployeesEntity savedCompany = employeesRepository.save(companyEntity);
-	        logger.info("Created Company with ID: {}", savedCompany.getEmployeeId());
-	        return convertToDTO(savedCompany);
+	    public EmployeesDto createEmployees(EmployeesDto employeesDto) {
+	    	EmployeesEntity EmployeesEntity = convertToEntity(employeesDto);
+	    	EmployeesEntity savedEmployees = employeesRepository.save(EmployeesEntity);
+	        logger.info("Created Employees with ID: {}", savedEmployees.getEmployeeId());
+	        return convertToDTO(savedEmployees);
 	    }
 
 	    // Read
 	    public List<EmployeesDto> getAllEmployees() {
-	        List<EmployeesEntity> companyEntities = employeesRepository.findAll();
-	        logger.info("Retrieved {} company from the database", companyEntities.size());
-	        return companyEntities.stream()
+	        List<EmployeesEntity> employeesEntities = employeesRepository.findAll();
+	        logger.info("Retrieved {} Employees from the database", employeesEntities.size());
+	        return employeesEntities.stream()
 	                .map(this::convertToDTO)
 	                .collect(Collectors.toList());
 	    }
 	    
-	    //get by CompanyId
+	    //get by EmployeesId
 	    public Optional<EmployeesDto> getEmployeesById(Long employeeId) {
-	        Optional<EmployeesEntity> company = employeesRepository.findById(employeeId);
-	        if (company.isPresent()) {
-	            return Optional.of(convertToDTO(company.get()));
+	        Optional<EmployeesEntity> employee = employeesRepository.findById(employeeId);
+	        if (employee.isPresent()) {
+	            return Optional.of(convertToDTO(employee.get()));
 	        } else {
-	            logger.warn("Company with ID {} not found", employeeId);
+	            logger.warn("Employees with ID {} not found", employeeId);
 	            return Optional.empty();
 	        }
 	    }
 	    
 	 // Update list by id
-	    public EmployeesDto updateEmployees(Long employeeId, EmployeesDto companyDto) {
-	        Optional<EmployeesEntity> existingCompanyOptional = employeesRepository.findById(employeeId);
-	        if (existingCompanyOptional.isPresent()) {
-	        	EmployeesEntity existingCompany = existingCompanyOptional.get();
-	            modelMapper.map(companyDto, existingCompanyOptional);
-	            EmployeesEntity updatedCompany = employeesRepository.save(existingCompany);
-	            logger.info("Updated company with ID: {}", updatedCompany.getEmployeeId());
-	            return convertToDTO(updatedCompany);
+	    public EmployeesDto updateEmployees(Long employeeId, EmployeesDto employeesDto) {
+	        Optional<EmployeesEntity> existingEmployeesOptional = employeesRepository.findById(employeeId);
+	        if (existingEmployeesOptional.isPresent()) {
+	        	EmployeesEntity existingEmployees = existingEmployeesOptional.get();
+	            modelMapper.map(employeesDto, existingEmployeesOptional);
+	            EmployeesEntity updatedEmployees = employeesRepository.save(existingEmployees);
+	            logger.info("Updated Employees with ID: {}", updatedEmployees.getEmployeeId());
+	            return convertToDTO(updatedEmployees);
 	        } else {
-	            logger.warn("Company with ID {} not found for update", employeeId);
+	            logger.warn("Employees with ID {} not found for update", employeeId);
 	            return null;
 	        }
 	    }
@@ -72,23 +72,23 @@ public class EmployeesService {
 	    // Delete
 	    public void deleteEmployees(Long employeeId) {
 	    	employeesRepository.deleteById(employeeId);
-	        logger.info("Deleted company with ID: {}", employeeId);
+	        logger.info("Deleted Employees with ID: {}", employeeId);
 	    }
 
-	    //count the total company
+	    //count the total Employees
 	    public long countEmployees()
 		 {
 			 return employeesRepository.count();
 		 }
 	    
-		// Helper method to convert CompanyDTo to Company entity
-	    private EmployeesEntity convertToEntity(EmployeesDto companyDto)
+		// Helper method to convert EmployeesDTo to EmployeesEntity
+	    private EmployeesEntity convertToEntity(EmployeesDto employeesDto)
 	    {
-	    	return modelMapper.map(companyDto, EmployeesEntity.class);
+	    	return modelMapper.map(employeesDto, EmployeesEntity.class);
 	    }
 
-	    // Helper method to convert Company Entity entity to CompanyDTo
-	    private EmployeesDto convertToDTO(EmployeesEntity companyEntity) {
-	        return modelMapper.map(companyEntity, EmployeesDto.class);
+	    // Helper method to convert EmployeesEntity to EmployeesDTo
+	    private EmployeesDto convertToDTO(EmployeesEntity employeesEntity) {
+	        return modelMapper.map(employeesEntity, EmployeesDto.class);
 	    } 
 }

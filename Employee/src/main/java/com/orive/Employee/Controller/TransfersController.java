@@ -31,56 +31,55 @@ public class TransfersController {
     private TransfersService transfersService;
 
   
-  	// Create a new Company
+  	// Create a new Transfers
       @PostMapping("/create/transfers")
-      public ResponseEntity<TransfersDto> createTransfers(@RequestBody TransfersDto companyDto) {
-    	  TransfersDto createdCompany = transfersService.createTransfers(companyDto);
-          logger.info("Created company with name: {}", createdCompany.getEmployeeName());
-          return new ResponseEntity<>(createdCompany, HttpStatus.CREATED);
+      public ResponseEntity<TransfersDto> createTransfers(@RequestBody TransfersDto transfersDto) {
+    	  TransfersDto createdTransfer = transfersService.createTransfers(transfersDto);
+          logger.info("Created Transfers with name: {}", createdTransfer.getEmployeeName());
+          return new ResponseEntity<>(createdTransfer, HttpStatus.CREATED);
       }
 
-      // Get all companies
-      
+      // Get all Transfers
       @GetMapping("/get/transfers")
       public ResponseEntity<List<TransfersDto>> getAllTransfers() {
-          List<TransfersDto> companies = transfersService.getAllTransfers();
-          logger.info("Retrieved {} companies from the database", companies.size());
-          return new ResponseEntity<>(companies, HttpStatus.OK);
+          List<TransfersDto> transfer = transfersService.getAllTransfers();
+          logger.info("Retrieved {} Transfers from the database", transfer.size());
+          return new ResponseEntity<>(transfer, HttpStatus.OK);
       }
 
-      // Get company by ID
+      // Get Transfers by ID
       @GetMapping("/get/{transferId}")
       public ResponseEntity<TransfersDto> getTransfersById(@PathVariable Long transferId) {
-          Optional<TransfersDto> company = transfersService.getTransfersById(transferId);
-          if (company.isPresent()) {
-              logger.info("Retrieved compay with ID: {}", transferId);
-              return new ResponseEntity<>(company.get(), HttpStatus.OK);
+          Optional<TransfersDto> transfer = transfersService.getTransfersById(transferId);
+          if (transfer.isPresent()) {
+              logger.info("Retrieved Transfers with ID: {}", transferId);
+              return new ResponseEntity<>(transfer.get(), HttpStatus.OK);
           } else {
-              logger.warn("company with ID {} not found", transferId);
+              logger.warn("Transfers with ID {} not found", transferId);
               return new ResponseEntity<>(HttpStatus.NOT_FOUND);
           }
       }
 
-      // Update company by ID
+      // Update Transfers by ID
       @PutMapping("/update/{transferId}")
-      public ResponseEntity<TransfersDto> updateTransfers(@PathVariable Long transferId, @RequestBody TransfersDto updatedCompanyDTO) {
-    	  TransfersDto updatedCompany = transfersService.updateTransfers(transferId, updatedCompanyDTO);
-          if (updatedCompany != null) {
-              logger.info("Updated company with ID: {}", transferId);
-              return new ResponseEntity<>(updatedCompany, HttpStatus.OK);
+      public ResponseEntity<TransfersDto> updateTransfers(@PathVariable Long transferId, @RequestBody TransfersDto updatedTransfersDto) {
+    	  TransfersDto updatedTransfer = transfersService.updateTransfers(transferId, updatedTransfersDto);
+          if (updatedTransfer != null) {
+              logger.info("Updated Transfers with ID: {}", transferId);
+              return new ResponseEntity<>(updatedTransfer, HttpStatus.OK);
           } else {
-              logger.warn("Company with ID {} not found for update", transferId);
+              logger.warn("Transfers with ID {} not found for update", transferId);
               return new ResponseEntity<>(HttpStatus.NOT_FOUND);
           }
       }
       
 
 
-      // Delete Company by ID
+      // Delete Transfers by ID
       @DeleteMapping("/delete/{transferId}")
       public ResponseEntity<Void> deleteTransfers(@PathVariable Long transferId) {
     	  transfersService.deleteTransfers(transferId);
-          logger.info("Deleted company with ID: {}", transferId);
+          logger.info("Deleted Transfers with ID: {}", transferId);
           return new ResponseEntity<>(HttpStatus.NO_CONTENT);
       }
   	    
