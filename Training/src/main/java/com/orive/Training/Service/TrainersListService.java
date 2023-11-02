@@ -86,7 +86,7 @@ public class TrainersListService {
     	return modelMapper.map(trainersListDto, TrainersListEntity.class);
     }
 
-    // Helper method to convert TrainersListEntity entity to TrainersListDTo
+    // Helper method to convert TrainersListEntity  to TrainersListDTo
     private TrainersListDto convertToDTO(TrainersListEntity trainersListEntity) {
         return modelMapper.map(trainersListEntity, TrainersListDto.class);
     } 
