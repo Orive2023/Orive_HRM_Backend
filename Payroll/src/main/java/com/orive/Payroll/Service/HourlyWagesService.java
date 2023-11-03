@@ -88,7 +88,7 @@ private static final Logger logger=LoggerFactory.getLogger(HourlyWagesService.cl
     	return modelMapper.map(hourlyWagesDto, HourlyWagesEntity.class);
     }
 
- // Helper method to convert HourlyWagesEntity entity to HourlyWagesDTo
+ // Helper method to convert HourlyWagesEntity  to HourlyWagesDTo
     private HourlyWagesDto convertToDTO(HourlyWagesEntity hourlyWagesEntity) {
         return modelMapper.map(hourlyWagesEntity, HourlyWagesDto.class);
     } 

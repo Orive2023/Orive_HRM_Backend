@@ -91,7 +91,7 @@ private static final Logger logger=LoggerFactory.getLogger(AdvanceSaleryService.
     	return modelMapper.map(advanceSaleryDto, AdvanceSaleryEntity.class);
     }
 
- // Helper method to convert AdvanceSaleryEntity entity to AdvanceSaleryDTo
+ // Helper method to convert AdvanceSaleryEntity  to AdvanceSaleryDTo
     private AdvanceSaleryDto convertToDTO(AdvanceSaleryEntity advanceSaleryEntity) {
         return modelMapper.map(advanceSaleryEntity, AdvanceSaleryDto.class);
     } 

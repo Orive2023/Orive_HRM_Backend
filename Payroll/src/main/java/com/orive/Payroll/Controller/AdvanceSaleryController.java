@@ -87,11 +87,8 @@ public class AdvanceSaleryController {
     }
 	    
 	    @GetMapping("/count/advancesalery")
-	    public long AdvanceSalery()
+	    public long countAdvanceSalery()
 	    {
 	    	return advanceSaleryService.countAdvanceSalery();
 	    }
-
-
-
 }
