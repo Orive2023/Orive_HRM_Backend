@@ -86,5 +86,4 @@ public class PayeesController {
 	    {
 	    	return payeesService.countPayees();
 	    }
-
 }
