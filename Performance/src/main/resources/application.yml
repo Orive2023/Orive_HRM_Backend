@@ -6,7 +6,7 @@ spring:
     password: Orive@123
     driver-class-name: com.mysql.cj.jdbc.Driver
   application:
-    name: PAYROLL-SERVICE
+    name: PARFORMANCE-SERVICE
 
 
   jpa:
@@ -26,4 +26,4 @@ spring:
 #    service-url:
 #      defaultZone: http://localhost:8761/eureka
 server:
-  port: 8085      
+  port: 8086      
