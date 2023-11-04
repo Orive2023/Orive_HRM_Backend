@@ -1,0 +1,20 @@
+server:
+  port: 9090
+spring:
+  application:
+    name: HRM-GATEWAY
+  cloud:
+    gateway:
+      routes:
+#      - id: LOGIN-SERVICE
+#        uri: lb://LOGIN-SERVICE
+#        predicates:
+#        - Path=/** 
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka             
