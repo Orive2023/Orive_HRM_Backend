@@ -35,7 +35,7 @@ public class EmployeesController {
       @PostMapping("/create/employee")
       public ResponseEntity<EmployeesDto> createEmployees(@RequestBody EmployeesDto employeesDto) {
     	  EmployeesDto createdEmployees = employeesService.createEmployees(employeesDto);
-          logger.info("Created Employees with name: {}", createdEmployees.getEmployeeName());
+          logger.info("Created Employees with name: {}", createdEmployees.getFirstName());
           return new ResponseEntity<>(createdEmployees, HttpStatus.CREATED);
       }
 
