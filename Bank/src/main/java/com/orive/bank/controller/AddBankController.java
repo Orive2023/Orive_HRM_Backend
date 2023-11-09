@@ -75,7 +75,7 @@ public class AddBankController {
 
     // Delete AddBank by ID
     @DeleteMapping("/delete/{addBankId}")
-    public ResponseEntity<Void> deleteContraVoucherAddBank(@PathVariable Long addBankId) {
+    public ResponseEntity<Void> deleteAddBank(@PathVariable Long addBankId) {
     	addBankService.deleteAddBank(addBankId);
         logger.info("Deleted AddBank with ID: {}", addBankId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -86,6 +86,4 @@ public class AddBankController {
 	    {
 	    	return addBankService.countAddBank();
 	    }
-	
-
 }

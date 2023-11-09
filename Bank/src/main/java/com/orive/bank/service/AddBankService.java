@@ -91,6 +91,4 @@ public class AddBankService {
     private AddBankDto convertToDTO(AddBankEntity addBankEntity) {
         return modelMapper.map(addBankEntity, AddBankDto.class);
     } 
-	
-
 }
