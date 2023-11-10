@@ -61,6 +61,7 @@ private static final Logger logger=LoggerFactory.getLogger(AwardsService.class);
         Optional<AwardsEntity> existingAwardOptional = awardsRepository.findById(awardId);
         if (existingAwardOptional.isPresent()) {
         	AwardsEntity existingAward = existingAwardOptional.get();
+        	existingAward.setEmployeeName(awardsDto.getEmployeeName());
             modelMapper.map(awardsDto, existingAwardOptional);
             AwardsEntity updatedAward = awardsRepository.save(existingAward);
             logger.info("Updated Award with ID: {}", updatedAward.getAwardId());

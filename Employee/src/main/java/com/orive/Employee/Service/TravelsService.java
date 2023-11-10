@@ -62,6 +62,11 @@ public class TravelsService {
         Optional<TravelsEntity> existingTravelsOptional = travelsRepository.findById(travelsId);
         if (existingTravelsOptional.isPresent()) {
         	TravelsEntity existingTravels = existingTravelsOptional.get();
+        	existingTravels.setPurposeOfVisit(travelsDto.getPurposeOfVisit());
+            existingTravels.setPlaceOfVisit(travelsDto.getPlaceOfVisit());
+            existingTravels.setTravelMode(travelsDto.getTravelMode());
+        	existingTravels.setExpectedTravelBudget(travelsDto.getExpectedTravelBudget());
+        	existingTravels.setActualTravelBudget(travelsDto.getActualTravelBudget());
             modelMapper.map(travelsDto, existingTravelsOptional);
             TravelsEntity updatedTravel = travelsRepository.save(existingTravels);
             logger.info("Updated Travels with ID: {}", updatedTravel.getTravelId());
@@ -94,7 +99,4 @@ public class TravelsService {
     private TravelsDto convertToDTO(TravelsEntity travelsEntity) {
         return modelMapper.map(travelsEntity, TravelsDto.class);
     } 
-
-	
-
 }

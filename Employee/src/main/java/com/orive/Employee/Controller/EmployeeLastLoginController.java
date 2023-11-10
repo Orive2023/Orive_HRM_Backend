@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,6 +26,7 @@ import com.orive.Employee.Service.EmployeesLastLoginService;
 
 @RestController
 @RequestMapping(value = "employees_last_login")
+@CrossOrigin(origins = "*")
 public class EmployeeLastLoginController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(EmployeeLastLoginController.class);
@@ -52,7 +54,7 @@ public class EmployeeLastLoginController {
 
 		  // Get EmployeeLastLogin by ID
 		  @GetMapping("/get/{employeesLastLoginId}")
-		  public ResponseEntity<EmployeesLastLoginDto> getEmployeesLastLoginDtoId(@PathVariable Long employeesLastLoginId) {
+		  public ResponseEntity<EmployeesLastLoginDto> getEmployeesLastLoginId(@PathVariable Long employeesLastLoginId) {
 		      Optional<EmployeesLastLoginDto> employeesLastLogins = employeesLastLoginService.getEmployeesLastLoginById(employeesLastLoginId);
 		      if (employeesLastLogins.isPresent()) {
 		          logger.info("Retrieved EmployeeLastLogin with ID: {}", employeesLastLoginId);

@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,6 +24,7 @@ import com.orive.Employee.Service.TravelsService;
 
 @RestController
 @RequestMapping(value = "travels")
+@CrossOrigin(origins = "*")
 public class TravelsController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(TravelsController.class);
@@ -32,7 +34,7 @@ public class TravelsController {
 	 
 	// Create a new Travels
     @PostMapping("/create/travels")
-    public ResponseEntity<TravelsDto> createResignations(@RequestBody TravelsDto travelsDto) {
+    public ResponseEntity<TravelsDto> createTravels(@RequestBody TravelsDto travelsDto) {
     	TravelsDto createdTravel = travelsService.createTravels(travelsDto);
         logger.info("Created Travels with id: {}", createdTravel.getEmployeeName());
         return new ResponseEntity<>(createdTravel, HttpStatus.CREATED);

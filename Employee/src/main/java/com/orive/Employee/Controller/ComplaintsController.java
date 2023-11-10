@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,6 +25,7 @@ import com.orive.Employee.Service.PromotionsService;
 
 @RestController
 @RequestMapping(value = "complaints")
+@CrossOrigin(origins = "*")
 public class ComplaintsController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(ComplaintsController.class);
@@ -40,7 +42,6 @@ public class ComplaintsController {
   }
 
   // Get all Complaints
-  
   @GetMapping("/get/complaints")
   public ResponseEntity<List<ComplaintsDto>> getAllComplaints() {
       List<ComplaintsDto> complaints = complaintsService.getAllComplaints();
@@ -87,6 +88,4 @@ public class ComplaintsController {
 	    {
 	    	return complaintsService.countComplaints();
 	    }
-
-
 }

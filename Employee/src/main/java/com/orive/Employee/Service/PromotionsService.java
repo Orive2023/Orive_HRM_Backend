@@ -61,6 +61,8 @@ public class PromotionsService {
         Optional<PromotionsEntity> existingPromotionsOptional = promotionsRepository.findById(promotionsId);
         if (existingPromotionsOptional.isPresent()) {
         	PromotionsEntity existingPromotions = existingPromotionsOptional.get();
+        	existingPromotions.setEmployeeName(promotionsDto.getEmployeeName());
+        	existingPromotions.setPromotionTitle(promotionsDto.getPromotionTitle());
             modelMapper.map(promotionsDto, existingPromotionsOptional);
             PromotionsEntity updatedPromotions = promotionsRepository.save(existingPromotions);
             logger.info("Updated Promotions with ID: {}", updatedPromotions.getPromotionsId());
@@ -83,16 +85,14 @@ public class PromotionsService {
 		 return promotionsRepository.count();
 	 }
     
- // Helper method to convert PromotionsDTo to Promotions entity
+ // Helper method to convert PromotionsDTo to PromotionsEntity
     private PromotionsEntity convertToEntity(PromotionsDto promotionsDto)
     {
     	return modelMapper.map(promotionsDto, PromotionsEntity.class);
     }
 
-    // Helper method to convert Promotions entity entity to PromotionsDTo
+    // Helper method to convert PromotionsEntity to PromotionsDTo
     private PromotionsDto convertToDTO(PromotionsEntity promotionsEntity) {
         return modelMapper.map(promotionsEntity, PromotionsDto.class);
     } 
-
-
 }

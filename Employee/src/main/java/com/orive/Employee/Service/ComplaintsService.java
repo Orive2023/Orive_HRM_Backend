@@ -58,6 +58,8 @@ private static final Logger logger=LoggerFactory.getLogger(ComplaintsService.cla
         Optional<ComplaintsEntity> existingComplaintsOptional = complaintsRepository.findById(complaintsId);
         if (existingComplaintsOptional.isPresent()) {
         	ComplaintsEntity existingComplaints = existingComplaintsOptional.get();
+        	existingComplaints.setComplaintAgainstEmployee(complaintsDto.getComplaintAgainstEmployee());
+        	existingComplaints.setComplaintTitle(complaintsDto.getComplaintTitle());
             modelMapper.map(complaintsDto, existingComplaintsOptional);
             ComplaintsEntity updatedComplaints = complaintsRepository.save(existingComplaints);
             logger.info("Updated Complaints with ID: {}", updatedComplaints.getComplaintsId());
@@ -80,13 +82,13 @@ private static final Logger logger=LoggerFactory.getLogger(ComplaintsService.cla
 		 return complaintsRepository.count();
 	 }
     
- // Helper method to convert ComplaintsDTo to Complaints entity
+ // Helper method to convert ComplaintsDTo to ComplaintsEntity
     private ComplaintsEntity convertToEntity(ComplaintsDto complaintsDto)
     {
     	return modelMapper.map(complaintsDto, ComplaintsEntity.class);
     }
 
-    // Helper method to convert Complaints entity entity to ComplaintsDTo
+    // Helper method to convert ComplaintsEntity to ComplaintsDTo
     private ComplaintsDto convertToDTO(ComplaintsEntity complaintsEntity) {
         return modelMapper.map(complaintsEntity, ComplaintsDto.class);
     } 

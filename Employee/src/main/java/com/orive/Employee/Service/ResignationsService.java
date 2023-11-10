@@ -61,6 +61,8 @@ public class ResignationsService {
         Optional<ResignationsEntity> existingResignationOptional = resignationsRepository.findById(resignationId);
         if (existingResignationOptional.isPresent()) {
         	ResignationsEntity existingResignation = existingResignationOptional.get();
+        	existingResignation.setEmployeeName(resignationsDto.getEmployeeName());
+        	existingResignation.setResignationReason(resignationsDto.getResignationReason());
             modelMapper.map(resignationsDto, existingResignationOptional);
             ResignationsEntity updatedResignation = resignationsRepository.save(existingResignation);
             logger.info("Updated Resignation with ID: {}", updatedResignation.getResignationId());

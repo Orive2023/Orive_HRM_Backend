@@ -61,6 +61,8 @@ private static final Logger logger=LoggerFactory.getLogger(TransfersService.clas
         Optional<TransfersEntity> existingTransferOptional = transfersRepository.findById(transferId);
         if (existingTransferOptional.isPresent()) {
         	TransfersEntity existingTransfer = existingTransferOptional.get();
+        	existingTransfer.setTransferToDepartment(transfersDto.getTransferToDepartment());
+        	existingTransfer.setTransferToLocation(transfersDto.getTransferToLocation());
             modelMapper.map(transfersDto, existingTransferOptional);
             TransfersEntity updatedTransfer = transfersRepository.save(existingTransfer);
             logger.info("Updated Transfers with ID: {}", updatedTransfer.getTransferId());

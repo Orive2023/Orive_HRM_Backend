@@ -60,6 +60,10 @@ public class TerminationsService {
         Optional<TerminationsEntity> existingTerminationsOptional = terminationsRepository.findById(terminationsId);
         if (existingTerminationsOptional.isPresent()) {
         	TerminationsEntity existingTerminations = existingTerminationsOptional.get();
+        	existingTerminations.setEmployeeName(terminationsDto.getEmployeeName());
+        	existingTerminations.setReturnOfCompanyProperty(terminationsDto.getReturnOfCompanyProperty());
+        	existingTerminations.setNumberOfUnusedVacation(terminationsDto.getNumberOfUnusedVacation());
+        	existingTerminations.setReasonForTermination(terminationsDto.getReasonForTermination());
             modelMapper.map(terminationsDto, existingTerminations);
             TerminationsEntity updatedTerminations = terminationsRepository.save(existingTerminations);
             logger.info("Updated Terminations with ID: {}", updatedTerminations.getTerminationId());

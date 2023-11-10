@@ -62,6 +62,9 @@ public class EmployeesLastLoginService {
         Optional<EmployeesLastLoginEntity> existingEmployeesLastLoginOptional = employeesLastLoginRepository.findById(employeesLastLoginId);
         if (existingEmployeesLastLoginOptional.isPresent()) {
         	EmployeesLastLoginEntity existingEmployeesLastLogin = existingEmployeesLastLoginOptional.get();
+        	existingEmployeesLastLogin.setEmployeeName(employeesLastLoginDto.getEmployeeName());
+        	existingEmployeesLastLogin.setEmployeeUserName(employeesLastLoginDto.getEmployeeUserName());
+        	existingEmployeesLastLogin.setRole(employeesLastLoginDto.getRole());
             modelMapper.map(employeesLastLoginDto, existingEmployeesLastLoginOptional);
             EmployeesLastLoginEntity updatedEmployeesLastLogin = employeesLastLoginRepository.save(existingEmployeesLastLogin);
             logger.info("Updated EmployeeLastLogin with ID: {}", updatedEmployeesLastLogin.getEmployeeLastLoginId());
@@ -84,18 +87,14 @@ public class EmployeesLastLoginService {
 		 return employeesLastLoginRepository.count();
 	 }
     
- // Helper method to convert EmployeeLastLoginDTo to EmployeeLastLogin entity
+ // Helper method to convert EmployeeLastLoginDTo to EmployeeLastLoginEntity
     private EmployeesLastLoginEntity convertToEntity(EmployeesLastLoginDto employeesLastLoginDto)
     {
     	return modelMapper.map(employeesLastLoginDto, EmployeesLastLoginEntity.class);
     }
 
-    // Helper method to convert EmployeeLastLogin entity entity to EmployeeLastLoginDTo
+    // Helper method to convert EmployeeLastLoginEntity to EmployeeLastLoginDTo
     private EmployeesLastLoginDto convertToDTO(EmployeesLastLoginEntity employeesLastLoginEntity) {
         return modelMapper.map(employeesLastLoginEntity, EmployeesLastLoginDto.class);
     } 
-	
-	
-      
-
 }

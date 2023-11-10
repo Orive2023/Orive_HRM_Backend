@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,6 +26,7 @@ import com.orive.Employee.Service.EmployeesExitService;
 
 @RestController
 @RequestMapping(value = "employee_exit")
+@CrossOrigin(origins = "*")
 public class EmployeesExitController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(EmployeesExitController.class);
@@ -44,7 +46,7 @@ public class EmployeesExitController {
 	  // Get all EmployeeExit
 	  
 	  @GetMapping("/get/employee_exit")
-	  public ResponseEntity<List<EmployeesExitDto>> getAllComplaints() {
+	  public ResponseEntity<List<EmployeesExitDto>> getAllEmployeeExit() {
 	      List<EmployeesExitDto> employeesExit = employeesExitService.getAllEmployeesExit();
 	      logger.info("Retrieved {} EmployeeExit from the database", employeesExit.size());
 	      return new ResponseEntity<>(employeesExit, HttpStatus.OK);

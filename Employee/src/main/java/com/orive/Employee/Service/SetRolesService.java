@@ -61,6 +61,7 @@ public class SetRolesService {
         Optional<SetRolesEntity> existingSetRolesOptional = setRolesRepository.findById(rolesId);
         if (existingSetRolesOptional.isPresent()) {
         	SetRolesEntity existingSetRoles = existingSetRolesOptional.get();
+        	existingSetRoles.setRoleName(setRolesDto.getRoleName());
             modelMapper.map(setRolesDto, existingSetRolesOptional);
             SetRolesEntity updatedSetRoles = setRolesRepository.save(existingSetRoles);
             logger.info("Updated SetRoles with ID: {}", updatedSetRoles.getRolesId());
