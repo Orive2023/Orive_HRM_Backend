@@ -37,8 +37,8 @@ public class CompanyEntity {
 	@Column(name = "legal_or_tranding_name")
 	private String legalOrTrandingName;
 	
-	@Column(name = "registration_number")
-	private String registrationNumber;
+	@Column(name = "cin")
+	private String cin;
 	
 	@Column(name = "contact_number")
 	private Long contactNumber;
@@ -49,13 +49,15 @@ public class CompanyEntity {
 	@Column(name = "website")
 	private String website;
 	
-	@Column(name = "tax_number_or_ein")
-	private String taxNumberOrEin;
+	@Column(name = "gst")
+	private String gst;
+	
+	@Column(name = "uan")
+	private String uan;
 	
 	@Column(name = "address")
 	private String address;
 	
-	@Lob
-	@Column(name = "company_logo",length = 1000)
+	@Column(name = "company_logo")
 	private String companyLogo;
 }

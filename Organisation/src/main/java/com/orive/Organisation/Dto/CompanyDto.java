@@ -24,11 +24,12 @@ public class CompanyDto {
 	private String companyName;
 	private String companyType;
 	private String legalOrTrandingName;
-	private String registrationNumber;
+	private String cin;
 	private Long contactNumber;
 	private String email;
 	private String website;
-	private String taxNumberOrEin;
+	private String gst;
+	private String uan;
 	private String address;
- 	private String companyLogo;
+	private String companyLogo;
 }
