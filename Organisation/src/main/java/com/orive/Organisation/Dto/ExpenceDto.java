@@ -21,6 +21,6 @@ public class ExpenceDto {
 	private String purchaseDate;
 	private Long amount;
 	private String purchaseBy;
-	//private byte[] billCopy;
-	private List<String> remarks;
+//	private String billCopy;
+	private String remarks;
 }

@@ -59,6 +59,13 @@ public class LocationService {
         Optional<LocationEntity> existingLocationOptional = locationRepository.findById(locationId);
         if (existingLocationOptional.isPresent()) {
         	LocationEntity existingLocation = existingLocationOptional.get();
+        	existingLocation.setCompanyName(locationDto.getCompanyName());
+        	existingLocation.setLocationName(locationDto.getLocationName());
+        	existingLocation.setEmail(locationDto.getEmail());
+        	existingLocation.setPhone(locationDto.getPhone());
+        	existingLocation.setLocationHead(locationDto.getLocationHead());
+        	existingLocation.setLocationHrManager(locationDto.getLocationHrManager());
+        	existingLocation.setAddress(locationDto.getAddress());
             modelMapper.map(locationDto, existingLocationOptional);
             LocationEntity updatedLocation = locationRepository.save(existingLocation);
             logger.info("Updated Location with ID: {}", updatedLocation.getLocationId());

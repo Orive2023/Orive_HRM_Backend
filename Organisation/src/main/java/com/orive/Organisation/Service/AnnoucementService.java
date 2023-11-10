@@ -63,6 +63,9 @@ public class AnnoucementService {
         Optional<AnnoucementEntity> existingAnnoucementOptional = annoucementsRepository.findById(announcementId);
         if (existingAnnoucementOptional.isPresent()) {
         	AnnoucementEntity existingAnnoucement = existingAnnoucementOptional.get();
+        	existingAnnoucement.setLocationName(annoucementDto.getLocationName());
+        	existingAnnoucement.setCompanyName(annoucementDto.getCompanyName());
+        	existingAnnoucement.setDepartmentName(annoucementDto.getDepartmentName());
             modelMapper.map(annoucementDto, existingAnnoucementOptional);
             AnnoucementEntity updatedAnnoucement = annoucementsRepository.save(existingAnnoucement);
             logger.info("Updated Annoucement with ID: {}", updatedAnnoucement.getAnnouncementsId());
@@ -91,7 +94,7 @@ public class AnnoucementService {
     	return modelMapper.map(annoucementDto, AnnoucementEntity.class);
     }
 
-    // Helper method to convert AnnoucementEntity entity to AnnoucementDTo
+    // Helper method to convert AnnoucementEntity  to AnnoucementDTo
     private AnnoucementDto convertToDTO(AnnoucementEntity annoucementEntity) {
         return modelMapper.map(annoucementEntity, AnnoucementDto.class);
     } 

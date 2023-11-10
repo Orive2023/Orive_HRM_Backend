@@ -24,5 +24,5 @@ public class AnnoucementDto {
 	private String locationName;
 	private String departmentName;
 	private String summary;
-	private List<String> description;
+	private String description;
 }

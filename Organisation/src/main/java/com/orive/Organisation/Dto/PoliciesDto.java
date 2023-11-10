@@ -20,5 +20,5 @@ public class PoliciesDto {
 	private Long policiesId;
 	private String companyName;
 	private String title;
-	private List<String> description;
+	private String description;
 }

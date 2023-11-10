@@ -30,5 +30,5 @@ public class CompanyDto {
 	private String website;
 	private String taxNumberOrEin;
 	private String address;
- 	private MultipartFile companyLogo;
+ 	private String companyLogo;
 }

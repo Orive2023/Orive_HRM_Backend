@@ -57,5 +57,5 @@ public class CompanyEntity {
 	
 	@Lob
 	@Column(name = "company_logo",length = 1000)
-	private byte[] companyLogo;
+	private String companyLogo;
 }

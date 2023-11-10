@@ -61,6 +61,8 @@ public class PoliciesService {
         Optional<PoliciesEntity> existingPoliciesOptional = policiesRepository.findById(policiesId);
         if (existingPoliciesOptional.isPresent()) {
         	PoliciesEntity existingPolicies = existingPoliciesOptional.get();
+        	existingPolicies.setCompanyName(policiesDto.getCompanyName());
+        	existingPolicies.setTitle(policiesDto.getTitle());
             modelMapper.map(policiesDto, existingPoliciesOptional);
             PoliciesEntity updatedPolicies = policiesRepository.save(existingPolicies);
             logger.info("Updated Policies with ID: {}", updatedPolicies.getPoliciesId());

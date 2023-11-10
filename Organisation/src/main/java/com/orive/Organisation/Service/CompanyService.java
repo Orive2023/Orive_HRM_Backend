@@ -59,6 +59,13 @@ public class CompanyService {
         Optional<CompanyEntity> existingCompanyOptional = companyRepository.findById(companyId);
         if (existingCompanyOptional.isPresent()) {
         	CompanyEntity existingCompany = existingCompanyOptional.get();
+        	existingCompany.setCompanyName(companyDto.getCompanyName());
+        	existingCompany.setCompanyType(companyDto.getCompanyType());
+        	existingCompany.setLegalOrTrandingName(companyDto.getLegalOrTrandingName());
+        	existingCompany.setContactNumber(companyDto.getContactNumber());
+        	existingCompany.setEmail(companyDto.getEmail());
+        	existingCompany.setWebsite(companyDto.getWebsite());
+        	existingCompany.setAddress(companyDto.getAddress());
             modelMapper.map(companyDto, existingCompanyOptional);
             CompanyEntity updatedCompany = companyRepository.save(existingCompany);
             logger.info("Updated company with ID: {}", updatedCompany.getCompanyId());
@@ -81,13 +88,13 @@ public class CompanyService {
 		 return companyRepository.count();
 	 }
     
-	// Helper method to convert CompanyDTo to Company entity
+	// Helper method to convert CompanyDTo to CompanyEntity
     private CompanyEntity convertToEntity(CompanyDto companyDto)
     {
     	return modelMapper.map(companyDto, CompanyEntity.class);
     }
 
-    // Helper method to convert Company Entity entity to CompanyDTo
+    // Helper method to convert CompanyEntity  to CompanyDTo
     private CompanyDto convertToDTO(CompanyEntity companyEntity) {
         return modelMapper.map(companyEntity, CompanyDto.class);
     } 

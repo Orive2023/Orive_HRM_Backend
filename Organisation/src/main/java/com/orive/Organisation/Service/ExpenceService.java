@@ -61,6 +61,10 @@ private static final Logger logger=LoggerFactory.getLogger(ExpenceService.class)
         Optional<ExpenceEntity> existingExpenceOptional = expenceRepository.findById(expenceId);
         if (existingExpenceOptional.isPresent()) {
         	ExpenceEntity existingExpence = existingExpenceOptional.get();
+        	existingExpence.setExpenceType(expenceDto.getExpenceType());
+        	existingExpence.setPurchaseDate(expenceDto.getPurchaseDate());
+        	existingExpence.setAmount(expenceDto.getAmount());
+        	existingExpence.setPurchaseBy(expenceDto.getPurchaseBy());
             modelMapper.map(expenceDto, existingExpenceOptional);
             ExpenceEntity updatedExpence = expenceRepository.save(existingExpence);
             logger.info("Updated Expence with ID: {}", updatedExpence.getExpenceId());
