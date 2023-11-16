@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
+import org.springframework.security.access.prepost.PreAuthorize;
 import com.orive.Organisation.Dto.CompanyDto;
 
 import com.orive.Organisation.Service.CompanyService;
@@ -43,6 +43,7 @@ public class CompanyController {
       // Get all companies
       
       @GetMapping("/get/company")
+      @PreAuthorize("hasRole('client_user')")
       public ResponseEntity<List<CompanyDto>> getAllCompany() {
           List<CompanyDto> companies = companyService.getAllCompany();
           logger.info("Retrieved {} companies from the database", companies.size());
@@ -86,6 +87,7 @@ public class CompanyController {
       }
   	    
   	    @GetMapping("/count/company")
+  	  @PreAuthorize("hasRole('client_admin')")
   	    public long countCompany()
   	    {
   	    	return companyService.countCompany();
