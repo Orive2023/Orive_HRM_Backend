@@ -21,7 +21,7 @@ import lombok.ToString;
 @ToString
 @Builder
 @Entity
-@Table(name = "company_details")
+@Table(name = "company")
 public class CompanyEntity {
 	
 	@Id
@@ -58,6 +58,7 @@ public class CompanyEntity {
 	@Column(name = "address")
 	private String address;
 	
-	@Column(name = "company_logo")
-	private String companyLogo;
+	@Lob
+	@Column(name = "company_logo",length = 1000)
+	private byte[] companyLogo;
 }
