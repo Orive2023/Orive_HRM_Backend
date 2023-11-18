@@ -58,6 +58,12 @@ public class CompanyEntity {
 	@Column(name = "address")
 	private String address;
 	
+	@Column(name = "status")
+	private String status;
+	
+	@Column(name = "approved_by")
+	private boolean approvedBy;
+	
 	@Lob
 	@Column(name = "company_logo",length = 1000)
 	private byte[] companyLogo;

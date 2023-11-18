@@ -19,4 +19,6 @@ public class DepartmentDto {
 	private String companyName;
 	private String locationName;
 	private String departmentHead;
+	private String status;
+	private boolean approvedBy;
 }

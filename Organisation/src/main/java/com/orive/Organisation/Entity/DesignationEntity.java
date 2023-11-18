@@ -32,4 +32,10 @@ public class DesignationEntity {
 	
 	@Column(name = "designation_name")
 	private String designationName;
+	
+	@Column(name = "status")
+	private String status;
+	
+	@Column(name = "approved_by")
+	private boolean approvedBy;
 }

@@ -38,4 +38,10 @@ public class DepartmentEntity {
 	
 	@Column(name = "department_head")
 	private String departmentHead;
+	
+	@Column(name = "status")
+	private String status;
+	
+	@Column(name = "approved_by")
+	private boolean approvedBy;
 }

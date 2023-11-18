@@ -46,4 +46,10 @@ public class ExpenceEntity {
 	
 	@Column(name = "remarks")
 	private String remarks;
+	
+	@Column(name = "status")
+	private String status;
+	
+	@Column(name = "approved_by")
+	private boolean approvedBy;
 }

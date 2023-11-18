@@ -2,6 +2,7 @@ package com.orive.Organisation.Dto;
 
 import java.util.List;
 
+import jakarta.persistence.Column;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,4 +22,6 @@ public class PoliciesDto {
 	private String companyName;
 	private String title;
 	private String description;
+	private String status;
+	private boolean approvedBy;
 }

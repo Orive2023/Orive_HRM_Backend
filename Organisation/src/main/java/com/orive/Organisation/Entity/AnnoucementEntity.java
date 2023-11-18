@@ -54,4 +54,10 @@ public class AnnoucementEntity {
 	
 	@Column(name = "description")
 	private String description;
+	
+	@Column(name = "status")
+	private String status;
+	
+	@Column(name = "approved_by")
+	private boolean approvedBy;
 }

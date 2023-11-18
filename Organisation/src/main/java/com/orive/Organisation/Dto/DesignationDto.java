@@ -17,4 +17,6 @@ public class DesignationDto {
     private Long designationId;
 	private String departmentName;
 	private String designationName;
+	private String status;
+	private boolean approvedBy;
 }

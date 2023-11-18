@@ -33,5 +33,7 @@ public class CompanyDto {
 	private String gst;
 	private String uan;
 	private String address;
+	private String status;
+	private boolean approvedBy;
 	private byte[] companyLogo;
 }

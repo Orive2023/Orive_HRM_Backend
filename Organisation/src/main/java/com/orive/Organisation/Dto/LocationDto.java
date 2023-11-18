@@ -1,5 +1,6 @@
 package com.orive.Organisation.Dto;
 
+import jakarta.persistence.Column;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,5 +23,7 @@ public class LocationDto {
 	private String locationHead;
 	private String locationHrManager;
 	private String address;
+	private String status;
+	private boolean approvedBy;
 
 }

@@ -50,4 +50,10 @@ public class LocationEntity {
 	
 	@Column(name = "address")
 	private String address;	
+	
+	@Column(name = "status")
+	private String status;
+	
+	@Column(name = "approved_by")
+	private boolean approvedBy;
 }

@@ -2,6 +2,7 @@ package com.orive.Organisation.Dto;
 
 import java.util.List;
 
+import jakarta.persistence.Column;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -23,4 +24,6 @@ public class ExpenceDto {
 	private String purchaseBy;
 //	private String billCopy;
 	private String remarks;
+	private String status;
+	private boolean approvedBy;
 }
