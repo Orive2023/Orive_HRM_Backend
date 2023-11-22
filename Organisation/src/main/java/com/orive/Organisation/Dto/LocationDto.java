@@ -24,6 +24,6 @@ public class LocationDto {
 	private String locationHrManager;
 	private String address;
 	private String status;
-	private boolean approvedBy;
+	private String approvedBy;
 
 }

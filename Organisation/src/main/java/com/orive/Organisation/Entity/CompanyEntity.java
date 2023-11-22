@@ -31,14 +31,20 @@ public class CompanyEntity {
 	@Column(name = "company_name")
 	private String companyName;
 	
+	@Column(name = "tax_number_or_ein")
+	private String taxNumberOrEin;
+	
 	@Column(name = "company_type")
 	private String companyType;
 	
 	@Column(name = "legal_or_tranding_name")
 	private String legalOrTrandingName;
 	
-	@Column(name = "cin")
-	private String cin;
+	@Column(name = "address")
+	private String address;
+	
+	@Column(name = "registration_number")
+	private String registrationNumber;
 	
 	@Column(name = "contact_number")
 	private Long contactNumber;
@@ -49,22 +55,34 @@ public class CompanyEntity {
 	@Column(name = "website")
 	private String website;
 	
+	@Column(name = "city")
+	private String city;
+	
+	@Column(name = "state")
+	private String state;
+	
+	@Column(name = "zip_code")
+	private int zipCode;
+	
+	@Column(name = "contry")
+	private String contry;
+	
+	@Lob
+	@Column(name = "company_logo",length = 1000)
+	private byte[] companyLogo;
+	
+	@Column(name = "cin")
+	private String cin;
+	
 	@Column(name = "gst")
 	private String gst;
 	
 	@Column(name = "uan")
 	private String uan;
 	
-	@Column(name = "address")
-	private String address;
-	
 	@Column(name = "status")
 	private String status;
 	
 	@Column(name = "approved_by")
-	private boolean approvedBy;
-	
-	@Lob
-	@Column(name = "company_logo",length = 1000)
-	private byte[] companyLogo;
+	private String approvedBy;
 }

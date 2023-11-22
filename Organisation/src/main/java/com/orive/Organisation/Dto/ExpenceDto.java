@@ -25,5 +25,5 @@ public class ExpenceDto {
 //	private String billCopy;
 	private String remarks;
 	private String status;
-	private boolean approvedBy;
+	private String approvedBy;
 }

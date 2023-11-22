@@ -51,5 +51,5 @@ public class ExpenceEntity {
 	private String status;
 	
 	@Column(name = "approved_by")
-	private boolean approvedBy;
+	private String approvedBy;
 }

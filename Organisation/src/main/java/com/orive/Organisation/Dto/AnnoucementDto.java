@@ -25,6 +25,6 @@ public class AnnoucementDto {
 	private String departmentName;
 	private String summary;
 	private String status;
-	private boolean approvedBy;
+	private String approvedBy;
 	private String description;
 }

@@ -23,5 +23,5 @@ public class PoliciesDto {
 	private String title;
 	private String description;
 	private String status;
-	private boolean approvedBy;
+	private String approvedBy;
 }

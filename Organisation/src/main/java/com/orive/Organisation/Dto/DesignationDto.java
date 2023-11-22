@@ -18,5 +18,5 @@ public class DesignationDto {
 	private String departmentName;
 	private String designationName;
 	private String status;
-	private boolean approvedBy;
+	private String approvedBy;
 }
