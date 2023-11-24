@@ -20,7 +20,7 @@ public class OpeningBalanceDTo {
     private Long openingBalanceId;
 	private String financialYear;
 	private String date;
-	private List<OpeningBalanceTableEntity> openingBalanceTableEntities;
+	private List<OpeningBalanceTableDto> openingBalanceTableDtos;
 	private double debitTotal;
 	private double creditTotal;
 }
