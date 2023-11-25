@@ -28,7 +28,7 @@ public class BidAnalysisEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long  bidAnalysisId;
+	private Long bidAnalysisId;
 	
 	@Column(name = "location")
 	private String location;
@@ -44,7 +44,7 @@ public class BidAnalysisEntity {
 	
 	
 	@OneToMany(targetEntity = CommitteeEntity.class,cascade = CascadeType.ALL)
-	@JoinColumn(name = "bid_analysis_fk",referencedColumnName = "bidAnalysisId")
+	@JoinColumn(name = "bidAnalysis_committee_fk",referencedColumnName = "bidAnalysisId")
 	private List<CommitteeEntity> committeeEntities;
 	
 	

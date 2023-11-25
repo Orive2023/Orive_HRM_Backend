@@ -24,7 +24,7 @@ import com.orive.Procurement.Service.BidAnalysisService;
 
 
 @RestController
-@RequestMapping(value = " bidAnalysis")
+@RequestMapping(value = "bidAnalysis")
 @CrossOrigin(origins = "*")
 public class BidAnalysisController {
 	

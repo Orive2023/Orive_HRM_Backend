@@ -18,19 +18,17 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "description_of_mterial")
-public class DescriptionOfMaterialEntity {
+@Table(name = "committees")
+public class CommitteesEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long descriptionOfMaterialId;
+	private Long committeesId;
 	
-	@Column(name = "description_of_material_or_goods_or_Service")
-	private String descriptionOfMaterialOrGoodsOrService;
+	@Column(name = "name")
+	private String name;
 	
-	@Column(name = "unit")
-	private String unit;
-	
-	@Column(name = "quantity")
-	private Double quantity;
+	@Column(name = "signature")
+	private String signature;
+
 }

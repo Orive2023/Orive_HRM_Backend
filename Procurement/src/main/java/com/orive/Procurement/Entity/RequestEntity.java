@@ -34,7 +34,7 @@ public class RequestEntity {
 	private String requestingPerson;
 	
 	@Column(name = "requesting_department")
-	private String requestingDepartment;
+	private String requestingDepartment;	
 	
 	@Column(name = "expected_time_to_have_the_good_starts")
 	private String expectedTimeToHaveTheGoodStarts;
@@ -46,7 +46,6 @@ public class RequestEntity {
 	private String reasonForRequesting;
 	
 	@OneToMany(targetEntity = DescriptionOfMaterialEntity.class,cascade = CascadeType.ALL)
-	@JoinColumn(name = "description_of_mterial_fk",referencedColumnName = "requestId")
+	@JoinColumn(name = "request_description_fk",referencedColumnName = "requestId")
 	private List<DescriptionOfMaterialEntity> descriptionOfMaterialEntities;
-
 }
