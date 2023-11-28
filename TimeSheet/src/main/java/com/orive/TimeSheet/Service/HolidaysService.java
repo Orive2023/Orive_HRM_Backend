@@ -61,7 +61,9 @@ public class HolidaysService {
 	        Optional<HolidaysEntity> existingHolidayOptional = holidaysRepository.findById(holidaysId);
 	        if (existingHolidayOptional.isPresent()) {
 	        	HolidaysEntity existingHoliday = existingHolidayOptional.get();
-	            modelMapper.map(holidaysDto, existingHolidayOptional);
+	            existingHoliday.setEventName(holidaysDto.getEventName());
+	        	existingHoliday.setStatus(holidaysDto.getStatus());	
+	        	modelMapper.map(holidaysDto, existingHolidayOptional);
 	            HolidaysEntity updatedHoliday = holidaysRepository.save(existingHoliday);
 	            logger.info("Updated Holidays with ID: {}", updatedHoliday.getHolidaysId());
 	            return convertToDTO(updatedHoliday);

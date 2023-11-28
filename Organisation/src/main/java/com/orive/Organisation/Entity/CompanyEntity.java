@@ -1,5 +1,7 @@
 package com.orive.Organisation.Entity;
 
+import java.util.Date;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -67,7 +69,6 @@ public class CompanyEntity {
 	@Column(name = "country")
 	private String country;
 	
-	
 	@Column(name = "cin")
 	private String cin;
 	
@@ -76,6 +77,9 @@ public class CompanyEntity {
 	
 	@Column(name = "uan")
 	private String uan;
+	
+	@Column(name = "date")
+	private Date date;
 	
 	@Column(name = "status")
 	private String status;

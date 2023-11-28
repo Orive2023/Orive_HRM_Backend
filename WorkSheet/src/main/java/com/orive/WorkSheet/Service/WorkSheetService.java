@@ -58,7 +58,11 @@ public class WorkSheetService {
         Optional<WorkSheetEntity> existingWorkSheetOptional = workSheetRepository.findById(WorkSheetId);
         if (existingWorkSheetOptional.isPresent()) {
         	WorkSheetEntity existingWorkSheet= existingWorkSheetOptional.get();
-            modelMapper.map(workSheetDto, existingWorkSheetOptional);
+        	existingWorkSheet.setWorkSheetTitle(workSheetDto.getWorkSheetTitle());
+        	existingWorkSheet.setAssignedTo(workSheetDto.getAssignedTo());
+        	existingWorkSheet.setEstimateHour(workSheetDto.getEstimateHour());
+        	existingWorkSheet.setProject(workSheetDto.getProject());
+        	modelMapper.map(workSheetDto, existingWorkSheetOptional);
             WorkSheetEntity updatedWorkSheet = workSheetRepository.save(existingWorkSheet);
             logger.info("Updated WorkSheet with ID: {}", updatedWorkSheet.getWorkSheetId());
             return convertToDTO(updatedWorkSheet);

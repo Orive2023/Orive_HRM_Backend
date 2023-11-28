@@ -58,7 +58,13 @@ public class DepositService {
         Optional<DepositEntity> existingDepositOptional = depositRepository.findById(depositId);
         if (existingDepositOptional.isPresent()) {
         	DepositEntity existingDeposit = existingDepositOptional.get();
-            modelMapper.map(depositDto, existingDepositOptional);
+        	existingDeposit.setEmployeeFullName(depositDto.getEmployeeFullName());
+            existingDeposit.setBankName(depositDto.getBankName());
+        	existingDeposit.setDepartment(depositDto.getDepartment());
+            existingDeposit.setDepositType(depositDto.getDepositType());
+        	existingDeposit.setEmployeePosition(depositDto.getEmployeePosition());
+            existingDeposit.setReasonOfReturn(depositDto.getReasonOfReturn());
+        	modelMapper.map(depositDto, existingDepositOptional);
             DepositEntity updatedDeposit = depositRepository.save(existingDeposit);
             logger.info("Updated Deposit with ID: {}", updatedDeposit.getDepositId());
             return convertToDTO(updatedDeposit);

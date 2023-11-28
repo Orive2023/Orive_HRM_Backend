@@ -58,7 +58,14 @@ public class ExpenseService {
         Optional<ExpenseEntity> existingExpenseOptional = expenseRepository.findById(expenseId);
         if (existingExpenseOptional.isPresent()) {
         	ExpenseEntity existingExpense = existingExpenseOptional.get();
-            modelMapper.map(expenseDto, existingExpenseOptional);
+            existingExpense.setAccountType(expenseDto.getAccountType());
+        	existingExpense.setBankName(expenseDto.getBankName());
+            existingExpense.setDepartment(expenseDto.getDepartment());
+        	existingExpense.setEmployeePosition(expenseDto.getEmployeePosition());
+            existingExpense.setEmployeeFullName(expenseDto.getEmployeeFullName());
+        	existingExpense.setExpenseCategory(expenseDto.getExpenseCategory());
+            existingExpense.setPaymentMethod(expenseDto.getPaymentMethod());
+        	modelMapper.map(expenseDto, existingExpenseOptional);
             ExpenseEntity updatedExpense = expenseRepository.save(existingExpense);
             logger.info("Updated Expense with ID: {}", updatedExpense.getExpenseId());
             return convertToDTO(updatedExpense);

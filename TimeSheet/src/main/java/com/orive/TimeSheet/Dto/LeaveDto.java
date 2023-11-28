@@ -19,5 +19,5 @@ public class LeaveDto {
 	private String endDate;
 	private String employeeName;
 	private String leaveReason;
-	private String remars;
+	private String remarks;
 }

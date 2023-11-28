@@ -59,7 +59,10 @@ private static final Logger logger=LoggerFactory.getLogger(LeavesService.class);
         Optional<LeavesEntity> existingLeavesOptional = leavesRepository.findById(leaveId);
         if (existingLeavesOptional.isPresent()) {
         	LeavesEntity existingLeave = existingLeavesOptional.get();
-            modelMapper.map(leaveDto, existingLeavesOptional);
+            existingLeave.setEmployeeName(leaveDto.getEmployeeName());
+        	existingLeave.setLeaveReason(leaveDto.getLeaveReason());
+            existingLeave.setLeaveType(leaveDto.getLeaveType());
+        	modelMapper.map(leaveDto, existingLeavesOptional);
             LeavesEntity updatedLeave = leavesRepository.save(existingLeave);
             logger.info("Updated Leaves with ID: {}", updatedLeave.getLeaveId());
             return convertToDTO(updatedLeave);

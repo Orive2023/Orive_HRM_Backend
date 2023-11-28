@@ -60,7 +60,14 @@ public class AttendanceService {
         Optional<AttendanceEntity> existingAttendanceOptional = attendanceRepository.findById(attendanceId);
         if (existingAttendanceOptional.isPresent()) {
         	AttendanceEntity existingAttendance = existingAttendanceOptional.get();
-            modelMapper.map(attendanceDto, existingAttendanceOptional);
+            existingAttendance.setDailyAttendanceBreaks(attendanceDto.getDailyAttendanceBreaks());
+        	existingAttendance.setDailyAttendanceInTime(attendanceDto.getDailyAttendanceInTime());
+        	existingAttendance.setDailyAttendanceOutTime(attendanceDto.getDailyAttendanceOutTime());
+        	existingAttendance.setDailyAttendanceTotalHours(attendanceDto.getDailyAttendanceTotalHours());
+        	existingAttendance.setDepartment(attendanceDto.getDepartment());
+        	existingAttendance.setLeaveType(attendanceDto.getLeaveType());
+        	existingAttendance.setTotalHoursForReportingPeriod(attendanceDto.getTotalHoursForReportingPeriod());
+        	modelMapper.map(attendanceDto, existingAttendanceOptional);
             AttendanceEntity updatedAttendance= attendanceRepository.save(existingAttendance);
             logger.info("Updated Attendance with ID: {}", updatedAttendance.getAttendanceId());
             return convertToDTO(updatedAttendance);

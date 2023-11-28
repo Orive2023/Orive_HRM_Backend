@@ -60,7 +60,8 @@ public class UnitsService {
 		        Optional<UnitsEntity> existingUnitsOptional = unitsRepository.findById(unitsId);
 		        if (existingUnitsOptional.isPresent()) {
 		        	UnitsEntity existingUnits = existingUnitsOptional.get();
-		            modelMapper.map(unitsDto, existingUnitsOptional);
+		            existingUnits.setUnit(unitsDto.getUnit());
+		        	modelMapper.map(unitsDto, existingUnitsOptional);
 		            UnitsEntity updatedUnits = unitsRepository.save(existingUnits);
 		            logger.info("Updated Units with ID: {}", updatedUnits.getUnitsId());
 		            return convertToDTO(updatedUnits);

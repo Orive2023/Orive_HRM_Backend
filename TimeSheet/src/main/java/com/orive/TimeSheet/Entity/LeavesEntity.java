@@ -40,6 +40,6 @@ public class LeavesEntity {
 	@Column(name = "leave_reason")
 	private String leaveReason;
 	
-	@Column(name = "remars")
-	private String remars;
+	@Column(name = "remarks")
+	private String remarks;
 }

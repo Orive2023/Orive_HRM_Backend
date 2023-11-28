@@ -58,7 +58,10 @@ public class RequestService {
 	        Optional<RequestEntity> existingRequestOptional = requestRepository.findById(requestId);
 	        if (existingRequestOptional.isPresent()) {
 	        	RequestEntity existingRequest = existingRequestOptional.get();
-	            modelMapper.map(requestDto, existingRequestOptional);
+	            existingRequest.setRequestingPerson(requestDto.getRequestingPerson());
+	        	existingRequest.setRequestingDepartment(requestDto.getRequestingDepartment());
+	        	existingRequest.setReasonForRequesting(requestDto.getReasonForRequesting());
+	        	modelMapper.map(requestDto, existingRequestOptional);
 	            RequestEntity updatedRequest = requestRepository.save(existingRequest);
 	            logger.info("Updated Request with ID: {}", updatedRequest.getRequestId());
 	            return convertToDTO(updatedRequest);

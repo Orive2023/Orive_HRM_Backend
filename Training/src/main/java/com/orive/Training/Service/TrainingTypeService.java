@@ -58,7 +58,11 @@ public class TrainingTypeService {
         Optional<TrainingTypeEntity> existingTrainingTypeOptional = trainingTypeRepository.findById(trainingTypeId);
         if (existingTrainingTypeOptional.isPresent()) {
         	TrainingTypeEntity existingTrainingType = existingTrainingTypeOptional.get();
-            modelMapper.map(trainingTypeDto, existingTrainingTypeOptional);
+            existingTrainingType.setOnlineCourse(trainingTypeDto.getOnlineCourse());
+        	existingTrainingType.setCustomerServiceTraining(trainingTypeDto.getCustomerServiceTraining());
+        	existingTrainingType.setOnTheJobTraining(trainingTypeDto.getOnTheJobTraining());
+        	existingTrainingType.setLeadershipDevelopment(trainingTypeDto.getLeadershipDevelopment());
+        	modelMapper.map(trainingTypeDto, existingTrainingTypeOptional);
             TrainingTypeEntity updatedTrainingType = trainingTypeRepository.save(existingTrainingType);
             logger.info("Updated TrainingType with ID: {}", updatedTrainingType.getTrainingTypeId());
             return convertToDTO(updatedTrainingType);

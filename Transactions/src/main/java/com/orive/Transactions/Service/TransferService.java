@@ -59,7 +59,15 @@ public class TransferService {
         Optional<TransferEntity> existingTransferOptional = transferRepository.findById(transferId);
         if (existingTransferOptional.isPresent()) {
         	TransferEntity existingTransfer = existingTransferOptional.get();
-            modelMapper.map(transferDto, existingTransferOptional);
+            existingTransfer.setCurrentDepartment(transferDto.getCurrentDepartment());
+        	existingTransfer.setCurrentLocation(transferDto.getCurrentLocation());
+        	existingTransfer.setCurrentManagersName(transferDto.getCurrentManagersName());
+        	existingTransfer.setCurrentPosition(transferDto.getCurrentPosition());
+        	existingTransfer.setEmployeeFullName(transferDto.getEmployeeFullName());
+        	existingTransfer.setHrRepresentivesName(transferDto.getHrRepresentivesName());
+        	existingTransfer.setReasonOfTransfer(transferDto.getReasonOfTransfer());
+        	existingTransfer.setNewmanagersName(transferDto.getNewmanagersName());
+        	modelMapper.map(transferDto, existingTransferOptional);
             TransferEntity updatedTransfer = transferRepository.save(existingTransfer);
             logger.info("Updated Transfer with ID: {}", updatedTransfer.getTransferId());
             return convertToDTO(updatedTransfer);

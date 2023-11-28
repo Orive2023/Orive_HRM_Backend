@@ -1,5 +1,7 @@
 package com.orive.Organisation.Dto;
 
+import java.util.Date;
+
 import org.springframework.web.multipart.MultipartFile;
 
 import jakarta.persistence.Column;
@@ -40,6 +42,7 @@ public class CompanyDto {
 	private String cin;
 	private String gst;
 	private String uan;
+	private Date date;
 	private String status;
 	private String approvedBy;
 	private byte[] companyLogo;

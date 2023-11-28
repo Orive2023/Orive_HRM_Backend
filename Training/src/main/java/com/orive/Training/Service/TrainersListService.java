@@ -58,7 +58,13 @@ public class TrainersListService {
         Optional<TrainersListEntity> existingTrainersListOptional = trainersListRepository.findById(trainersListId);
         if (existingTrainersListOptional.isPresent()) {
         	TrainersListEntity existingTrainersList = existingTrainersListOptional.get();
-            modelMapper.map(trainersListDto, existingTrainersListOptional);
+            existingTrainersList.setOtherTrainingFormats(trainersListDto.getOtherTrainingFormats());
+        	existingTrainersList.setWorkshops(trainersListDto.getWorkshops());
+        	existingTrainersList.setTrainingMaterialsProvided(trainersListDto.getTrainingMaterialsProvided());
+        	existingTrainersList.setTrainersTechnicalSkills(trainersListDto.getTrainersTechnicalSkills());
+        	existingTrainersList.setTrainersFullName(trainersListDto.getTrainersFullName());
+        	existingTrainersList.setTrainersPhoneNo(trainersListDto.getTrainersPhoneNo());
+        	modelMapper.map(trainersListDto, existingTrainersListOptional);
             TrainersListEntity updatedTrainersList = trainersListRepository.save(existingTrainersList);
             logger.info("Updated TrainersList with ID: {}", updatedTrainersList.getTrainersListId());
             return convertToDTO(updatedTrainersList);
