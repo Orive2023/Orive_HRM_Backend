@@ -31,8 +31,8 @@ public class CompanyEntity {
 	@Column(name = "company_name")
 	private String companyName;
 	
-	@Column(name = "tax_number_or_ein")
-	private String taxNumberOrEin;
+	@Column(name = "income_tax_number")
+	private String incomeTaxNumber;
 	
 	@Column(name = "company_type")
 	private String companyType;
@@ -64,12 +64,9 @@ public class CompanyEntity {
 	@Column(name = "zip_code")
 	private int zipCode;
 	
-	@Column(name = "contry")
-	private String contry;
+	@Column(name = "country")
+	private String country;
 	
-	@Lob
-	@Column(name = "company_logo",length = 1000)
-	private byte[] companyLogo;
 	
 	@Column(name = "cin")
 	private String cin;
@@ -85,4 +82,8 @@ public class CompanyEntity {
 	
 	@Column(name = "approved_by")
 	private String approvedBy;
+	
+	@Lob
+	@Column(name = "company_logo",length = 100000)
+	private byte[] companyLogo;
 }

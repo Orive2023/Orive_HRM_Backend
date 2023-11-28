@@ -60,29 +60,46 @@ public class CompanyService {
 //	    }
 //	}
 	
-	 public String uploadImage(MultipartFile file,
+	 public String uploadImage(
 			 String companyName,
+			 String incomeTaxNumber,
 			 String companyType,
 			 String legalOrTrandingName,
-			 String cin,
+			 String address,
+			 String registrationNumber,
 			 Long contactNumber,
 			 String email,
 			 String website,
+			 String city,
+			 String state,
+			 int zipCode,
+			 String country,
+			 String cin,
 			 String gst,
 			 String uan,
-			 String address) throws IOException {
+			 String status,
+			 String approvedBy,
+			 MultipartFile file) throws IOException {
 
 	        CompanyEntity imageData = companyRepository.save(CompanyEntity.builder()
 	                .companyName(companyName)
+	                .incomeTaxNumber(incomeTaxNumber)
 	                .companyType(companyType)
 	                .legalOrTrandingName(legalOrTrandingName)
-	                .cin(cin)
+	                .address(address)
+	                .registrationNumber(registrationNumber)
 	                .contactNumber(contactNumber)
 	                .email(email)
 	                .website(website)
+	                .city(city)
+	                .state(state)
+	                .zipCode(zipCode)
+	                .country(country)              
+	                .cin(cin)
 	                .gst(gst)
 	                .uan(uan)
-	                .address(address)
+	                .status(status)
+	                .approvedBy(approvedBy)
 	                .companyLogo(ImageUtils.compressImage(file.getBytes())).build());
 	        if (imageData != null) {
 	            return "file uploaded successfully : " + file.getOriginalFilename();

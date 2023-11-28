@@ -25,7 +25,7 @@ public class CompanyDto {
 	
 	private Long companyId;
 	private String companyName;
-	private String taxNumberOrEin;
+	private String incomeTaxNumber;
 	private String companyType;
 	private String legalOrTrandingName;
 	private String address;
@@ -36,11 +36,11 @@ public class CompanyDto {
 	private String city;
 	private String state;
 	private int zipCode;
-	private String contry;
-	private byte[] companyLogo;
+	private String country;
 	private String cin;
 	private String gst;
 	private String uan;
 	private String status;
 	private String approvedBy;
+	private byte[] companyLogo;
 }

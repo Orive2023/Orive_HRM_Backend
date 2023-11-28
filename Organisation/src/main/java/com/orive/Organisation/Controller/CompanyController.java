@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.security.access.prepost.PreAuthorize;
+//import org.springframework.security.access.prepost.PreAuthorize;
 import com.orive.Organisation.Dto.CompanyDto;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -39,29 +39,42 @@ public class CompanyController {
   
   	// Create a new Company
       @PostMapping("/create/company")
-      @PreAuthorize("hasRole('client_admin')")
-      public ResponseEntity<?> uploadImage(@RequestParam("companyLogo") MultipartFile file,
+//      @PreAuthorize("hasRole('client_admin')")
+      public ResponseEntity<?> uploadImage(
               @RequestParam("companyName") String companyName,
+              @RequestParam("incomeTaxNumber") String incomeTaxNumber,
               @RequestParam("companyType") String companyType,
               @RequestParam("legalOrTrandingName") String legalOrTrandingName,
-              @RequestParam("cin") String cin,
+              @RequestParam("address") String address,
+              @RequestParam("registrationNumber") String registrationNumber,
               @RequestParam("contactNumber") Long contactNumber,
               @RequestParam("email") String email,
               @RequestParam("website") String website,
+              @RequestParam("city") String city,
+              @RequestParam("state") String state,
+              @RequestParam("zipCode") int zipCode,
+              @RequestParam("country") String country,
+              @RequestParam("cin") String cin,
               @RequestParam("gst") String gst,
               @RequestParam("uan") String uan,
-              @RequestParam("address") String address) {
+              @RequestParam("status")  String status,
+              @RequestParam("approvedBy") String approvedBy,
+              @RequestParam("companyLogo") MultipartFile file) {
                              try {
-                            String uploadImage = companyService.uploadImage(file, companyName,companyType
-                            		,legalOrTrandingName,cin,contactNumber,email,website,gst,uan,address);
+                            String uploadImage = companyService.uploadImage(companyName,incomeTaxNumber,companyType
+                            		,legalOrTrandingName,address,registrationNumber,contactNumber,email,website,city,state,zipCode,country,cin,gst,uan ,status,approvedBy,file);
                           return ResponseEntity.status(HttpStatus.OK).body(uploadImage);
                            } catch (IOException e) {
                               e.printStackTrace();
            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error uploading file");
            }
           }
+      
+      
+      
+// Get companies logo by name
       @GetMapping("/{companyName}")
-      @PreAuthorize("hasRole('client_admin')")
+//      @PreAuthorize("hasRole('client_admin')")
   	public ResponseEntity<?> downloadImage(@PathVariable String companyName){
   		byte[] imageData=companyService.downloadImage(companyName);
   		return ResponseEntity.status(HttpStatus.OK)
@@ -70,10 +83,11 @@ public class CompanyController {
 
   	}
 
-      // Get all companies
       
+      
+ // Get all companies  
       @GetMapping("/get/company")
-      @PreAuthorize("hasRole('client_user')")
+//      @PreAuthorize("hasRole('client_user')")
       public ResponseEntity<List<CompanyDto>> getAllCompany() {
           List<CompanyDto> companies = companyService.getAllCompany();
           logger.info("Retrieved {} companies from the database", companies.size());
@@ -117,7 +131,7 @@ public class CompanyController {
       }
   	    
   	    @GetMapping("/count/company")
-  	  @PreAuthorize("hasRole('client_admin')")
+//  	  @PreAuthorize("hasRole('client_admin')")
   	    public long countCompany()
   	    {
   	    	return companyService.countCompany();
