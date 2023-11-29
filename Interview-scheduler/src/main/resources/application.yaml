@@ -1,0 +1,33 @@
+spring:
+  application:
+    name: interview-scheduler
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/orivemaildb
+    username: root
+    password: root2628
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+    properties:
+      hibernate:
+        format_sql: false
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: sumit2628r@gmail.com
+    password: lule vtqa dpsq duhi
+    smtp:
+      connectiontimeout: 5000
+      timeout: 5000
+      writetimeout: 5000
+      auth: true
+      starttls:
+        enable: true
+      ssl:
+        enable: false
+    debug: true
+server:
+  port: 8081
