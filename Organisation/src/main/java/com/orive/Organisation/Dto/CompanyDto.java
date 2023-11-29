@@ -29,7 +29,7 @@ public class CompanyDto {
 	private String companyName;
 	private String incomeTaxNumber;
 	private String companyType;
-	private String legalOrTrandingName;
+	private String legalOrTradingName;
 	private String address;
 	private String registrationNumber;
 	private Long contactNumber;

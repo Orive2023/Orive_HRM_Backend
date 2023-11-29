@@ -39,8 +39,8 @@ public class CompanyEntity {
 	@Column(name = "company_type")
 	private String companyType;
 	
-	@Column(name = "legal_or_tranding_name")
-	private String legalOrTrandingName;
+	@Column(name = "legal_or_trading_name")
+	private String legalOrTradingName;
 	
 	@Column(name = "address")
 	private String address;

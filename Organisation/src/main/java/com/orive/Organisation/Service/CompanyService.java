@@ -64,7 +64,7 @@ public class CompanyService {
 			 String companyName,
 			 String incomeTaxNumber,
 			 String companyType,
-			 String legalOrTrandingName,
+			 String legalOrTradingName,
 			 String address,
 			 String registrationNumber,
 			 Long contactNumber,
@@ -85,7 +85,7 @@ public class CompanyService {
 	                .companyName(companyName)
 	                .incomeTaxNumber(incomeTaxNumber)
 	                .companyType(companyType)
-	                .legalOrTrandingName(legalOrTrandingName)
+	                .legalOrTradingName(legalOrTradingName)
 	                .address(address)
 	                .registrationNumber(registrationNumber)
 	                .contactNumber(contactNumber)
@@ -140,7 +140,7 @@ public class CompanyService {
         	CompanyEntity existingCompany = existingCompanyOptional.get();
         	existingCompany.setCompanyName(companyDto.getCompanyName());
         	existingCompany.setCompanyType(companyDto.getCompanyType());
-        	existingCompany.setLegalOrTrandingName(companyDto.getLegalOrTrandingName());
+        	existingCompany.setLegalOrTradingName(companyDto.getLegalOrTradingName());
         	existingCompany.setContactNumber(companyDto.getContactNumber());
         	existingCompany.setEmail(companyDto.getEmail());
         	existingCompany.setWebsite(companyDto.getWebsite());

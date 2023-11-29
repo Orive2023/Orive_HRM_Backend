@@ -44,7 +44,7 @@ public class CompanyController {
               @RequestParam("companyName") String companyName,
               @RequestParam("incomeTaxNumber") String incomeTaxNumber,
               @RequestParam("companyType") String companyType,
-              @RequestParam("legalOrTrandingName") String legalOrTrandingName,
+              @RequestParam("legalOrTradingName") String legalOrTradingName,
               @RequestParam("address") String address,
               @RequestParam("registrationNumber") String registrationNumber,
               @RequestParam("contactNumber") Long contactNumber,
@@ -62,7 +62,7 @@ public class CompanyController {
               @RequestParam("companyLogo") MultipartFile file) {
                              try {
                             String uploadImage = companyService.uploadImage(companyName,incomeTaxNumber,companyType
-                            		,legalOrTrandingName,address,registrationNumber,contactNumber,email,website,city,state,zipCode,country,cin,gst,uan ,status,approvedBy,file);
+                            		,legalOrTradingName,address,registrationNumber,contactNumber,email,website,city,state,zipCode,country,cin,gst,uan ,status,approvedBy,file);
                           return ResponseEntity.status(HttpStatus.OK).body(uploadImage);
                            } catch (IOException e) {
                               e.printStackTrace();
