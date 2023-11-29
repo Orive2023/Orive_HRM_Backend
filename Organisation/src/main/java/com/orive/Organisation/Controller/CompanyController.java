@@ -1,6 +1,7 @@
 package com.orive.Organisation.Controller;
 
 import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -42,7 +43,6 @@ public class CompanyController {
 //      @PreAuthorize("hasRole('client_admin')")
       public ResponseEntity<?> uploadImage(
               @RequestParam("companyName") String companyName,
-              @RequestParam("incomeTaxNumber") String incomeTaxNumber,
               @RequestParam("companyType") String companyType,
               @RequestParam("legalOrTradingName") String legalOrTradingName,
               @RequestParam("address") String address,
@@ -57,12 +57,13 @@ public class CompanyController {
               @RequestParam("cin") String cin,
               @RequestParam("gst") String gst,
               @RequestParam("uan") String uan,
-              @RequestParam("status")  String status,
-              @RequestParam("approvedBy") String approvedBy,
-              @RequestParam("companyLogo") MultipartFile file) {
+              @RequestParam("createdDate") Date createdDate,
+//              @RequestParam("status")  String status,
+//              @RequestParam("approvedBy") String approvedBy,
+              @RequestParam("uploadLogo") MultipartFile file) {
                              try {
-                            String uploadImage = companyService.uploadImage(companyName,incomeTaxNumber,companyType
-                            		,legalOrTradingName,address,registrationNumber,contactNumber,email,website,city,state,zipCode,country,cin,gst,uan ,status,approvedBy,file);
+                            String uploadImage = companyService.uploadImage(companyName,companyType
+                            		,legalOrTradingName,address,registrationNumber,contactNumber,email,website,city,state,zipCode,country,cin,gst,uan,createdDate,file);
                           return ResponseEntity.status(HttpStatus.OK).body(uploadImage);
                            } catch (IOException e) {
                               e.printStackTrace();

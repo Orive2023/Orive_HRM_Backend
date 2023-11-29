@@ -27,7 +27,7 @@ public class CompanyDto {
 	
 	private Long companyId;
 	private String companyName;
-	private String incomeTaxNumber;
+//	private String incomeTaxNumber;
 	private String companyType;
 	private String legalOrTradingName;
 	private String address;
@@ -42,8 +42,8 @@ public class CompanyDto {
 	private String cin;
 	private String gst;
 	private String uan;
-	private Date date;
-	private String status;
-	private String approvedBy;
-	private byte[] companyLogo;
+	private Date createdDate;
+//	private String status;
+//	private String approvedBy;
+	private byte[] uploadLogo;
 }

@@ -1,5 +1,7 @@
 package com.orive.Organisation.Entity;
 
+import java.util.Date;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -30,8 +32,17 @@ public class LocationEntity {
 	@Column(name = "company_name")
 	private String companyName;
 	
+	@Column(name = "location_head")
+	private String locationHead;
+	
+	@Column(name = "location")
+	private String location;
+	
 	@Column(name = "location_name")
 	private String locationName;
+	
+	@Column(name = "address")
+	private String address;	
 	
 	@Column(name = "email")
 	private String email;
@@ -42,18 +53,24 @@ public class LocationEntity {
 	@Column(name = "fax_number")
 	private String faxNumber;
 	
-	@Column(name = "location_head")
-	private String locationHead;
+	@Column(name = "city")
+	private String city;
 	
-	@Column(name = "location_hr_manager")
-	private String locationHrManager;
+	@Column(name = "state")
+	private String state;
 	
-	@Column(name = "address")
-	private String address;	
+	@Column(name = "zip_code")
+	private int zipCode;
 	
-	@Column(name = "status")
-	private String status;
+	@Column(name = "country")
+	private String country;
 	
-	@Column(name = "approved_by")
-	private String approvedBy;
+	@Column(name = "date")
+	private Date date;
+	
+//	@Column(name = "status")
+//	private String status;
+//	
+//	@Column(name = "approved_by")
+//	private String approvedBy;
 }

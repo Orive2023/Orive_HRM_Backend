@@ -1,9 +1,6 @@
 package com.orive.Organisation.Entity;
 
 import java.util.Date;
-import java.util.List;
-
-import org.springframework.web.multipart.MultipartFile;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -25,31 +22,22 @@ import lombok.ToString;
 @ToString
 @Builder
 @Entity
-@Table(name = "policies")
-public class PoliciesEntity {
+@Table(name = "expencelist")
+public class ExpenseListEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long policiesId;
+	private Long expenceListId;
 	
-	@Column(name = "company_name")
-	private String companyName;
+	@Column(name = "purchase_date")
+	private String purchaseDate;
 	
-	@Column(name = "title")
-	private String title;
-	
-	@Column(name = "description", length = 100000 )
+	@Column(name = "description", length = 100000)
 	private String description;
 	
-	@Column(name = "created_date")
-	private Date createdDate;
+	@Column(name = "purchased_by")
+	private String purchasedBy;
 	
-	@Column(name = "upload_pdf")
-	private MultipartFile uploadPdf;
-	
-//	@Column(name = "status")
-//	private String status;
-//	
-//	@Column(name = "approved_by")
-//	private String approvedBy;
+	@Column(name = "amount")
+	private Long amount;		
 }

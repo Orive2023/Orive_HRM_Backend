@@ -1,7 +1,9 @@
 package com.orive.Organisation.Dto;
 
+import java.util.Date;
 import java.util.List;
 
+import jakarta.persistence.Column;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,7 +18,7 @@ import lombok.ToString;
 @ToString
 public class AnnoucementDto {
 
-    private Long announcementsId;
+	private Long announcementsId;
 	private String title;
 	private String startDate;
 	private String endDate;
@@ -24,7 +26,8 @@ public class AnnoucementDto {
 	private String locationName;
 	private String departmentName;
 	private String summary;
-	private String status;
-	private String approvedBy;
 	private String description;
+	private Date createdDate;
+//	private String status;
+//	private String approvedBy;
 }

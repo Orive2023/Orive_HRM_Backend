@@ -1,6 +1,7 @@
 package com.orive.Organisation.Service;
 
 import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -62,7 +63,6 @@ public class CompanyService {
 	
 	 public String uploadImage(
 			 String companyName,
-			 String incomeTaxNumber,
 			 String companyType,
 			 String legalOrTradingName,
 			 String address,
@@ -77,13 +77,13 @@ public class CompanyService {
 			 String cin,
 			 String gst,
 			 String uan,
-			 String status,
-			 String approvedBy,
+			 Date createdDate,
+//			 String status,
+//			 String approvedBy,
 			 MultipartFile file) throws IOException {
 
 	        CompanyEntity imageData = companyRepository.save(CompanyEntity.builder()
 	                .companyName(companyName)
-	                .incomeTaxNumber(incomeTaxNumber)
 	                .companyType(companyType)
 	                .legalOrTradingName(legalOrTradingName)
 	                .address(address)
@@ -98,9 +98,10 @@ public class CompanyService {
 	                .cin(cin)
 	                .gst(gst)
 	                .uan(uan)
-	                .status(status)
-	                .approvedBy(approvedBy)
-	                .companyLogo(ImageUtils.compressImage(file.getBytes())).build());
+	                .createdDate(createdDate)
+//	                .status(status)
+//	                .approvedBy(approvedBy)
+	                .uploadLogo(ImageUtils.compressImage(file.getBytes())).build());
 	        if (imageData != null) {
 	            return "file uploaded successfully : " + file.getOriginalFilename();
 	        }
@@ -108,7 +109,7 @@ public class CompanyService {
 	    }
 	 public byte[] downloadImage(String companyName){
 	        Optional<CompanyEntity> dbImageData = companyRepository.findByCompanyName(companyName);
-	        byte[] images=ImageUtils.decompressImage(dbImageData.get().getCompanyLogo());
+	        byte[] images=ImageUtils.decompressImage(dbImageData.get().getUploadLogo());
 	        return images;
 	    }
 
@@ -139,12 +140,11 @@ public class CompanyService {
         if (existingCompanyOptional.isPresent()) {
         	CompanyEntity existingCompany = existingCompanyOptional.get();
         	existingCompany.setCompanyName(companyDto.getCompanyName());
-        	existingCompany.setCompanyType(companyDto.getCompanyType());
-        	existingCompany.setLegalOrTradingName(companyDto.getLegalOrTradingName());
         	existingCompany.setContactNumber(companyDto.getContactNumber());
         	existingCompany.setEmail(companyDto.getEmail());
-        	existingCompany.setWebsite(companyDto.getWebsite());
-        	existingCompany.setAddress(companyDto.getAddress());
+        	existingCompany.setCin(companyDto.getCin());
+        	existingCompany.setGst(companyDto.getGst());
+        	existingCompany.setUan(companyDto.getUan());
             modelMapper.map(companyDto, existingCompanyOptional);
             CompanyEntity updatedCompany = companyRepository.save(existingCompany);
             logger.info("Updated company with ID: {}", updatedCompany.getCompanyId());

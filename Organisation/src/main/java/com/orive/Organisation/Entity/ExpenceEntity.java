@@ -1,5 +1,6 @@
 package com.orive.Organisation.Entity;
 
+import java.util.Date;
 import java.util.List;
 
 import jakarta.persistence.Column;
@@ -32,24 +33,15 @@ public class ExpenceEntity {
 	@Column(name = "expence_type")
 	private String expenceType;
 	
-	@Column(name = "purchase_date")
-	private String purchaseDate;
+	@Column(name = "created_date")
+	private Date createdDate;
 	
-	@Column(name = "amount")
-	private Long amount;
+	@Column(name = "total")
+	private Date total;
 	
-	@Column(name = "purchase_by")
-	private String purchaseBy;
-	
-	@Column(name = "bill_copy")
-	private String  billCopy;
-	
-	@Column(name = "remarks")
-	private String remarks;
-	
-	@Column(name = "status")
-	private String status;
-	
-	@Column(name = "approved_by")
-	private String approvedBy;
+//	@Column(name = "status")
+//	private String status;
+//	
+//	@Column(name = "approved_by")
+//	private String approvedBy;
 }

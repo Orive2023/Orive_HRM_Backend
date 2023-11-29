@@ -1,5 +1,7 @@
 package com.orive.Organisation.Entity;
 
+import java.util.Date;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -39,9 +41,12 @@ public class DepartmentEntity {
 	@Column(name = "department_head")
 	private String departmentHead;
 	
-	@Column(name = "status")
-	private String status;
+	@Column(name = "created_date")
+	private Date createdDate;
 	
-	@Column(name = "approved_by")
-	private String approvedBy;
+//	@Column(name = "status")
+//	private String status;
+//	
+//	@Column(name = "approved_by")
+//	private String approvedBy;
 }

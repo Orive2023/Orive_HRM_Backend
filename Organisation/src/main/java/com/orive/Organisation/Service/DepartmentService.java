@@ -62,9 +62,7 @@ public class DepartmentService {
         if (existingDepartmentOptional.isPresent()) {
         	DepartmentEntity existingDepartment = existingDepartmentOptional.get();
         	existingDepartment.setDepartmentName(departmentDto.getDepartmentName());
-        	existingDepartment.setCompanyName(departmentDto.getCompanyName());
         	existingDepartment.setLocationName(departmentDto.getLocationName());
-        	existingDepartment.setDepartmentHead(departmentDto.getDepartmentHead());
             modelMapper.map(departmentDto, existingDepartmentOptional);
             DepartmentEntity updatedDepartment= departmentRepository.save(existingDepartment);
             logger.info("Updated Department with ID: {}", updatedDepartment.getDepartmentId());

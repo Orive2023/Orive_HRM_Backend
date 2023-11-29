@@ -1,5 +1,6 @@
 package com.orive.Organisation.Dto;
 
+import java.util.Date;
 import java.util.List;
 
 import jakarta.persistence.Column;
@@ -19,11 +20,12 @@ public class ExpenceDto {
 
     private Long expenceId;
 	private String expenceType;
-	private String purchaseDate;
-	private Long amount;
-	private String purchaseBy;
-//	private String billCopy;
-	private String remarks;
-	private String status;
-	private String approvedBy;
+	private Date createdDate;
+	private Date total;
+	
+//	@Column(name = "status")
+//	private String status;
+//	
+//	@Column(name = "approved_by")
+//	private String approvedBy;
 }

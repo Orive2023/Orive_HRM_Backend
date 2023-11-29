@@ -33,8 +33,8 @@ public class CompanyEntity {
 	@Column(name = "company_name")
 	private String companyName;
 	
-	@Column(name = "income_tax_number")
-	private String incomeTaxNumber;
+//	@Column(name = "income_tax_number")
+//	private String incomeTaxNumber;
 	
 	@Column(name = "company_type")
 	private String companyType;
@@ -78,16 +78,16 @@ public class CompanyEntity {
 	@Column(name = "uan")
 	private String uan;
 	
-	@Column(name = "date")
-	private Date date;
+	@Column(name = "created_date")
+	private Date createdDate;
 	
-	@Column(name = "status")
-	private String status;
-	
-	@Column(name = "approved_by")
-	private String approvedBy;
+//	@Column(name = "status")
+//	private String status;
+//	
+//	@Column(name = "approved_by")
+//	private String approvedBy;
 	
 	@Lob
-	@Column(name = "company_logo",length = 100000)
-	private byte[] companyLogo;
+	@Column(name = "upload_logo",length = 100000)
+	private byte[] uploadLogo;
 }

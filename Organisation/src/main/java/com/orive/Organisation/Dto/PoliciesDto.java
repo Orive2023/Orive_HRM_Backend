@@ -1,6 +1,9 @@
 package com.orive.Organisation.Dto;
 
+import java.util.Date;
 import java.util.List;
+
+import org.springframework.web.multipart.MultipartFile;
 
 import jakarta.persistence.Column;
 import lombok.AllArgsConstructor;
@@ -18,10 +21,12 @@ import lombok.ToString;
 public class PoliciesDto {
 
 	
-	private Long policiesId;
+    private Long policiesId;
 	private String companyName;
 	private String title;
 	private String description;
-	private String status;
-	private String approvedBy;
+	private Date createdDate;
+	private MultipartFile uploadPdf;
+//	private String status;
+//	private String approvedBy;
 }

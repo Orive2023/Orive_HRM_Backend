@@ -1,7 +1,5 @@
 package com.orive.Organisation.Dto;
 
-import java.util.Date;
-
 import jakarta.persistence.Column;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -14,12 +12,11 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class DesignationDto {
+public class ExpenseListDto {
 
-	private Long designationId;
-	private String departmentName;
-	private String designationName;
-	private Date createdDate;
-//	private String status;
-//	private String approvedBy;
+    private Long expenceListId;
+	private String purchaseDate;
+	private String description;
+	private String purchasedBy;
+	private Long amount;
 }

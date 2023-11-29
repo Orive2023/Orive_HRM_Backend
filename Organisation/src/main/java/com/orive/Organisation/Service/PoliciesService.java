@@ -1,5 +1,7 @@
 package com.orive.Organisation.Service;
 
+import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -9,6 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.orive.Organisation.Dto.PoliciesDto;
 import com.orive.Organisation.Entity.PoliciesEntity;
@@ -35,6 +38,26 @@ public class PoliciesService {
         logger.info("Created Policies with ID: {}", savedPolicies.getPoliciesId());
         return convertToDTO(savedPolicies);
     }
+	
+	
+//	public String uploadPdf(
+//			String companyName,
+//			String title,
+//			String description,
+//			Date createdDate,
+//			MultipartFile file) throws IOException {
+//		
+//		PoliciesEntity pdfData = policiesRepository.save(PoliciesEntity.builder()
+//				.companyName(companyName)
+//				.title(title)
+//				.description(description)
+//				.createdDate(createdDate)
+//				.uploadPdf(pdfU)
+//				)
+//	}
+//			
+	
+	
 
     // Read
     public List<PoliciesDto> getAllPolicies() {
@@ -61,7 +84,6 @@ public class PoliciesService {
         Optional<PoliciesEntity> existingPoliciesOptional = policiesRepository.findById(policiesId);
         if (existingPoliciesOptional.isPresent()) {
         	PoliciesEntity existingPolicies = existingPoliciesOptional.get();
-        	existingPolicies.setCompanyName(policiesDto.getCompanyName());
         	existingPolicies.setTitle(policiesDto.getTitle());
             modelMapper.map(policiesDto, existingPoliciesOptional);
             PoliciesEntity updatedPolicies = policiesRepository.save(existingPolicies);

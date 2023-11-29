@@ -57,7 +57,6 @@ public class DesignationService {
         Optional<DesignationEntity> existingDesignationOptional = designationRepository.findById(designationId);
         if (existingDesignationOptional.isPresent()) {
         	DesignationEntity existingDesignation = existingDesignationOptional.get();
-        	existingDesignation.setDepartmentName(designationDto.getDepartmentName());
         	existingDesignation.setDesignationName(designationDto.getDesignationName());
             modelMapper.map(designationDto, existingDesignationOptional);
             DesignationEntity updatedDesignation = designationRepository.save(existingDesignation);

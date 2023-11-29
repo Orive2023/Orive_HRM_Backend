@@ -2,6 +2,7 @@ package com.orive.Organisation.Entity;
 
 
 
+import java.util.Date;
 import java.util.List;
 
 import jakarta.persistence.Column;
@@ -52,12 +53,16 @@ public class AnnoucementEntity {
 	@Column(name = "summary")
 	private String summary;
 	
-	@Column(name = "description")
+	
+	@Column(name = "description",length = 100000)
 	private String description;
 	
-	@Column(name = "status")
-	private String status;
+	@Column(name = "created_date")
+	private Date createdDate;
 	
-	@Column(name = "approved_by")
-	private String approvedBy;
+//	@Column(name = "status")
+//	private String status;
+//	
+//	@Column(name = "approved_by")
+//	private String approvedBy;
 }

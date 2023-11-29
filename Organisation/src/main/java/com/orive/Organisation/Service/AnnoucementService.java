@@ -63,9 +63,10 @@ public class AnnoucementService {
         Optional<AnnoucementEntity> existingAnnoucementOptional = annoucementsRepository.findById(announcementId);
         if (existingAnnoucementOptional.isPresent()) {
         	AnnoucementEntity existingAnnoucement = existingAnnoucementOptional.get();
-        	existingAnnoucement.setLocationName(annoucementDto.getLocationName());
-        	existingAnnoucement.setCompanyName(annoucementDto.getCompanyName());
-        	existingAnnoucement.setDepartmentName(annoucementDto.getDepartmentName());
+        	existingAnnoucement.setTitle(annoucementDto.getTitle());
+        	existingAnnoucement.setStartDate(annoucementDto.getStartDate());
+        	existingAnnoucement.setEndDate(annoucementDto.getEndDate());
+        	existingAnnoucement.setDescription(annoucementDto.getDescription());
             modelMapper.map(annoucementDto, existingAnnoucementOptional);
             AnnoucementEntity updatedAnnoucement = annoucementsRepository.save(existingAnnoucement);
             logger.info("Updated Annoucement with ID: {}", updatedAnnoucement.getAnnouncementsId());
