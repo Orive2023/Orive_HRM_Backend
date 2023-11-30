@@ -45,7 +45,7 @@ public class PoliciesEntity {
 	private Date createdDate;
 	
 	@Column(name = "upload_pdf")
-	private MultipartFile uploadPdf;
+	private String uploadPdf;
 	
 //	@Column(name = "status")
 //	private String status;

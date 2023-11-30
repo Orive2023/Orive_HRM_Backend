@@ -11,7 +11,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.orive.Organisation.Dto.ExpenceDto;
+import com.orive.Organisation.Dto.ExpenseListDto;
 import com.orive.Organisation.Entity.ExpenceEntity;
+import com.orive.Organisation.Entity.ExpenseListEntity;
+import com.orive.Organisation.Exceptions.ResourceNotFoundException;
 import com.orive.Organisation.Repository.ExpenceRepository;
 
 
@@ -59,18 +62,33 @@ private static final Logger logger=LoggerFactory.getLogger(ExpenceService.class)
  // Update list by id
     public ExpenceDto updateExpence(Long expenceId, ExpenceDto expenceDto) {
         Optional<ExpenceEntity> existingExpenceOptional = expenceRepository.findById(expenceId);
+
         if (existingExpenceOptional.isPresent()) {
-        	ExpenceEntity existingExpence = existingExpenceOptional.get();
-//        	existingExpence.setPurchaseDate(expenceDto.getPurchaseDate());
-//        	existingExpence.setPurchaseBy(expenceDto.getPurchaseBy());
-//        	existingExpence.setAmount(expenceDto.getAmount());
-            modelMapper.map(expenceDto, existingExpenceOptional);
+            ExpenceEntity existingExpence = existingExpenceOptional.get();
+
+            // Assuming there is only one ExpenseListEntity in the list for simplicity
+            List<ExpenseListDto> expenseListDtos = expenceDto.getExpenseListEntities();
+            if (expenseListDtos != null && !expenseListDtos.isEmpty()) {
+                ExpenseListDto expenseListDto = expenseListDtos.get(0);
+
+                // Update fields in associated ExpenseListEntity
+                List<ExpenseListEntity> expenseListEntities = existingExpence.getExpenseListEntities();
+                if (expenseListEntities != null && !expenseListEntities.isEmpty()) {
+                    ExpenseListEntity expenseListEntity = expenseListEntities.get(0);
+                    expenseListEntity.setPurchaseDate(expenseListDto.getPurchaseDate());
+                    expenseListEntity.setDescription(expenseListDto.getDescription());
+                    expenseListEntity.setPurchasedBy(expenseListDto.getPurchasedBy());
+                    expenseListEntity.setAmount(expenseListDto.getAmount());
+                }
+            }
+
             ExpenceEntity updatedExpence = expenceRepository.save(existingExpence);
             logger.info("Updated Expence with ID: {}", updatedExpence.getExpenceId());
+
             return convertToDTO(updatedExpence);
         } else {
             logger.warn("Expence with ID {} not found for update", expenceId);
-            return null;
+            throw new ResourceNotFoundException("Expence with ID " + expenceId + " not found");
         }
     }
     

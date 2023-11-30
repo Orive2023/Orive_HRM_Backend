@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
-	@ExceptionHandler(ResourceNotFounException.class)
-	public ResponseEntity<Map<String, Object>> notFoundHandler(ResourceNotFounException exception)
+	@ExceptionHandler(ResourceNotFoundException.class)
+	public ResponseEntity<Map<String, Object>> notFoundHandler(ResourceNotFoundException exception)
 	{
 		Map map = new HashMap();
 		map.put("message", exception.getMessage());

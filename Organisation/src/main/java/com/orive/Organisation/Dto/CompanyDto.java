@@ -42,7 +42,7 @@ public class CompanyDto {
 	private String cin;
 	private String gst;
 	private String uan;
-	private Date createdDate;
+	private String createdDate;
 //	private String status;
 //	private String approvedBy;
 	private byte[] uploadLogo;

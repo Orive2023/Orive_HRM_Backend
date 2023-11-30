@@ -1,6 +1,7 @@
 package com.orive.Organisation.Service;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -15,10 +16,14 @@ import org.springframework.stereotype.Service;
 
 import com.orive.Organisation.Dto.CompanyDto;
 import com.orive.Organisation.Entity.CompanyEntity;
+import com.orive.Organisation.Entity.LocationEntity;
+import com.orive.Organisation.Exceptions.ResourceNotFoundException;
 import com.orive.Organisation.Repository.CompanyRepository;
 import com.orive.Organisation.Util.ImageUtils;
 
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
+
 
 @Service
 public class CompanyService {
@@ -31,36 +36,11 @@ public class CompanyService {
 	@Autowired
 	private ModelMapper modelMapper;
 	
+	@Autowired
+	private RestTemplate restTemplate;
+	
 	
 	// Create
-//	public CompanyDto createCompany(MultipartFile file, CompanyDto companyDto) {
-//	    try {
-//	        // Convert CompanyDto to CompanyEntity
-//	        CompanyEntity companyEntity = convertToEntity(companyDto);
-//
-//	        // Compress and set the company logo from the MultipartFile
-//	        companyEntity.setCompanyLogo(ImageUtils.compressImage(file.getBytes()));
-//
-//	        // Save the company entity with the compressed logo
-//	        CompanyEntity savedCompany = companyRepository.save(companyEntity);
-//
-//	        if (savedCompany != null) {
-//	            // Log the creation of the company
-//	            logger.info("Created Company with ID: {}", savedCompany.getCompanyId());
-//
-//	            // Convert the saved entity back to DTO for response
-//	            return convertToDTO(savedCompany);
-//	        } else {
-//	            // Handle the case where the company is not saved successfully
-//	            return null;
-//	        }
-//	    } catch (IOException e) {
-//	        // Handle IOException (e.g., if there's an issue reading or compressing the image)
-//	        logger.error("Error creating company with logo", e);
-//	        return null;
-//	    }
-//	}
-	
 	 public String uploadImage(
 			 String companyName,
 			 String companyType,
@@ -77,7 +57,7 @@ public class CompanyService {
 			 String cin,
 			 String gst,
 			 String uan,
-			 Date createdDate,
+			 String createdDate,
 //			 String status,
 //			 String approvedBy,
 			 MultipartFile file) throws IOException {
@@ -107,6 +87,8 @@ public class CompanyService {
 	        }
 	        return null;
 	    }
+	 
+	 //Download Logo
 	 public byte[] downloadImage(String companyName){
 	        Optional<CompanyEntity> dbImageData = companyRepository.findByCompanyName(companyName);
 	        byte[] images=ImageUtils.decompressImage(dbImageData.get().getUploadLogo());
@@ -124,14 +106,17 @@ public class CompanyService {
     }
     
     //get by CompanyId
-    public Optional<CompanyDto> getCompanyById(Long companyId) {
-        Optional<CompanyEntity> company = companyRepository.findById(companyId);
-        if (company.isPresent()) {
-            return Optional.of(convertToDTO(company.get()));
-        } else {
-            logger.warn("Company with ID {} not found", companyId);
-            return Optional.empty();
-        }
+    public CompanyEntity getCompanyById(Long companyId) {
+        CompanyEntity company = companyRepository.findById(companyId)
+                .orElseThrow(() -> {
+                    logger.warn("Company with ID {} not found", companyId);
+                    return new ResourceNotFoundException("Company with ID " + companyId + " not found");
+                });
+//        ArrayList<LocationEntity> ratingsOfUser = restTemplate.getForObject("http://localhost:5000/candidateProfile/getcareer/" + company.get(), ArrayList.class);
+//        logger.info("{} ", ratingsOfUser);
+//        company.setLocationEntities(ratingsOfUser);
+
+        return company;
     }
     
  // Update list by id
@@ -166,6 +151,27 @@ public class CompanyService {
 	 {
 		 return companyRepository.count();
 	 }
+//    //ALL DETAILS BY COMAPNYNAME
+//    public List<CompanyEntity> getAllLocationsByCompanyName(String companyName) {
+//    	logger.info("Request to get all Company for companyname: " + companyName);
+//        List<CompanyEntity> locations = companyRepository.findAllByCompanyName(companyName);
+//
+//        if (locations.isEmpty()) {
+//        	logger.warn("No Company found for companyname: " + companyName);
+//            throw new ResourceNotFoundException("No Company found for companyname: " + companyName);
+//        } else {
+//        	logger.info("Retrieved " + locations.size() + " locations for companyname: " + companyName);
+//        }
+//
+//        return locations;
+//    }
+    
+    
+    
+    
+    
+    
+    
     
 	// Helper method to convert CompanyDTo to CompanyEntity
     private CompanyEntity convertToEntity(CompanyDto companyDto)

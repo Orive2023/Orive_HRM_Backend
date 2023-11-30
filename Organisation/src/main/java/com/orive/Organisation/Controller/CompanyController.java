@@ -22,10 +22,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-//import org.springframework.security.access.prepost.PreAuthorize;
-import com.orive.Organisation.Dto.CompanyDto;
 import org.springframework.web.multipart.MultipartFile;
 
+//import org.springframework.security.access.prepost.PreAuthorize;
+import com.orive.Organisation.Dto.CompanyDto;
+import com.orive.Organisation.Dto.LocationDto;
+import com.orive.Organisation.Entity.CompanyEntity;
+import com.orive.Organisation.Exceptions.ResourceNotFoundException;
 import com.orive.Organisation.Service.CompanyService;
 @RestController
 @RequestMapping(value = "company")
@@ -57,7 +60,7 @@ public class CompanyController {
               @RequestParam("cin") String cin,
               @RequestParam("gst") String gst,
               @RequestParam("uan") String uan,
-              @RequestParam("createdDate") Date createdDate,
+              @RequestParam("createdDate") String createdDate,
 //              @RequestParam("status")  String status,
 //              @RequestParam("approvedBy") String approvedBy,
               @RequestParam("uploadLogo") MultipartFile file) {
@@ -97,14 +100,14 @@ public class CompanyController {
 
       // Get company by ID
       @GetMapping("/get/{companyId}")
-      public ResponseEntity<CompanyDto> getCompanyById(@PathVariable Long companyId) {
-          Optional<CompanyDto> company = companyService.getCompanyById(companyId);
-          if (company.isPresent()) {
-              logger.info("Retrieved compay with ID: {}", companyId);
-              return new ResponseEntity<>(company.get(), HttpStatus.OK);
-          } else {
-              logger.warn("company with ID {} not found", companyId);
-              return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+      public ResponseEntity<CompanyEntity> getCompanyById(@PathVariable Long companyId) {
+          try {
+              CompanyEntity company = companyService.getCompanyById(companyId);
+              return ResponseEntity.ok(company);
+          } catch (ResourceNotFoundException e) {
+              return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+          } catch (Exception e) {
+              return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
           }
       }
 

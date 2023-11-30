@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import com.orive.Organisation.Dto.LocationDto;
 import com.orive.Organisation.Entity.LocationEntity;
+import com.orive.Organisation.Exceptions.ResourceNotFoundException;
 import com.orive.Organisation.Repository.LocationRepository;
 
 @Service
@@ -83,6 +84,34 @@ public class LocationService {
 	 {
 		 return locationRepository.count();
 	 }
+    
+    //find all details by CompanyName
+    public List<LocationEntity> getAllLocationsByCompanyName(String companyName) {
+    	logger.info("Request to get all locations for company: " + companyName);
+        List<LocationEntity> locations = locationRepository.findAllByCompanyName(companyName);
+
+        if (locations.isEmpty()) {
+        	logger.warn("No locations found for company: " + companyName);
+            throw new ResourceNotFoundException("No locations found for company: " + companyName);
+        } else {
+        	logger.info("Retrieved " + locations.size() + " locations for company: " + companyName);
+        }
+
+        return locations;
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
 	// Helper method to convert LocationDTo to LocationEntity
     private LocationEntity convertToEntity(LocationDto locationDto)

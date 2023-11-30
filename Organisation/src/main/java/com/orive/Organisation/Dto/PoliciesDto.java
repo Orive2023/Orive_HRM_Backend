@@ -26,7 +26,7 @@ public class PoliciesDto {
 	private String title;
 	private String description;
 	private Date createdDate;
-	private MultipartFile uploadPdf;
+	private String uploadPdf;
 //	private String status;
 //	private String approvedBy;
 }

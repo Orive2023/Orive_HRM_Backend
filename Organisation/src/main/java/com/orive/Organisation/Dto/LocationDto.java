@@ -19,7 +19,6 @@ public class LocationDto {
     private Long locationId;
 	private String companyName;
 	private String locationHead;
-	private String location;
 	private String locationName;
 	private String address;	
 	private String email;

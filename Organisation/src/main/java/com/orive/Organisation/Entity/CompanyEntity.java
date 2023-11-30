@@ -1,6 +1,8 @@
 package com.orive.Organisation.Entity;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -9,6 +11,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Lob;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -33,8 +36,6 @@ public class CompanyEntity {
 	@Column(name = "company_name")
 	private String companyName;
 	
-//	@Column(name = "income_tax_number")
-//	private String incomeTaxNumber;
 	
 	@Column(name = "company_type")
 	private String companyType;
@@ -79,7 +80,7 @@ public class CompanyEntity {
 	private String uan;
 	
 	@Column(name = "created_date")
-	private Date createdDate;
+	private String createdDate;
 	
 //	@Column(name = "status")
 //	private String status;
@@ -90,4 +91,7 @@ public class CompanyEntity {
 	@Lob
 	@Column(name = "upload_logo",length = 100000)
 	private byte[] uploadLogo;
+	
+//	@Transient
+//	private List<LocationEntity> locationEntities=new ArrayList<>();
 }

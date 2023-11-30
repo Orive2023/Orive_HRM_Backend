@@ -35,9 +35,6 @@ public class LocationEntity {
 	@Column(name = "location_head")
 	private String locationHead;
 	
-	@Column(name = "location")
-	private String location;
-	
 	@Column(name = "location_name")
 	private String locationName;
 	
