@@ -1,5 +1,7 @@
 package com.orive.TimeSheet.Entity;
 
+import java.util.Date;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -25,8 +27,11 @@ public class OfficeShiftsEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long OfficeShiftsId;
 	
-	@Column(name = "shift_name")
-	private String shiftName;
+	@Column(name = "created_date")
+	private Date createdDate;
+	
+	@Column(name = "day")
+	private Date day;
 	
 	@Column(name = "monday")
 	private String monday;

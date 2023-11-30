@@ -61,9 +61,8 @@ public class TerminationsService {
         if (existingTerminationsOptional.isPresent()) {
         	TerminationsEntity existingTerminations = existingTerminationsOptional.get();
         	existingTerminations.setEmployeeName(terminationsDto.getEmployeeName());
-        	existingTerminations.setReturnOfCompanyProperty(terminationsDto.getReturnOfCompanyProperty());
-        	existingTerminations.setNumberOfUnusedVacation(terminationsDto.getNumberOfUnusedVacation());
-        	existingTerminations.setReasonForTermination(terminationsDto.getReasonForTermination());
+        	existingTerminations.setTerminateDate(terminationsDto.getTerminateDate());
+        	existingTerminations.setTerminatedBy(terminationsDto.getTerminatedBy());
             modelMapper.map(terminationsDto, existingTerminations);
             TerminationsEntity updatedTerminations = terminationsRepository.save(existingTerminations);
             logger.info("Updated Terminations with ID: {}", updatedTerminations.getTerminationId());

@@ -58,8 +58,8 @@ private static final Logger logger=LoggerFactory.getLogger(ComplaintsService.cla
         Optional<ComplaintsEntity> existingComplaintsOptional = complaintsRepository.findById(complaintsId);
         if (existingComplaintsOptional.isPresent()) {
         	ComplaintsEntity existingComplaints = existingComplaintsOptional.get();
-        	existingComplaints.setComplaintAgainstEmployee(complaintsDto.getComplaintAgainstEmployee());
-        	existingComplaints.setComplaintTitle(complaintsDto.getComplaintTitle());
+        	existingComplaints.setComplaintFrom(complaintsDto.getComplaintFrom());
+        	existingComplaints.setComplaintAgainst(complaintsDto.getComplaintAgainst());
             modelMapper.map(complaintsDto, existingComplaintsOptional);
             ComplaintsEntity updatedComplaints = complaintsRepository.save(existingComplaints);
             logger.info("Updated Complaints with ID: {}", updatedComplaints.getComplaintsId());

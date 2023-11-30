@@ -1,5 +1,7 @@
 package com.orive.Employee.Dto;
 
+import java.util.Date;
+
 import jakarta.persistence.Column;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -16,7 +18,7 @@ public class EmployeesExitDto {
 	
 	private Long employeeExitId;
 	private String employeeToExit;
-	private String exitDate;
+	private Date exitDate;
 	private String typeOfExit;
 	private String exitInterview;
 	private String inactivateEmployeeAccount;

@@ -1,5 +1,7 @@
 package com.orive.Employee.Dto;
 
+import java.util.Date;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -19,8 +21,8 @@ public class ResignationsDto {
 	
     private Long resignationId;
 	private String employeeName;
-	private String noticeDate;
-	private String resignationDate;
+	private Date noticeDate;
+	private Date resignationDate;
 	private String resignationReason;
 
 }

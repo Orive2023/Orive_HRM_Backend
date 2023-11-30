@@ -37,7 +37,7 @@ public class OfficeShiftsController {
       @PostMapping("/create/officeShifts")
       public ResponseEntity<OfficeShiftsDto> createOfficeShifts(@RequestBody OfficeShiftsDto officeShiftsDto) {
     	  OfficeShiftsDto createdOfficeShifts = officeShiftsService.createOfficeShifts(officeShiftsDto);
-          logger.info("Created OfficeShifts with name: {}", createdOfficeShifts.getShiftName());
+          logger.info("Created OfficeShifts with name: {}", createdOfficeShifts.getOfficeShiftsId());
           return new ResponseEntity<>(createdOfficeShifts, HttpStatus.CREATED);
       }
 

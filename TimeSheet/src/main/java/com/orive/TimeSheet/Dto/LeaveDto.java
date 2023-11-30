@@ -1,5 +1,8 @@
 package com.orive.TimeSheet.Dto;
 
+import java.util.Date;
+
+import jakarta.persistence.Column;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,9 +18,10 @@ public class LeaveDto {
 
     private Long leaveId;
 	private String leaveType;
-	private String startDate;
-	private String endDate;
+	private Date startDate;
+	private Date endDate;
 	private String employeeName;
 	private String leaveReason;
-	private String remarks;
+	private String Description;
+	private String appliedOn;
 }

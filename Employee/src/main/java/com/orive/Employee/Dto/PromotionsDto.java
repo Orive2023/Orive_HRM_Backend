@@ -1,5 +1,7 @@
 package com.orive.Employee.Dto;
 
+import java.util.Date;
+
 import jakarta.persistence.Column;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -17,7 +19,7 @@ public class PromotionsDto {
 	    private Long promotionsId;
 		private String employeeName;
 		private String promotionTitle;
-		private String promotionDate;
+		private Date promotionDate;
 		private String description;
 
 }

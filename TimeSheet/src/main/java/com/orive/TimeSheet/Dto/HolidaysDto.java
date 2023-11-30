@@ -1,5 +1,8 @@
 package com.orive.TimeSheet.Dto;
 
+import java.util.Date;
+
+import jakarta.persistence.Column;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,8 +18,7 @@ public class HolidaysDto {
 
     private Long holidaysId;
 	private String eventName;
-	private String startDate;
-	private String endDate;
+	private Date startDate;
+	private Date endDate;
 	private String description;
-	private String status;
 }

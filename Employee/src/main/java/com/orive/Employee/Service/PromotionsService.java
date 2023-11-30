@@ -63,6 +63,7 @@ public class PromotionsService {
         	PromotionsEntity existingPromotions = existingPromotionsOptional.get();
         	existingPromotions.setEmployeeName(promotionsDto.getEmployeeName());
         	existingPromotions.setPromotionTitle(promotionsDto.getPromotionTitle());
+        	existingPromotions.setPromotionDate(promotionsDto.getPromotionDate());
             modelMapper.map(promotionsDto, existingPromotionsOptional);
             PromotionsEntity updatedPromotions = promotionsRepository.save(existingPromotions);
             logger.info("Updated Promotions with ID: {}", updatedPromotions.getPromotionsId());

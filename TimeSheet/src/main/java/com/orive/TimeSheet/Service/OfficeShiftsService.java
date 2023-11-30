@@ -61,7 +61,13 @@ public class OfficeShiftsService {
 	        Optional<OfficeShiftsEntity> existingofficeShiftsOptional = officeShiftsRepository.findById(OfficeShiftsId);
 	        if (existingofficeShiftsOptional.isPresent()) {
 	        	OfficeShiftsEntity existingOfficeShifts = existingofficeShiftsOptional.get();
-	            existingOfficeShifts.setShiftName(officeShiftsDto.getShiftName());
+	           existingOfficeShifts.setMonday(officeShiftsDto.getMonday());
+	           existingOfficeShifts.setTuesday(officeShiftsDto.getTuesday());
+	           existingOfficeShifts.setWednesday(officeShiftsDto.getWednesday());
+	           existingOfficeShifts.setThursday(officeShiftsDto.getThursday());
+	           existingOfficeShifts.setFriday(officeShiftsDto.getFriday());
+	           existingOfficeShifts.setSaturday(officeShiftsDto.getSaturday());
+	           existingOfficeShifts.setSunday(officeShiftsDto.getSunday());
 	        	modelMapper.map(officeShiftsDto, existingofficeShiftsOptional);
 	            OfficeShiftsEntity updatedOfficeShifts = officeShiftsRepository.save(existingOfficeShifts);
 	            logger.info("Updated OfficeShifts with ID: {}", updatedOfficeShifts.getOfficeShiftsId());

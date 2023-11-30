@@ -1,5 +1,7 @@
 package com.orive.Employee.Dto;
 
+import java.util.Date;
+
 import jakarta.persistence.Column;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -14,12 +16,12 @@ import lombok.ToString;
 @NoArgsConstructor
 public class WarningsDto {
 	
-	private Long warningsId;
+    private Long warningsId;
 	private String warningToEmployee;
 	private String warningType;
 	private String subject;
 	private String warningByEmployee;
-	private String warningDate;
+	private Date warningDate;
 	private String description;
 
 }

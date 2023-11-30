@@ -1,5 +1,8 @@
 package com.orive.Employee.Dto;
 
+import java.util.Date;
+
+import jakarta.persistence.Column;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,9 +16,10 @@ import lombok.ToString;
 @ToString
 public class TransfersDto {
 
-	private Long transferId;
+    private Long transferId;
 	private String employeeName;
-	private String transferDate;
-	private String TransferToDepartment;
-	private String transferToLocation;
+	private Date transferDate;
+	private String departmentName;
+	private String locationName;
+	private String description;
 }

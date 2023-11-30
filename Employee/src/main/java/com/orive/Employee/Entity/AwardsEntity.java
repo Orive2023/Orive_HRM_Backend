@@ -1,5 +1,7 @@
 package com.orive.Employee.Entity;
 
+import java.util.Date;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -27,18 +29,21 @@ public class AwardsEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long awardId;
 	
-	@Column(name = "employee_name")
-	private String employeeName;
-	
 	@Column(name = "award_name")
 	private String awardName;
 	
-	@Column(name = "gift")
-	private String gift;
+	@Column(name = "award_description")
+	private String awardDescription;
 	
-	@Column(name = "cash_price")
-	private Long cashPrice;
+	@Column(name = "gift_item")
+	private String giftItem;
 	
-	@Column(name = "award_date")
-	private String awardDate;
+	@Column(name = "date")
+	private Date date;
+	
+	@Column(name = "employee_name")
+	private String employeeName;
+	
+	@Column(name = "award_by")
+	private String awardBy;
 }

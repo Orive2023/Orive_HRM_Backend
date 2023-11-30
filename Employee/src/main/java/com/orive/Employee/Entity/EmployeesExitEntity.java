@@ -1,5 +1,7 @@
 package com.orive.Employee.Entity;
 
+import java.util.Date;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -31,7 +33,7 @@ public class EmployeesExitEntity {
 	private String employeeToExit;
 	
 	@Column(name = "exit_date")
-	private String exitDate;
+	private Date exitDate;
 	
 	@Column(name = "type_of_exit")
 	private String typeOfExit;

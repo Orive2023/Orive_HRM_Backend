@@ -1,5 +1,7 @@
 package com.orive.Employee.Dto;
 
+import java.util.Date;
+
 import jakarta.persistence.Column;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -14,11 +16,11 @@ import lombok.ToString;
 @NoArgsConstructor
 public class ComplaintsDto {
 		
-	private Long complaintsId;
-	private String complaintFromEmployee;
+    private Long complaintsId;
+	private String complaintFrom;
 	private String complaintTitle;
-	private String complaintDate;
-	private String complaintAgainstEmployee;
+	private Date complaintDate;
+	private String complaintAgainst;
 	private String description;
 
 }

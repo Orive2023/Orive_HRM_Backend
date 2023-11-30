@@ -1,5 +1,7 @@
 package com.orive.Employee.Dto;
 
+import java.util.Date;
+
 import jakarta.persistence.Column;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -16,8 +18,8 @@ public class TravelsDto {
 	
 	    private Long travelId;
 		private String employeeName;
-		private String startDate;
-		private String endDate;
+		private Date startDate;
+		private Date endDate;
 		private String purposeOfVisit;
 		private String placeOfVisit;
 		private String travelMode;
@@ -25,4 +27,5 @@ public class TravelsDto {
 		private double expectedTravelBudget;
 		private double actualTravelBudget;
 		private String description;
+		private Date createdDate;
 }

@@ -59,10 +59,9 @@ public class EmployeesService {
 	        Optional<EmployeesEntity> existingEmployeesOptional = employeesRepository.findById(employeeId);
 	        if (existingEmployeesOptional.isPresent()) {
 	        	EmployeesEntity existingEmployees = existingEmployeesOptional.get();
-	        	existingEmployees.setEmailAddress(employeesDto.getEmailAddress());
-	        	existingEmployees.setMaidenName(employeesDto.getMaidenName());
+	        	existingEmployees.setEmployeeName(employeesDto.getEmployeeName());
 	        	existingEmployees.setPhone(employeesDto.getPhone());
-	        	existingEmployees.setEmployeeType(employeesDto.getEmployeeType());
+	        	existingEmployees.setAccountNumber(employeesDto.getAccountNumber());
 	            modelMapper.map(employeesDto, existingEmployeesOptional);
 	            EmployeesEntity updatedEmployees = employeesRepository.save(existingEmployees);
 	            logger.info("Updated Employees with ID: {}", updatedEmployees.getEmployeeId());

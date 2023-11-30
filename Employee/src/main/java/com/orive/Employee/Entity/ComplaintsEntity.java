@@ -1,5 +1,7 @@
 package com.orive.Employee.Entity;
 
+import java.util.Date;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -28,19 +30,18 @@ public class ComplaintsEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long complaintsId;
 	
-	@Column(name = "complaint_from_employee")
-	private String complaintFromEmployee;
+	@Column(name = "complaint_from")
+	private String complaintFrom;
 
 	@Column(name = "complaint_title")
 	private String complaintTitle;
 	
 	@Column(name = "complaint_date")
-	private String complaintDate;
+	private Date complaintDate;
 	
-	@Column(name = "complaint_against_employee")
-	private String complaintAgainstEmployee;
+	@Column(name = "complaint_against")
+	private String complaintAgainst;
 	
 	@Column(name = "description")
 	private String description;
-
 }

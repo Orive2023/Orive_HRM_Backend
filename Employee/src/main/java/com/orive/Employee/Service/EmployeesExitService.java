@@ -63,6 +63,7 @@ private static final Logger logger=LoggerFactory.getLogger(EmployeesExitService.
         if (existingEmployeeExitOptional.isPresent()) {
         	EmployeesExitEntity existingEmployeesExit = existingEmployeeExitOptional.get();
         	existingEmployeesExit.setEmployeeToExit(employeesExitDto.getEmployeeToExit());
+        	existingEmployeesExit.setExitDate(employeesExitDto.getExitDate());
         	existingEmployeesExit.setTypeOfExit(employeesExitDto.getTypeOfExit());
             modelMapper.map(employeesExitDto, existingEmployeeExitOptional);
             EmployeesExitEntity updatedEmployeesExit = employeesExitRepository.save(existingEmployeesExit);

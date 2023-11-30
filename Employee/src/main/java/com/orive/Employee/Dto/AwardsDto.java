@@ -1,5 +1,8 @@
 package com.orive.Employee.Dto;
 
+import java.util.Date;
+
+import jakarta.persistence.Column;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,10 +16,11 @@ import lombok.ToString;
 @ToString
 public class AwardsDto {
 
-    private Long awardId;
-	private String employeeName;
+	private Long awardId;
 	private String awardName;
-	private String gift;
-	private Long cashPrice;
-	private String awardDate;
+	private String awardDescription;
+	private String giftItem;
+	private Date date;
+	private String employeeName;
+	private String awardBy;
 }

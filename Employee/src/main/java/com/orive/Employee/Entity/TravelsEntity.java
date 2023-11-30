@@ -1,5 +1,7 @@
 package com.orive.Employee.Entity;
 
+import java.util.Date;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -31,13 +33,11 @@ public class TravelsEntity {
 	@Column(name = "employee_name")
 	private String employeeName;
 	
-
 	@Column(name = "start_date")
-	private String startDate;
-	
+	private Date startDate;
 	
 	@Column(name = "end_date")
-	private String endDate;
+	private Date endDate;
 	
 	@Column(name = "purpose_of_visit")
 	private String purposeOfVisit;
@@ -48,7 +48,6 @@ public class TravelsEntity {
 	@Column(name = "travel_mode")
 	private String travelMode;
 	
-
 	@Column(name = "arrangement_type")
 	private String arrangementType;
 	
@@ -60,5 +59,7 @@ public class TravelsEntity {
 	
 	@Column(name = "description")
 	private String description;
-
+	
+	@Column(name = "created_date")
+	private Date createdDate;
 }

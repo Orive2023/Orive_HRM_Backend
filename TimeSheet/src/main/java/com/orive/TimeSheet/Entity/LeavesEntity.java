@@ -1,5 +1,7 @@
 package com.orive.TimeSheet.Entity;
 
+import java.util.Date;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -29,10 +31,10 @@ public class LeavesEntity {
 	private String leaveType;
 	
 	@Column(name = "start_date")
-	private String startDate;
+	private Date startDate;
 	
 	@Column(name = "end_date")
-	private String endDate;
+	private Date endDate;
 	
 	@Column(name = "employee_name")
 	private String employeeName;
@@ -40,6 +42,9 @@ public class LeavesEntity {
 	@Column(name = "leave_reason")
 	private String leaveReason;
 	
-	@Column(name = "remarks")
-	private String remarks;
+	@Column(name = "Description")
+	private String Description;
+	
+	@Column(name = "applied_on")
+	private String appliedOn;
 }

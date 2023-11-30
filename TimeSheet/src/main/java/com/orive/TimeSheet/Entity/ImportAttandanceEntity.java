@@ -1,12 +1,11 @@
 package com.orive.TimeSheet.Entity;
 
-import java.util.Date;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Lob;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -20,22 +19,14 @@ import lombok.ToString;
 @AllArgsConstructor
 @ToString
 @Entity
-@Table(name = "holidays")
-public class HolidaysEntity {
+@Table(name = "import_attandance")
+public class ImportAttandanceEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long holidaysId;
+	private Long importAttandanceId;
 	
-	@Column(name = "event_name")
-	private String eventName;
-	
-	@Column(name = "start_date")
-	private Date startDate;
-	
-	@Column(name = "end_date")
-	private Date endDate;
-	
-	@Column(name = "description")
-	private String description;
+	@Lob
+	@Column(name = "upload_doc")
+	private byte[] uploadDoc;
 }
