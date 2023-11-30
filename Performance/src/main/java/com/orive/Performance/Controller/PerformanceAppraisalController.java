@@ -23,7 +23,7 @@ import com.orive.Performance.Service.PerformanceAppraisalService;
 
 @RestController
 @RequestMapping(value = "performanceappraisal")
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "http://localhost:3000")
 public class PerformanceAppraisalController {
 
 	

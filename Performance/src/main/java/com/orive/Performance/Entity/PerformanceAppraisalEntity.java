@@ -28,11 +28,11 @@ public class PerformanceAppraisalEntity {
 	@Column(name = "employee_name")
 	private String employeeName;
 	
-	@Column(name = "employee_id_number")
-	private String employeeIdNumber;
+	@Column(name = "employee_id")
+	private String employeeId;
 	
 	@Column(name = "Department_name")
-	private String DepartmentName;
+	private String departmentName;
 		
 	@Column(name = "job_title")
 	private String jobTitle;
@@ -46,6 +46,9 @@ public class PerformanceAppraisalEntity {
 	@Column(name = "quality_of_work_comments")
 	private String qualityOfWorkComments;
 	
+	@Column(name = "quality_of_work_rating_score")
+	private Long qualityOfWorkRatingScore;
+	
 	@Column(name = "job_knowledge_rating")
 	private int jobKnowledgeRating;
 	
@@ -56,7 +59,10 @@ public class PerformanceAppraisalEntity {
 	private int communicationSkillsRating;
 
 	@Column(name = "communication_skills_comments")
-	private String CommunicationSkillsComments;
+	private String communicationSkillsComments;
+	
+	@Column(name = "communicationSkillsScore")
+	private Long communicationSkillsScore;
 	
 	@Column(name = "teamwork_and_collaboration_rating")
 	private int teamworkAndCollaborationRating;
@@ -64,11 +70,17 @@ public class PerformanceAppraisalEntity {
 	@Column(name = "teamwork_and_collaboration_comments")
 	private String teamworkAndCollaborationComments;
 	
+	@Column(name = "teamworkAndCollaborationScore")
+	private Long teamworkAndCollaborationScore;
+	
 	@Column(name = "initiative_and_creativity_rating")
 	private int initiativeAndCreativityRating;
 	
 	@Column(name = "initiative_and_creativity_comments")
 	private String initiativeAndCreativityComments;
+	
+	@Column(name = "initiativeAndCreativityScore")
+	private Long initiativeAndCreativityScore;
 	
 	@Column(name = "punctuality_and_attendance_rating")
 	private int punctualityAndAttendanceRating;
@@ -76,11 +88,17 @@ public class PerformanceAppraisalEntity {
 	@Column(name = "punctuality_and_attendance_comments")
 	private String punctualityAndAttendanceComments;
 	
+	@Column(name = "punctualityAndAttendanceScore")
+	private Long punctualityAndAttendanceScore;
+	
 	@Column(name = "adaptability_rating")
 	private int adaptabilityRating;
 	
 	@Column(name = "adaptability_comments")
 	private String adaptabilityComments;
+	
+	@Column(name = "adaptabilityScore")
+	private Long adaptabilityScore;
 	
 	@Column(name = "overall_rating")
 	private int overallRating;
@@ -88,8 +106,8 @@ public class PerformanceAppraisalEntity {
 	@Column(name = "overall_comments")
 	private String overallComments;
 	
-	@Column(name = "strengths")
-	private String strengths;
+	@Column(name = "overallScore")
+	private Long overallScore;
 	
 	@Column(name = "areas_for_improvement")
 	private String areasForImprovement;
@@ -106,15 +124,4 @@ public class PerformanceAppraisalEntity {
 	@Column(name = "managers_comments")
 	private String managersComments;
 	
-	@Column(name = "employees_signature")
-	private String employeesSignature;
-	
-	@Column(name = "employees_signature_date")
-	private String employeesSignatureDate;
-	
-	@Column(name = "managers_signature")
-	private String managersSignature;
-	
-	@Column(name = "managers_signature_date")
-	private String managersSignatureDate;
 }
