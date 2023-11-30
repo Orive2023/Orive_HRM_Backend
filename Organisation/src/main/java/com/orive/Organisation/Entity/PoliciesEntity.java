@@ -10,6 +10,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Lob;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -42,10 +43,11 @@ public class PoliciesEntity {
 	private String description;
 	
 	@Column(name = "created_date")
-	private Date createdDate;
+	private String createdDate;
 	
-	@Column(name = "upload_pdf")
-	private String uploadPdf;
+	@Lob
+	@Column(name = "upload_pdf", length = 100000)
+	private byte[] uploadPdf;
 	
 //	@Column(name = "status")
 //	private String status;

@@ -25,8 +25,8 @@ public class PoliciesDto {
 	private String companyName;
 	private String title;
 	private String description;
-	private Date createdDate;
-	private String uploadPdf;
+	private String createdDate;
+	private byte[] uploadPdf;
 //	private String status;
 //	private String approvedBy;
 }

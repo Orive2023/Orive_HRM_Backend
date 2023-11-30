@@ -9,5 +9,4 @@ import com.orive.Organisation.Entity.PoliciesEntity;
 
 public interface PoliciesRepository extends JpaRepository<PoliciesEntity, Long>{
 
-	Optional<PoliciesEntity> findByCompanyName(String companyName);
 }

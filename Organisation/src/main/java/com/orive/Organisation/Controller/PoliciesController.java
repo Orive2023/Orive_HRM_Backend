@@ -1,12 +1,16 @@
 package com.orive.Organisation.Controller;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ContentDisposition;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -16,7 +20,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.orive.Organisation.Dto.PoliciesDto;
 import com.orive.Organisation.Service.PoliciesService;
@@ -35,12 +41,47 @@ public class PoliciesController {
 
   
   	// Create a new Policies
-      @PostMapping("/create/policies")
-      public ResponseEntity<PoliciesDto> createPolicies(@RequestBody PoliciesDto policiesDto) {
-    	  PoliciesDto createdPolicies = policiesService.createPolicies(policiesDto);
-          logger.info("Created Policies with name: {}", createdPolicies.getCompanyName());
-          return new ResponseEntity<>(createdPolicies, HttpStatus.CREATED);
-      }
+//      @PostMapping("/create/policies")
+//      public ResponseEntity<PoliciesDto> createPolicies(@RequestBody PoliciesDto policiesDto) {
+//    	  PoliciesDto createdPolicies = policiesService.createPolicies(policiesDto);
+//          logger.info("Created Policies with name: {}", createdPolicies.getCompanyName());
+//          return new ResponseEntity<>(createdPolicies, HttpStatus.CREATED);
+//      }
+    
+    @PostMapping("/create/policies")
+    public ResponseEntity<String> savePoliciesEntity(
+    		 @RequestParam String companyName,
+    		 @RequestParam String title,
+    		 @RequestParam  String description,
+    		 @RequestParam String createdDate,
+    		 @RequestParam("file") MultipartFile file){
+    	
+    	String result = policiesService.savePoliciesEntity( 
+    			companyName, title, description, createdDate, file );
+    
+    	if(result != null) {
+    		 return new ResponseEntity<>(result, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>("Failed to save policies entity", HttpStatus.INTERNAL_SERVER_ERROR);
+       
+    	}
+    }
+    
+    
+    @GetMapping("/download/{policiesId}")
+    public ResponseEntity<byte[]> downloadsPdf(@PathVariable Long policiesId) {
+        byte[] pdf = policiesService.downloadPdf(policiesId);
+
+        if (pdf != null) {
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_PDF);
+            headers.setContentDisposition(ContentDisposition.builder("attachment").filename(policiesId + "_policies.pdf").build());
+            return new ResponseEntity<>(pdf, headers, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+    		
 
       // Get all Policies  
       @GetMapping("/get/policies")

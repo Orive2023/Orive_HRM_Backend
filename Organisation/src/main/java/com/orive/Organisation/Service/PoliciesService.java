@@ -11,10 +11,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.orive.Organisation.Dto.PoliciesDto;
 import com.orive.Organisation.Entity.PoliciesEntity;
 import com.orive.Organisation.Repository.PoliciesRepository;
+import com.orive.Organisation.Util.UploadPdfUtils;
 
 
 
@@ -31,31 +33,52 @@ public class PoliciesService {
 	
 	
 	// Create
-    public PoliciesDto createPolicies(PoliciesDto policiesDto) {
-    	PoliciesEntity policiesEntity = convertToEntity(policiesDto);
-    	PoliciesEntity savedPolicies = policiesRepository.save(policiesEntity);
-        logger.info("Created Policies with ID: {}", savedPolicies.getPoliciesId());
-        return convertToDTO(savedPolicies);
-    }
+//    public PoliciesDto createPolicies(PoliciesDto policiesDto) {
+//    	PoliciesEntity policiesEntity = convertToEntity(policiesDto);
+//    	PoliciesEntity savedPolicies = policiesRepository.save(policiesEntity);
+//        logger.info("Created Policies with ID: {}", savedPolicies.getPoliciesId());
+//        return convertToDTO(savedPolicies);
+//    }
 	
 	
-//	public String uploadPdf(
-//			String companyName,
-//			String title,
-//			String description,
-//			Date createdDate,
-//			MultipartFile file) throws IOException {
-//		
-//		PoliciesEntity pdfData = policiesRepository.save(PoliciesEntity.builder()
-//				.companyName(companyName)
-//				.title(title)
-//				.description(description)
-//				.createdDate(createdDate)
-//				.uploadPdf(pdfU)
-//				)
-//	}
-//			
-	
+	public String savePoliciesEntity(
+			String companyName,
+			String title,
+			String description,
+			String createdDate,
+			MultipartFile file) {
+		
+		try {
+			PoliciesEntity pdfData = policiesRepository.save(PoliciesEntity.builder()
+					.companyName(companyName)
+					.title(title)
+					.description(description)
+					.createdDate(createdDate)
+					.uploadPdf(UploadPdfUtils.compressPdf(file.getBytes()))
+					.build());
+			
+			 if (pdfData != null) {
+		            return "File uploaded successfully: " + file.getOriginalFilename();
+		        }
+			
+		}catch (Exception e) {
+			// Handle the IOException appropriately (e.g., log it, return an error message)
+	        return "Error uploading file: " + e.getMessage();
+		}
+		
+		return null;
+	}
+			
+	public byte[] downloadPdf(Long policiesId) {
+		 Optional<PoliciesEntity> dbPdfData = policiesRepository.findById(policiesId);
+	    
+	    if (dbPdfData.isPresent()) {
+	        return UploadPdfUtils.decompressPdf(dbPdfData.get().getUploadPdf());
+	    } else {
+	        // Handle the case where the candidate profile is not found
+	        return null;
+	    }
+	}
 	
 
     // Read
