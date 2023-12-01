@@ -111,15 +111,16 @@ public class CompanyController {
           }
       }
 
-      // Update company by ID
-      @PutMapping("/update/{companyId}")
-      public ResponseEntity<CompanyDto> updateCompany(@PathVariable Long companyId, @RequestBody CompanyDto updatedCompanyDTO) {
-    	  CompanyDto updatedCompany = companyService.updateCompany(companyId, updatedCompanyDTO);
+      @PutMapping("/{companyId}")
+      public ResponseEntity<CompanyDto> updateCompany(
+              @PathVariable Long companyId,
+              @RequestBody CompanyDto companyDto,
+              @RequestParam(required = false) MultipartFile file) throws IOException {
+
+          CompanyDto updatedCompany = companyService.updateCompany(companyId, companyDto, file);
           if (updatedCompany != null) {
-              logger.info("Updated company with ID: {}", companyId);
               return new ResponseEntity<>(updatedCompany, HttpStatus.OK);
           } else {
-              logger.warn("Company with ID {} not found for update", companyId);
               return new ResponseEntity<>(HttpStatus.NOT_FOUND);
           }
       }

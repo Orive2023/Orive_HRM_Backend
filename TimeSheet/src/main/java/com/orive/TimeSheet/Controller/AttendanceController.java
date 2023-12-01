@@ -6,7 +6,10 @@ import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ContentDisposition;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -16,7 +19,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.orive.TimeSheet.Dto.AttendanceDto;
 import com.orive.TimeSheet.Dto.HolidaysDto;
@@ -33,12 +38,56 @@ public class AttendanceController {
 	private AttendanceService attendanceService;
 	
 	// Create a new Attendance
-    @PostMapping("/create/attendance")
-    public ResponseEntity<AttendanceDto> createAttendance(@RequestBody AttendanceDto attendanceDto) {
-    	AttendanceDto createdAttendance = attendanceService.createsAttendances(attendanceDto);
-        logger.info("Created Attendance with name: {}", createdAttendance.getEmployeeName());
-        return new ResponseEntity<>(createdAttendance, HttpStatus.CREATED);
-    }
+//    @PostMapping("/create/attendance")
+//    public ResponseEntity<AttendanceDto> createAttendance(@RequestBody AttendanceDto attendanceDto) {
+//    	AttendanceDto createdAttendance = attendanceService.createsAttendances(attendanceDto);
+//        logger.info("Created Attendance with name: {}", createdAttendance.getEmployeeName());
+//        return new ResponseEntity<>(createdAttendance, HttpStatus.CREATED);
+//    }
+	
+	
+	  @PostMapping("/create/attendance")
+	    public ResponseEntity<String> saveAttendanceEntity(
+	    		@RequestParam String employeeName,
+	    		@RequestParam String clockIn,
+	    		@RequestParam String clockOut,
+	    		@RequestParam int late,
+	    		@RequestParam int earlyLeaving,
+	    		@RequestParam int overTime,
+	    		@RequestParam int totalWork,
+	    		@RequestParam int totalRest,
+	    		@RequestParam String date,
+	    	    @RequestParam("file") MultipartFile file){
+	    	
+	    	String result = attendanceService.saveAttendanceEntity( 
+	    			employeeName, clockIn, clockOut, late, earlyLeaving, overTime, totalWork, totalRest, date, file );
+	    
+	    	if(result != null) {
+	    		 return new ResponseEntity<>(result, HttpStatus.OK);
+	        } else {
+	            return new ResponseEntity<>("Failed to save Attendance entity", HttpStatus.INTERNAL_SERVER_ERROR);
+	       
+	    	}
+	    }
+	    
+	    
+	    @GetMapping("/download/{attendanceId}")
+	    public ResponseEntity<byte[]> downloadsDocs(@PathVariable Long attendanceId) {
+	        byte[] doc = attendanceService.downloadPdf(attendanceId);
+
+	        if (doc != null) {
+	            HttpHeaders headers = new HttpHeaders();
+	            headers.setContentType(MediaType.APPLICATION_PDF);
+	            headers.setContentDisposition(ContentDisposition.builder("attachment").filename(attendanceId + "_attendance.pdf").build());
+	            return new ResponseEntity<>(doc, headers, HttpStatus.OK);
+	        } else {
+	            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+	        }
+	    }
+	
+	
+	
+	
 
     // Get all Attendance   
     @GetMapping("/get/attendance")

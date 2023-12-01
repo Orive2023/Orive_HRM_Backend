@@ -9,12 +9,15 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+
 
 import com.orive.TimeSheet.Dto.AttendanceDto;
 import com.orive.TimeSheet.Dto.HolidaysDto;
 import com.orive.TimeSheet.Entity.AttendanceEntity;
 import com.orive.TimeSheet.Entity.HolidaysEntity;
 import com.orive.TimeSheet.Repository.AttendanceRepository;
+import com.orive.TimeSheet.Util.UploadDocUtil;
 
 @Service
 public class AttendanceService {
@@ -27,13 +30,62 @@ public class AttendanceService {
 	@Autowired
 	private ModelMapper modelMapper;
 	
-	// Create
-    public AttendanceDto createsAttendances(AttendanceDto attendanceDto) {
-    	AttendanceEntity attendanceEntity = convertToEntity(attendanceDto);
-    	AttendanceEntity savedAttendances = attendanceRepository.save(attendanceEntity);
-        logger.info("Created Attendance with ID: {}", savedAttendances.getAttendanceId());
-        return convertToDTO(savedAttendances);
-    }
+//	// Create
+//    public AttendanceDto createsAttendances(AttendanceDto attendanceDto) {
+//    	AttendanceEntity attendanceEntity = convertToEntity(attendanceDto);
+//    	AttendanceEntity savedAttendances = attendanceRepository.save(attendanceEntity);
+//        logger.info("Created Attendance with ID: {}", savedAttendances.getAttendanceId());
+//        return convertToDTO(savedAttendances);
+//    }
+	
+	public String saveAttendanceEntity(
+			String employeeName,
+			String clockIn,
+			String clockOut,
+			int late,
+			int earlyLeaving,
+			int overTime,
+			int totalWork,
+			int totalRest,
+			String date,
+			MultipartFile file) {
+		
+		try {
+			AttendanceEntity docData = attendanceRepository.save(AttendanceEntity.builder()
+					.employeeName(employeeName)
+					.clockIn(clockIn)
+					.clockOut(clockOut)
+					.late(late)
+					.earlyLeaving(earlyLeaving)
+					.overTime(overTime)
+					.totalWork(totalWork)
+					.totalRest(totalRest)
+					.date(date)
+					.uploadDoc(UploadDocUtil.compressPdf(file.getBytes()))
+					.build());
+			
+			 if (docData != null) {
+		            return "File uploaded successfully: " + file.getOriginalFilename();
+		        }
+			
+		}catch (Exception e) {
+			// Handle the IOException appropriately (e.g., log it, return an error message)
+	        return "Error uploading file: " + e.getMessage();
+		}
+		
+		return null;
+	}
+			
+	public byte[] downloadPdf(Long attendanceId) {
+		 Optional<AttendanceEntity> dbDocData = attendanceRepository.findById(attendanceId);
+	    
+	    if (dbDocData.isPresent()) {
+	        return UploadDocUtil.decompressPdf(dbDocData.get().getUploadDoc());
+	    } else {
+	        // Handle the case where the candidate profile is not found
+	        return null;
+	    }
+	}
 
     // Read
     public List<AttendanceDto> getAllAttendances() {

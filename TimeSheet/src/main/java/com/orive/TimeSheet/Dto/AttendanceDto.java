@@ -3,6 +3,7 @@ package com.orive.TimeSheet.Dto;
 import java.util.Date;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.Lob;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,8 +16,8 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 public class AttendanceDto {
-	
-	private Long attendanceId;
+ 	
+    private Long attendanceId;
 	private String employeeName;
 	private String clockIn;
 	private String clockOut;
@@ -25,6 +26,6 @@ public class AttendanceDto {
 	private int overTime;
 	private int totalWork;
 	private int totalRest;
-	private Date date;
-
+	private String date;
+	private byte[] uploadDoc;
 }

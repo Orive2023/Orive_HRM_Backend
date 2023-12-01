@@ -120,17 +120,24 @@ public class CompanyService {
     }
     
  // Update list by id
-    public CompanyDto updateCompany(Long companyId, CompanyDto companyDto) {
+    public CompanyDto updateCompany(Long companyId, CompanyDto companyDto, MultipartFile file) throws IOException {
         Optional<CompanyEntity> existingCompanyOptional = companyRepository.findById(companyId);
         if (existingCompanyOptional.isPresent()) {
-        	CompanyEntity existingCompany = existingCompanyOptional.get();
-        	existingCompany.setCompanyName(companyDto.getCompanyName());
-        	existingCompany.setContactNumber(companyDto.getContactNumber());
-        	existingCompany.setEmail(companyDto.getEmail());
-        	existingCompany.setCin(companyDto.getCin());
-        	existingCompany.setGst(companyDto.getGst());
-        	existingCompany.setUan(companyDto.getUan());
-            modelMapper.map(companyDto, existingCompanyOptional);
+            CompanyEntity existingCompany = existingCompanyOptional.get();
+            existingCompany.setCompanyName(companyDto.getCompanyName());
+            existingCompany.setContactNumber(companyDto.getContactNumber());
+            existingCompany.setEmail(companyDto.getEmail());
+            existingCompany.setCin(companyDto.getCin());
+            existingCompany.setGst(companyDto.getGst());
+            existingCompany.setUan(companyDto.getUan());
+
+            // Check if a new file is provided for update
+            if (file != null && !file.isEmpty()) {
+                // Update the uploadLogo field with the compressed image bytes
+                existingCompany.setUploadLogo(ImageUtils.compressImage(file.getBytes()));
+            }
+
+            // Save the updated entity
             CompanyEntity updatedCompany = companyRepository.save(existingCompany);
             logger.info("Updated company with ID: {}", updatedCompany.getCompanyId());
             return convertToDTO(updatedCompany);

@@ -7,8 +7,10 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Lob;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -19,6 +21,7 @@ import lombok.ToString;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 @Entity
 @Table(name = "attendance")
 public class AttendanceEntity {
@@ -52,5 +55,9 @@ public class AttendanceEntity {
 	private int totalRest;
 	
 	@Column(name = "date")
-	private Date date;
+	private String date;
+	
+	@Lob
+	@Column(name = "upload_doc",  length = 100000)
+	private byte[] uploadDoc;
 }
