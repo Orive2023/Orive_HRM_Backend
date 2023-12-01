@@ -59,6 +59,10 @@ public class ProjectService {
         Optional<ProjectEntity> existingProjectOptional =projectRepository.findById(projectsId);
         if (existingProjectOptional.isPresent()) {
         	ProjectEntity existingProject = existingProjectOptional.get();
+        	existingProject.setBudget(projectDto.getBudget());
+        	existingProject.setStartDate(projectDto.getStartDate());
+        	existingProject.setEndDate(projectDto.getEndDate());
+        	existingProject.setClientName(projectDto.getClientName());
             modelMapper.map(projectDto, existingProjectOptional);
            ProjectEntity updatedProject = projectRepository.save(existingProject);
             logger.info("Updated project with ID: {}", updatedProject.getProjectsId());

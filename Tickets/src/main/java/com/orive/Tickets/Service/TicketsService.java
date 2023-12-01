@@ -60,6 +60,7 @@ public class TicketsService {
         Optional<TicketsEntity> existingTicketsOptional = ticketsRepository.findById(TicketsId);
         if (existingTicketsOptional.isPresent()) {
         	TicketsEntity existingTickets= existingTicketsOptional.get();
+        	existingTickets.setEmployeeName(ticketsDto.getEmployeeName());
             modelMapper.map(ticketsDto, existingTicketsOptional);
             TicketsEntity updatedTickets = ticketsRepository.save(existingTickets);
             logger.info("Updated Tickets with ID: {}", updatedTickets.getTicketsId());

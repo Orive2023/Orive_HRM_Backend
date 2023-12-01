@@ -62,6 +62,15 @@ public class EmployeesService {
 	        	existingEmployees.setEmployeeName(employeesDto.getEmployeeName());
 	        	existingEmployees.setPhone(employeesDto.getPhone());
 	        	existingEmployees.setAccountNumber(employeesDto.getAccountNumber());
+	        	existingEmployees.setBasicSalary(employeesDto.getBasicSalary());
+	        	existingEmployees.setTransportAllowance(employeesDto.getTransportAllowance());
+	        	existingEmployees.setHraAllowances(employeesDto.getHraAllowances());
+	        	existingEmployees.setOtherAllowances(employeesDto.getOtherAllowances());
+	        	existingEmployees.setPfAllowances(employeesDto.getPfAllowances());
+	        	existingEmployees.setDaAllowances(employeesDto.getDaAllowances());
+	        	existingEmployees.setMedicalAllowances(employeesDto.getMedicalAllowances());
+	        	existingEmployees.setOtherInsurance(employeesDto.getOtherInsurance());
+	        	existingEmployees.setTax(employeesDto.getTax());
 	            modelMapper.map(employeesDto, existingEmployeesOptional);
 	            EmployeesEntity updatedEmployees = employeesRepository.save(existingEmployees);
 	            logger.info("Updated Employees with ID: {}", updatedEmployees.getEmployeeId());

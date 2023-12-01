@@ -1,5 +1,7 @@
 package com.orive.Payroll.Entity;
 
+import java.util.Date;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -24,18 +26,21 @@ public class AdvanceSaleryEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long advanceSaleryId;
 	
+	@Column(name = "created_date")
+	private String createdDate;
+	
 	@Column(name = "employee_name")
 	private String employeeName;
 	
-	@Column(name = "amount")
-	private double amount;
+	@Column(name = "salary")
+	private String salary;
+	
+	@Column(name = "advance_amount")
+	private double advanceAmount;
+	
+	@Column(name = "salary_due")
+	private String salaryDue;
 	
 	@Column(name = "month_and_year")
-	private String monthAndYear;
-	
-	@Column(name = "one_time_deduct")
-	private String oneTimeDeduct;
-	
-	@Column(name = "emi")
-	private String emi;
+	private Date monthAndYear;
 }

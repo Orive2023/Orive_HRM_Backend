@@ -39,6 +39,12 @@ public class TicketsEntity {
 	@Column(name = "priority")
 	private String priority;
 	
+	@Column(name = "created_by")
+	private String createdBy;
+	
 	@Column(name = "date")
 	private Date date;
+	
+	@Column(name = "project")
+	private Date project;
 }

@@ -1,5 +1,8 @@
 package com.orive.Payroll.Entity;
 
+import java.util.Date;
+
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -25,6 +28,42 @@ public class SalaryTemplates {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long salaryTemplatesId;
+	
+	@Column(name = "basic_salary")
+	private double basicSalary;
+	
+	@Column(name = "house_rent_allowance")
+	private double houseRentAllowance;
+	
+	@Column(name = "medical_allowance")
+	private double medicalAllowance;
+	
+	@Column(name = "pf")
+	private double pf;
+	
+	@Column(name = "tax_deduction")
+	private double taxDeduction;
+	
+	@Column(name = "transport_allowance")
+	private double transportAllowance;
+	
+	@Column(name = "dearness_allowance")
+	private double dearnessAllowance;
+	
+	@Column(name = "gross_salary")
+	private double grossSalary;
+	
+	@Column(name = "total_deduction")
+	private double totalDeduction;
+	
+	@Column(name = "net_salary")
+	private double netSalary;
+	
+	@Column(name = "payroll_template")
+	private String payrollTemplate;
+	
+	@Column(name = "created_date")
+	private Date createdDate;
 	
 	
 }

@@ -28,17 +28,17 @@ public class TrainersListEntity {
 	@Column(name = "trainers_full_name")
 	private String trainersFullName;
 	
-	@Column(name = "trainers_email_address")
-	private String trainersEmailAddress;
+	@Column(name = "email_address")
+	private String emailAddress;
 	
-	@Column(name = "trainers_phone_no")
-	private String trainersPhoneNo;
+	@Column(name = "phone_no")
+	private Long phoneNo;
 	
-	@Column(name = "trainers_technical_skills")
-	private String trainersTechnicalSkills;
+	@Column(name = "technical_skills")
+	private String technicalSkills;
 	
-	@Column(name = "trainers_soft_skills")
-	private String trainersSoftSkills;
+	@Column(name = "soft_skills")
+	private String softSkills;
 	
 	@Column(name = "industries")
 	private String industries;
@@ -46,20 +46,11 @@ public class TrainersListEntity {
 	@Column(name = "certifications")
 	private String certifications;
 	
-	@Column(name = "workshops")
-	private String workshops;
+	@Column(name = "training_programs_offered")
+	private String trainingProgramsOffered;
 	
-	@Column(name = "seminars")
-	private String seminars;
-	
-	@Column(name = "webinars")
-	private String webinars;
-	
-	@Column(name = "other_training_formats")
-	private String otherTrainingFormats;
-	
-	@Column(name = "preferred_training_audience")
-	private String preferredTrainingAudience;
+	@Column(name = "preferred_training_audienece")
+	private String preferredTrainingAudienece;
 	
 	@Column(name = "training_languages")
 	private String trainingLanguages;

@@ -33,6 +33,9 @@ public class EmployeesEntity {
 	@Column(name = "employee_name")
 	private String employeeName;
 	
+	@Column(name = "designation_name")
+	private String designationName;
+	
 	@Column(name = "email")
 	private String email;
 	
@@ -102,8 +105,8 @@ public class EmployeesEntity {
 	@Column(name = "medical_allowances")
 	private double medicalAllowances;
 	
-	@Column(name = "insurance")
-	private double insurance;
+	@Column(name = "other_insurance")
+	private double otherInsurance;
 	
 	@Column(name = "tax")
 	private double tax;
@@ -191,14 +194,8 @@ public class EmployeesEntity {
 	private String password;
 	
 	@Lob
-	@Column(name = "education_certificate", length = 100000)
-	private byte[] educationCertificate;
+	@Column(name = "upload_document", length = 100000)
+	private byte[] uploadDocument;
 	
-	@Lob
-	@Column(name = "aadhar_card", length = 100000)
-	private byte[] aadharCard;
-	
-	@Lob
-	@Column(name = "pan_card", length = 100000)
-	private byte[] panCard;
+
 }

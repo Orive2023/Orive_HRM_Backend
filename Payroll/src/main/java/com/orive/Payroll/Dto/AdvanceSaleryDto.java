@@ -1,5 +1,8 @@
 package com.orive.Payroll.Dto;
 
+import java.util.Date;
+
+import jakarta.persistence.Column;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,10 +16,11 @@ import lombok.ToString;
 @ToString
 public class AdvanceSaleryDto {
 
-    private Long advanceSaleryId;
+	private Long advanceSaleryId;
+	private String createdDate;
 	private String employeeName;
-	private double amount;
-	private String monthAndYear;
-	private String oneTimeDeduct;
-	private String emi;
+	private String salary;
+	private double advanceAmount;
+	private String salaryDue;
+	private Date monthAndYear;
 }

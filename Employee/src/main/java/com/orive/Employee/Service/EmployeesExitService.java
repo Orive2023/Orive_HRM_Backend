@@ -11,9 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.orive.Employee.Dto.EmployeesExitDto;
-import com.orive.Employee.Dto.EmployeesLastLoginDto;
 import com.orive.Employee.Entity.EmployeesExitEntity;
-import com.orive.Employee.Entity.EmployeesLastLoginEntity;
 import com.orive.Employee.Repository.EmployeesExitRepository;
 
 

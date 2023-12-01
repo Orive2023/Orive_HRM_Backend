@@ -1,5 +1,6 @@
 package com.orive.project.Dto;
 
+import java.util.Date;
 import java.util.List;
 
 import jakarta.persistence.Column;
@@ -16,15 +17,15 @@ import lombok.ToString;
 @NoArgsConstructor
 public class ProjectDto {
 	
-	private long projectsId;
+    private long projectsId;
 	private String projectTitle;
 	private String clientName;
 	private String companyName;
-	private String startDate;
-	private String endDate;
+	private Date startDate;
+	private Date endDate;
 	private String priority;
+	private double budget;
 	private String projectManagers;
 	private String summary;
 	private String description;
-
 }

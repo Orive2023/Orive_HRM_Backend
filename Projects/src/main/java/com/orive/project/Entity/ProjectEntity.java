@@ -38,13 +38,16 @@ public class ProjectEntity {
 	private String companyName;
 	
 	@Column(name = "start_date")
-	private String startDate;
+	private Date startDate;
 	
 	@Column(name = "end_date" )
-	private String endDate;
+	private Date endDate;
 	
 	@Column(name = "priority")
 	private String priority;
+	
+	@Column(name = "budget")
+	private double budget;
 	
 	@Column(name = "project_managers")
 	private String projectManagers;
@@ -54,6 +57,4 @@ public class ProjectEntity {
 	
 	@Column(name = "description")
 	private String description;
-	
-
 }

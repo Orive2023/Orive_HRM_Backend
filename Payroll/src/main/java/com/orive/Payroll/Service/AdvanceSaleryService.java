@@ -63,6 +63,7 @@ private static final Logger logger=LoggerFactory.getLogger(AdvanceSaleryService.
         Optional<AdvanceSaleryEntity> existingAdvanceSaleryOptional = advanceSaleryRepository.findById(AdvanceSaleryId);
         if (existingAdvanceSaleryOptional.isPresent()) {
         	AdvanceSaleryEntity existingAdvanceSalery= existingAdvanceSaleryOptional.get();
+        	existingAdvanceSalery.setAdvanceAmount(advanceSaleryDto.getAdvanceAmount());
             modelMapper.map(advanceSaleryDto, existingAdvanceSaleryOptional);
             AdvanceSaleryEntity updatedAdvanceSalery = advanceSaleryRepository.save(existingAdvanceSalery);
             logger.info("Updated AdvanceSalery with ID: {}", updatedAdvanceSalery.getAdvanceSaleryId());

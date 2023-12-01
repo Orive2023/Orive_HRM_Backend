@@ -19,6 +19,7 @@ public class EmployeesDto {
 
     private Long employeeId;
 	private String employeeName;
+	private String designationName;
 	private String email;
 	private Long phone;
 	private Long alternativePhone;
@@ -42,7 +43,7 @@ public class EmployeesDto {
 	private double pfAllowances;
 	private double daAllowances;
 	private double medicalAllowances;
-	private double insurance;
+	private double otherInsurance;
 	private double tax;
 	private String subDepartment;
 	private String position;
@@ -71,7 +72,5 @@ public class EmployeesDto {
 	private Long cellPhone;
 	private String userEmailOrName;
 	private String password;
-	private byte[] educationCertificate;
-	private byte[] aadharCard;
-	private byte[] panCard;
+	private byte[] uploadDocument;
 }

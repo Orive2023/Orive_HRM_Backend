@@ -14,19 +14,16 @@ import lombok.ToString;
 @NoArgsConstructor
 public class TrainersListDto {
 	
-    private Long trainersListId;
+	private Long trainersListId;
 	private String trainersFullName;
-	private String trainersEmailAddress;
-	private String trainersPhoneNo;
-	private String trainersTechnicalSkills;
-	private String trainersSoftSkills;
+	private String emailAddress;
+	private Long phoneNo;
+	private String technicalSkills;
+	private String softSkills;
 	private String industries;
 	private String certifications;
-	private String workshops;
-	private String seminars;
-	private String webinars;
-	private String otherTrainingFormats;
-	private String preferredTrainingAudience;
+	private String trainingProgramsOffered;
+	private String preferredTrainingAudienece;
 	private String trainingLanguages;
 	private String availability;
 	private String previousClients;

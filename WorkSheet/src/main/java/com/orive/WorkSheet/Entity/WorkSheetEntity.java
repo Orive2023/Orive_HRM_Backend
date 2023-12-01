@@ -1,5 +1,7 @@
 package com.orive.WorkSheet.Entity;
 
+import java.util.Date;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -25,14 +27,14 @@ public class WorkSheetEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long workSheetId;
 	
-	@Column(name = "woek_sheet_title")
+	@Column(name = "work_sheet_title")
 	private String workSheetTitle;
 	
 	@Column(name = "start_date")
-	private String startDate;
+	private Date startDate;
 	
 	@Column(name = "end_date")
-	private String endDate;
+	private Date endDate;
 	
 	@Column(name = "estimate_hour")
 	private double estimateHour;
@@ -40,9 +42,24 @@ public class WorkSheetEntity {
 	@Column(name = "project")
 	private String project;
 	
+	@Column(name = "employee_name")
+	private String employeeName;
+	
 	@Column(name = "assigned_to")
 	private String assignedTo;
 	
 	@Column(name = "description")
 	private String description;
+	
+	@Column(name = "task_name")
+	private String taskName;
+	
+	@Column(name = "challange_part")
+	private String challangePart;
+	
+	@Column(name = "work_progress")
+	private String workProgress;
+	
+	@Column(name = "created_date")
+	private Date createdDate;
 }
