@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -110,21 +111,17 @@ public class CompanyController {
               return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
           }
       }
-
-      @PutMapping("/{companyId}")
-      public ResponseEntity<CompanyDto> updateCompany(
-              @PathVariable Long companyId,
-              @RequestBody CompanyDto companyDto,
-              @RequestParam(required = false) MultipartFile file) throws IOException {
-
-          CompanyDto updatedCompany = companyService.updateCompany(companyId, companyDto, file);
-          if (updatedCompany != null) {
-              return new ResponseEntity<>(updatedCompany, HttpStatus.OK);
-          } else {
-              return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-          }
-      }
       
+
+   // Update company by ID
+      @PatchMapping("/{companyId}")
+      public ResponseEntity<Void> partialUpdateCompany(
+              @PathVariable Long companyId,
+              @RequestBody CompanyEntity companyEntity) {
+
+          companyService.partialUpdateCompany(companyId, companyEntity);
+          return new ResponseEntity<>(HttpStatus.OK);
+      }
 
 
       // Delete Company by ID

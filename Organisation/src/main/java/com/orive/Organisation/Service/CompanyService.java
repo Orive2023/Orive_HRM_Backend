@@ -120,30 +120,40 @@ public class CompanyService {
     }
     
  // Update list by id
-    public CompanyDto updateCompany(Long companyId, CompanyDto companyDto, MultipartFile file) throws IOException {
+    public void partialUpdateCompany(Long companyId, CompanyEntity companyEntity) {
         Optional<CompanyEntity> existingCompanyOptional = companyRepository.findById(companyId);
         if (existingCompanyOptional.isPresent()) {
             CompanyEntity existingCompany = existingCompanyOptional.get();
-            existingCompany.setCompanyName(companyDto.getCompanyName());
-            existingCompany.setContactNumber(companyDto.getContactNumber());
-            existingCompany.setEmail(companyDto.getEmail());
-            existingCompany.setCin(companyDto.getCin());
-            existingCompany.setGst(companyDto.getGst());
-            existingCompany.setUan(companyDto.getUan());
 
-            // Check if a new file is provided for update
-            if (file != null && !file.isEmpty()) {
-                // Update the uploadLogo field with the compressed image bytes
-                existingCompany.setUploadLogo(ImageUtils.compressImage(file.getBytes()));
+            // Update fields conditionally only if they are not null in companyEntity
+            if (companyEntity.getCompanyName() != null) {
+                existingCompany.setCompanyName(companyEntity.getCompanyName());
             }
 
+            if (companyEntity.getContactNumber() != null) {
+                existingCompany.setContactNumber(companyEntity.getContactNumber());
+            }
+
+            if (companyEntity.getEmail() != null) {
+                existingCompany.setEmail(companyEntity.getEmail());
+            }
+
+            if (companyEntity.getGst() != null) {
+                existingCompany.setGst(companyEntity.getGst());
+            }
+            
+            if (companyEntity.getCin() != null) {
+                existingCompany.setCin(companyEntity.getCin());
+            }
+            
+            if (companyEntity.getUan() != null) {
+                existingCompany.setUan(companyEntity.getUan());
+            }
             // Save the updated entity
-            CompanyEntity updatedCompany = companyRepository.save(existingCompany);
-            logger.info("Updated company with ID: {}", updatedCompany.getCompanyId());
-            return convertToDTO(updatedCompany);
+            companyRepository.save(existingCompany);
+            logger.info("Updated company with ID: {}", existingCompany.getCompanyId());
         } else {
             logger.warn("Company with ID {} not found for update", companyId);
-            return null;
         }
     }
     
