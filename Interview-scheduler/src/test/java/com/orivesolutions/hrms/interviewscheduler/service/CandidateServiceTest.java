@@ -41,7 +41,7 @@ public class CandidateServiceTest {
 //        Mockito.when(candidateRepository.save(Mockito.any(Candidate.class))).thenReturn(expectedCandidate);
 //
 //        CandidateDto candidateInput = getCandidateDto();
-//        CandidateDto resultantCandidate = underTestService.getCandidate(candidateInput);
+//        String resultantCandidate = underTestService.saveCandidate(candidateInput);
 //
 //
 //        Assertions.assertNotNull(resultantCandidate);

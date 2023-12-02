@@ -34,10 +34,10 @@ public class TravelsEntity {
 	private String employeeName;
 	
 	@Column(name = "start_date")
-	private Date startDate;
+	private String startDate;
 	
 	@Column(name = "end_date")
-	private Date endDate;
+	private String endDate;
 	
 	@Column(name = "purpose_of_visit")
 	private String purposeOfVisit;

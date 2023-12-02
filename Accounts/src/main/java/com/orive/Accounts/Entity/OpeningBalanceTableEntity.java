@@ -24,8 +24,8 @@ public class OpeningBalanceTableEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long openingBalanceTableId;
 	
-	@Column(name = "account_number")
-	private String accountNumber;
+	@Column(name = "account_name")
+	private String accountName;
 	
 	@Column(name = "sub_type")
 	private String subType;

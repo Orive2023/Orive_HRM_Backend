@@ -29,7 +29,7 @@ private static final Logger logger= LoggerFactory.getLogger(ContraVoucherService
     public ContraVoucherDto createContraVoucher(ContraVoucherDto accountListDto) {
     	ContraVoucherEntity accountListEntity = convertToEntity(accountListDto);
     	ContraVoucherEntity savedAccountList = contraVoucherRepository.save(accountListEntity);
-        logger.info("Created AccountList with ID: {}", savedAccountList.getAccountName());
+        logger.info("Created AccountList with ID: {}", savedAccountList.getReversedAccountHead());
         return convertToDTO(savedAccountList);
     }
 

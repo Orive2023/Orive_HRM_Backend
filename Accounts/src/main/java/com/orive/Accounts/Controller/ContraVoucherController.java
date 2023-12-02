@@ -36,7 +36,7 @@ public class ContraVoucherController {
     @PostMapping("/create/contraVoucher")
     public ResponseEntity<ContraVoucherDto> createContraVoucher(@RequestBody ContraVoucherDto accountListDto) {
     	ContraVoucherDto createdAccountList = contraVoucherService.createContraVoucher(accountListDto);
-        logger.info("Created AccountList with name: {}", createdAccountList.getAccountName());
+        logger.info("Created AccountList with name: {}", createdAccountList.getReversedAccountHead());
         return new ResponseEntity<>(createdAccountList, HttpStatus.CREATED);
     }
 

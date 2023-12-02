@@ -12,6 +12,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -22,9 +23,11 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
+@Builder
 @Entity
 @Table(name = "opening_balance")
 public class OpeningBalanceEntity {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long openingBalanceId;
@@ -39,9 +42,9 @@ public class OpeningBalanceEntity {
 	@JoinColumn(name = "opening_balance_table_fk",referencedColumnName = "openingBalanceId")
 	private List<OpeningBalanceTableEntity> openingBalanceTableEntities;
 	
-	@Column(name = "debit_total")
-	private double debitTotal;
+	@Column(name = "total_debit")
+	private double totalDebit;
 	
-	@Column(name = "credit_total")
-	private double creditTotal;
+	@Column(name = "total_credit")
+	private double totalCredit;
 }

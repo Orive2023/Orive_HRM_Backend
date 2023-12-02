@@ -18,8 +18,8 @@ public class TravelsDto {
 	
 	    private Long travelId;
 		private String employeeName;
-		private Date startDate;
-		private Date endDate;
+		private String startDate;
+		private String endDate;
 		private String purposeOfVisit;
 		private String placeOfVisit;
 		private String travelMode;

@@ -8,6 +8,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -29,6 +31,7 @@ public class DepartmentEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long departmentId;
 	
+//	@NotEmpty(message = "This field shouldn't be empty")
 	@Column(name = "department_name")
 	private String departmentName;
 	

@@ -1,5 +1,6 @@
 package com.orive.Accounts.Dto;
 
+import jakarta.persistence.Column;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,11 +14,11 @@ import lombok.ToString;
 @NoArgsConstructor
 public class AccountBalanceDto {
 	
-    private Long accountBalancesId;
+	private Long accountBalancesId;
 	private String employeeFullName;
 	private String employeeId;
 	private String department;
-	private String employeePosition;
+	private String jobTitle;
 	private double hsaBalance;
 	private double fsaBalance;
 	private double retirementAccountBalance;

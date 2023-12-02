@@ -58,6 +58,7 @@ public class SubTypeSevice {
 	        Optional<SubTypeEntity> existingAccountListOptional = subTypeRepository.findById(subTypeId);
 	        if (existingAccountListOptional.isPresent()) {
 	        	SubTypeEntity existingAccountList = existingAccountListOptional.get();
+	        	existingAccountList.setAccountName(accountListDto.getAccountName());
 	            modelMapper.map(accountListDto, existingAccountListOptional);
 	            SubTypeEntity updatedAccountList = subTypeRepository.save(existingAccountList);
 	            logger.info("Updated AccountList with ID: {}", updatedAccountList.getSubTypeId());

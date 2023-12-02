@@ -7,6 +7,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -17,6 +18,7 @@ import lombok.ToString;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 @Entity
 @Table(name = "account_list")
 public class AccountListEntity {
@@ -34,8 +36,8 @@ public class AccountListEntity {
 	@Column(name = "department")
 	private String department;
 	
-	@Column(name = "employee_position")
-	private String employeePosition;
+	@Column(name = "job_title")
+	private String jobTitle;
 	
 	@Column(name = "bank_name")
 	private String bankName;

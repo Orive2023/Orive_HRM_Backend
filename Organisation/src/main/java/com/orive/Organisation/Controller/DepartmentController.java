@@ -19,7 +19,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.orive.Organisation.Dto.DepartmentDto;
+import com.orive.Organisation.Entity.DepartmentEntity;
 import com.orive.Organisation.Service.DepartmentService;
+
+import jakarta.validation.Valid;
 
 
 
@@ -36,7 +39,7 @@ public class DepartmentController {
   
   	// Create a new Department
       @PostMapping("/create/department")
-      public ResponseEntity<DepartmentDto> createDepartment(@RequestBody DepartmentDto departmentDto) {
+      public ResponseEntity<DepartmentDto> createDepartment(@Valid @RequestBody DepartmentDto departmentDto) {
     	  DepartmentDto createdDepartment = departmentService.createDepartment(departmentDto);
           logger.info("Created Department with name: {}", createdDepartment.getCompanyName());
           return new ResponseEntity<>(createdDepartment, HttpStatus.CREATED);
@@ -85,7 +88,24 @@ public class DepartmentController {
           logger.info("Deleted Department with ID: {}", departmentId);
           return new ResponseEntity<>(HttpStatus.NO_CONTENT);
       }
-  	    
+      
+      
+//      // REST endpoint to restore a department by ID
+//      @PostMapping("/restore/{departmentId}")
+//      public ResponseEntity<DepartmentEntity> restoreDepartment(@PathVariable Long departmentId) {
+//          DepartmentEntity restoredDepartment = departmentService.restoreDepartment(departmentId);
+//
+//          if (restoredDepartment != null) {
+//              return new ResponseEntity<>(restoredDepartment, HttpStatus.OK);
+//          } else {
+//              logger.warn("Unable to restore Department with ID: {}", departmentId);
+//              return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+//          }
+//      }
+      
+      
+      
+   // count department    
   	    @GetMapping("/count/department")
   	    public long countDepartment()
   	    {

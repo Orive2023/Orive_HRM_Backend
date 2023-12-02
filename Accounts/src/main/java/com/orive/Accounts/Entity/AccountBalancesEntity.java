@@ -34,8 +34,8 @@ public class AccountBalancesEntity {
 	@Column(name = "department")
 	private String department;
 	
-	@Column(name = "employee_position")
-	private String employeePosition;
+	@Column(name = "job_title")
+	private String jobTitle;
 	
 	@Column(name = "hsa_balance")
 	private double hsaBalance;

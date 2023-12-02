@@ -60,6 +60,9 @@ public class FinancialYearService {
         Optional<FinancialYearEntity> existingAccountListOptional = financialYearRepository.findById(financialYearId);
         if (existingAccountListOptional.isPresent()) {
         	FinancialYearEntity existingAccountList = existingAccountListOptional.get();
+        	existingAccountList.setFinancialYear(accountListDto.getFinancialYear());
+        	existingAccountList.setFinancialYearStartDate(accountListDto.getFinancialYearStartDate());
+        	existingAccountList.setFinancialYearEndDate(accountListDto.getFinancialYearEndDate());
             modelMapper.map(accountListDto, existingAccountListOptional);
             FinancialYearEntity updatedAccountList = financialYearRepository.save(existingAccountList);
             logger.info("Updated AccountList with ID: {}", updatedAccountList.getFinancialYearId());

@@ -59,6 +59,9 @@ public class AddBankService {
         Optional<AddBankEntity> existingAddBankOptional = addBankRepository.findById(addBankId);
         if (existingAddBankOptional.isPresent()) {
         	AddBankEntity existingAddBank = existingAddBankOptional.get();
+        	existingAddBank.setBankName(addBankDto.getBankName());
+        	existingAddBank.setAccountName(addBankDto.getAccountName());
+        	existingAddBank.setAccountNumber(addBankDto.getAccountNumber());
             modelMapper.map(addBankDto, existingAddBankOptional);
             AddBankEntity updatedAddBank = addBankRepository.save(existingAddBank);
             logger.info("Updated AddBank with ID: {}", updatedAddBank.getAddBankId());

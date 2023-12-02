@@ -1,6 +1,12 @@
 package com.orive.Accounts.Dto;
 
+import java.util.List;
+
+import com.orive.Accounts.Entity.ContraVoucherListEntity;
+
+
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -11,15 +17,14 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
+@Builder
 public class ContraVoucherDto {
 
 	private Long contraVoucherId;
 	private String voucherType;
-	private String reverseAccountHead;
+	private String reversedAccountHead;
 	private String date;
 	private String remark;
-	private String accountName;
-	private String ledgerComment;
-	private double debit;
-	private double credit;
+	private List<ContraVoucherListEntity> contraVoucherListEntities;
+
 }

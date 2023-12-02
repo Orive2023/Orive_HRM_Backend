@@ -30,6 +30,12 @@ public class JournalVoucherEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long journalVoucherId;
 	
+	@Column(name = "journal_voucher")
+	private String journalVoucher;
+	
+	@Column(name = "voucher_type")
+	private String voucherType;
+	
 	@Column(name = "date")
 	private String date;
 	

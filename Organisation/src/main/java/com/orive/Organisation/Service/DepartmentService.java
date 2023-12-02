@@ -73,12 +73,42 @@ public class DepartmentService {
         }
     }
     
+    
     // Delete
     public void deleteDepartment(Long departmentId) {
     	departmentRepository.deleteById(departmentId);
         logger.info("Deleted Department with ID: {}", departmentId);
     }
 
+    
+    
+ // Restore a department by ID
+//    public DepartmentEntity restoreDepartment(Long departmentId) {
+//        // Retrieve the department from a backup or history
+//    	DepartmentEntity restoredDepartment = getRestoredDepartmentFromBackup(departmentId);
+//
+//        if (restoredDepartment != null) {
+//            // Save the restored department back to the main database
+//        	DepartmentEntity savedDepartment = departmentRepository.save(restoredDepartment);
+//
+//            logger.info("Restored Department with ID: {}", departmentId);
+//            return savedDepartment;
+//        } else {
+//            logger.warn("Unable to restore Department with ID: {}", departmentId);
+//            return null; // or throw an exception, depending on your requirements
+//        }
+//    }
+//
+//    // Method to simulate retrieving a department from a backup or history
+//    private DepartmentEntity getRestoredDepartmentFromBackup(Long departmentId) {
+//    	DepartmentEntity restoredDepartment = new DepartmentEntity();
+//        restoredDepartment.setDepartmentId(departmentId);
+//        // Set other fields as needed
+//        return restoredDepartment;
+//    }
+    
+    
+   
     //count the total Department
     public long countDepartment()
 	 {

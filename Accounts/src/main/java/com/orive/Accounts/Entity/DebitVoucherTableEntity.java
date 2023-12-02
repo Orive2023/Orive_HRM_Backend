@@ -36,6 +36,4 @@ public class DebitVoucherTableEntity {
 	
 	@Column(name = "amount")
 	private double amount;
-	
-	
 }

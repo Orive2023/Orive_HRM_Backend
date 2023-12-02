@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.orive.Accounts.Entity.JournalVoucherTableEntity;
 
+import jakarta.persistence.Column;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,6 +20,8 @@ import lombok.ToString;
 public class JournalVoucherDto {
 
     private Long journalVoucherId;
+	private String journalVoucher;
+	private String voucherType;
 	private String date;
 	private String remark;
 	private List<JournalVoucherTableEntity> journalVoucherTableEntities;

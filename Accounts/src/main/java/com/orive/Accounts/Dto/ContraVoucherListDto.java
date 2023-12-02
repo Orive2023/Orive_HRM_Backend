@@ -1,6 +1,9 @@
 package com.orive.Accounts.Dto;
 
+import com.orive.Accounts.Entity.ContraVoucherEntity;
+
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -11,11 +14,13 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class OpeningBalanceTableDto {
-
-    private Long openingBalanceTableId;
-    private String accountName;
-	private String subType;
+@Builder
+public class ContraVoucherListDto {
+	
+	
+    private Long contraVoucherListId;
+	private String accountName;
+	private String ledgerComment;
 	private double debit;
 	private double credit;
 }
