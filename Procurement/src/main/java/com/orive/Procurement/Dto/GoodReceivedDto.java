@@ -3,6 +3,8 @@ package com.orive.Procurement.Dto;
 import java.util.Date;
 import java.util.List;
 
+import com.orive.Procurement.Entity.GoodReceivedEntity;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Lob;
 import lombok.AllArgsConstructor;
@@ -18,17 +20,15 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class PurchaseOrderDto {
-	
-    private Long purchaseOrderId;
-	private String quotation;
-	private String location;
+public class GoodReceivedDto {
+
+    private Long goodReceivedId;
+	private String purchaseOrder;
+	private String paymentSource;
 	private String vendorName;
-	private String address;
-	private String notes;
-	private String authorizedByName;
+	private Date date;
+	private String receivedByName;
 	private String title;
 	private byte[] signatureAndStamp;
-	private Date date;
-	private List<PurchaseOrderListDto> purchaseOrderListDtos;
+	private List<GoodReceivedListDto> goodReceivedListDtos;
 }

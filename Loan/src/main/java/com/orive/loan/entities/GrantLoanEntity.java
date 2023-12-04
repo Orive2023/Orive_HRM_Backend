@@ -1,5 +1,7 @@
 package com.orive.loan.entities;
 
+import java.util.Date;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -35,10 +37,10 @@ public class GrantLoanEntity {
 	private String loanDetails;
 	
 	@Column(name = "approve_date")
-	private String approveDate;
+	private Date approveDate;
 	
 	@Column(name = "repayment_form")
-	private String repaymentForm;
+	private Date repaymentForm;
 	
 	@Column(name = "Amount")
 	private double Amount;
@@ -57,4 +59,10 @@ public class GrantLoanEntity {
 	
 	@Column(name = "status")
 	private String status;
+	
+	@Column(name = "installment_cleared")
+	private int installmentCleared;
+	
+	@Column(name = "total_payment_cleared")
+	private double totalPaymentCleared;
 }

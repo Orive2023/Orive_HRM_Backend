@@ -36,7 +36,7 @@ public class UnitsController {
     @PostMapping("/create/units")
     public ResponseEntity<UnitsDto> createUnits(@RequestBody UnitsDto unitsDto) {
     	UnitsDto createdUnits = unitsService.createUnits(unitsDto);
-        logger.info("Created Units with name: {}", createdUnits.getUnit());
+        logger.info("Created Units with name: {}", createdUnits.getUnitName());
         return new ResponseEntity<>(createdUnits, HttpStatus.CREATED);
     }
 

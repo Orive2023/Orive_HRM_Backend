@@ -7,6 +7,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -17,9 +18,10 @@ import lombok.ToString;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 @Entity
 @Table(name = "description_of_mterial")
-public class DescriptionOfMaterialEntity {
+public class DescriptionOfMaterialListEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,8 +30,8 @@ public class DescriptionOfMaterialEntity {
 	@Column(name = "description_of_material_or_goods_or_Service")
 	private String descriptionOfMaterialOrGoodsOrService;
 	
-	@Column(name = "unit")
-	private String unit;
+	@Column(name = "unit_name")
+	private String unitName;
 	
 	@Column(name = "quantity")
 	private Double quantity;

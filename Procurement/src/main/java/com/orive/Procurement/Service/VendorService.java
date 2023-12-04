@@ -60,11 +60,9 @@ public class VendorService {
 	        Optional<VendorEntity> existingVendorOptional = vendorRepository.findById(vendorId);
 	        if (existingVendorOptional.isPresent()) {
 	        	VendorEntity existingVendor = existingVendorOptional.get();
-	            existingVendor.setMobileNo(vendorDto.getMobileNo());
-	            existingVendor.setVendorName(vendorDto.getVendorName());
-	        	existingVendor.setEmailAddress(vendorDto.getEmailAddress());
-	        	existingVendor.setZipCode(vendorDto.getZipCode());
-	        	existingVendor.setAddress(vendorDto.getAddress());
+	        	 existingVendor.setVendorName(vendorDto.getVendorName());
+	             existingVendor.setMobileNo(vendorDto.getMobileNo());
+	        	 existingVendor.setEmailAddress(vendorDto.getEmailAddress());
 	        	modelMapper.map(vendorDto, existingVendor);
 	            VendorEntity updatedVendor = vendorRepository.save(existingVendor);
 	            logger.info("Updated Vendor with ID: {}", updatedVendor.getVendorId());

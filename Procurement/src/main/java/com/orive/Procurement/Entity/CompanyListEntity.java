@@ -16,17 +16,41 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Builder
 @Entity
-@Table(name = "units")
-public class UnitsEntity {
-
+@Table(name = "company_list")
+public class CompanyListEntity {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long unitsId;
+	private Long CompanyListId;
+	
+	@Column(name = "company")
+	private String company;
+	
+	@Column(name = "description")
+	private String description;
+	
+	@Column(name = "reason_of_choosing")
+	private String reasonOfChoosing;
+	
+	@Column(name = "remarks")
+	private String remarks;
 	
 	@Column(name = "unit_name")
 	private String unitName;
+	
+	@Column(name = "quantity")
+	private int quantity;
+	
+	@Column(name = "price")
+	private double price;
+	
+	@Column(name = "total")
+	private double total;
+	
+	@Column(name = "grand_total")
+	private double grandTotal;
 }

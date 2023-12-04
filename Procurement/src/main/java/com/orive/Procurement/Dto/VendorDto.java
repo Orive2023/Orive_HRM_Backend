@@ -1,6 +1,7 @@
 package com.orive.Procurement.Dto;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -11,6 +12,7 @@ import lombok.ToString;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class VendorDto {
  
 	private Long vendorId;
@@ -20,7 +22,7 @@ public class VendorDto {
 	private String address;
 	private String country;
 	private String city;
-	private String zipCode;
+	private int zipCode;
 	private double previousBalance;
 
 }

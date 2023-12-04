@@ -60,8 +60,6 @@ private static final Logger logger= LoggerFactory.getLogger(PurchaseOrderService
 	        Optional<PurchaseOrderEntity> existingPurchaseOrderOptional = purchaseOrderRepository.findById(purchaseOrderId);
 	        if (existingPurchaseOrderOptional.isPresent()) {
 	        	PurchaseOrderEntity existingPurchaseOrder = existingPurchaseOrderOptional.get();
-	            existingPurchaseOrder.setAddress(purchaseOrderDto.getAddress());
-	        	existingPurchaseOrder.setAuthorizedByName(purchaseOrderDto.getAuthorizedByName());
 	            existingPurchaseOrder.setVendorName(purchaseOrderDto.getVendorName());
 	            existingPurchaseOrder.setLocation(purchaseOrderDto.getLocation());
 	        	modelMapper.map(purchaseOrderDto, existingPurchaseOrder);

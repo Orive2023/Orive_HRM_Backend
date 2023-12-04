@@ -1,10 +1,13 @@
 package com.orive.Procurement.Dto;
 
+import java.util.Date;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -15,14 +18,15 @@ import lombok.ToString;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-public class CommitteeDto {
+@Builder
+public class CommitteeListDto {
 	
 
 	private Long committeeId;
 	
 	private String name;
 	
-	private String signature;
+	private byte[] signature;
 	
-	private String date;
+	private Date date;
 }

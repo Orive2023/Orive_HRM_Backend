@@ -59,9 +59,8 @@ public class BidAnalysisService {
 	        Optional<BidAnalysisEntity> existingBidAnalysisOptional = bidAnalysisRepository.findById(bidAnalysisId);
 	        if (existingBidAnalysisOptional.isPresent()) {
 	        	BidAnalysisEntity existingBidAnalysis = existingBidAnalysisOptional.get();
-	            existingBidAnalysis.setAttachment(bidAnalysisDto.getAttachment());
 	        	existingBidAnalysis.setLocation(bidAnalysisDto.getLocation());
-                existingBidAnalysis.setQuotation(bidAnalysisDto.getQuotation());	          
+                existingBidAnalysis.setDate(bidAnalysisDto.getDate());	          
 	        	modelMapper.map(bidAnalysisDto, existingBidAnalysis);
 	            BidAnalysisEntity updatedBidAnalysis = bidAnalysisRepository.save(existingBidAnalysis);
 	            logger.info("Updated BidAnalysis with ID: {}", updatedBidAnalysis.getBidAnalysisId());

@@ -7,6 +7,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -17,6 +18,7 @@ import lombok.ToString;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 @Entity
 @Table(name = "vendor")
 public class VendorEntity {
@@ -44,7 +46,7 @@ public class VendorEntity {
 	private String city;
 	
 	@Column(name = "zip_code")
-	private String zipCode;
+	private int zipCode;
 	
 	@Column(name = "previous_balance")
 	private double previousBalance;

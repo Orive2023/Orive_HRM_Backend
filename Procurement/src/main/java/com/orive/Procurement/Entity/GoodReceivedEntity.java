@@ -20,6 +20,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
+
 @Getter
 @Setter
 @ToString
@@ -27,30 +28,27 @@ import lombok.ToString;
 @NoArgsConstructor
 @Builder
 @Entity
-@Table(name = "purchaseOrder")
-public class PurchaseOrderEntity {
+@Table(name = "good_received")
+public class GoodReceivedEntity {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long purchaseOrderId;
+	private Long goodReceivedId;
 	
-	@Column(name = "quotation")
-	private String quotation;
+	@Column(name = "purchase_order")
+	private String purchaseOrder;
 	
-	@Column(name = "location")
-	private String location;
-
+	@Column(name = "payment_source")
+	private String paymentSource;
+	
 	@Column(name = "vendor_name")
 	private String vendorName;
 	
-	@Column(name = "address")
-	private String address;
+	@Column(name = "date")
+	private Date date;
 	
-	@Column(name = "notes")
-	private String notes;
-	
-	@Column(name = "authorized_by_name")
-	private String authorizedByName;
+	@Column(name = "received_by_name")
+	private String receivedByName;
 	
 	@Column(name = "title")
 	private String title;
@@ -59,10 +57,8 @@ public class PurchaseOrderEntity {
 	@Column(name = "signature_and_stamp", length = 100000)
 	private byte[] signatureAndStamp;
 	
-	@Column(name = "date")
-	private Date date;
-	
-	@OneToMany(targetEntity = PurchaseOrderListEntity.class,cascade = CascadeType.ALL)
-	@JoinColumn(name = "purchaseOrder_list_fk",referencedColumnName = "purchaseOrderId")
-	private List<PurchaseOrderListEntity> purchaseOrderListEntities;
+	@OneToMany(targetEntity = GoodReceivedListEntity.class,cascade = CascadeType.ALL)
+	@JoinColumn(name = "goodReceived_list_fk",referencedColumnName = "goodReceivedId")
+	private List<GoodReceivedListEntity> goodReceivedListEntities;
+
 }

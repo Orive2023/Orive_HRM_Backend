@@ -7,32 +7,41 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-
 @Getter
 @Setter
-@ToString
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString
+@Builder
 @Entity
-@Table(name = "committee")
-public class CommitteeEntity {
+@Table(name = "purchaseOrder_list")
+public class PurchaseOrderListEntity {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long committeeId;
+	private Long purchaseOrderListId;
 	
-	@Column(name = "name")
-	private String name;
+	@Column(name = "description")
+	private String description;
 	
-	@Column(name = "signature")
-	private String signature;
+	@Column(name = "unit_name")
+	private String unitName;
 	
-	@Column(name = "date")
-	private String date;
-
+	@Column(name = "quantity")
+	private int quantity;
+	
+	@Column(name = "price")
+	private double price;
+	
+	@Column(name = "total")
+	private double total;
+	
+	@Column(name = "grand_total")
+	private double grandTotal;
 }

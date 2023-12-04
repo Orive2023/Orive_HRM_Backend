@@ -58,6 +58,9 @@ public class GrantLoanService {
         Optional<GrantLoanEntity> existingGrantLoanOptional = grantLoanRepository.findById(grantLoanId);
         if (existingGrantLoanOptional.isPresent()) {
         	GrantLoanEntity existingGrantLoan = existingGrantLoanOptional.get();
+        	existingGrantLoan.setAmount(grantLoanDto.getAmount());
+        	existingGrantLoan.setInterestPersentage(grantLoanDto.getInterestPersentage());
+        	existingGrantLoan.setInstallmentPeriod(grantLoanDto.getInstallmentPeriod());
             modelMapper.map(grantLoanDto, existingGrantLoanOptional);
             GrantLoanEntity updatedGrantLoan = grantLoanRepository.save(existingGrantLoan);
             logger.info("Updated GrantLoan with ID: {}", updatedGrantLoan.getGrantLoanId());

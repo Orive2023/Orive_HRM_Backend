@@ -1,5 +1,7 @@
 package com.orive.Procurement.Dto;
 
+
+
 import jakarta.persistence.Column;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -10,13 +12,18 @@ import lombok.ToString;
 
 @Getter
 @Setter
-@ToString
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString
 @Builder
-public class UnitsDto {
+public class PurchaseOrderListDto {
 	
-    private Long unitsId;
-    private String unitName;
+	private Long purchaseOrderListId;
+	private String description;
+	private String unitName;
+	private int quantity;
+	private double price;
+	private double total;
+	private double grandTotal;
 
 }

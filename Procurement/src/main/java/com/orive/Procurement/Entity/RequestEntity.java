@@ -1,5 +1,6 @@
 package com.orive.Procurement.Entity;
 
+import java.util.Date;
 import java.util.List;
 
 import jakarta.persistence.CascadeType;
@@ -12,6 +13,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -22,6 +24,7 @@ import lombok.ToString;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 @Entity
 @Table(name = "request")
 public class RequestEntity {
@@ -45,7 +48,10 @@ public class RequestEntity {
 	@Column(name = "reason_for_requesting")
 	private String reasonForRequesting;
 	
-	@OneToMany(targetEntity = DescriptionOfMaterialEntity.class,cascade = CascadeType.ALL)
+	@Column(name = "created_date")
+	private Date createdDate;
+	
+	@OneToMany(targetEntity = DescriptionOfMaterialListEntity.class,cascade = CascadeType.ALL)
 	@JoinColumn(name = "request_description_fk",referencedColumnName = "requestId")
-	private List<DescriptionOfMaterialEntity> descriptionOfMaterialEntities;
+	private List<DescriptionOfMaterialListEntity> descriptionOfMaterialEntities;
 }

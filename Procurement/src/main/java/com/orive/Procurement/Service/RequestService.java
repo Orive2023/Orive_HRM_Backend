@@ -59,8 +59,8 @@ public class RequestService {
 	        if (existingRequestOptional.isPresent()) {
 	        	RequestEntity existingRequest = existingRequestOptional.get();
 	            existingRequest.setRequestingPerson(requestDto.getRequestingPerson());
-	        	existingRequest.setRequestingDepartment(requestDto.getRequestingDepartment());
-	        	existingRequest.setReasonForRequesting(requestDto.getReasonForRequesting());
+	        	existingRequest.setExpectedTimeToHaveTheGoodStarts(requestDto.getExpectedTimeToHaveTheGoodStarts());
+	        	existingRequest.setExpectedTimeToHaveTheGoodEnds(requestDto.getExpectedTimeToHaveTheGoodEnds());
 	        	modelMapper.map(requestDto, existingRequestOptional);
 	            RequestEntity updatedRequest = requestRepository.save(existingRequest);
 	            logger.info("Updated Request with ID: {}", updatedRequest.getRequestId());
