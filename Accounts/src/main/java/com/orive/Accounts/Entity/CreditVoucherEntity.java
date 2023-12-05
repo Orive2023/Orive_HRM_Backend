@@ -1,5 +1,6 @@
 package com.orive.Accounts.Entity;
 
+import java.time.ZonedDateTime;
 import java.util.List;
 
 import jakarta.persistence.CascadeType;
@@ -12,6 +13,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -22,6 +24,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
+@Builder
 @Entity
 @Table(name = "credit_voucher")
 public class CreditVoucherEntity {
@@ -37,13 +40,13 @@ public class CreditVoucherEntity {
 	private String debitAccountHead;
 	
 	@Column(name = "date")
-	private String date;
+	private ZonedDateTime date;
 	
 	@Column(name = "remark")
 	private String remark;
 	
 	@OneToMany(targetEntity = CreditVoucherTableEntity.class,cascade = CascadeType.ALL)
-	@JoinColumn(name = "credit_voucher_table_fk",referencedColumnName = "creditVoucherId")
+	@JoinColumn(name = "creditvoucher_table_fk",referencedColumnName = "creditVoucherId")
 	private List<CreditVoucherTableEntity> creditVoucherTableEntities;
 	
 	@Column(name = "total")

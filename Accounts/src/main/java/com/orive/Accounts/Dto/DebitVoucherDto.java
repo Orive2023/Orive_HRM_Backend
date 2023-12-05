@@ -1,5 +1,6 @@
 package com.orive.Accounts.Dto;
 
+import java.time.ZonedDateTime;
 import java.util.List;
 
 import com.orive.Accounts.Entity.DebitVoucherTableEntity;
@@ -23,8 +24,8 @@ public class DebitVoucherDto {
     private Long debitVoucherId;
 	private String voucherType;
 	private String creditAccountHead;
-	private String date;
+	private ZonedDateTime date;
 	private String remark;
-	private List<DebitVoucherTableEntity> debitVoucherTableEntities;
+	private List<DebitVoucherTableDto> debitVoucherTableEntities;
 	private double total;
 }

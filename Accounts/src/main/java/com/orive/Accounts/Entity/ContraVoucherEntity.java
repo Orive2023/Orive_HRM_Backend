@@ -1,5 +1,6 @@
 package com.orive.Accounts.Entity;
 
+import java.time.ZonedDateTime;
 import java.util.List;
 
 import jakarta.persistence.CascadeType;
@@ -27,6 +28,7 @@ import lombok.ToString;
 @Entity
 @Table(name = "contra_voucher")
 public class ContraVoucherEntity {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long contraVoucherId;
@@ -38,12 +40,12 @@ public class ContraVoucherEntity {
 	private String reversedAccountHead;
 	
 	@Column(name = "date")
-	private String date;
+	private ZonedDateTime date;
 	
 	@Column(name = "remark")
 	private String remark;
 
 	@OneToMany(targetEntity =  ContraVoucherListEntity.class,cascade = CascadeType.ALL)
-	@JoinColumn(name = "contra_voucher_table_fk",referencedColumnName = "contraVoucherId")
+	@JoinColumn(name = "contravoucher_table_fk",referencedColumnName = "contraVoucherId")
 	private List<ContraVoucherListEntity> contraVoucherListEntities;
 }

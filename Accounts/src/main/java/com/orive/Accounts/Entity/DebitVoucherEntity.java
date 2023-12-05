@@ -1,5 +1,6 @@
 package com.orive.Accounts.Entity;
 
+import java.time.ZonedDateTime;
 import java.util.List;
 
 import jakarta.persistence.CascadeType;
@@ -38,13 +39,13 @@ public class DebitVoucherEntity {
 	private String creditAccountHead;
 	
 	@Column(name = "date")
-	private String date;
+	private ZonedDateTime date;
 	
 	@Column(name = "remark")
 	private String remark;
 	
 	@OneToMany(targetEntity = DebitVoucherTableEntity.class,cascade = CascadeType.ALL)
-	@JoinColumn(name = "debit_voucher_table_fk",referencedColumnName = "debitVoucherId")
+	@JoinColumn(name = "debitvoucher_table_fk",referencedColumnName = "debitVoucherId")
 	private List<DebitVoucherTableEntity> debitVoucherTableEntities;
 	
 	@Column(name = "total")

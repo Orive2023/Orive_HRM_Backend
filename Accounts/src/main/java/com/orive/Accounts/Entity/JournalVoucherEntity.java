@@ -1,5 +1,6 @@
 package com.orive.Accounts.Entity;
 
+import java.time.ZonedDateTime;
 import java.util.List;
 
 import jakarta.persistence.CascadeType;
@@ -39,13 +40,13 @@ public class JournalVoucherEntity {
 	private String voucherType;
 	
 	@Column(name = "date")
-	private String date;
+	private ZonedDateTime date;
 	
 	@Column(name = "remark")
 	private String remark;
 	
 	@OneToMany(targetEntity = JournalVoucherTableEntity.class,cascade = CascadeType.ALL)
-	@JoinColumn(name = "journal_voucher_table_fk",referencedColumnName = "journalVoucherId")
+	@JoinColumn(name = "journalvoucher_table_fk",referencedColumnName = "journalVoucherId")
 	private List<JournalVoucherTableEntity> journalVoucherTableEntities;
 	
 	@Column(name = "total_credit")

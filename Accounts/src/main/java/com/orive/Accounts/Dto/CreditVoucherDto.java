@@ -1,10 +1,12 @@
 package com.orive.Accounts.Dto;
 
+import java.time.ZonedDateTime;
 import java.util.List;
 
 import com.orive.Accounts.Entity.CreditVoucherTableEntity;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -15,13 +17,14 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
+@Builder
 public class CreditVoucherDto {
 
 	private Long creditVoucherId;
 	private String voucherType;
 	private String debitAccountHead;
-	private String date;
+	private ZonedDateTime date;
 	private String remark;
-	private List<CreditVoucherTableEntity> creditVoucherTableEntities;
+	private List<CreditVoucherTableDto> creditVoucherTableEntities;
 	private double total;
 }

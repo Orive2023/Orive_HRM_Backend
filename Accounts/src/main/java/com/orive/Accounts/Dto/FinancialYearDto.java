@@ -1,5 +1,7 @@
 package com.orive.Accounts.Dto;
 
+import java.time.ZonedDateTime;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -17,6 +19,6 @@ public class FinancialYearDto {
 
     private Long financialYearId;
 	private String financialYear;
-	private String financialYearStartDate;
-	private String financialYearEndDate;
+	private ZonedDateTime financialYearStartDate;
+	private ZonedDateTime financialYearEndDate;
 }

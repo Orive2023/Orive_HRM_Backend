@@ -50,7 +50,7 @@ public class FinancialYearController {
     }
 
     // Get AccountList by ID
-    @GetMapping("/get/{accountListId}")
+    @GetMapping("/get/{financialYearId}")
     public ResponseEntity<FinancialYearDto> getFinancialYearListById(@PathVariable Long financialYearId) {
         Optional<FinancialYearDto> accountList = financialYearService.getFinancialYearById(financialYearId);
         if (accountList.isPresent()) {

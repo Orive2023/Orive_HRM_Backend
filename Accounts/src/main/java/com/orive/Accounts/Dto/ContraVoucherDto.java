@@ -1,10 +1,14 @@
 package com.orive.Accounts.Dto;
 
+import java.time.ZonedDateTime;
 import java.util.List;
 
 import com.orive.Accounts.Entity.ContraVoucherListEntity;
 
-
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -19,12 +23,12 @@ import lombok.ToString;
 @ToString
 @Builder
 public class ContraVoucherDto {
-
-	private Long contraVoucherId;
+	
+    private Long contraVoucherId;
 	private String voucherType;
 	private String reversedAccountHead;
-	private String date;
+	private ZonedDateTime date;
 	private String remark;
-	private List<ContraVoucherListEntity> contraVoucherListEntities;
+	private List<ContraVoucherListDto> contraVoucherListEntities;
 
 }

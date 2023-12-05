@@ -1,5 +1,7 @@
 package com.orive.Accounts.Entity;
 
+import java.time.ZonedDateTime;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -30,8 +32,8 @@ public class FinancialYearEntity {
 	private String financialYear;
 	
 	@Column(name = "financial_year_start_date")
-	private String financialYearStartDate;
+	private ZonedDateTime financialYearStartDate;
 	
 	@Column(name = "financial_year_end_date")
-	private String financialYearEndDate;
+	private ZonedDateTime financialYearEndDate;
 }

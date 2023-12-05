@@ -1,5 +1,6 @@
 package com.orive.Accounts.Entity;
 
+import java.time.ZonedDateTime;
 import java.util.List;
 
 import jakarta.persistence.CascadeType;
@@ -36,10 +37,10 @@ public class OpeningBalanceEntity {
 	private String financialYear;
 	
 	@Column(name = "date")
-	private String date;
+	private ZonedDateTime date;
 	
 	@OneToMany(targetEntity = OpeningBalanceTableEntity.class,cascade = CascadeType.ALL)
-	@JoinColumn(name = "opening_balance_table_fk",referencedColumnName = "openingBalanceId")
+	@JoinColumn(name = "openingbalance_table_fk",referencedColumnName = "openingBalanceId")
 	private List<OpeningBalanceTableEntity> openingBalanceTableEntities;
 	
 	@Column(name = "total_debit")
