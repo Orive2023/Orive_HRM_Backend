@@ -31,7 +31,7 @@ public class AccountBalancesEntity {
 	private String employeeFullName;
 	
 	@Column(name = "employee_id")
-	private String employeeId;
+	private Long employeeId;
 	
 	@Column(name = "department")
 	private String department;

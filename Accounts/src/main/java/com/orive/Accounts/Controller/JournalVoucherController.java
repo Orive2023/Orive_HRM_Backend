@@ -32,61 +32,62 @@ private static final Logger logger=LoggerFactory.getLogger(JournalVoucherControl
 	private JournalVoucherService journalVoucherService;
 	
 	
-	// Create a new AccountList
+	// Create a new JournalVoucher
     @PostMapping("/create/journalVoucher")
-    public ResponseEntity<JournalVoucherDto> createJournalVoucher(@RequestBody JournalVoucherDto accountListDto) {
-    	JournalVoucherDto createdAccountList = journalVoucherService.createJournalVoucher(accountListDto);
-        logger.info("Created AccountList with year: {}", createdAccountList.getJournalVoucherId());
-        return new ResponseEntity<>(createdAccountList, HttpStatus.CREATED);
+    public ResponseEntity<JournalVoucherDto> createJournalVoucher(@RequestBody JournalVoucherDto journalVoucherDto) {
+    	JournalVoucherDto createdJournalVoucher = journalVoucherService.createJournalVoucher(journalVoucherDto);
+        logger.info("Created JournalVoucher with year: {}", createdJournalVoucher.getJournalVoucherId());
+        return new ResponseEntity<>(createdJournalVoucher, HttpStatus.CREATED);
     }
 
-    // Get all AccountList   
+    // Get all JournalVoucher   
     @GetMapping("/get/journalVoucher")
     public ResponseEntity<List<JournalVoucherDto>> getAllJournalVoucher() {
-        List<JournalVoucherDto> accountList = journalVoucherService.getAllJournalVoucher();
-        logger.info("Retrieved {} AccountList from the database", accountList.size());
-        return new ResponseEntity<>(accountList, HttpStatus.OK);
+        List<JournalVoucherDto> journalVoucher = journalVoucherService.getAllJournalVoucher();
+        logger.info("Retrieved {} JournalVoucher from the database", journalVoucher.size());
+        return new ResponseEntity<>(journalVoucher, HttpStatus.OK);
     }
 
-    // Get AccountList by ID
+    // Get JournalVoucher by ID
     @GetMapping("/get/{journalVoucherId}")
     public ResponseEntity<JournalVoucherDto> getJournalVoucherById(@PathVariable Long journalVoucherId) {
-        Optional<JournalVoucherDto> accountList = journalVoucherService.getJournalVoucherById(journalVoucherId);
-        if (accountList.isPresent()) {
-            logger.info("Retrieved AccountList with ID: {}", journalVoucherId);
-            return new ResponseEntity<>(accountList.get(), HttpStatus.OK);
+        Optional<JournalVoucherDto> journalVoucher = journalVoucherService.getJournalVoucherById(journalVoucherId);
+        if (journalVoucher.isPresent()) {
+            logger.info("Retrieved JournalVoucher with ID: {}", journalVoucherId);
+            return new ResponseEntity<>(journalVoucher.get(), HttpStatus.OK);
         } else {
-            logger.warn("AccountList with ID {} not found", journalVoucherId);
+            logger.warn("JournalVoucher with ID {} not found", journalVoucherId);
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 
-    // Update AccountList by ID
+    // Update JournalVoucher by ID
     @PutMapping("/update/{journalVoucherId}")
-    public ResponseEntity<JournalVoucherDto> updateJournalVoucher(@PathVariable Long journalVoucherId, @RequestBody JournalVoucherDto updatedAccountListDto) {
-    	JournalVoucherDto updatedAccountList = journalVoucherService.updateJournalVoucher(journalVoucherId, updatedAccountListDto);
-        if (updatedAccountList != null) {
-            logger.info("Updated AccountList with ID: {}", journalVoucherId);
-            return new ResponseEntity<>(updatedAccountList, HttpStatus.OK);
+    public ResponseEntity<JournalVoucherDto> updateJournalVoucher(@PathVariable Long journalVoucherId, @RequestBody JournalVoucherDto updatedJournalVoucherDto) {
+    	JournalVoucherDto updatedJournalVoucher = journalVoucherService.updateJournalVoucher(journalVoucherId, updatedJournalVoucherDto);
+        if (updatedJournalVoucher != null) {
+            logger.info("Updated JournalVoucher with ID: {}", journalVoucherId);
+            return new ResponseEntity<>(updatedJournalVoucher, HttpStatus.OK);
         } else {
-            logger.warn("AccountList with ID {} not found for update", journalVoucherId);
+            logger.warn("JournalVoucher with ID {} not found for update", journalVoucherId);
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
     
 
 
-    // Delete AccountList by ID
+    // Delete JournalVoucher by ID
     @DeleteMapping("/delete/{journalVoucherId}")
     public ResponseEntity<Void> deleteJournalVoucher(@PathVariable Long journalVoucherId) {
     	journalVoucherService.deleteJournalVoucher(journalVoucherId);
-        logger.info("Deleted AccountList with ID: {}", journalVoucherId);
+        logger.info("Deleted JournalVoucher with ID: {}", journalVoucherId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 	    
+   // Count the total JournalVoucher
 	    @GetMapping("/count/journalVoucher")
 	    public long countJournalVoucher()
 	    {
-	    	return journalVoucherService.countFinancialYearList();
+	    	return journalVoucherService.countJournalVoucherList();
 	    }
 }

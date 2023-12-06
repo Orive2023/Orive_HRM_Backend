@@ -1,9 +1,13 @@
 package com.orive.Employee.Dto;
 
+import java.time.ZonedDateTime;
 import java.util.Date;
+
+import com.orive.Employee.Entity.AwardsEntity;
 
 import jakarta.persistence.Column;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -14,13 +18,14 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
+@Builder
 public class AwardsDto {
 
 	private Long awardId;
 	private String awardName;
 	private String awardDescription;
 	private String giftItem;
-	private Date date;
+	private ZonedDateTime date;
 	private String employeeName;
 	private String awardBy;
 }

@@ -18,7 +18,7 @@ public class AccountBalanceDto {
 	
 	private Long accountBalancesId;
 	private String employeeFullName;
-	private String employeeId;
+	private Long employeeId;
 	private String department;
 	private String jobTitle;
 	private double hsaBalance;

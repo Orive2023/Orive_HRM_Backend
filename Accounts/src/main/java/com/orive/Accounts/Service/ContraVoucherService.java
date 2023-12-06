@@ -26,44 +26,44 @@ private static final Logger logger= LoggerFactory.getLogger(ContraVoucherService
 	private ModelMapper modelMapper;
 	
 	// Create
-    public ContraVoucherDto createContraVoucher(ContraVoucherDto accountListDto) {
-    	ContraVoucherEntity accountListEntity = convertToEntity(accountListDto);
-    	ContraVoucherEntity savedAccountList = contraVoucherRepository.save(accountListEntity);
-        logger.info("Created AccountList with ID: {}", savedAccountList.getReversedAccountHead());
-        return convertToDTO(savedAccountList);
+    public ContraVoucherDto createContraVoucher(ContraVoucherDto contraVoucherDto) {
+    	ContraVoucherEntity contraVoucherEntity = convertToEntity(contraVoucherDto);
+    	ContraVoucherEntity savedContraVoucher = contraVoucherRepository.save(contraVoucherEntity);
+        logger.info("Created ContraVoucher with ID: {}", savedContraVoucher.getReversedAccountHead());
+        return convertToDTO(savedContraVoucher);
     }
 
     // Read
     public List<ContraVoucherDto> getAllContraVoucher() {
-        List<ContraVoucherEntity> accountListEntities = contraVoucherRepository.findAll();
-        logger.info("Retrieved {} AccountList from the database", accountListEntities.size());
-        return accountListEntities.stream()
+        List<ContraVoucherEntity> contraVoucherEntities = contraVoucherRepository.findAll();
+        logger.info("Retrieved {} ContraVoucher from the database", contraVoucherEntities.size());
+        return contraVoucherEntities.stream()
                 .map(this::convertToDTO)
                 .collect(Collectors.toList());
     }
     
-    //get by AccountListId
+    //get by ContraVoucherId
     public Optional<ContraVoucherDto> getContraVoucherById(Long contraVoucherId) {
-        Optional<ContraVoucherEntity> accountList = contraVoucherRepository.findById(contraVoucherId);
-        if (accountList.isPresent()) {
-            return Optional.of(convertToDTO(accountList.get()));
+        Optional<ContraVoucherEntity> contraVoucher = contraVoucherRepository.findById(contraVoucherId);
+        if (contraVoucher.isPresent()) {
+            return Optional.of(convertToDTO(contraVoucher.get()));
         } else {
-            logger.warn("AccountList with ID {} not found", contraVoucherId);
+            logger.warn("ContraVoucher with ID {} not found", contraVoucherId);
             return Optional.empty();
         }
     }
     
  // Update list by id
-    public ContraVoucherDto updateContraVoucher(Long contraVoucherId, ContraVoucherDto accountListDto) {
-        Optional<ContraVoucherEntity> existingAccountListOptional = contraVoucherRepository.findById(contraVoucherId);
-        if (existingAccountListOptional.isPresent()) {
-        	ContraVoucherEntity existingAccountList = existingAccountListOptional.get();
-            modelMapper.map(accountListDto, existingAccountListOptional);
-            ContraVoucherEntity updatedAccountList = contraVoucherRepository.save(existingAccountList);
-            logger.info("Updated AccountList with ID: {}", updatedAccountList.getContraVoucherId());
-            return convertToDTO(updatedAccountList);
+    public ContraVoucherDto updateContraVoucher(Long contraVoucherId, ContraVoucherDto contraVoucherDto) {
+        Optional<ContraVoucherEntity> existingContraVoucherOptional = contraVoucherRepository.findById(contraVoucherId);
+        if (existingContraVoucherOptional.isPresent()) {
+        	ContraVoucherEntity existingContraVoucher = existingContraVoucherOptional.get();
+            modelMapper.map(contraVoucherDto, existingContraVoucherOptional);
+            ContraVoucherEntity updatedContraVoucher = contraVoucherRepository.save(existingContraVoucher);
+            logger.info("Updated ContraVoucher with ID: {}", updatedContraVoucher.getContraVoucherId());
+            return convertToDTO(updatedContraVoucher);
         } else {
-            logger.warn("AccountList with ID {} not found for update", contraVoucherId);
+            logger.warn("ContraVoucher with ID {} not found for update", contraVoucherId);
             return null;
         }
     }
@@ -71,23 +71,23 @@ private static final Logger logger= LoggerFactory.getLogger(ContraVoucherService
     // Delete
     public void deleteContraVoucher(Long contraVoucherId) {
     	contraVoucherRepository.deleteById(contraVoucherId);
-        logger.info("Deleted AccountList with ID: {}", contraVoucherId);
+        logger.info("Deleted ContraVoucher with ID: {}", contraVoucherId);
     }
 
-    //count the total AccountList
+    //count the total ContraVoucher
     public long countContraVoucher()
 	 {
 		 return contraVoucherRepository.count();
 	 }
     
-	// Helper method to convert AccountListDTo to AccountListEntity
-    private ContraVoucherEntity convertToEntity(ContraVoucherDto accountListDto )
+	// Helper method to convert ContraVoucherDTo to ContraVoucherEntity
+    private ContraVoucherEntity convertToEntity(ContraVoucherDto contraVoucherDto )
     {
-    	return modelMapper.map(accountListDto, ContraVoucherEntity.class);
+    	return modelMapper.map(contraVoucherDto, ContraVoucherEntity.class);
     }
 
-    // Helper method to convert AccountListEntity  to AccountListDTo
-    private ContraVoucherDto convertToDTO(ContraVoucherEntity accountListEntity) {
-        return modelMapper.map(accountListEntity, ContraVoucherDto.class);
+    // Helper method to convert ContraVoucherEntity  to ContraVoucherDTo
+    private ContraVoucherDto convertToDTO(ContraVoucherEntity contraVoucherEntity) {
+        return modelMapper.map(contraVoucherEntity, ContraVoucherDto.class);
     } 
 }

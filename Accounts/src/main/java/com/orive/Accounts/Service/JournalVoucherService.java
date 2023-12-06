@@ -26,44 +26,44 @@ public class JournalVoucherService {
 		private ModelMapper modelMapper;
 		
 		// Create
-	    public JournalVoucherDto createJournalVoucher(JournalVoucherDto accountListDto) {
-	    	JournalVoucherEntity accountListEntity = convertToEntity(accountListDto);
-	    	JournalVoucherEntity savedAccountList = journalVoucherRepository.save(accountListEntity);
-	        logger.info("Created AccountList with ID: {}", savedAccountList.getJournalVoucherId());
-	        return convertToDTO(savedAccountList);
+	    public JournalVoucherDto createJournalVoucher(JournalVoucherDto journalVoucherDto) {
+	    	JournalVoucherEntity journalVoucherEntity = convertToEntity(journalVoucherDto);
+	    	JournalVoucherEntity savedJournalVoucher = journalVoucherRepository.save(journalVoucherEntity);
+	        logger.info("Created JournalVoucher with ID: {}", savedJournalVoucher.getJournalVoucherId());
+	        return convertToDTO(savedJournalVoucher);
 	    }
 
 	    // Read
 	    public List<JournalVoucherDto> getAllJournalVoucher() {
-	        List<JournalVoucherEntity> accountListEntities = journalVoucherRepository.findAll();
-	        logger.info("Retrieved {} AccountList from the database", accountListEntities.size());
-	        return accountListEntities.stream()
+	        List<JournalVoucherEntity> journalVoucherEntities = journalVoucherRepository.findAll();
+	        logger.info("Retrieved {} JournalVoucher from the database", journalVoucherEntities.size());
+	        return journalVoucherEntities.stream()
 	                .map(this::convertToDTO)
 	                .collect(Collectors.toList());
 	    }
 	    
-	    //get by AccountListId
+	    //get by JournalVoucherId
 	    public Optional<JournalVoucherDto> getJournalVoucherById(Long journalVoucherId) {
-	        Optional<JournalVoucherEntity> accountList = journalVoucherRepository.findById(journalVoucherId);
-	        if (accountList.isPresent()) {
-	            return Optional.of(convertToDTO(accountList.get()));
+	        Optional<JournalVoucherEntity> journalVoucher = journalVoucherRepository.findById(journalVoucherId);
+	        if (journalVoucher.isPresent()) {
+	            return Optional.of(convertToDTO(journalVoucher.get()));
 	        } else {
-	            logger.warn("AccountList with ID {} not found", journalVoucherId);
+	            logger.warn("JournalVoucher with ID {} not found", journalVoucherId);
 	            return Optional.empty();
 	        }
 	    }
 	    
 	 // Update list by id
-	    public JournalVoucherDto updateJournalVoucher(Long journalVoucherId, JournalVoucherDto accountListDto) {
-	        Optional<JournalVoucherEntity> existingAccountListOptional = journalVoucherRepository.findById(journalVoucherId);
-	        if (existingAccountListOptional.isPresent()) {
-	        	JournalVoucherEntity existingAccountList = existingAccountListOptional.get();
-	            modelMapper.map(accountListDto, existingAccountListOptional);
-	            JournalVoucherEntity updatedAccountList = journalVoucherRepository.save(existingAccountList);
-	            logger.info("Updated AccountList with ID: {}", updatedAccountList.getJournalVoucherId());
-	            return convertToDTO(updatedAccountList);
+	    public JournalVoucherDto updateJournalVoucher(Long journalVoucherId, JournalVoucherDto journalVoucherDto) {
+	        Optional<JournalVoucherEntity> existingJournalVoucherOptional = journalVoucherRepository.findById(journalVoucherId);
+	        if (existingJournalVoucherOptional.isPresent()) {
+	        	JournalVoucherEntity existingJournalVoucher = existingJournalVoucherOptional.get();
+	            modelMapper.map(journalVoucherDto, existingJournalVoucherOptional);
+	            JournalVoucherEntity updatedJournalVoucher = journalVoucherRepository.save(existingJournalVoucher);
+	            logger.info("Updated JournalVoucher with ID: {}", updatedJournalVoucher.getJournalVoucherId());
+	            return convertToDTO(updatedJournalVoucher);
 	        } else {
-	            logger.warn("AccountList with ID {} not found for update",journalVoucherId );
+	            logger.warn("JournalVoucher with ID {} not found for update",journalVoucherId );
 	            return null;
 	        }
 	    }
@@ -71,23 +71,23 @@ public class JournalVoucherService {
 	    // Delete
 	    public void deleteJournalVoucher(Long journalVoucherId) {
 	    	journalVoucherRepository.deleteById(journalVoucherId);
-	        logger.info("Deleted AccountList with ID: {}", journalVoucherId);
+	        logger.info("Deleted JournalVoucher with ID: {}", journalVoucherId);
 	    }
 
-	    //count the total AccountList
-	    public long countFinancialYearList()
+	    //count the total JournalVoucher
+	    public long countJournalVoucherList()
 		 {
 			 return journalVoucherRepository.count();
 		 }
 	    
-		// Helper method to convert AccountListDTo to AccountListEntity
-	    private JournalVoucherEntity convertToEntity(JournalVoucherDto accountListDto )
+		// Helper method to convert JournalVoucherDTo to JournalVoucherEntity
+	    private JournalVoucherEntity convertToEntity(JournalVoucherDto journalVoucherDto )
 	    {
-	    	return modelMapper.map(accountListDto, JournalVoucherEntity.class);
+	    	return modelMapper.map(journalVoucherDto, JournalVoucherEntity.class);
 	    }
 
-	    // Helper method to convert AccountListEntity  to AccountListDTo
-	    private JournalVoucherDto convertToDTO(JournalVoucherEntity accountListEntity) {
-	        return modelMapper.map(accountListEntity, JournalVoucherDto.class);
+	    // Helper method to convert JournalVoucherEntity  to JournalVoucherDTo
+	    private JournalVoucherDto convertToDTO(JournalVoucherEntity journalVoucherEntity) {
+	        return modelMapper.map(journalVoucherEntity, JournalVoucherDto.class);
 	    } 
 }

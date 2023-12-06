@@ -32,58 +32,59 @@ public class SubTypeController {
 		private SubTypeSevice subTypeSevice;
 		
 		
-		// Create a new AccountList
+		// Create a new SubType
 	    @PostMapping("/create/subType")
-	    public ResponseEntity<SubTypeDto> createSubTypeList(@RequestBody SubTypeDto accountListDto) {
-	    	SubTypeDto createdAccountList = subTypeSevice.createSubTypeList(accountListDto);
-	        logger.info("Created AccountList with year: {}", createdAccountList.getSubType());
-	        return new ResponseEntity<>(createdAccountList, HttpStatus.CREATED);
+	    public ResponseEntity<SubTypeDto> createSubTypeList(@RequestBody SubTypeDto subTypeDto) {
+	    	SubTypeDto createdSubType = subTypeSevice.createSubTypeList(subTypeDto);
+	        logger.info("Created SubType with year: {}", createdSubType.getSubType());
+	        return new ResponseEntity<>(createdSubType, HttpStatus.CREATED);
 	    }
 
-	    // Get all AccountList   
+	    // Get all SubType   
 	    @GetMapping("/get/subType")
 	    public ResponseEntity<List<SubTypeDto>> getAllSubTypeList() {
-	        List<SubTypeDto> accountList = subTypeSevice.getAllSubTypeList();
-	        logger.info("Retrieved {} AccountList from the database", accountList.size());
-	        return new ResponseEntity<>(accountList, HttpStatus.OK);
+	        List<SubTypeDto> subType = subTypeSevice.getAllSubTypeList();
+	        logger.info("Retrieved {} SubType from the database", subType.size());
+	        return new ResponseEntity<>(subType, HttpStatus.OK);
 	    }
 
-	    // Get AccountList by ID
+	    // Get SubType by ID
 	    @GetMapping("/get/{subTypeId}")
 	    public ResponseEntity<SubTypeDto> getSubTypeById(@PathVariable Long subTypeId) {
-	        Optional<SubTypeDto> accountList = subTypeSevice.getSubTypeById(subTypeId);
-	        if (accountList.isPresent()) {
-	            logger.info("Retrieved AccountList with ID: {}", subTypeId);
-	            return new ResponseEntity<>(accountList.get(), HttpStatus.OK);
+	        Optional<SubTypeDto> subType = subTypeSevice.getSubTypeById(subTypeId);
+	        if (subType.isPresent()) {
+	            logger.info("Retrieved SubType with ID: {}", subTypeId);
+	            return new ResponseEntity<>(subType.get(), HttpStatus.OK);
 	        } else {
-	            logger.warn("AccountList with ID {} not found", subTypeId);
+	            logger.warn("SubType with ID {} not found", subTypeId);
 	            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	        }
 	    }
 
-	    // Update AccountList by ID
+	    // Update SubType by ID
 	    @PutMapping("/update/{subTypeId}")
-	    public ResponseEntity<SubTypeDto> updateSubTypeList(@PathVariable Long subTypeId, @RequestBody SubTypeDto updatedAccountListDto) {
-	    	SubTypeDto updatedAccountList = subTypeSevice.updateSubTypeList(subTypeId, updatedAccountListDto);
-	        if (updatedAccountList != null) {
-	            logger.info("Updated AccountList with ID: {}", subTypeId);
-	            return new ResponseEntity<>(updatedAccountList, HttpStatus.OK);
+	    public ResponseEntity<SubTypeDto> updateSubTypeList(@PathVariable Long subTypeId, @RequestBody SubTypeDto updatedSubTypeDto) {
+	    	SubTypeDto updatedSubType = subTypeSevice.updateSubTypeList(subTypeId, updatedSubTypeDto);
+	        if (updatedSubType != null) {
+	            logger.info("Updated SubType with ID: {}", subTypeId);
+	            return new ResponseEntity<>(updatedSubType, HttpStatus.OK);
 	        } else {
-	            logger.warn("AccountList with ID {} not found for update", subTypeId);
+	            logger.warn("SubType with ID {} not found for update", subTypeId);
 	            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	        }
 	    }
 	    
 
 
-	    // Delete AccountList by ID
+	    // Delete SubType by ID
 	    @DeleteMapping("/delete/{subTypeId}")
 	    public ResponseEntity<Void> deleteSubTypeList(@PathVariable Long subTypeId) {
 	    	subTypeSevice.deleteSubTypeList(subTypeId);
-	        logger.info("Deleted AccountList with ID: {}", subTypeId);
+	        logger.info("Deleted SubType with ID: {}", subTypeId);
 	        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	    }
-		    
+		   
+	    // Count the total SubType
 		    @GetMapping("/count/subType")
 		    public long countSubTypeList()
 		    {

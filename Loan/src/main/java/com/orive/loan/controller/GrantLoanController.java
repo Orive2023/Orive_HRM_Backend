@@ -83,6 +83,7 @@ public class GrantLoanController {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 	    
+    // Count the total GrantLoan
 	    @GetMapping("/count/grantloan")
 	    public long countGrantLoan()
 	    {

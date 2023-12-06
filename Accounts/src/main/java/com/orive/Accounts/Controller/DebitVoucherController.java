@@ -34,60 +34,61 @@ public class DebitVoucherController {
 	private DebitVoucherService debitVoucherService;
 	
 	
-	// Create a new AccountList
+	// Create a new DebitVoucher
     @PostMapping("/create/debitVoucher")
-    public ResponseEntity<DebitVoucherDto> createDebitVoucher(@RequestBody DebitVoucherDto accountListDto) {
-    	DebitVoucherDto createdAccountList = debitVoucherService.createDebitVoucher(accountListDto);
-        logger.info("Created AccountList with year: {}", createdAccountList.getDebitVoucherId());
-        return new ResponseEntity<>(createdAccountList, HttpStatus.CREATED);
+    public ResponseEntity<DebitVoucherDto> createDebitVoucher(@RequestBody DebitVoucherDto debitVoucherDto) {
+    	DebitVoucherDto createdDebitVoucher = debitVoucherService.createDebitVoucher(debitVoucherDto);
+        logger.info("Created DebitVoucher with year: {}", createdDebitVoucher.getDebitVoucherId());
+        return new ResponseEntity<>(createdDebitVoucher, HttpStatus.CREATED);
     }
 
-    // Get all AccountList   
+    // Get all DebitVoucher   
     @GetMapping("/get/debitVoucher")
     public ResponseEntity<List<DebitVoucherDto>> getAllDebitVoucher() {
-        List<DebitVoucherDto> accountList = debitVoucherService.getAllDebitVoucher();
-        logger.info("Retrieved {} AccountList from the database", accountList.size());
-        return new ResponseEntity<>(accountList, HttpStatus.OK);
+        List<DebitVoucherDto> debitVoucher = debitVoucherService.getAllDebitVoucher();
+        logger.info("Retrieved {} DebitVoucher from the database", debitVoucher.size());
+        return new ResponseEntity<>(debitVoucher, HttpStatus.OK);
     }
 
-    // Get AccountList by ID
+    // Get DebitVoucher by ID
     @GetMapping("/get/{debitVoucherId}")
     public ResponseEntity<DebitVoucherDto> getDebitVoucherById(@PathVariable Long debitVoucherId) {
-        Optional<DebitVoucherDto> accountList = debitVoucherService.getDebitVoucherById(debitVoucherId);
-        if (accountList.isPresent()) {
-            logger.info("Retrieved AccountList with ID: {}", debitVoucherId);
-            return new ResponseEntity<>(accountList.get(), HttpStatus.OK);
+        Optional<DebitVoucherDto> debitVoucher = debitVoucherService.getDebitVoucherById(debitVoucherId);
+        if (debitVoucher.isPresent()) {
+            logger.info("Retrieved DebitVoucher with ID: {}", debitVoucherId);
+            return new ResponseEntity<>(debitVoucher.get(), HttpStatus.OK);
         } else {
-            logger.warn("AccountList with ID {} not found", debitVoucherId);
+            logger.warn("DebitVoucher with ID {} not found", debitVoucherId);
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 
-    // Update AccountList by ID
+    // Update DebitVoucher by ID
     @PutMapping("/update/{debitVoucherId}")
-    public ResponseEntity<DebitVoucherDto> updateDebitVoucher(@PathVariable Long debitVoucherId, @RequestBody DebitVoucherDto updatedAccountListDto) {
-    	DebitVoucherDto updatedAccountList = debitVoucherService.updateDebitVoucher(debitVoucherId, updatedAccountListDto);
-        if (updatedAccountList != null) {
-            logger.info("Updated AccountList with ID: {}", debitVoucherId);
-            return new ResponseEntity<>(updatedAccountList, HttpStatus.OK);
+    public ResponseEntity<DebitVoucherDto> updateDebitVoucher(@PathVariable Long debitVoucherId, @RequestBody DebitVoucherDto updatedDebitVoucherDto) {
+    	DebitVoucherDto updatedDebitVoucher = debitVoucherService.updateDebitVoucher(debitVoucherId, updatedDebitVoucherDto);
+        if (updatedDebitVoucher != null) {
+            logger.info("Updated DebitVoucher with ID: {}", debitVoucherId);
+            return new ResponseEntity<>(updatedDebitVoucher, HttpStatus.OK);
         } else {
-            logger.warn("AccountList with ID {} not found for update", debitVoucherId);
+            logger.warn("DebitVoucher with ID {} not found for update", debitVoucherId);
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
     
 
 
-    // Delete AccountList by ID
+    // Delete DebitVoucher by ID
     @DeleteMapping("/delete/{debitVoucherId}")
     public ResponseEntity<Void> deleteDebitVoucher(@PathVariable Long debitVoucherId) {
     	debitVoucherService.deleteDebitVoucher(debitVoucherId);
-        logger.info("Deleted AccountList with ID: {}", debitVoucherId);
+        logger.info("Deleted DebitVoucher with ID: {}", debitVoucherId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 	    
+    // Count the total DebitVoucher 
 	    @GetMapping("/count/debitVoucher")
-	    public long countFinancialYearList()
+	    public long countDebitVoucherList()
 	    {
 	    	return debitVoucherService.countDebitVoucher();
 	    }

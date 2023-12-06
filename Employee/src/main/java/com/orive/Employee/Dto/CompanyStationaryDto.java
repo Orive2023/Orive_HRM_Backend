@@ -1,5 +1,6 @@
 package com.orive.Employee.Dto;
 
+import java.time.ZonedDateTime;
 import java.util.Date;
 
 import com.orive.Employee.Entity.CompanyStationaryEntity;
@@ -26,7 +27,7 @@ public class CompanyStationaryDto {
 	private String modelName;
 	private String employeeName;
 	private String employeeRole;
-	private Date assignDate;
-	private Date returnDate;
+	private ZonedDateTime assignDate;
+	private ZonedDateTime returnDate;
 	private double itemCost;
 }

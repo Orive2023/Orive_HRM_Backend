@@ -93,9 +93,4 @@ public class GrantLoanService {
     private GrantLoanDto convertToDTO(GrantLoanEntity grantLoanEntity) {
         return modelMapper.map(grantLoanEntity, GrantLoanDto.class);
     } 
-	
-	
-	
-	
-
 }

@@ -26,44 +26,44 @@ public class OpeningBalanceService {
 	private ModelMapper modelMapper;
 	
 	// Create
-    public OpeningBalanceDTo createOpeningBalance(OpeningBalanceDTo accountBalanceDto) {
-    	OpeningBalanceEntity accountBalancesEntity = convertToEntity(accountBalanceDto);
-    	OpeningBalanceEntity savedAccountBalance = openingBalanceRepository.save(accountBalancesEntity);
-        logger.info("Created AccountBalance with ID: {}", savedAccountBalance.getOpeningBalanceId());
-        return convertToDTO(savedAccountBalance);
+    public OpeningBalanceDTo createOpeningBalance(OpeningBalanceDTo openingBalanceDTo) {
+    	OpeningBalanceEntity openingBalanceEntity = convertToEntity(openingBalanceDTo);
+    	OpeningBalanceEntity savedOpeningBalance = openingBalanceRepository.save(openingBalanceEntity);
+        logger.info("Created OpeningBalance with ID: {}", savedOpeningBalance.getOpeningBalanceId());
+        return convertToDTO(savedOpeningBalance);
     }
 
     // Read
     public List<OpeningBalanceDTo> getAllOpeningBalance() {
-        List<OpeningBalanceEntity> accountBalancesEntities = openingBalanceRepository.findAll();
-        logger.info("Retrieved {} AccountBalance from the database", accountBalancesEntities.size());
-        return accountBalancesEntities.stream()
+        List<OpeningBalanceEntity> openingBalanceEntities = openingBalanceRepository.findAll();
+        logger.info("Retrieved {} OpeningBalance from the database", openingBalanceEntities.size());
+        return openingBalanceEntities.stream()
                 .map(this::convertToDTO)
                 .collect(Collectors.toList());
     }
     
-    //get by AccountBalanceId
+    //get by OpeningBalanceId
     public Optional<OpeningBalanceDTo> getOpeningBalanceById(Long openingBalanceId) {
-        Optional<OpeningBalanceEntity> accountBalance = openingBalanceRepository.findById(openingBalanceId);
-        if (accountBalance.isPresent()) {
-            return Optional.of(convertToDTO(accountBalance.get()));
+        Optional<OpeningBalanceEntity> openingBalance = openingBalanceRepository.findById(openingBalanceId);
+        if (openingBalance.isPresent()) {
+            return Optional.of(convertToDTO(openingBalance.get()));
         } else {
-            logger.warn("AccountBalance with ID {} not found", openingBalanceId);
+            logger.warn("OpeningBalance with ID {} not found", openingBalanceId);
             return Optional.empty();
         }
     }
     
  // Update list by id
-    public OpeningBalanceDTo updateOpeningBalance(Long openingBalanceId, OpeningBalanceDTo accountBalanceDto) {
-        Optional<OpeningBalanceEntity> existingAccountBalanceOptional = openingBalanceRepository.findById(openingBalanceId);
-        if (existingAccountBalanceOptional.isPresent()) {
-        	OpeningBalanceEntity existingAccountBalance = existingAccountBalanceOptional.get();
-            modelMapper.map(accountBalanceDto, existingAccountBalanceOptional);
-            OpeningBalanceEntity updatedAccountBalance = openingBalanceRepository.save(existingAccountBalance);
-            logger.info("Updated AccountBalance with ID: {}", updatedAccountBalance.getOpeningBalanceId());
-            return convertToDTO(updatedAccountBalance);
+    public OpeningBalanceDTo updateOpeningBalance(Long openingBalanceId, OpeningBalanceDTo openingBalanceDTo) {
+        Optional<OpeningBalanceEntity> existingOpeningBalanceOptional = openingBalanceRepository.findById(openingBalanceId);
+        if (existingOpeningBalanceOptional.isPresent()) {
+        	OpeningBalanceEntity existingtOpeningBalance = existingOpeningBalanceOptional.get();
+            modelMapper.map(openingBalanceDTo, existingOpeningBalanceOptional);
+            OpeningBalanceEntity updatedOpeningBalance = openingBalanceRepository.save(existingtOpeningBalance);
+            logger.info("Updated OpeningBalance with ID: {}", updatedOpeningBalance.getOpeningBalanceId());
+            return convertToDTO(updatedOpeningBalance);
         } else {
-            logger.warn("AccountBalance with ID {} not found for update", openingBalanceId);
+            logger.warn("OpeningBalance with ID {} not found for update", openingBalanceId);
             return null;
         }
     }
@@ -71,7 +71,7 @@ public class OpeningBalanceService {
     // Delete
     public void deleteOpeningBalance(Long openingBalanceId) {
     	openingBalanceRepository.deleteById(openingBalanceId);
-        logger.info("Deleted AccountBalance with ID: {}", openingBalanceId);
+        logger.info("Deleted OpeningBalance with ID: {}", openingBalanceId);
     }
 
     //count the total OpeningBalance
@@ -80,15 +80,15 @@ public class OpeningBalanceService {
 		 return openingBalanceRepository.count();
 	 }
     
-	// Helper method to convert AccountBalanceDTo to AccountBalanceEntity
-    private  OpeningBalanceEntity convertToEntity(OpeningBalanceDTo accountBalanceDto )
+	// Helper method to convert OpeningBalanceDTo to OpeningBalanceEntity
+    private  OpeningBalanceEntity convertToEntity(OpeningBalanceDTo openingBalanceDTo )
     {
-    	return modelMapper.map(accountBalanceDto,OpeningBalanceEntity.class);
+    	return modelMapper.map(openingBalanceDTo,OpeningBalanceEntity.class);
     }
 
-    // Helper method to convert AccountBalanceEntity to AccountBalanceDTo
-    private OpeningBalanceDTo convertToDTO(OpeningBalanceEntity accountBalancesEntity) 
+    // Helper method to convert OpeningBalanceEntity to OpeningBalanceDTo
+    private OpeningBalanceDTo convertToDTO(OpeningBalanceEntity openingBalanceEntity) 
     {
-        return modelMapper.map(accountBalancesEntity, OpeningBalanceDTo.class);
+        return modelMapper.map(openingBalanceEntity, OpeningBalanceDTo.class);
     } 	
 }

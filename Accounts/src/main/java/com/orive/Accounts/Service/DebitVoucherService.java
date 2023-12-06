@@ -28,44 +28,44 @@ public class DebitVoucherService {
 	private ModelMapper modelMapper;
 	
 	// Create
-    public DebitVoucherDto createDebitVoucher(DebitVoucherDto accountListDto) {
-    	DebitVoucherEntity accountListEntity = convertToEntity(accountListDto);
-    	DebitVoucherEntity savedAccountList = debitVoucherRepository.save(accountListEntity);
-        logger.info("Created AccountList with ID: {}", savedAccountList.getDebitVoucherId());
-        return convertToDTO(savedAccountList);
+    public DebitVoucherDto createDebitVoucher(DebitVoucherDto debitVoucherDto) {
+    	DebitVoucherEntity debitVoucherEntity = convertToEntity(debitVoucherDto);
+    	DebitVoucherEntity savedDebitVoucher = debitVoucherRepository.save(debitVoucherEntity);
+        logger.info("Created DebitVoucher with ID: {}", savedDebitVoucher.getDebitVoucherId());
+        return convertToDTO(savedDebitVoucher);
     }
 
     // Read
     public List<DebitVoucherDto> getAllDebitVoucher() {
-        List<DebitVoucherEntity> accountListEntities = debitVoucherRepository.findAll();
-        logger.info("Retrieved {} AccountList from the database", accountListEntities.size());
-        return accountListEntities.stream()
+        List<DebitVoucherEntity> debitVoucherEntities = debitVoucherRepository.findAll();
+        logger.info("Retrieved {} DebitVoucher from the database", debitVoucherEntities.size());
+        return debitVoucherEntities.stream()
                 .map(this::convertToDTO)
                 .collect(Collectors.toList());
     }
     
-    //get by AccountListId
+    //get by DebitVoucherId
     public Optional<DebitVoucherDto> getDebitVoucherById(Long debitVoucherId) {
-        Optional<DebitVoucherEntity> accountList = debitVoucherRepository.findById(debitVoucherId);
-        if (accountList.isPresent()) {
-            return Optional.of(convertToDTO(accountList.get()));
+        Optional<DebitVoucherEntity> debitVoucher = debitVoucherRepository.findById(debitVoucherId);
+        if (debitVoucher.isPresent()) {
+            return Optional.of(convertToDTO(debitVoucher.get()));
         } else {
-            logger.warn("AccountList with ID {} not found", debitVoucherId);
+            logger.warn("DebitVoucher with ID {} not found", debitVoucherId);
             return Optional.empty();
         }
     }
     
  // Update list by id
-    public DebitVoucherDto updateDebitVoucher(Long debitVoucherId, DebitVoucherDto accountListDto) {
-        Optional<DebitVoucherEntity> existingAccountListOptional = debitVoucherRepository.findById(debitVoucherId);
-        if (existingAccountListOptional.isPresent()) {
-        	DebitVoucherEntity existingAccountList = existingAccountListOptional.get();
-            modelMapper.map(accountListDto, existingAccountListOptional);
-            DebitVoucherEntity updatedAccountList = debitVoucherRepository.save(existingAccountList);
-            logger.info("Updated AccountList with ID: {}", updatedAccountList.getDebitVoucherId());
-            return convertToDTO(updatedAccountList);
+    public DebitVoucherDto updateDebitVoucher(Long debitVoucherId, DebitVoucherDto debitVoucherDto) {
+        Optional<DebitVoucherEntity> existingDebitVoucherOptional = debitVoucherRepository.findById(debitVoucherId);
+        if (existingDebitVoucherOptional.isPresent()) {
+        	DebitVoucherEntity existingDebitVoucher = existingDebitVoucherOptional.get();
+            modelMapper.map(debitVoucherDto, existingDebitVoucherOptional);
+            DebitVoucherEntity updatedDebitVoucher = debitVoucherRepository.save(existingDebitVoucher);
+            logger.info("Updated DebitVoucher with ID: {}", updatedDebitVoucher.getDebitVoucherId());
+            return convertToDTO(updatedDebitVoucher);
         } else {
-            logger.warn("AccountList with ID {} not found for update", debitVoucherId);
+            logger.warn("DebitVoucher with ID {} not found for update", debitVoucherId);
             return null;
         }
     }
@@ -73,23 +73,23 @@ public class DebitVoucherService {
     // Delete
     public void deleteDebitVoucher(Long debitVoucherId) {
     	debitVoucherRepository.deleteById(debitVoucherId);
-        logger.info("Deleted AccountList with ID: {}", debitVoucherId);
+        logger.info("Deleted DebitVoucher with ID: {}", debitVoucherId);
     }
 
-    //count the total AccountList
+    //count the total DebitVoucher
     public long countDebitVoucher()
 	 {
 		 return debitVoucherRepository.count();
 	 }
     
-	// Helper method to convert AccountListDTo to AccountListEntity
-    private DebitVoucherEntity convertToEntity(DebitVoucherDto accountListDto )
+	// Helper method to convert DebitVoucherDTo to DebitVoucherEntity
+    private DebitVoucherEntity convertToEntity(DebitVoucherDto debitVoucherDto )
     {
-    	return modelMapper.map(accountListDto, DebitVoucherEntity.class);
+    	return modelMapper.map(debitVoucherDto, DebitVoucherEntity.class);
     }
 
-    // Helper method to convert AccountListEntity  to AccountListDTo
-    private DebitVoucherDto convertToDTO(DebitVoucherEntity accountListEntity) {
-        return modelMapper.map(accountListEntity, DebitVoucherDto.class);
+    // Helper method to convert DebitVoucherEntity  to DebitVoucherDTo
+    private DebitVoucherDto convertToDTO(DebitVoucherEntity debitVoucherEntity) {
+        return modelMapper.map(debitVoucherEntity, DebitVoucherDto.class);
     } 
 }

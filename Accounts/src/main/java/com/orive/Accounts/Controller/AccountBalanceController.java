@@ -82,7 +82,8 @@ public class AccountBalanceController {
         logger.info("Deleted AccountBalance with ID: {}", accountBalanceId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
-	    
+    
+ // Count the total AccountBalance
 	    @GetMapping("/count/accountbalance")
 	    public long countAccountBalance()
 	    {

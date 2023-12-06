@@ -33,42 +33,42 @@ public class FinancialYearController {
 	private FinancialYearService financialYearService;
 	
 	
-	// Create a new AccountList
+	// Create a new FinancialYear
     @PostMapping("/create/financialYear")
-    public ResponseEntity<FinancialYearDto> createFinancialYearList(@RequestBody FinancialYearDto accountListDto) {
-    	FinancialYearDto createdAccountList = financialYearService.createFinancialYearList(accountListDto);
-        logger.info("Created AccountList with year: {}", createdAccountList.getFinancialYear());
-        return new ResponseEntity<>(createdAccountList, HttpStatus.CREATED);
+    public ResponseEntity<FinancialYearDto> createFinancialYearList(@RequestBody FinancialYearDto financialYearDto) {
+    	FinancialYearDto createdFinancialYear = financialYearService.createFinancialYearList(financialYearDto);
+        logger.info("Created FinancialYear with year: {}", createdFinancialYear.getFinancialYear());
+        return new ResponseEntity<>(createdFinancialYear, HttpStatus.CREATED);
     }
 
-    // Get all AccountList   
+    // Get all FinancialYear   
     @GetMapping("/get/financialYear")
     public ResponseEntity<List<FinancialYearDto>> getAllFinancialYearList() {
-        List<FinancialYearDto> accountList = financialYearService.getAllFinancialYearList();
-        logger.info("Retrieved {} AccountList from the database", accountList.size());
-        return new ResponseEntity<>(accountList, HttpStatus.OK);
+        List<FinancialYearDto> financialYear = financialYearService.getAllFinancialYearList();
+        logger.info("Retrieved {} FinancialYear from the database", financialYear.size());
+        return new ResponseEntity<>(financialYear, HttpStatus.OK);
     }
 
-    // Get AccountList by ID
+    // Get FinancialYear by ID
     @GetMapping("/get/{financialYearId}")
     public ResponseEntity<FinancialYearDto> getFinancialYearListById(@PathVariable Long financialYearId) {
-        Optional<FinancialYearDto> accountList = financialYearService.getFinancialYearById(financialYearId);
-        if (accountList.isPresent()) {
-            logger.info("Retrieved AccountList with ID: {}", financialYearId);
-            return new ResponseEntity<>(accountList.get(), HttpStatus.OK);
+        Optional<FinancialYearDto> financialYear = financialYearService.getFinancialYearById(financialYearId);
+        if (financialYear.isPresent()) {
+            logger.info("Retrieved FinancialYear with ID: {}", financialYearId);
+            return new ResponseEntity<>(financialYear.get(), HttpStatus.OK);
         } else {
-            logger.warn("AccountList with ID {} not found", financialYearId);
+            logger.warn("FinancialYear with ID {} not found", financialYearId);
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 
-    // Update AccountList by ID
+    // Update FinancialYear by ID
     @PutMapping("/update/{financialYearId}")
-    public ResponseEntity<FinancialYearDto> updateFinancialYearList(@PathVariable Long financialYearId, @RequestBody FinancialYearDto updatedAccountListDto) {
-    	FinancialYearDto updatedAccountList = financialYearService.updateFinancialYearList(financialYearId, updatedAccountListDto);
-        if (updatedAccountList != null) {
-            logger.info("Updated AccountList with ID: {}", financialYearId);
-            return new ResponseEntity<>(updatedAccountList, HttpStatus.OK);
+    public ResponseEntity<FinancialYearDto> updateFinancialYearList(@PathVariable Long financialYearId, @RequestBody FinancialYearDto updatedFinancialYearDto) {
+    	FinancialYearDto updatedFinancialYear = financialYearService.updateFinancialYearList(financialYearId, updatedFinancialYearDto);
+        if (updatedFinancialYear != null) {
+            logger.info("Updated FinancialYear with ID: {}", financialYearId);
+            return new ResponseEntity<>(updatedFinancialYear, HttpStatus.OK);
         } else {
             logger.warn("AccountList with ID {} not found for update", financialYearId);
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -77,7 +77,7 @@ public class FinancialYearController {
     
 
 
-    // Delete AccountList by ID
+    // Delete FinancialYear by ID
     @DeleteMapping("/delete/{financialYearId}")
     public ResponseEntity<Void> deleteFinancialYearList(@PathVariable Long financialYearId) {
     	financialYearService.deleteFinancialYearList(financialYearId);
@@ -85,6 +85,7 @@ public class FinancialYearController {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 	    
+    // Count the total FinancialYear 
 	    @GetMapping("/count/financialYear")
 	    public long countFinancialYearList()
 	    {

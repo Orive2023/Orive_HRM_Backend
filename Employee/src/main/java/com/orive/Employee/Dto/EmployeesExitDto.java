@@ -1,5 +1,6 @@
 package com.orive.Employee.Dto;
 
+import java.time.ZonedDateTime;
 import java.util.Date;
 
 import jakarta.persistence.Column;
@@ -16,9 +17,9 @@ import lombok.ToString;
 @NoArgsConstructor
 public class EmployeesExitDto {
 	
-	private Long employeeExitId;
+    private Long employeeExitId;
 	private String employeeToExit;
-	private Date exitDate;
+	private ZonedDateTime exitDate;
 	private String typeOfExit;
 	private String exitInterview;
 	private String inactivateEmployeeAccount;

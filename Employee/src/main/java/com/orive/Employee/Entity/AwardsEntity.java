@@ -1,5 +1,6 @@
 package com.orive.Employee.Entity;
 
+import java.time.ZonedDateTime;
 import java.util.Date;
 
 import jakarta.persistence.Column;
@@ -39,7 +40,7 @@ public class AwardsEntity {
 	private String giftItem;
 	
 	@Column(name = "date")
-	private Date date;
+	private ZonedDateTime date;
 	
 	@Column(name = "employee_name")
 	private String employeeName;

@@ -19,10 +19,10 @@ import lombok.ToString;
 @Builder
 public class AddBankDto {
 	
-    private Long addBankId;
+	private Long addBankId;
 	private String bankName;
 	private String accountName;
-	private String accountNumber;
+	private Long accountNumber;
 	private String branchName;
 	private String accountType;
 }

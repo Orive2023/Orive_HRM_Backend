@@ -1,5 +1,6 @@
 package com.orive.Employee.Entity;
 
+import java.time.ZonedDateTime;
 import java.util.Date;
 
 import jakarta.persistence.Column;
@@ -64,7 +65,7 @@ public class EmployeesEntity {
 	private String employeeType;
 	
 	@Column(name = "created_date")
-	private Date createdDate;
+	private ZonedDateTime createdDate;
 		
 	@Column(name = "account_number")
 	private Long accountNumber;
@@ -121,10 +122,10 @@ public class EmployeesEntity {
 	private String dutyType;
 	
 	@Column(name = "hire_date")
-	private Date hireDate;
+	private ZonedDateTime hireDate;
 	
 	@Column(name = "joining_date")
-	private Date joiningDate;
+	private ZonedDateTime joiningDate;
 	
 	@Column(name = "rate_type")
 	private String rateType;
@@ -157,7 +158,7 @@ public class EmployeesEntity {
 	private String reportingTo;
 	
 	@Column(name = "date_of_birth")
-	private String dateOfBirth;
+	private ZonedDateTime dateOfBirth;
 	
 	@Column(name = "gender")
 	private String gender;
@@ -196,6 +197,4 @@ public class EmployeesEntity {
 	@Lob
 	@Column(name = "upload_document", length = 100000)
 	private byte[] uploadDocument;
-	
-
 }

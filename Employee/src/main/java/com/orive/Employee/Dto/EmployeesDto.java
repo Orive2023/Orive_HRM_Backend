@@ -1,10 +1,12 @@
 package com.orive.Employee.Dto;
 
+import java.time.ZonedDateTime;
 import java.util.Date;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Lob;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -15,6 +17,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
+@Builder
 public class EmployeesDto {
 
     private Long employeeId;
@@ -29,7 +32,7 @@ public class EmployeesDto {
 	private String employeeRole;
 	private String attendanceTime;
 	private String employeeType;
-	private Date createdDate;
+	private ZonedDateTime createdDate;
 	private Long accountNumber;
 	private String bankName;
 	private String ifscNumber;
@@ -48,8 +51,8 @@ public class EmployeesDto {
 	private String subDepartment;
 	private String position;
 	private String dutyType;
-	private Date hireDate;
-	private Date joiningDate;
+	private ZonedDateTime hireDate;
+	private ZonedDateTime joiningDate;
 	private String rateType;
 	private int rateNumber;
 	private int monthlyWorkHours;
@@ -60,7 +63,7 @@ public class EmployeesDto {
 	private String others;
 	private String teamLeaderName;
 	private String reportingTo;
-	private String dateOfBirth;
+	private ZonedDateTime dateOfBirth;
 	private String gender;
 	private String maritalStatus;
 	private String workInCity;

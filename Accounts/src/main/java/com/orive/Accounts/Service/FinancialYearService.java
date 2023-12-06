@@ -28,47 +28,47 @@ public class FinancialYearService {
 	private ModelMapper modelMapper;
 	
 	// Create
-    public FinancialYearDto createFinancialYearList(FinancialYearDto accountListDto) {
-    	FinancialYearEntity accountListEntity = convertToEntity(accountListDto);
-    	FinancialYearEntity savedAccountList = financialYearRepository.save(accountListEntity);
-        logger.info("Created AccountList with ID: {}", savedAccountList.getFinancialYearId());
-        return convertToDTO(savedAccountList);
+    public FinancialYearDto createFinancialYearList(FinancialYearDto financialYearDto) {
+    	FinancialYearEntity financialYearEntity = convertToEntity(financialYearDto);
+    	FinancialYearEntity savedFinancialYear = financialYearRepository.save(financialYearEntity);
+        logger.info("Created FinancialYear with ID: {}", savedFinancialYear.getFinancialYearId());
+        return convertToDTO(savedFinancialYear);
     }
 
     // Read
     public List<FinancialYearDto> getAllFinancialYearList() {
-        List<FinancialYearEntity> accountListEntities = financialYearRepository.findAll();
-        logger.info("Retrieved {} AccountList from the database", accountListEntities.size());
-        return accountListEntities.stream()
+        List<FinancialYearEntity> financialYearEntities = financialYearRepository.findAll();
+        logger.info("Retrieved {} FinancialYear from the database", financialYearEntities.size());
+        return financialYearEntities.stream()
                 .map(this::convertToDTO)
                 .collect(Collectors.toList());
     }
     
-    //get by AccountListId
+    //get by FinancialYearId
     public Optional<FinancialYearDto> getFinancialYearById(Long financialYearId) {
-        Optional<FinancialYearEntity> accountList = financialYearRepository.findById(financialYearId);
-        if (accountList.isPresent()) {
-            return Optional.of(convertToDTO(accountList.get()));
+        Optional<FinancialYearEntity> financialYear = financialYearRepository.findById(financialYearId);
+        if (financialYear.isPresent()) {
+            return Optional.of(convertToDTO(financialYear.get()));
         } else {
-            logger.warn("AccountList with ID {} not found", financialYearId);
+            logger.warn("FinancialYear with ID {} not found", financialYearId);
             return Optional.empty();
         }
     }
     
  // Update list by id
-    public FinancialYearDto updateFinancialYearList(Long financialYearId, FinancialYearDto accountListDto) {
-        Optional<FinancialYearEntity> existingAccountListOptional = financialYearRepository.findById(financialYearId);
-        if (existingAccountListOptional.isPresent()) {
-        	FinancialYearEntity existingAccountList = existingAccountListOptional.get();
-        	existingAccountList.setFinancialYear(accountListDto.getFinancialYear());
-        	existingAccountList.setFinancialYearStartDate(accountListDto.getFinancialYearStartDate());
-        	existingAccountList.setFinancialYearEndDate(accountListDto.getFinancialYearEndDate());
-            modelMapper.map(accountListDto, existingAccountListOptional);
-            FinancialYearEntity updatedAccountList = financialYearRepository.save(existingAccountList);
-            logger.info("Updated AccountList with ID: {}", updatedAccountList.getFinancialYearId());
-            return convertToDTO(updatedAccountList);
+    public FinancialYearDto updateFinancialYearList(Long financialYearId, FinancialYearDto financialYearDto) {
+        Optional<FinancialYearEntity> existingFinancialYearOptional = financialYearRepository.findById(financialYearId);
+        if (existingFinancialYearOptional.isPresent()) {
+        	FinancialYearEntity existingFinancialYear = existingFinancialYearOptional.get();
+        	existingFinancialYear.setFinancialYear(financialYearDto.getFinancialYear());
+        	existingFinancialYear.setFinancialYearStartDate(financialYearDto.getFinancialYearStartDate());
+        	existingFinancialYear.setFinancialYearEndDate(financialYearDto.getFinancialYearEndDate());
+            modelMapper.map(financialYearDto, existingFinancialYearOptional);
+            FinancialYearEntity updatedFinancialYear = financialYearRepository.save(existingFinancialYear);
+            logger.info("Updated FinancialYear with ID: {}", updatedFinancialYear.getFinancialYearId());
+            return convertToDTO(updatedFinancialYear);
         } else {
-            logger.warn("AccountList with ID {} not found for update",financialYearId );
+            logger.warn("FinancialYear with ID {} not found for update",financialYearId );
             return null;
         }
     }
@@ -76,23 +76,23 @@ public class FinancialYearService {
     // Delete
     public void deleteFinancialYearList(Long financialYearId) {
     	financialYearRepository.deleteById(financialYearId);
-        logger.info("Deleted AccountList with ID: {}", financialYearId);
+        logger.info("Deleted FinancialYear with ID: {}", financialYearId);
     }
 
-    //count the total AccountList
+    //count the total FinancialYear
     public long countFinancialYearList()
 	 {
 		 return financialYearRepository.count();
 	 }
     
-	// Helper method to convert AccountListDTo to AccountListEntity
-    private FinancialYearEntity convertToEntity(FinancialYearDto accountListDto )
+	// Helper method to convert FinancialYearDTo to FinancialYearEntity
+    private FinancialYearEntity convertToEntity(FinancialYearDto financialYearDto )
     {
-    	return modelMapper.map(accountListDto, FinancialYearEntity.class);
+    	return modelMapper.map(financialYearDto, FinancialYearEntity.class);
     }
 
-    // Helper method to convert AccountListEntity  to AccountListDTo
-    private FinancialYearDto convertToDTO(FinancialYearEntity accountListEntity) {
-        return modelMapper.map(accountListEntity, FinancialYearDto.class);
+    // Helper method to convert FinancialYearEntity  to FinancialYearDTo
+    private FinancialYearDto convertToDTO(FinancialYearEntity financialYearEntity) {
+        return modelMapper.map(financialYearEntity, FinancialYearDto.class);
     } 
 }

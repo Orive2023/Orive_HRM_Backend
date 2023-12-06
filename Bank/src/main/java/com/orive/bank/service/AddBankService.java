@@ -30,7 +30,7 @@ public class AddBankService {
     public AddBankDto createAddBank(AddBankDto addBankDto) {
     	AddBankEntity addBankEntity = convertToEntity(addBankDto);
     	AddBankEntity savedAddBank = addBankRepository.save(addBankEntity);
-        logger.info("Created AddBank with ID: {}", savedAddBank.getBankName());
+        logger.info("Created AddBank with ID: {}", savedAddBank.getAccountName());
         return convertToDTO(savedAddBank);
     }
 

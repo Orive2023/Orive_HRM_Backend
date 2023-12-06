@@ -31,7 +31,7 @@ public class AccountListEntity {
 	private String employeeFullName;
 	
 	@Column(name = "employee_id")
-	private String employeeId;
+	private Long employeeId;
 	
 	@Column(name = "department")
 	private String department;
@@ -46,10 +46,10 @@ public class AccountListEntity {
 	private String accountHolderName;
 	
 	@Column(name = "account_number")
-	private String accountNumber;
+	private Long accountNumber;
 	
 	@Column(name = "routing_number")
-	private String routingNumber;
+	private Long routingNumber;
 	
 	@Column(name = "account_type")
 	private String accountType;

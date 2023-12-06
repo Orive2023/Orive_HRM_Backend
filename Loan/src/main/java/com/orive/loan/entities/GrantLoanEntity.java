@@ -1,5 +1,6 @@
 package com.orive.loan.entities;
 
+import java.time.ZonedDateTime;
 import java.util.Date;
 
 import jakarta.persistence.Column;
@@ -9,6 +10,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -19,6 +21,7 @@ import lombok.ToString;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 @Entity
 @Table(name = "grantloan")
 public class GrantLoanEntity {
@@ -37,10 +40,10 @@ public class GrantLoanEntity {
 	private String loanDetails;
 	
 	@Column(name = "approve_date")
-	private Date approveDate;
+	private ZonedDateTime approveDate;
 	
 	@Column(name = "repayment_form")
-	private Date repaymentForm;
+	private ZonedDateTime repaymentForm;
 	
 	@Column(name = "Amount")
 	private double Amount;

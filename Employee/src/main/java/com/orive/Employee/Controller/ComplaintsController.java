@@ -82,7 +82,8 @@ public class ComplaintsController {
       logger.info("Deleted Complaints with ID: {}", complaintsId);
       return new ResponseEntity<>(HttpStatus.NO_CONTENT);
   }
-	    
+	   
+//Count the total Complaints
 	    @GetMapping("/count/complaints")
 	    public long countComplaints()
 	    {

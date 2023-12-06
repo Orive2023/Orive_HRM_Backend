@@ -16,15 +16,15 @@ import lombok.ToString;
 @Builder
 public class AccountListDto {
 	
-    private Long accountListId;	
+	private Long accountListId;	
 	private String employeeFullName;
-	private String employeeId;
+	private Long employeeId;
 	private String department;
 	private String jobTitle;
 	private String bankName;
 	private String accountHolderName;
-	private String accountNumber;
-	private String routingNumber;
+	private Long accountNumber;
+	private Long routingNumber;
 	private String accountType;
 	private String emailAddress;
 	private String emailSystem;

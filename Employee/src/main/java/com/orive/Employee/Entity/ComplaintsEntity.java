@@ -1,5 +1,6 @@
 package com.orive.Employee.Entity;
 
+import java.time.ZonedDateTime;
 import java.util.Date;
 
 import jakarta.persistence.Column;
@@ -37,7 +38,7 @@ public class ComplaintsEntity {
 	private String complaintTitle;
 	
 	@Column(name = "complaint_date")
-	private Date complaintDate;
+	private ZonedDateTime complaintDate;
 	
 	@Column(name = "complaint_against")
 	private String complaintAgainst;

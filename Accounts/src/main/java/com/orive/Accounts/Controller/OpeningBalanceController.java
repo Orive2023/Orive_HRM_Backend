@@ -32,58 +32,59 @@ private static final Logger logger=LoggerFactory.getLogger(OpeningBalanceControl
 	private OpeningBalanceService openingBalanceService;
 	
 	
-	// Create a new AccountList
+	// Create a new OpeningBalance
     @PostMapping("/create/openingBalance")
-    public ResponseEntity<OpeningBalanceDTo> createOpeningBalance(@RequestBody OpeningBalanceDTo accountListDto) {
-    	OpeningBalanceDTo createdAccountList = openingBalanceService.createOpeningBalance(accountListDto);
-        logger.info("Created AccountList with year: {}", createdAccountList.getOpeningBalanceId());
-        return new ResponseEntity<>(createdAccountList, HttpStatus.CREATED);
+    public ResponseEntity<OpeningBalanceDTo> createOpeningBalance(@RequestBody OpeningBalanceDTo openingBalanceDTo) {
+    	OpeningBalanceDTo createdOpeningBalance = openingBalanceService.createOpeningBalance(openingBalanceDTo);
+        logger.info("Created OpeningBalance with year: {}", createdOpeningBalance.getOpeningBalanceId());
+        return new ResponseEntity<>(createdOpeningBalance, HttpStatus.CREATED);
     }
 
-    // Get all AccountList   
+    // Get all OpeningBalance   
     @GetMapping("/get/openingBalance")
     public ResponseEntity<List<OpeningBalanceDTo>> getAllOpeningBalance() {
-        List<OpeningBalanceDTo> accountList = openingBalanceService.getAllOpeningBalance();
-        logger.info("Retrieved {} AccountList from the database", accountList.size());
-        return new ResponseEntity<>(accountList, HttpStatus.OK);
+        List<OpeningBalanceDTo> openingBalance = openingBalanceService.getAllOpeningBalance();
+        logger.info("Retrieved {} OpeningBalance from the database", openingBalance.size());
+        return new ResponseEntity<>(openingBalance, HttpStatus.OK);
     }
 
-    // Get AccountList by ID
+    // Get OpeningBalance by ID
     @GetMapping("/get/{openingBalanceId}")
     public ResponseEntity<OpeningBalanceDTo> getOpeningBalanceById(@PathVariable Long openingBalanceId) {
-        Optional<OpeningBalanceDTo> accountList = openingBalanceService.getOpeningBalanceById(openingBalanceId);
-        if (accountList.isPresent()) {
-            logger.info("Retrieved AccountList with ID: {}", openingBalanceId);
-            return new ResponseEntity<>(accountList.get(), HttpStatus.OK);
+        Optional<OpeningBalanceDTo> openingBalance = openingBalanceService.getOpeningBalanceById(openingBalanceId);
+        if (openingBalance.isPresent()) {
+            logger.info("Retrieved OpeningBalance with ID: {}", openingBalanceId);
+            return new ResponseEntity<>(openingBalance.get(), HttpStatus.OK);
         } else {
-            logger.warn("AccountList with ID {} not found", openingBalanceId);
+            logger.warn("OpeningBalance with ID {} not found", openingBalanceId);
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 
-    // Update AccountList by ID
+    // Update OpeningBalance by ID
     @PutMapping("/update/{openingBalanceId}")
-    public ResponseEntity<OpeningBalanceDTo> updateOpeningBalance(@PathVariable Long openingBalanceId, @RequestBody OpeningBalanceDTo updatedAccountListDto) {
-    	OpeningBalanceDTo updatedAccountList = openingBalanceService.updateOpeningBalance(openingBalanceId, updatedAccountListDto);
-        if (updatedAccountList != null) {
-            logger.info("Updated AccountList with ID: {}", openingBalanceId);
-            return new ResponseEntity<>(updatedAccountList, HttpStatus.OK);
+    public ResponseEntity<OpeningBalanceDTo> updateOpeningBalance(@PathVariable Long openingBalanceId, @RequestBody OpeningBalanceDTo updatedOpeningBalanceDTo) {
+    	OpeningBalanceDTo updatedOpeningBalance = openingBalanceService.updateOpeningBalance(openingBalanceId, updatedOpeningBalanceDTo);
+        if (updatedOpeningBalance != null) {
+            logger.info("Updated OpeningBalance with ID: {}", openingBalanceId);
+            return new ResponseEntity<>(updatedOpeningBalance, HttpStatus.OK);
         } else {
-            logger.warn("AccountList with ID {} not found for update", openingBalanceId);
+            logger.warn("OpeningBalance with ID {} not found for update", openingBalanceId);
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
     
 
 
-    // Delete AccountList by ID
+    // Delete OpeningBalance by ID
     @DeleteMapping("/delete/{openingBalanceId}")
     public ResponseEntity<Void> deleteOpeningBalance(@PathVariable Long openingBalanceId) {
     	openingBalanceService.deleteOpeningBalance(openingBalanceId);
-        logger.info("Deleted AccountList with ID: {}", openingBalanceId);
+        logger.info("Deleted OpeningBalance with ID: {}", openingBalanceId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 	    
+    // Count the total OpeningBalance
 	    @GetMapping("/count/openingBalance")
 	    public long countOpeningBalance()
 	    {

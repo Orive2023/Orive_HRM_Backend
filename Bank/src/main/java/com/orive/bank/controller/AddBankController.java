@@ -35,7 +35,7 @@ public class AddBankController {
     @PostMapping("/create/addbank")
     public ResponseEntity<AddBankDto> createAddBank(@RequestBody AddBankDto addBankDto) {
     	AddBankDto createdAddBank = addBankService.createAddBank(addBankDto);
-        logger.info("Created AddBank with name: {}", createdAddBank.getBankName());
+        logger.info("Created AddBank with name: {}", createdAddBank.getAccountName());
         return new ResponseEntity<>(createdAddBank, HttpStatus.CREATED);
     }
 
@@ -82,7 +82,8 @@ public class AddBankController {
         logger.info("Deleted AddBank with ID: {}", addBankId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
-	    
+    
+   // count the total AddBank
 	    @GetMapping("/count/addbank")
 	    public long countAddBank()
 	    {

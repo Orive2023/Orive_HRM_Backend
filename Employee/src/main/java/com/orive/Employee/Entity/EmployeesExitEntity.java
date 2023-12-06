@@ -1,5 +1,6 @@
 package com.orive.Employee.Entity;
 
+import java.time.ZonedDateTime;
 import java.util.Date;
 
 import jakarta.persistence.Column;
@@ -33,7 +34,7 @@ public class EmployeesExitEntity {
 	private String employeeToExit;
 	
 	@Column(name = "exit_date")
-	private Date exitDate;
+	private ZonedDateTime exitDate;
 	
 	@Column(name = "type_of_exit")
 	private String typeOfExit;

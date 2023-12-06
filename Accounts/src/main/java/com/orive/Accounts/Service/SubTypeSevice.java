@@ -26,45 +26,45 @@ public class SubTypeSevice {
 		private ModelMapper modelMapper;
 		
 		// Create
-	    public SubTypeDto createSubTypeList(SubTypeDto accountListDto) {
-	    	SubTypeEntity accountListEntity = convertToEntity(accountListDto);
-	    	SubTypeEntity savedAccountList = subTypeRepository.save(accountListEntity);
-	        logger.info("Created AccountList with ID: {}", savedAccountList.getSubTypeId());
-	        return convertToDTO(savedAccountList);
+	    public SubTypeDto createSubTypeList(SubTypeDto subTypeDto) {
+	    	SubTypeEntity subTypeEntity = convertToEntity(subTypeDto);
+	    	SubTypeEntity savedSubType = subTypeRepository.save(subTypeEntity);
+	        logger.info("Created SubType with ID: {}", savedSubType.getSubTypeId());
+	        return convertToDTO(savedSubType);
 	    }
 
 	    // Read
 	    public List<SubTypeDto> getAllSubTypeList() {
-	        List<SubTypeEntity> accountListEntities = subTypeRepository.findAll();
-	        logger.info("Retrieved {} AccountList from the database", accountListEntities.size());
-	        return accountListEntities.stream()
+	        List<SubTypeEntity> subTypeEntities = subTypeRepository.findAll();
+	        logger.info("Retrieved {} SubType from the database", subTypeEntities.size());
+	        return subTypeEntities.stream()
 	                .map(this::convertToDTO)
 	                .collect(Collectors.toList());
 	    }
 	    
-	    //get by AccountListId
+	    //get by SubTypeId
 	    public Optional<SubTypeDto> getSubTypeById(Long subTypeId) {
-	        Optional<SubTypeEntity> accountList = subTypeRepository.findById(subTypeId);
-	        if (accountList.isPresent()) {
-	            return Optional.of(convertToDTO(accountList.get()));
+	        Optional<SubTypeEntity> subType = subTypeRepository.findById(subTypeId);
+	        if (subType.isPresent()) {
+	            return Optional.of(convertToDTO(subType.get()));
 	        } else {
-	            logger.warn("AccountList with ID {} not found", subTypeId);
+	            logger.warn("SubType with ID {} not found", subTypeId);
 	            return Optional.empty();
 	        }
 	    }
 	    
 	 // Update list by id
-	    public SubTypeDto updateSubTypeList(Long subTypeId, SubTypeDto accountListDto) {
-	        Optional<SubTypeEntity> existingAccountListOptional = subTypeRepository.findById(subTypeId);
-	        if (existingAccountListOptional.isPresent()) {
-	        	SubTypeEntity existingAccountList = existingAccountListOptional.get();
-	        	existingAccountList.setAccountName(accountListDto.getAccountName());
-	            modelMapper.map(accountListDto, existingAccountListOptional);
-	            SubTypeEntity updatedAccountList = subTypeRepository.save(existingAccountList);
-	            logger.info("Updated AccountList with ID: {}", updatedAccountList.getSubTypeId());
-	            return convertToDTO(updatedAccountList);
+	    public SubTypeDto updateSubTypeList(Long subTypeId, SubTypeDto subTypeDto) {
+	        Optional<SubTypeEntity> existingSubTypeOptional = subTypeRepository.findById(subTypeId);
+	        if (existingSubTypeOptional.isPresent()) {
+	        	SubTypeEntity existingSubType = existingSubTypeOptional.get();
+	        	existingSubType.setAccountName(subTypeDto.getAccountName());
+	            modelMapper.map(subTypeDto, existingSubTypeOptional);
+	            SubTypeEntity updatedSubType = subTypeRepository.save(existingSubType);
+	            logger.info("Updated SubType with ID: {}", updatedSubType.getSubTypeId());
+	            return convertToDTO(updatedSubType);
 	        } else {
-	            logger.warn("AccountList with ID {} not found for update",subTypeId );
+	            logger.warn("SubType with ID {} not found for update",subTypeId );
 	            return null;
 	        }
 	    }
@@ -72,23 +72,23 @@ public class SubTypeSevice {
 	    // Delete
 	    public void deleteSubTypeList(Long subTypeId) {
 	    	subTypeRepository.deleteById(subTypeId);
-	        logger.info("Deleted AccountList with ID: {}", subTypeId);
+	        logger.info("Deleted SubType with ID: {}", subTypeId);
 	    }
 
-	    //count the total AccountList
+	    //count the total SubType
 	    public long countSubTypeList()
 		 {
 			 return subTypeRepository.count();
 		 }
 	    
-		// Helper method to convert AccountListDTo to AccountListEntity
-	    private SubTypeEntity convertToEntity(SubTypeDto accountListDto )
+		// Helper method to convert SubTypeDTo to SubTypeEntity
+	    private SubTypeEntity convertToEntity(SubTypeDto subTypeDto )
 	    {
-	    	return modelMapper.map(accountListDto, SubTypeEntity.class);
+	    	return modelMapper.map(subTypeDto, SubTypeEntity.class);
 	    }
 
-	    // Helper method to convert AccountListEntity  to AccountListDTo
-	    private SubTypeDto convertToDTO(SubTypeEntity accountListEntity) {
-	        return modelMapper.map(accountListEntity, SubTypeDto.class);
+	    // Helper method to convert SubTypeEntity  to SubTypeDTo
+	    private SubTypeDto convertToDTO(SubTypeEntity subTypeEntity) {
+	        return modelMapper.map(subTypeEntity, SubTypeDto.class);
 	    } 
 }

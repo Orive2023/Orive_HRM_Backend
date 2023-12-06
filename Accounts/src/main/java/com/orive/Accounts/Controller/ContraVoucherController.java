@@ -32,58 +32,59 @@ public class ContraVoucherController {
 	private ContraVoucherService contraVoucherService;
 	
 	
-	// Create a new AccountList
+	// Create a new ContraVoucher
     @PostMapping("/create/contraVoucher")
-    public ResponseEntity<ContraVoucherDto> createContraVoucher(@RequestBody ContraVoucherDto accountListDto) {
-    	ContraVoucherDto createdAccountList = contraVoucherService.createContraVoucher(accountListDto);
-        logger.info("Created AccountList with name: {}", createdAccountList.getReversedAccountHead());
-        return new ResponseEntity<>(createdAccountList, HttpStatus.CREATED);
+    public ResponseEntity<ContraVoucherDto> createContraVoucher(@RequestBody ContraVoucherDto contraVoucherDto) {
+    	ContraVoucherDto createdContraVoucher = contraVoucherService.createContraVoucher(contraVoucherDto);
+        logger.info("Created ContraVoucher with name: {}", createdContraVoucher.getReversedAccountHead());
+        return new ResponseEntity<>(createdContraVoucher, HttpStatus.CREATED);
     }
 
-    // Get all AccountList   
+    // Get all ContraVoucher   
     @GetMapping("/get/contraVoucher")
     public ResponseEntity<List<ContraVoucherDto>> getAllContraVoucher() {
-        List<ContraVoucherDto> accountList = contraVoucherService.getAllContraVoucher();
-        logger.info("Retrieved {} AccountList from the database", accountList.size());
-        return new ResponseEntity<>(accountList, HttpStatus.OK);
+        List<ContraVoucherDto> contraVoucher = contraVoucherService.getAllContraVoucher();
+        logger.info("Retrieved {} ContraVoucher from the database", contraVoucher.size());
+        return new ResponseEntity<>(contraVoucher, HttpStatus.OK);
     }
 
-    // Get AccountList by ID
+    // Get ContraVoucher by ID
     @GetMapping("/get/{contraVoucherId}")
     public ResponseEntity<ContraVoucherDto> getContraVoucherById(@PathVariable Long contraVoucherId) {
-        Optional<ContraVoucherDto> accountList = contraVoucherService.getContraVoucherById(contraVoucherId);
-        if (accountList.isPresent()) {
-            logger.info("Retrieved AccountList with ID: {}", contraVoucherId);
-            return new ResponseEntity<>(accountList.get(), HttpStatus.OK);
+        Optional<ContraVoucherDto> contraVoucher = contraVoucherService.getContraVoucherById(contraVoucherId);
+        if (contraVoucher.isPresent()) {
+            logger.info("Retrieved ContraVoucher with ID: {}", contraVoucherId);
+            return new ResponseEntity<>(contraVoucher.get(), HttpStatus.OK);
         } else {
-            logger.warn("AccountList with ID {} not found", contraVoucherId);
+            logger.warn("ContraVoucher with ID {} not found", contraVoucherId);
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 
-    // Update AccountList by ID
+    // Update ContraVoucher by ID
     @PutMapping("/update/{contraVoucherId}")
-    public ResponseEntity<ContraVoucherDto> updateContraVoucher(@PathVariable Long contraVoucherId, @RequestBody ContraVoucherDto updatedAccountListDto) {
-    	ContraVoucherDto updatedAccountList = contraVoucherService.updateContraVoucher(contraVoucherId, updatedAccountListDto);
-        if (updatedAccountList != null) {
-            logger.info("Updated AccountList with ID: {}", contraVoucherId);
-            return new ResponseEntity<>(updatedAccountList, HttpStatus.OK);
+    public ResponseEntity<ContraVoucherDto> updateContraVoucher(@PathVariable Long contraVoucherId, @RequestBody ContraVoucherDto updatedContraVoucherDto) {
+    	ContraVoucherDto updatedContraVoucher = contraVoucherService.updateContraVoucher(contraVoucherId, updatedContraVoucherDto);
+        if (updatedContraVoucher != null) {
+            logger.info("Updated ContraVoucher with ID: {}", contraVoucherId);
+            return new ResponseEntity<>(updatedContraVoucher, HttpStatus.OK);
         } else {
-            logger.warn("AccountList with ID {} not found for update", contraVoucherId);
+            logger.warn("ContraVoucher with ID {} not found for update", contraVoucherId);
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
     
 
 
-    // Delete AccountList by ID
+    // Delete ContraVoucher by ID
     @DeleteMapping("/delete/{contraVoucherId}")
     public ResponseEntity<Void> deleteContraVoucher(@PathVariable Long contraVoucherId) {
     	contraVoucherService.deleteContraVoucher(contraVoucherId);
-        logger.info("Deleted AccountList with ID: {}", contraVoucherId);
+        logger.info("Deleted ContraVoucher with ID: {}", contraVoucherId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
-	    
+	   
+    // count the total ContraVoucher 
 	    @GetMapping("/count/contraVoucher")
 	    public long countContraVoucher()
 	    {

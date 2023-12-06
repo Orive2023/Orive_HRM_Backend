@@ -34,7 +34,7 @@ public class AddBankEntity {
 	private String accountName;
 	
 	@Column(name = "account_number")
-	private String accountNumber;
+	private Long accountNumber;
 	
 	@Column(name = "branch_name")
 	private String branchName;

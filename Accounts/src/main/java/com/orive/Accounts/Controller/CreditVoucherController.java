@@ -34,58 +34,60 @@ public class CreditVoucherController {
 		private CreditVoucherService creditVoucherService;
 		
 		
-		// Create a new AccountList
+		// Create a new CreditVoucher
 	    @PostMapping("/create/creditVoucher")
-	    public ResponseEntity<CreditVoucherDto> createCreditVoucher(@RequestBody CreditVoucherDto accountListDto) {
-	    	CreditVoucherDto createdAccountList = creditVoucherService.createCreditVoucher(accountListDto);
-	        logger.info("Created AccountList with year: {}", createdAccountList.getCreditVoucherId());
-	        return new ResponseEntity<>(createdAccountList, HttpStatus.CREATED);
+	    public ResponseEntity<CreditVoucherDto> createCreditVoucher(@RequestBody CreditVoucherDto creditVoucherDto) {
+	    	CreditVoucherDto createdCreditVoucher= creditVoucherService.createCreditVoucher(creditVoucherDto);
+	        logger.info("Created CreditVoucher with year: {}", createdCreditVoucher.getCreditVoucherId());
+	        return new ResponseEntity<>(createdCreditVoucher, HttpStatus.CREATED);
 	    }
 
-	    // Get all AccountList   
+	    // Get all CreditVoucher   
 	    @GetMapping("/get/creditVoucher")
 	    public ResponseEntity<List<CreditVoucherDto>> getAllCreditVoucher() {
-	        List<CreditVoucherDto> accountList = creditVoucherService.getAllCreditVoucher();
-	        logger.info("Retrieved {} AccountList from the database", accountList.size());
-	        return new ResponseEntity<>(accountList, HttpStatus.OK);
+	        List<CreditVoucherDto> creditVoucher = creditVoucherService.getAllCreditVoucher();
+	        logger.info("Retrieved {} CreditVoucher from the database", creditVoucher.size());
+	        return new ResponseEntity<>(creditVoucher, HttpStatus.OK);
 	    }
 
-	    // Get AccountList by ID
+	    // Get CreditVoucher by ID
 	    @GetMapping("/get/{creditVoucherId}")
 	    public ResponseEntity<CreditVoucherDto> getCreditVoucherById(@PathVariable Long creditVoucherId) {
-	        Optional<CreditVoucherDto> accountList = creditVoucherService.getCreditVoucherById(creditVoucherId);
-	        if (accountList.isPresent()) {
-	            logger.info("Retrieved AccountList with ID: {}", creditVoucherId);
-	            return new ResponseEntity<>(accountList.get(), HttpStatus.OK);
+	        Optional<CreditVoucherDto> creditVoucher = creditVoucherService.getCreditVoucherById(creditVoucherId);
+	        if (creditVoucher.isPresent()) {
+	            logger.info("Retrieved CreditVoucher with ID: {}", creditVoucherId);
+	            return new ResponseEntity<>(creditVoucher.get(), HttpStatus.OK);
 	        } else {
-	            logger.warn("AccountList with ID {} not found", creditVoucherId);
+	            logger.warn("CreditVoucher with ID {} not found", creditVoucherId);
 	            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	        }
 	    }
 
-	    // Update AccountList by ID
+	    // Update CreditVoucher by ID
 	    @PutMapping("/update/{creditVoucherId}")
-	    public ResponseEntity<CreditVoucherDto> updateCreditVoucher(@PathVariable Long creditVoucherId, @RequestBody CreditVoucherDto updatedAccountListDto) {
-	    	CreditVoucherDto updatedAccountList = creditVoucherService.updateCreditVoucher(creditVoucherId, updatedAccountListDto);
-	        if (updatedAccountList != null) {
-	            logger.info("Updated AccountList with ID: {}", creditVoucherId);
-	            return new ResponseEntity<>(updatedAccountList, HttpStatus.OK);
+	    public ResponseEntity<CreditVoucherDto> updateCreditVoucher(@PathVariable Long creditVoucherId, @RequestBody CreditVoucherDto updatedCreditVoucherDto) {
+	    	CreditVoucherDto updatedCreditVoucher = creditVoucherService.updateCreditVoucher(creditVoucherId, updatedCreditVoucherDto);
+	        if (updatedCreditVoucher != null) {
+	            logger.info("Updated CreditVoucher with ID: {}", creditVoucherId);
+	            return new ResponseEntity<>(updatedCreditVoucher, HttpStatus.OK);
 	        } else {
-	            logger.warn("AccountList with ID {} not found for update", creditVoucherId);
+	            logger.warn("CreditVoucher with ID {} not found for update", creditVoucherId);
 	            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	        }
 	    }
 	    
 
 
-	    // Delete AccountList by ID
+	    // Delete CreditVoucher by ID
 	    @DeleteMapping("/delete/{creditVoucherId}")
 	    public ResponseEntity<Void> deleteCreditVoucher(@PathVariable Long creditVoucherId) {
 	    	creditVoucherService.deleteCreditVoucher(creditVoucherId);
-	        logger.info("Deleted AccountList with ID: {}", creditVoucherId);
+	        logger.info("Deleted CreditVoucher with ID: {}", creditVoucherId);
 	        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	    }
-		    
+	    
+	    
+	 // Count the total  CreditVoucher 
 		    @GetMapping("/count/creditVoucher")
 		    public long countCreditVoucherList()
 		    {

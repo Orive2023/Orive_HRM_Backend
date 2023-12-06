@@ -1,5 +1,6 @@
 package com.orive.Employee.Entity;
 
+import java.time.ZonedDateTime;
 import java.util.Date;
 
 import jakarta.persistence.Column;
@@ -45,10 +46,10 @@ public class CompanyStationaryEntity {
 	private String employeeRole;
 	
 	@Column(name = "assign_date")
-	private Date assignDate;
+	private ZonedDateTime assignDate;
 	
 	@Column(name = "return_date")
-	private Date returnDate;
+	private ZonedDateTime returnDate;
 	
 	@Column(name = "item_cost")
 	private double itemCost;
