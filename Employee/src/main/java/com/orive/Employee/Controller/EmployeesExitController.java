@@ -86,12 +86,10 @@ public class EmployeesExitController {
 	      return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	  }
 		    
+	  // Count the total EmployeeExit 
 		    @GetMapping("/count/employee_exit")
 		    public long countEmployeeExit()
 		    {
 		    	return employeesExitService.countEmployeeExit();
 		    }
-
-
-
 }

@@ -68,7 +68,8 @@ public class PoliciesService {
 		
 		return null;
 	}
-			
+		
+	//Download pdf
 	public byte[] downloadPdf(Long policiesId) {
 		 Optional<PoliciesEntity> dbPdfData = policiesRepository.findById(policiesId);
 	    

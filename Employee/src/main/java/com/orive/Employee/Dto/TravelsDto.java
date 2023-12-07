@@ -1,9 +1,11 @@
 package com.orive.Employee.Dto;
 
+import java.time.ZonedDateTime;
 import java.util.Date;
 
 import jakarta.persistence.Column;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -14,18 +16,19 @@ import lombok.ToString;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class TravelsDto {
 	
-	    private Long travelId;
-		private String employeeName;
-		private String startDate;
-		private String endDate;
-		private String purposeOfVisit;
-		private String placeOfVisit;
-		private String travelMode;
-		private String arrangementType;
-		private double expectedTravelBudget;
-		private double actualTravelBudget;
-		private String description;
-		private Date createdDate;
+    private Long travelId;
+	private String employeeName;
+	private ZonedDateTime startDate;
+	private ZonedDateTime endDate;
+	private String purposeOfVisit;
+	private String placeOfVisit;
+	private String travelMode;
+	private String arrangementType;
+	private double expectedTravelBudget;
+	private double actualTravelBudget;
+	private String description;
+	private ZonedDateTime createdDate;
 }

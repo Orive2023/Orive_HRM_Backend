@@ -83,11 +83,10 @@ public class TravelsController {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 	    
+ // Count the total  Travels
 	    @GetMapping("/count/travels")
 	    public long countTravels()
 	    {
 	    	return travelsService.countTravels();
 	    }
-
-
 }

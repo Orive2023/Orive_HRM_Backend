@@ -1,5 +1,6 @@
 package com.orive.Employee.Entity;
 
+import java.time.ZonedDateTime;
 import java.util.Date;
 
 import jakarta.persistence.Column;
@@ -34,10 +35,10 @@ public class TravelsEntity {
 	private String employeeName;
 	
 	@Column(name = "start_date")
-	private String startDate;
+	private ZonedDateTime startDate;
 	
 	@Column(name = "end_date")
-	private String endDate;
+	private ZonedDateTime endDate;
 	
 	@Column(name = "purpose_of_visit")
 	private String purposeOfVisit;
@@ -61,5 +62,5 @@ public class TravelsEntity {
 	private String description;
 	
 	@Column(name = "created_date")
-	private Date createdDate;
+	private ZonedDateTime createdDate;
 }

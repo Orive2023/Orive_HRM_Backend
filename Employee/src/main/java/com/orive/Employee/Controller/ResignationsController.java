@@ -84,11 +84,10 @@ public class ResignationsController {
          return new ResponseEntity<>(HttpStatus.NO_CONTENT);
      }
  	    
+  // Count the total  Resignation
  	    @GetMapping("/count/resignations")
  	    public long countResignations()
  	    {
  	    	return resignationsService.countResignations();
  	    }
-
-
 }

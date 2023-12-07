@@ -60,8 +60,8 @@ public class GrantLoanEntity {
 	@Column(name = "installment")
 	private int installment;
 	
-	@Column(name = "status")
-	private String status;
+//	@Column(name = "status")
+//	private String status;
 	
 	@Column(name = "installment_cleared")
 	private int installmentCleared;

@@ -48,6 +48,8 @@ public class PoliciesController {
 //          return new ResponseEntity<>(createdPolicies, HttpStatus.CREATED);
 //      }
     
+    
+ // Create a new policies
     @PostMapping("/create/policies")
     public ResponseEntity<String> savePoliciesEntity(
     		 @RequestParam String companyName,
@@ -67,7 +69,7 @@ public class PoliciesController {
     	}
     }
     
-    
+ // Get Policies pdf by id  
     @GetMapping("/download/{policiesId}")
     public ResponseEntity<byte[]> downloadsPdf(@PathVariable Long policiesId) {
         byte[] pdf = policiesService.downloadPdf(policiesId);

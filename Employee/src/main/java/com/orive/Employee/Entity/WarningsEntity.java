@@ -1,5 +1,6 @@
 package com.orive.Employee.Entity;
 
+import java.time.ZonedDateTime;
 import java.util.Date;
 
 import jakarta.persistence.Column;
@@ -42,7 +43,7 @@ public class WarningsEntity {
 	private String warningByEmployee;
 	
 	@Column(name = "warning_date")
-	private Date warningDate;
+	private ZonedDateTime warningDate;
 	
 	@Column(name = "description")
 	private String description;

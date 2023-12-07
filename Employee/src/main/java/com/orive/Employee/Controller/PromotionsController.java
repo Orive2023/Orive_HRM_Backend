@@ -84,6 +84,7 @@ public class PromotionsController {
        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
    }
 	    
+   // Count the total promotions 
 	    @GetMapping("/count/promotions")
 	    public long countPromotions()
 	    {

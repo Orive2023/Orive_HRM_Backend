@@ -1,5 +1,6 @@
 package com.orive.Employee.Entity;
 
+import java.time.ZonedDateTime;
 import java.util.Date;
 
 import jakarta.persistence.Column;
@@ -33,7 +34,7 @@ public class TerminationsEntity {
 	private String employeeName;
 	
 	@Column(name = "terminate_date")
-	private Date terminateDate;
+	private ZonedDateTime terminateDate;
 	
 	@Column(name = "reason_for_termination")
 	private String reasonForTermination;

@@ -1,12 +1,17 @@
 package com.orive.Employee.Controller;
 
+import java.io.IOException;
+import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ContentDisposition;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -16,7 +21,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.orive.Employee.Dto.EmployeesDto;
 import com.orive.Employee.Service.EmployeesService;
@@ -33,14 +40,114 @@ public class EmployeesController {
     private EmployeesService employeesService;
 
   
-  	// Create a new Employees
-      @PostMapping("/create/employee")
-      public ResponseEntity<EmployeesDto> createEmployees(@RequestBody EmployeesDto employeesDto) {
-    	  EmployeesDto createdEmployees = employeesService.createEmployees(employeesDto);
-          logger.info("Created Employees with name: {}", createdEmployees.getEmployeeName());
-          return new ResponseEntity<>(createdEmployees, HttpStatus.CREATED);
-      }
+//  	// Create a new Employees
+//      @PostMapping("/create/employee")
+//      public ResponseEntity<EmployeesDto> createEmployees(@RequestBody EmployeesDto employeesDto) {
+//    	  EmployeesDto createdEmployees = employeesService.createEmployees(employeesDto);
+//          logger.info("Created Employees with name: {}", createdEmployees.getEmployeeName());
+//          return new ResponseEntity<>(createdEmployees, HttpStatus.CREATED);
+//      }
 
+    
+ // Create a new Employees  
+    @PostMapping("/create/employee")
+  public ResponseEntity<?> uploadEmployeeData(
+          @RequestParam("employeeName") String employeeName,
+          @RequestParam("designationName") String designationName,
+          @RequestParam("email") String email,
+          @RequestParam("phone") Long phone,
+          @RequestParam("alternativePhone") Long alternativePhone,
+          @RequestParam("country") String country,
+          @RequestParam("city") String city,
+          @RequestParam("zipCode") int zipCode,
+          @RequestParam("employeeRole") String employeeRole,
+          @RequestParam("attendanceTime") String attendanceTime,
+          @RequestParam("employeeType") String employeeType,
+          @RequestParam("createdDate") ZonedDateTime createdDate,
+          @RequestParam("accountNumber") Long accountNumber,
+          @RequestParam("bankName") String bankName,
+          @RequestParam("ifscNumber") String ifscNumber,
+          @RequestParam("branchName") String branchName,
+          @RequestParam("basicSalary")  double basicSalary,
+          @RequestParam("transportAllowance") double transportAllowance,
+          @RequestParam("grossSalary")  double grossSalary,
+          @RequestParam("tinNumber") Long tinNumber,
+          @RequestParam("hraAllowances")  double hraAllowances,
+          @RequestParam("otherAllowances") double otherAllowances,
+          @RequestParam("pfAllowances")  double pfAllowances,
+          @RequestParam("daAllowances") double daAllowances,
+          @RequestParam("medicalAllowances")  double medicalAllowances,
+          @RequestParam("otherInsurance") double otherInsurance,
+          @RequestParam("tax")  double tax,
+          @RequestParam("subDepartment") String subDepartment,
+          @RequestParam("position")  String position,
+          @RequestParam("dutyType") String dutyType,
+          @RequestParam("hireDate")  ZonedDateTime hireDate,
+          @RequestParam("joiningDate") ZonedDateTime joiningDate,
+          @RequestParam("rateType")  String rateType,
+          @RequestParam("rateNumber") int rateNumber,
+          @RequestParam("monthlyWorkHours")  int monthlyWorkHours,
+          @RequestParam("payFrequency") String payFrequency,
+          @RequestParam("medical")  String medical,
+          @RequestParam("family") String family,
+          @RequestParam("transportation")  String transportation,
+          @RequestParam("others") String others,
+          @RequestParam("teamLeaderName")  String teamLeaderName,
+          @RequestParam("reportingTo") String reportingTo,
+          @RequestParam("dateOfBirth")  ZonedDateTime dateOfBirth,
+          @RequestParam("gender") String gender,
+          @RequestParam("maritalStatus")  String maritalStatus,
+          @RequestParam("workInCity") String workInCity,
+          @RequestParam("cityOfResidence")  String cityOfResidence,
+          @RequestParam("workPermit") String workPermit,
+          @RequestParam("uploadPhoto")  MultipartFile filePhoto,
+          @RequestParam("businessEmail") String businessEmail,
+          @RequestParam("homePhone")  Long homePhone,
+          @RequestParam("cellPhone") Long cellPhone,
+          @RequestParam("userEmailOrName")  String userEmailOrName,
+          @RequestParam("password") String password,
+          @RequestParam("uploadDocument") MultipartFile fileDocument) throws IOException {
+                         String uploadEmployee = employeesService.saveEmployeesEntity(employeeName,designationName,email,phone,alternativePhone,
+                		                        country,city,zipCode,employeeRole,attendanceTime,employeeType,createdDate,accountNumber,
+                		                        bankName,ifscNumber,branchName,basicSalary,transportAllowance,grossSalary,tinNumber,
+                		                        hraAllowances,otherAllowances,pfAllowances,daAllowances,medicalAllowances,otherInsurance,tax,
+                		                        subDepartment,position,dutyType, hireDate,joiningDate,rateType,rateNumber,monthlyWorkHours,
+                		                        payFrequency,medical,family,transportation,others,teamLeaderName,reportingTo,dateOfBirth,
+                		                        gender,maritalStatus,workInCity,cityOfResidence,workPermit,filePhoto,businessEmail,homePhone,
+                				                cellPhone,userEmailOrName,password,fileDocument);
+                      return ResponseEntity.status(HttpStatus.OK).body(uploadEmployee);
+      }
+  
+  
+  
+//Get Employees logo by name
+  @GetMapping("/{employeeId}")
+	public ResponseEntity<?> downloadImage(@PathVariable Long employeeId){
+		byte[] imageData=employeesService.downloadImage(employeeId);
+		return ResponseEntity.status(HttpStatus.OK)
+				.contentType(MediaType.valueOf("image/png"))
+				.body(imageData);
+
+	}
+    
+    
+//Get Employees pdf by id  
+  @GetMapping("/download/{employeeId}")
+  public ResponseEntity<byte[]> downloadsPdf(@PathVariable Long employeeId) {
+      byte[] pdf = employeesService.downloadPdf(employeeId);
+
+      if (pdf != null) {
+          HttpHeaders headers = new HttpHeaders();
+          headers.setContentType(MediaType.APPLICATION_PDF);
+          headers.setContentDisposition(ContentDisposition.builder("attachment").filename(employeeId + "employee.pdf").build());
+          return new ResponseEntity<>(pdf, headers, HttpStatus.OK);
+      } else {
+          return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+      }
+  }
+    
+    
+    
       // Get all Employees
       @GetMapping("/get/employee")
       public ResponseEntity<List<EmployeesDto>> getAllEmployees() {
@@ -84,7 +191,8 @@ public class EmployeesController {
           logger.info("Deleted Employees with ID: {}", employeeId);
           return new ResponseEntity<>(HttpStatus.NO_CONTENT);
       }
-  	    
+      
+      // Count the total EmployeeExit 
   	    @GetMapping("/count/employee")
   	    public long countEmployees()
   	    {

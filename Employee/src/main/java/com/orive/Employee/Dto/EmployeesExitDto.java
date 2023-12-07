@@ -22,7 +22,7 @@ public class EmployeesExitDto {
 	private ZonedDateTime exitDate;
 	private String typeOfExit;
 	private String exitInterview;
-	private String inactivateEmployeeAccount;
+	private Long inactivateEmployeeAccount;
 	private String description;
 
 }

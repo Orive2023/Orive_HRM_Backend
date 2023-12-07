@@ -84,7 +84,8 @@ public class WarningsController {
 	      logger.info("Deleted Warnings with ID: {}", warningsId);
 	      return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	  }
-		    
+		   
+	  // Count the total Complaints
 		    @GetMapping("/count/warnings")
 		    public long countWarnings()
 		    {

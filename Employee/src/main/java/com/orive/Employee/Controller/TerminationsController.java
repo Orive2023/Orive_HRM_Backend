@@ -85,6 +85,7 @@ public class TerminationsController {
          return new ResponseEntity<>(HttpStatus.NO_CONTENT);
      }
  	    
+     // Count the total Terminations
  	    @GetMapping("/count/awards")
  	    public long countTerminations()
  	    {
