@@ -1,5 +1,6 @@
 package com.orive.Accounts.Dto;
 
+import java.time.LocalDate;
 import java.time.ZonedDateTime;
 import java.util.List;
 
@@ -27,7 +28,7 @@ public class ContraVoucherDto {
     private Long contraVoucherId;
 	private String voucherType;
 	private String reversedAccountHead;
-	private ZonedDateTime date;
+	private LocalDate date;
 	private String remark;
 	private List<ContraVoucherListDto> contraVoucherListEntities;
 

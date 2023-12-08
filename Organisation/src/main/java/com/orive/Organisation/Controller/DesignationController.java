@@ -84,7 +84,9 @@ public class DesignationController {
           logger.info("Deleted Designation with ID: {}", designationId);
           return new ResponseEntity<>(HttpStatus.NO_CONTENT);
       }
-  	    
+      
+      
+  	  //Count the total Designation
   	    @GetMapping("/count/designation")
   	    public long countDesignation()
   	    {

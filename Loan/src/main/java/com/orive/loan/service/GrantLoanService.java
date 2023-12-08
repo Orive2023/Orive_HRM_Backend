@@ -28,11 +28,29 @@ public class GrantLoanService {
 	// Create
     public GrantLoanDto createGrantLoan(GrantLoanDto grantLoanDto) {
     	GrantLoanEntity grantLoanEntity = convertToEntity(grantLoanDto);
+    	
+    	 grantLoanEntity.setAmount(grantLoanDto.getAmount());
+    	    grantLoanEntity.setInterestPersentage(grantLoanDto.getInterestPersentage());
+
+    	    // Calculate and set the repaymentTotal
+    	    double repaymentTotal = (grantLoanEntity.getAmount() * grantLoanEntity.getInterestPersentage() / 100)
+    	            + grantLoanEntity.getAmount();
+    	    grantLoanEntity.setRepaymentTotal(repaymentTotal);
+    	    
+    	    //Calculate and set the installment period
+    	    double installment = (grantLoanEntity.getRepaymentTotal()/grantLoanEntity.getInstallmentPeriod());
+    	    grantLoanEntity.setInstallment(installment);
+    	    
+    	  //Calculate and set the total Payment cleared
+    	    double totalPaymentCleared =(grantLoanEntity.getInstallment() * grantLoanEntity.getInstallmentCleared());
+    	    grantLoanEntity.setTotalPaymentCleared(totalPaymentCleared);
+    	    
     	GrantLoanEntity savedGrantLoan = grantLoanRepository.save(grantLoanEntity);
         logger.info("Created GrantLoan with ID: {}", savedGrantLoan.getEmployeeName());
         return convertToDTO(savedGrantLoan);
     }
 
+    
     // Read
     public List<GrantLoanDto> getAllGrantLoan() {
         List<GrantLoanEntity> grantLoanEntities = grantLoanRepository.findAll();

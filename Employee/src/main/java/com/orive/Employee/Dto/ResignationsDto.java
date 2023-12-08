@@ -1,5 +1,6 @@
 package com.orive.Employee.Dto;
 
+import java.time.LocalDate;
 import java.time.ZonedDateTime;
 import java.util.Date;
 
@@ -24,7 +25,7 @@ public class ResignationsDto {
 	
     private Long resignationId;
 	private String employeeName;
-	private ZonedDateTime noticeDate;
-	private ZonedDateTime resignationDate;
+	private LocalDate noticeDate;
+	private LocalDate resignationDate;
 	private String resignationReason;
 }

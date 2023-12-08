@@ -62,6 +62,23 @@ public class LocationController {
               return new ResponseEntity<>(HttpStatus.NOT_FOUND);
           }
       }
+      
+      // Get the Location by company name
+  	  @GetMapping("/{companyName}")
+      public ResponseEntity<List<LocationEntity>> getLocationsByCompanyName(@PathVariable String companyName) {
+          try {
+        	  logger.info("Request to get locations for company: " + companyName);
+              List<LocationEntity> locations = locationService.getAllLocationsByCompanyName(companyName);
+              logger.info("Returned " + locations.size() + " locations for company: " + companyName);
+              return ResponseEntity.ok(locations);
+          } catch (ResourceNotFoundException e) {
+        	  logger.warn("No locations found for company: " + companyName);
+              throw e;
+          } catch (Exception e) {
+        	  logger.error("Error occurred while processing the request for company: {}", companyName, e);
+              throw e; // You might want to handle this differently based on your use case
+          }
+      }
 
       // Update Location by ID
       @PutMapping("/update/{locationId}")
@@ -85,27 +102,13 @@ public class LocationController {
           logger.info("Deleted Location with ID: {}", locationId);
           return new ResponseEntity<>(HttpStatus.NO_CONTENT);
       }
-  	    
+      
+      //Count the total Location 
   	    @GetMapping("/count/location")
   	    public long countLocation()
   	    {
   	    	return locationService.countLocation();
   	    }
   	    
-  	    //
-  	  @GetMapping("/{companyName}")
-      public ResponseEntity<List<LocationEntity>> getLocationsByCompanyName(@PathVariable String companyName) {
-          try {
-        	  logger.info("Request to get locations for company: " + companyName);
-              List<LocationEntity> locations = locationService.getAllLocationsByCompanyName(companyName);
-              logger.info("Returned " + locations.size() + " locations for company: " + companyName);
-              return ResponseEntity.ok(locations);
-          } catch (ResourceNotFoundException e) {
-        	  logger.warn("No locations found for company: " + companyName);
-              throw e;
-          } catch (Exception e) {
-        	  logger.error("Error occurred while processing the request for company: {}", companyName, e);
-              throw e; // You might want to handle this differently based on your use case
-          }
-      }
+  	  
 }

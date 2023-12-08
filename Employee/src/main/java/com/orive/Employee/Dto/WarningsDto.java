@@ -1,5 +1,6 @@
 package com.orive.Employee.Dto;
 
+import java.time.LocalDate;
 import java.time.ZonedDateTime;
 import java.util.Date;
 
@@ -22,7 +23,7 @@ public class WarningsDto {
 	private String warningType;
 	private String subject;
 	private String warningByEmployee;
-	private ZonedDateTime warningDate;
+	private LocalDate warningDate;
 	private String description;
 
 }

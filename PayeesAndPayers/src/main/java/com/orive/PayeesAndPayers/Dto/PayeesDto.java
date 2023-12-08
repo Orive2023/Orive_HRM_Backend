@@ -1,7 +1,10 @@
 package com.orive.PayeesAndPayers.Dto;
 
+import java.time.LocalDate;
+
 import jakarta.persistence.Column;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -12,6 +15,7 @@ import lombok.ToString;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class PayeesDto {
 	
     private Long payeesId;
@@ -23,7 +27,7 @@ public class PayeesDto {
 	private String employeeId;
 	private String jobTitle;
 	private String department;
-	private String hireDate;
+	private LocalDate hireDate;
 	private String companyName;
 	private String taxId;
 	private String productsProvided;

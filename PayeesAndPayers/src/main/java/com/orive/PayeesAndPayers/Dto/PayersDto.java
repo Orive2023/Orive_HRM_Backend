@@ -1,7 +1,12 @@
 package com.orive.PayeesAndPayers.Dto;
 
+import java.time.LocalDate;
+
+import org.modelmapper.internal.bytebuddy.asm.Advice.Local;
+
 import jakarta.persistence.Column;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -12,6 +17,7 @@ import lombok.ToString;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class PayersDto {
 	
     private Long payersId;
@@ -25,7 +31,7 @@ public class PayersDto {
 	private String payerAccount;
 	private String payerWalletAddress;
 	private String transactionId;
-	private String transactionDate;
+	private LocalDate transactionDate;
 	private String transactionStatus;
 	private String purposeOfPayment;
 	private String transactionNotes;

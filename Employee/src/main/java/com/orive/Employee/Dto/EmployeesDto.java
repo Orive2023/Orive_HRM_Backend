@@ -1,5 +1,6 @@
 package com.orive.Employee.Dto;
 
+import java.time.LocalDate;
 import java.time.ZonedDateTime;
 import java.util.Date;
 
@@ -32,7 +33,7 @@ public class EmployeesDto {
 	private String employeeRole;
 	private String attendanceTime;
 	private String employeeType;
-	private ZonedDateTime createdDate;
+	private LocalDate createdDate;
 	private Long accountNumber;
 	private String bankName;
 	private String ifscNumber;
@@ -51,8 +52,8 @@ public class EmployeesDto {
 	private String subDepartment;
 	private String position;
 	private String dutyType;
-	private ZonedDateTime hireDate;
-	private ZonedDateTime joiningDate;
+	private LocalDate hireDate;
+	private LocalDate joiningDate;
 	private String rateType;
 	private int rateNumber;
 	private int monthlyWorkHours;
@@ -63,7 +64,7 @@ public class EmployeesDto {
 	private String others;
 	private String teamLeaderName;
 	private String reportingTo;
-	private ZonedDateTime dateOfBirth;
+	private LocalDate dateOfBirth;
 	private String gender;
 	private String maritalStatus;
 	private String workInCity;

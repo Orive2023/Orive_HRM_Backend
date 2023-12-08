@@ -1,5 +1,6 @@
 package com.orive.Employee.Entity;
 
+import java.time.LocalDate;
 import java.time.ZonedDateTime;
 import java.util.Date;
 
@@ -40,7 +41,7 @@ public class AwardsEntity {
 	private String giftItem;
 	
 	@Column(name = "date")
-	private ZonedDateTime date;
+	private LocalDate date;
 	
 	@Column(name = "employee_name")
 	private String employeeName;

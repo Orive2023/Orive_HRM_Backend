@@ -1,5 +1,6 @@
 package com.orive.Employee.Dto;
 
+import java.time.LocalDate;
 import java.time.ZonedDateTime;
 import java.util.Date;
 
@@ -24,7 +25,7 @@ public class PromotionsDto {
     private Long promotionsId;
 	private String employeeName;
 	private String promotionTitle;
-	private ZonedDateTime promotionDate;
+	private LocalDate promotionDate;
 	private String description;
 
 }

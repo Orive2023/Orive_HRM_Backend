@@ -1,5 +1,6 @@
 package com.orive.Accounts.Dto;
 
+import java.time.LocalDate;
 import java.time.ZonedDateTime;
 import java.util.List;
 
@@ -28,7 +29,7 @@ public class JournalVoucherDto {
     private Long journalVoucherId;
 	private String journalVoucher;
 	private String voucherType;
-	private ZonedDateTime date;
+	private LocalDate date;
 	private String remark;
 	private List<JournalVoucherTableDto> journalVoucherTableEntities;
 	private double totalCredit;

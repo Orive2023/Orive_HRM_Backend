@@ -1,5 +1,7 @@
 package com.orive.Organisation.Entity;
 
+import java.time.LocalDate;
+import java.time.ZonedDateTime;
 import java.util.Date;
 
 import jakarta.persistence.Column;
@@ -63,7 +65,7 @@ public class LocationEntity {
 	private String country;
 	
 	@Column(name = "date")
-	private Date date;
+	private LocalDate date;
 	
 //	@Column(name = "status")
 //	private String status;

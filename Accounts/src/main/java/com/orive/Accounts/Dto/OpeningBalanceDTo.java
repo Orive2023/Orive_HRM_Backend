@@ -1,5 +1,6 @@
 package com.orive.Accounts.Dto;
 
+import java.time.LocalDate;
 import java.time.ZonedDateTime;
 import java.util.List;
 
@@ -26,7 +27,7 @@ public class OpeningBalanceDTo {
 
     private Long openingBalanceId;
 	private String financialYear;
-	private ZonedDateTime date;
+	private LocalDate date;
 	private List<OpeningBalanceTableDto> openingBalanceTableEntities;
 	private double totalDebit;
 	private double totalCredit;

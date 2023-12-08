@@ -1,5 +1,7 @@
 package com.orive.Organisation.Entity;
 
+import java.time.LocalDate;
+import java.time.ZonedDateTime;
 import java.util.Date;
 
 import jakarta.persistence.Column;
@@ -30,7 +32,7 @@ public class ExpenseListEntity {
 	private Long expenceListId;
 	
 	@Column(name = "purchase_date")
-	private String purchaseDate;
+	private LocalDate purchaseDate;
 	
 	@Column(name = "description", length = 100000)
 	private String description;

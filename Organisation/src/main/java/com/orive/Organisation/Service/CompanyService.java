@@ -1,6 +1,8 @@
 package com.orive.Organisation.Service;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -57,7 +59,7 @@ public class CompanyService {
 			 String cin,
 			 String gst,
 			 String uan,
-			 String createdDate,
+			 LocalDate createdDate,
 //			 String status,
 //			 String approvedBy,
 			 MultipartFile file) throws IOException {

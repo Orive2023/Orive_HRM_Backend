@@ -1,5 +1,6 @@
 package com.orive.Employee.Entity;
 
+import java.time.LocalDate;
 import java.time.ZonedDateTime;
 import java.util.Date;
 
@@ -35,10 +36,10 @@ public class TravelsEntity {
 	private String employeeName;
 	
 	@Column(name = "start_date")
-	private ZonedDateTime startDate;
+	private LocalDate startDate;
 	
 	@Column(name = "end_date")
-	private ZonedDateTime endDate;
+	private LocalDate endDate;
 	
 	@Column(name = "purpose_of_visit")
 	private String purposeOfVisit;
@@ -62,5 +63,5 @@ public class TravelsEntity {
 	private String description;
 	
 	@Column(name = "created_date")
-	private ZonedDateTime createdDate;
+	private LocalDate createdDate;
 }

@@ -1,6 +1,8 @@
 package com.orive.Organisation.Controller;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.ZonedDateTime;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -61,7 +63,7 @@ public class CompanyController {
               @RequestParam("cin") String cin,
               @RequestParam("gst") String gst,
               @RequestParam("uan") String uan,
-              @RequestParam("createdDate") String createdDate,
+              @RequestParam("createdDate") LocalDate createdDate,
 //              @RequestParam("status")  String status,
 //              @RequestParam("approvedBy") String approvedBy,
               @RequestParam("uploadLogo") MultipartFile file) {
@@ -132,6 +134,7 @@ public class CompanyController {
           return new ResponseEntity<>(HttpStatus.NO_CONTENT);
       }
   	    
+      //Count the total Company
   	    @GetMapping("/count/company")
 //  	  @PreAuthorize("hasRole('client_admin')")
   	    public long countCompany()

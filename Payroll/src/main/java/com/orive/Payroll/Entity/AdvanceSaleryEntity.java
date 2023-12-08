@@ -1,5 +1,6 @@
 package com.orive.Payroll.Entity;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 import jakarta.persistence.Column;
@@ -9,6 +10,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -18,6 +20,7 @@ import lombok.ToString;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 @Entity
 @Table(name = "advance_salery")
 public class AdvanceSaleryEntity {
@@ -27,20 +30,20 @@ public class AdvanceSaleryEntity {
 	private Long advanceSaleryId;
 	
 	@Column(name = "created_date")
-	private String createdDate;
+	private LocalDate createdDate;
 	
 	@Column(name = "employee_name")
 	private String employeeName;
 	
 	@Column(name = "salary")
-	private String salary;
+	private double salary;
 	
 	@Column(name = "advance_amount")
 	private double advanceAmount;
 	
 	@Column(name = "salary_due")
-	private String salaryDue;
+	private double salaryDue;
 	
 	@Column(name = "month_and_year")
-	private Date monthAndYear;
+	private LocalDate monthAndYear;
 }

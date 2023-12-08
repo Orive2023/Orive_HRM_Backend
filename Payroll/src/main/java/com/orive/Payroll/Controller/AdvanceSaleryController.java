@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.orive.Payroll.Dto.AdvanceSaleryDto;
-import com.orive.Payroll.Dto.HourlyWagesDto;
 import com.orive.Payroll.Service.AdvanceSaleryService;
 
 

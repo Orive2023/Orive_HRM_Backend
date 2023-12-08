@@ -1,5 +1,6 @@
 package com.orive.Employee.Dto;
 
+import java.time.LocalDate;
 import java.time.ZonedDateTime;
 import java.util.Date;
 
@@ -21,7 +22,7 @@ public class TransfersDto {
 
 	private Long transferId;
 	private String employeeName;
-	private ZonedDateTime transferDate;
+	private LocalDate transferDate;
 	private String departmentName;
 	private String locationName;
 	private String description;

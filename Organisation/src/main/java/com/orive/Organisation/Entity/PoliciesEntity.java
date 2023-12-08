@@ -1,5 +1,7 @@
 package com.orive.Organisation.Entity;
 
+import java.time.LocalDate;
+import java.time.ZonedDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -43,7 +45,7 @@ public class PoliciesEntity {
 	private String description;
 	
 	@Column(name = "created_date")
-	private String createdDate;
+	private LocalDate createdDate;
 	
 	@Lob
 	@Column(name = "upload_pdf", length = 100000)

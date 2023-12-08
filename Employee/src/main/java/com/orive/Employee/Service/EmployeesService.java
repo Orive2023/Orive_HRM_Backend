@@ -1,5 +1,6 @@
 package com.orive.Employee.Service;
 
+import java.time.LocalDate;
 import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -14,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.orive.Employee.Dto.EmployeesDto;
 import com.orive.Employee.Entity.EmployeesEntity;
+import com.orive.Employee.Exceptions.ResourceNotFoundException;
 import com.orive.Employee.Repository.EmployeesRepository;
 import com.orive.Employee.util.ImageUploadUtils;
 import com.orive.Employee.util.PdfUploadUtils;
@@ -52,7 +54,7 @@ public class EmployeesService {
 				String employeeRole,
 				String attendanceTime,
 				String employeeType,
-				ZonedDateTime createdDate,
+				LocalDate createdDate,
 				Long accountNumber,
 				String bankName,
 				String ifscNumber,
@@ -71,8 +73,8 @@ public class EmployeesService {
 				String subDepartment,
 				String position,
 				String dutyType,
-				ZonedDateTime hireDate,
-				ZonedDateTime joiningDate,
+				LocalDate hireDate,
+				LocalDate joiningDate,
 				String rateType,
 				int rateNumber,
 				int monthlyWorkHours,
@@ -83,7 +85,7 @@ public class EmployeesService {
 				String others,
 				String teamLeaderName,
 				String reportingTo,
-				ZonedDateTime dateOfBirth,
+				LocalDate dateOfBirth,
 				String gender,
 				String maritalStatus,
 				String workInCity,
@@ -208,6 +210,18 @@ public class EmployeesService {
 	            logger.warn("Employees with ID {} not found", employeeId);
 	            return Optional.empty();
 	        }
+	    }
+	    
+	    //get by EmployeesName
+	    public List<EmployeesEntity> getEmployeesByName(String employeeName) {
+	        List<EmployeesEntity> employees = employeesRepository.findEmployeeByEmployeeName(employeeName);
+
+	        if (employees.isEmpty()) {
+	            logger.warn("No employees found with name: {}", employeeName);
+	            throw new ResourceNotFoundException("No employees found with name: " + employeeName);
+	        }
+
+	        return employees;
 	    }
 	    
 	 // Update list by id

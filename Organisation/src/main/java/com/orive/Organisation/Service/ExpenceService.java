@@ -1,5 +1,7 @@
 package com.orive.Organisation.Service;
 
+import java.time.LocalDate;
+import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -9,6 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.orive.Organisation.Dto.ExpenceDto;
 import com.orive.Organisation.Dto.ExpenseListDto;
@@ -16,6 +19,8 @@ import com.orive.Organisation.Entity.ExpenceEntity;
 import com.orive.Organisation.Entity.ExpenseListEntity;
 import com.orive.Organisation.Exceptions.ResourceNotFoundException;
 import com.orive.Organisation.Repository.ExpenceRepository;
+import com.orive.Organisation.Util.UploadDocumentUtils;
+import com.orive.Organisation.Util.UploadPdfUtils;
 
 
 
@@ -30,15 +35,56 @@ private static final Logger logger=LoggerFactory.getLogger(ExpenceService.class)
 	@Autowired
 	private ModelMapper modelMapper;
 	
+//	
+//	// Create
+//    public ExpenceDto createExpence(ExpenceDto expenceDto) {
+//    	ExpenceEntity expenceEntity = convertToEntity(expenceDto);
+//    	ExpenceEntity savedExpence = expenceRepository.save(expenceEntity);
+//        logger.info("Created Expence with ID: {}", savedExpence.getExpenceId());
+//        return convertToDTO(savedExpence);
+//    }
 	
-	// Create
-    public ExpenceDto createExpence(ExpenceDto expenceDto) {
-    	ExpenceEntity expenceEntity = convertToEntity(expenceDto);
-    	ExpenceEntity savedExpence = expenceRepository.save(expenceEntity);
-        logger.info("Created Expence with ID: {}", savedExpence.getExpenceId());
-        return convertToDTO(savedExpence);
-    }
-
+	public String saveExpenceEntity(
+			String expenceType,
+			LocalDate createdDate,
+			Long total,
+			List<ExpenseListEntity> expenseListEntities,
+			MultipartFile fileDocument) {
+		
+		try {
+			ExpenceEntity pdfData = expenceRepository.save(ExpenceEntity.builder()
+					.expenceType(expenceType)
+					.createdDate(createdDate)
+					.total(total)
+					.expenseListEntities(expenseListEntities)
+					.uploadDocument(UploadDocumentUtils.compressPdf(fileDocument.getBytes()))
+					.build());
+			
+			 if (pdfData != null) {
+		            return "File uploaded successfully: " + fileDocument.getOriginalFilename();
+		        }
+			
+		}catch (Exception e) {
+			// Handle the IOException appropriately (e.g., log it, return an error message)
+	        return "Error uploading file: " + e.getMessage();
+		}
+		
+		return null;
+	}
+		
+	
+	//Download pdf
+	public byte[] downloadPdf(Long expenceId) {
+		 Optional<ExpenceEntity> dbPdfData = expenceRepository.findById(expenceId);
+	    
+	    if (dbPdfData.isPresent()) {
+	        return UploadPdfUtils.decompressPdf(dbPdfData.get().getUploadDocument());
+	    } else {
+	        // Handle the case where the candidate profile is not found
+	        return null;
+	    }
+	}
+	
     // Read
     public List<ExpenceDto> getAllExpence() {
         List<ExpenceEntity> expenceEntities = expenceRepository.findAll();

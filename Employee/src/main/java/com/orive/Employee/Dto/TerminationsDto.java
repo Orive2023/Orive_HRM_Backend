@@ -1,5 +1,6 @@
 package com.orive.Employee.Dto;
 
+import java.time.LocalDate;
 import java.time.ZonedDateTime;
 import java.util.Date;
 
@@ -21,7 +22,7 @@ public class TerminationsDto {
 	
     private Long terminationId;
 	private String employeeName;
-	private ZonedDateTime terminateDate;
+	private LocalDate terminateDate;
 	private String reasonForTermination;
 	private String terminatedBy;
 }

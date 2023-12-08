@@ -1,5 +1,7 @@
 package com.orive.Organisation.Entity;
 
+import java.time.LocalDate;
+import java.time.ZonedDateTime;
 import java.util.Date;
 
 import jakarta.persistence.Column;
@@ -45,7 +47,7 @@ public class DepartmentEntity {
 	private String departmentHead;
 	
 	@Column(name = "created_date")
-	private Date createdDate;
+	private LocalDate createdDate;
 	
 //	@Column(name = "status")
 //	private String status;

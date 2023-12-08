@@ -1,5 +1,6 @@
 package com.orive.Accounts.Dto;
 
+import java.time.LocalDate;
 import java.time.ZonedDateTime;
 import java.util.List;
 
@@ -23,7 +24,7 @@ public class CreditVoucherDto {
 	private Long creditVoucherId;
 	private String voucherType;
 	private String debitAccountHead;
-	private ZonedDateTime date;
+	private LocalDate date;
 	private String remark;
 	private List<CreditVoucherTableDto> creditVoucherTableEntities;
 	private double total;

@@ -1,5 +1,6 @@
 package com.orive.Employee.Entity;
 
+import java.time.LocalDate;
 import java.time.ZonedDateTime;
 import java.util.Date;
 
@@ -65,7 +66,7 @@ public class EmployeesEntity {
 	private String employeeType;
 	
 	@Column(name = "created_date")
-	private ZonedDateTime createdDate;
+	private LocalDate createdDate;
 		
 	@Column(name = "account_number")
 	private Long accountNumber;
@@ -122,10 +123,10 @@ public class EmployeesEntity {
 	private String dutyType;
 	
 	@Column(name = "hire_date")
-	private ZonedDateTime hireDate;
+	private LocalDate hireDate;
 	
 	@Column(name = "joining_date")
-	private ZonedDateTime joiningDate;
+	private LocalDate joiningDate;
 	
 	@Column(name = "rate_type")
 	private String rateType;
@@ -158,7 +159,7 @@ public class EmployeesEntity {
 	private String reportingTo;
 	
 	@Column(name = "date_of_birth")
-	private ZonedDateTime dateOfBirth;
+	private LocalDate dateOfBirth;
 	
 	@Column(name = "gender")
 	private String gender;

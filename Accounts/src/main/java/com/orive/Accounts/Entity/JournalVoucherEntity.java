@@ -1,5 +1,6 @@
 package com.orive.Accounts.Entity;
 
+import java.time.LocalDate;
 import java.time.ZonedDateTime;
 import java.util.List;
 
@@ -40,7 +41,7 @@ public class JournalVoucherEntity {
 	private String voucherType;
 	
 	@Column(name = "date")
-	private ZonedDateTime date;
+	private LocalDate date;
 	
 	@Column(name = "remark")
 	private String remark;

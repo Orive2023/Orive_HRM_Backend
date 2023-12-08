@@ -1,9 +1,11 @@
 package com.orive.Payroll.Dto;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 import jakarta.persistence.Column;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -14,13 +16,14 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
+@Builder
 public class AdvanceSaleryDto {
 
 	private Long advanceSaleryId;
-	private String createdDate;
+	private LocalDate createdDate;
 	private String employeeName;
-	private String salary;
+	private double salary;
 	private double advanceAmount;
-	private String salaryDue;
-	private Date monthAndYear;
+	private double salaryDue;
+	private LocalDate monthAndYear;
 }

@@ -1,5 +1,6 @@
 package com.orive.loan.dto;
 
+import java.time.LocalDate;
 import java.time.ZonedDateTime;
 import java.util.Date;
 
@@ -23,13 +24,13 @@ public class GrantLoanDto {
 	private String employeeName;
 	private String permittedBy;
 	private String loanDetails;
-	private ZonedDateTime approveDate;
-	private ZonedDateTime repaymentForm;
-	private double Amount;
+	private LocalDate approveDate;
+	private LocalDate repaymentForm;
+	private double amount;
 	private double interestPersentage;
-	private int installmentPeriod;
+	private double installmentPeriod;
 	private double repaymentTotal;
-	private int installment;
+	private double installment;
 //	private String status;
 	private int installmentCleared;
 	private double totalPaymentCleared;

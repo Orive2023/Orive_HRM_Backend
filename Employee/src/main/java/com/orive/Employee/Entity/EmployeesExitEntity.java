@@ -1,5 +1,6 @@
 package com.orive.Employee.Entity;
 
+import java.time.LocalDate;
 import java.time.ZonedDateTime;
 import java.util.Date;
 
@@ -34,7 +35,7 @@ public class EmployeesExitEntity {
 	private String employeeToExit;
 	
 	@Column(name = "exit_date")
-	private ZonedDateTime exitDate;
+	private LocalDate exitDate;
 	
 	@Column(name = "type_of_exit")
 	private String typeOfExit;

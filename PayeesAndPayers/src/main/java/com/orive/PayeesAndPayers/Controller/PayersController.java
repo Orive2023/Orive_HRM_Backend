@@ -82,7 +82,7 @@ public class PayersController {
         logger.info("Deleted Payers with ID: {}", payersId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
-	    
+	  //Count the total Payers
 	    @GetMapping("/count/payers")
 	    public long countPayers()
 	    {

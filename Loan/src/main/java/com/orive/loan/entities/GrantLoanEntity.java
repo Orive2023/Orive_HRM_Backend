@@ -1,5 +1,6 @@
 package com.orive.loan.entities;
 
+import java.time.LocalDate;
 import java.time.ZonedDateTime;
 import java.util.Date;
 
@@ -40,25 +41,25 @@ public class GrantLoanEntity {
 	private String loanDetails;
 	
 	@Column(name = "approve_date")
-	private ZonedDateTime approveDate;
+	private LocalDate approveDate;
 	
 	@Column(name = "repayment_form")
-	private ZonedDateTime repaymentForm;
+	private LocalDate repaymentForm;
 	
-	@Column(name = "Amount")
-	private double Amount;
+	@Column(name = "amount")
+	private double amount;
 	
 	@Column(name = "interest_persentage")
 	private double interestPersentage;
 	
 	@Column(name = "installment_period")
-	private int installmentPeriod;
+	private double installmentPeriod;
 	
 	@Column(name = "repayment_total")
 	private double repaymentTotal;
 	
 	@Column(name = "installment")
-	private int installment;
+	private double installment;
 	
 //	@Column(name = "status")
 //	private String status;

@@ -105,7 +105,7 @@ public class DepartmentController {
       
       
       
-   // count department    
+   // count the total Department    
   	    @GetMapping("/count/department")
   	    public long countDepartment()
   	    {

@@ -1,5 +1,6 @@
 package com.orive.Employee.Dto;
 
+import java.time.LocalDate;
 import java.time.ZonedDateTime;
 import java.util.Date;
 
@@ -19,7 +20,7 @@ public class EmployeesExitDto {
 	
     private Long employeeExitId;
 	private String employeeToExit;
-	private ZonedDateTime exitDate;
+	private LocalDate exitDate;
 	private String typeOfExit;
 	private String exitInterview;
 	private Long inactivateEmployeeAccount;

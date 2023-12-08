@@ -1,5 +1,6 @@
 package com.orive.Employee.Dto;
 
+import java.time.LocalDate;
 import java.time.ZonedDateTime;
 import java.util.Date;
 
@@ -21,8 +22,8 @@ public class TravelsDto {
 	
     private Long travelId;
 	private String employeeName;
-	private ZonedDateTime startDate;
-	private ZonedDateTime endDate;
+	private LocalDate startDate;
+	private LocalDate endDate;
 	private String purposeOfVisit;
 	private String placeOfVisit;
 	private String travelMode;
@@ -30,5 +31,5 @@ public class TravelsDto {
 	private double expectedTravelBudget;
 	private double actualTravelBudget;
 	private String description;
-	private ZonedDateTime createdDate;
+	private LocalDate createdDate;
 }

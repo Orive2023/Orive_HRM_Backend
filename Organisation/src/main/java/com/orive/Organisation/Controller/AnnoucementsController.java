@@ -86,6 +86,7 @@ public class AnnoucementsController {
           return new ResponseEntity<>(HttpStatus.NO_CONTENT);
       }
   	    
+      //Count the total Annoucement
   	    @GetMapping("/count/announcement")
   	    public long countAnnoucement()
   	    {

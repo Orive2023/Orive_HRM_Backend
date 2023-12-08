@@ -1,5 +1,6 @@
 package com.orive.Employee.Entity;
 
+import java.time.LocalDate;
 import java.time.ZonedDateTime;
 import java.util.Date;
 
@@ -38,7 +39,7 @@ public class ComplaintsEntity {
 	private String complaintTitle;
 	
 	@Column(name = "complaint_date")
-	private ZonedDateTime complaintDate;
+	private LocalDate complaintDate;
 	
 	@Column(name = "complaint_against")
 	private String complaintAgainst;

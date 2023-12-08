@@ -11,9 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.orive.Payroll.Dto.AdvanceSaleryDto;
-import com.orive.Payroll.Dto.HourlyWagesDto;
 import com.orive.Payroll.Entity.AdvanceSaleryEntity;
-import com.orive.Payroll.Entity.HourlyWagesEntity;
 import com.orive.Payroll.Repository.AdvanceSaleryRepository;
 
 

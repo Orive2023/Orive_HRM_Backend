@@ -1,5 +1,7 @@
 package com.orive.Organisation.Controller;
 
+import java.time.LocalDate;
+import java.time.ZonedDateTime;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -55,7 +57,7 @@ public class PoliciesController {
     		 @RequestParam String companyName,
     		 @RequestParam String title,
     		 @RequestParam  String description,
-    		 @RequestParam String createdDate,
+    		 @RequestParam LocalDate createdDate,
     		 @RequestParam("file") MultipartFile file){
     	
     	String result = policiesService.savePoliciesEntity( 
@@ -129,6 +131,7 @@ public class PoliciesController {
           return new ResponseEntity<>(HttpStatus.NO_CONTENT);
       }
   	    
+      //Count the total Policies
   	    @GetMapping("/count/policies")
   	    public long countPolicies()
   	    {

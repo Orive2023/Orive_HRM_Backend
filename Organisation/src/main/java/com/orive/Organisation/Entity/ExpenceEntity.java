@@ -1,5 +1,7 @@
 package com.orive.Organisation.Entity;
 
+import java.time.LocalDate;
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -11,6 +13,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.Lob;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -38,10 +41,14 @@ public class ExpenceEntity {
 	private String expenceType;
 	
 	@Column(name = "created_date")
-	private Date createdDate;
+	private LocalDate createdDate;
 	
 	@Column(name = "total")
 	private Long total;
+	
+	@Lob
+	@Column(name = "upload_document", length = 100000)
+	private byte[] uploadDocument;
 	
 //	@Column(name = "status")
 //	private String status;
@@ -50,6 +57,6 @@ public class ExpenceEntity {
 //	private String approvedBy;
 	
 	@OneToMany(targetEntity =ExpenseListEntity.class,cascade = CascadeType.ALL)
-	@JoinColumn(name = "expence_expenceList_fk",referencedColumnName = "expenceId")
+	@JoinColumn(name = "expence_list_fk",referencedColumnName = "expenceId")
 	private List<ExpenseListEntity> expenseListEntities;
 }

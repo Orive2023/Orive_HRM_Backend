@@ -1,6 +1,8 @@
 package com.orive.Organisation.Service;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.ZonedDateTime;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -45,7 +47,7 @@ public class PoliciesService {
 			String companyName,
 			String title,
 			String description,
-			String createdDate,
+			LocalDate createdDate,
 			MultipartFile file) {
 		
 		try {

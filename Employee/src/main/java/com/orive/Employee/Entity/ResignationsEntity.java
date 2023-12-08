@@ -1,5 +1,6 @@
 package com.orive.Employee.Entity;
 
+import java.time.LocalDate;
 import java.time.ZonedDateTime;
 import java.util.Date;
 
@@ -34,10 +35,10 @@ public class ResignationsEntity {
 	private String employeeName;
 	
 	@Column(name = "notice_date")
-	private ZonedDateTime noticeDate;
+	private LocalDate noticeDate;
 	
 	@Column(name = "resignation_date")
-	private ZonedDateTime resignationDate;
+	private LocalDate resignationDate;
 	
 	@Column(name = "resignation_reason")
 	private String resignationReason;

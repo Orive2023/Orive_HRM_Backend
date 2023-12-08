@@ -1,6 +1,7 @@
 package com.orive.Employee.Controller;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -26,6 +27,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.orive.Employee.Dto.EmployeesDto;
+import com.orive.Employee.Entity.EmployeesEntity;
+import com.orive.Employee.Exceptions.ResourceNotFoundException;
 import com.orive.Employee.Service.EmployeesService;
 
 
@@ -63,7 +66,7 @@ public class EmployeesController {
           @RequestParam("employeeRole") String employeeRole,
           @RequestParam("attendanceTime") String attendanceTime,
           @RequestParam("employeeType") String employeeType,
-          @RequestParam("createdDate") ZonedDateTime createdDate,
+          @RequestParam("createdDate") LocalDate createdDate,
           @RequestParam("accountNumber") Long accountNumber,
           @RequestParam("bankName") String bankName,
           @RequestParam("ifscNumber") String ifscNumber,
@@ -82,8 +85,8 @@ public class EmployeesController {
           @RequestParam("subDepartment") String subDepartment,
           @RequestParam("position")  String position,
           @RequestParam("dutyType") String dutyType,
-          @RequestParam("hireDate")  ZonedDateTime hireDate,
-          @RequestParam("joiningDate") ZonedDateTime joiningDate,
+          @RequestParam("hireDate")  LocalDate hireDate,
+          @RequestParam("joiningDate") LocalDate joiningDate,
           @RequestParam("rateType")  String rateType,
           @RequestParam("rateNumber") int rateNumber,
           @RequestParam("monthlyWorkHours")  int monthlyWorkHours,
@@ -94,7 +97,7 @@ public class EmployeesController {
           @RequestParam("others") String others,
           @RequestParam("teamLeaderName")  String teamLeaderName,
           @RequestParam("reportingTo") String reportingTo,
-          @RequestParam("dateOfBirth")  ZonedDateTime dateOfBirth,
+          @RequestParam("dateOfBirth")  LocalDate dateOfBirth,
           @RequestParam("gender") String gender,
           @RequestParam("maritalStatus")  String maritalStatus,
           @RequestParam("workInCity") String workInCity,
@@ -121,7 +124,7 @@ public class EmployeesController {
   
   
 //Get Employees logo by name
-  @GetMapping("/{employeeId}")
+  @GetMapping("/downloadImage/{employeeId}")
 	public ResponseEntity<?> downloadImage(@PathVariable Long employeeId){
 		byte[] imageData=employeesService.downloadImage(employeeId);
 		return ResponseEntity.status(HttpStatus.OK)
@@ -132,7 +135,7 @@ public class EmployeesController {
     
     
 //Get Employees pdf by id  
-  @GetMapping("/download/{employeeId}")
+  @GetMapping("/downloadPdf/{employeeId}")
   public ResponseEntity<byte[]> downloadsPdf(@PathVariable Long employeeId) {
       byte[] pdf = employeesService.downloadPdf(employeeId);
 
@@ -168,6 +171,23 @@ public class EmployeesController {
               return new ResponseEntity<>(HttpStatus.NOT_FOUND);
           }
       }
+      
+      
+      
+      // Get Employees by EmployeeName
+      @GetMapping("/byName/{employeeName}")
+      public ResponseEntity<List<EmployeesEntity>> getEmployeesByName(@PathVariable String employeeName) {
+          try {
+              List<EmployeesEntity> employees = employeesService.getEmployeesByName(employeeName);
+              logger.info("Retrieved Employees with Names: {}", employeeName);
+              return new ResponseEntity<>(employees, HttpStatus.OK);
+          } catch (ResourceNotFoundException e) {
+        	  logger.warn("Employees with Name {} not found", employeeName);
+              return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+          }
+      }
+      
+      
 
       // Update Employees by ID
       @PutMapping("/update/{employeeId}")

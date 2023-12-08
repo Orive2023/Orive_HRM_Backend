@@ -1,5 +1,7 @@
 package com.orive.Organisation.Entity;
 
+import java.time.LocalDate;
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -80,7 +82,7 @@ public class CompanyEntity {
 	private String uan;
 	
 	@Column(name = "created_date")
-	private String createdDate;
+	private LocalDate createdDate;
 	
 //	@Column(name = "status")
 //	private String status;

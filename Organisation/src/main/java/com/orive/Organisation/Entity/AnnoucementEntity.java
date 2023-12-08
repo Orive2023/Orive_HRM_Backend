@@ -2,6 +2,8 @@ package com.orive.Organisation.Entity;
 
 
 
+import java.time.LocalDate;
+import java.time.ZonedDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -36,10 +38,10 @@ public class AnnoucementEntity {
 	private String title;
 	
 	@Column(name = "start_date")
-	private String startDate;
+	private LocalDate startDate;
 	
 	@Column(name = "end_date")
-	private String endDate;
+	private LocalDate endDate;
 	
 	@Column(name = "company_name")
 	private String companyName;
@@ -52,13 +54,12 @@ public class AnnoucementEntity {
 	
 	@Column(name = "summary")
 	private String summary;
-	
-	
+		
 	@Column(name = "description",length = 100000)
 	private String description;
 	
 	@Column(name = "created_date")
-	private Date createdDate;
+	private LocalDate createdDate;
 	
 //	@Column(name = "status")
 //	private String status;

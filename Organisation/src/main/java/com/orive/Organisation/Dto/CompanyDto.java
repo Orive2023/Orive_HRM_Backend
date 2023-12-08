@@ -1,5 +1,7 @@
 package com.orive.Organisation.Dto;
 
+import java.time.LocalDate;
+import java.time.ZonedDateTime;
 import java.util.Date;
 
 import org.springframework.web.multipart.MultipartFile;
@@ -42,7 +44,7 @@ public class CompanyDto {
 	private String cin;
 	private String gst;
 	private String uan;
-	private String createdDate;
+	private LocalDate createdDate;
 //	private String status;
 //	private String approvedBy;
 	private byte[] uploadLogo;
