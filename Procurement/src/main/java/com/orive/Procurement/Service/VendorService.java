@@ -16,6 +16,7 @@ import com.orive.Procurement.Repository.VendorRepository;
 
 
 
+
 @Service
 public class VendorService {
 	
@@ -60,10 +61,10 @@ public class VendorService {
 	        Optional<VendorEntity> existingVendorOptional = vendorRepository.findById(vendorId);
 	        if (existingVendorOptional.isPresent()) {
 	        	VendorEntity existingVendor = existingVendorOptional.get();
-	        	 existingVendor.setVendorName(vendorDto.getVendorName());
-	             existingVendor.setMobileNo(vendorDto.getMobileNo());
-	        	 existingVendor.setEmailAddress(vendorDto.getEmailAddress());
-	        	modelMapper.map(vendorDto, existingVendor);
+	        	existingVendor.setVendorName(vendorDto.getVendorName());
+	        	existingVendor.setMobileNo(vendorDto.getMobileNo());
+	        	existingVendor.setEmailAddress(vendorDto.getEmailAddress());
+	            modelMapper.map(vendorDto, existingVendorOptional);
 	            VendorEntity updatedVendor = vendorRepository.save(existingVendor);
 	            logger.info("Updated Vendor with ID: {}", updatedVendor.getVendorId());
 	            return convertToDTO(updatedVendor);

@@ -1,5 +1,6 @@
 package com.orive.Procurement.Dto;
 
+import jakarta.persistence.Column;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -24,5 +25,4 @@ public class VendorDto {
 	private String city;
 	private int zipCode;
 	private double previousBalance;
-
 }

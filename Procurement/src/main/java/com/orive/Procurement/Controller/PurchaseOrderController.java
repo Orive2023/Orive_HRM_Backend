@@ -86,6 +86,7 @@ public class PurchaseOrderController {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 	    
+    //count the total PurchaseOrder
 	    @GetMapping("/count/bidAnalysis")
 	    public long countPurchaseOrder()
 	    {

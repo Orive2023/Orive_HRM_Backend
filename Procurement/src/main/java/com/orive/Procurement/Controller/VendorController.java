@@ -23,6 +23,7 @@ import com.orive.Procurement.Service.VendorService;
 
 
 
+
 @RestController
 @RequestMapping(value = "vendor")
 @CrossOrigin(origins = "*")
@@ -67,17 +68,16 @@ public class VendorController {
     // Update Vendor by ID
     @PutMapping("/update/{vendorId}")
     public ResponseEntity<VendorDto> updateVendor(@PathVariable Long vendorId, @RequestBody VendorDto updatedVendorDto) {
-    	VendorDto updatedVendor = vendorService.updateVendor(vendorId, updatedVendorDto);
-        if (updatedVendor != null) {
+    	VendorDto updatedvendor = vendorService.updateVendor(vendorId, updatedVendorDto);
+        if (updatedvendor != null) {
             logger.info("Updated vendor with ID: {}", vendorId);
-            return new ResponseEntity<>(updatedVendor, HttpStatus.OK);
+            return new ResponseEntity<>(updatedvendor, HttpStatus.OK);
         } else {
             logger.warn("vendor with ID {} not found for update", vendorId);
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
     
-
 
     // Delete Vendor by ID
     @DeleteMapping("/delete/{vendorId}")

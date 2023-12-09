@@ -36,8 +36,8 @@ public class AccountListEntity {
 	@Column(name = "department")
 	private String department;
 	
-	@Column(name = "job_title")
-	private String jobTitle;
+	@Column(name = "position")
+	private String position;
 	
 	@Column(name = "bank_name")
 	private String bankName;

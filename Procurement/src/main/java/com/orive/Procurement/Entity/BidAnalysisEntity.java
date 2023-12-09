@@ -1,5 +1,6 @@
 package com.orive.Procurement.Entity;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -36,12 +37,12 @@ public class BidAnalysisEntity {
 	
 	@Column(name = "location")
 	private String location;
+
+	@Column(name = "date")
+	private LocalDate date;
 	
 	@Column(name = "quotation")
 	private String quotation;
-	
-	@Column(name = "date")
-	private Date date;
 	
 	@Lob
 	@Column(name = "attachment", length = 100000)

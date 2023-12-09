@@ -263,6 +263,24 @@ public class EmployeesService {
 			 return employeesRepository.count();
 		 }
 	    
+	    
+	    //count the male from employee
+	    
+	    public long countEmployeesByMale()
+		 {
+			 return employeesRepository.countEmployeeByMale();
+		 }
+	    
+	    
+       //count the female from employee
+	    
+	    public long countEmployeesByFemale()
+		 {
+			 return employeesRepository.countEmployeeByFemale();
+		 }
+	    
+	    
+	    
 		// Helper method to convert EmployeesDTo to EmployeesEntity
 	    private EmployeesEntity convertToEntity(EmployeesDto employeesDto)
 	    {

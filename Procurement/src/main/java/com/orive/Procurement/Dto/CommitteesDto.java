@@ -18,6 +18,6 @@ public class CommitteesDto {
 
     private Long committeesId;
 	private String name;
-	private String signature;
+	private byte[] signature;
 
 }

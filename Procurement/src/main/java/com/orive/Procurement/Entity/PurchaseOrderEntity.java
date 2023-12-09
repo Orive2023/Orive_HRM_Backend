@@ -1,5 +1,6 @@
 package com.orive.Procurement.Entity;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -60,7 +61,7 @@ public class PurchaseOrderEntity {
 	private byte[] signatureAndStamp;
 	
 	@Column(name = "date")
-	private Date date;
+	private LocalDate date;
 	
 	@OneToMany(targetEntity = PurchaseOrderListEntity.class,cascade = CascadeType.ALL)
 	@JoinColumn(name = "purchaseOrder_list_fk",referencedColumnName = "purchaseOrderId")

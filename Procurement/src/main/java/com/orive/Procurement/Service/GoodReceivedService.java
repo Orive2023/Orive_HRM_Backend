@@ -1,5 +1,7 @@
 package com.orive.Procurement.Service;
 
+import java.io.IOException;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -9,10 +11,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+
 
 import com.orive.Procurement.Dto.GoodReceivedDto;
 import com.orive.Procurement.Entity.GoodReceivedEntity;
+import com.orive.Procurement.Entity.GoodReceivedListEntity;
 import com.orive.Procurement.Repository.GoodReceivedRepository;
+import com.orive.Procurement.Util.PhotoUtils;
 
 @Service
 public class GoodReceivedService {
@@ -26,13 +32,48 @@ private static final Logger logger= LoggerFactory.getLogger(GoodReceivedService.
 	private ModelMapper  modelMapper;
 	
 	// Create
-		 public GoodReceivedDto createGoodReceived(GoodReceivedDto goodReceivedDto) {
-			 GoodReceivedEntity goodReceivedEntity = convertToEntity(goodReceivedDto);
-			 GoodReceivedEntity savedGoodReceived = goodReceivedRepository.save(goodReceivedEntity);
-		        logger.info("Created GoodReceived with ID: {}", savedGoodReceived.getGoodReceivedId());
-		        return convertToDTO(savedGoodReceived);
-		    }
+//		 public GoodReceivedDto createGoodReceived(GoodReceivedDto goodReceivedDto) {
+//			 GoodReceivedEntity goodReceivedEntity = convertToEntity(goodReceivedDto);
+//			 GoodReceivedEntity savedGoodReceived = goodReceivedRepository.save(goodReceivedEntity);
+//		        logger.info("Created GoodReceived with ID: {}", savedGoodReceived.getGoodReceivedId());
+//		        return convertToDTO(savedGoodReceived);
+//		    }
 
+	
+	// Create
+		 public String uploadImage(
+				 String purchaseOrder,
+				 String paymentSource,
+				 String vendorName,
+				 LocalDate date,
+				 String receivedByName,
+				 String title,
+				 List<GoodReceivedListEntity> goodReceivedListEntities,
+				 MultipartFile file) throws IOException {
+
+			 GoodReceivedEntity imageData = goodReceivedRepository.save(GoodReceivedEntity.builder()
+		                .purchaseOrder(purchaseOrder)
+		                .paymentSource(paymentSource)
+		                .vendorName(vendorName)
+		                .date(date)
+		                .receivedByName(receivedByName)
+		                .title(title)
+		                .goodReceivedListEntities(goodReceivedListEntities)
+		                .signatureAndStamp(PhotoUtils.compressImage(file.getBytes())).build());
+		        if (imageData != null) {
+		            return "file uploaded successfully : " + file.getOriginalFilename();
+		        }
+		        return null;
+		    }
+		 
+		 //Download Logo
+		 public byte[] downloadImage(String vendorName){
+		        Optional<GoodReceivedEntity> dbImageData = goodReceivedRepository.findByVendorName(vendorName);
+		        byte[] images=PhotoUtils.decompressImage(dbImageData.get().getSignatureAndStamp());
+		        return images;
+		    }
+	
+	
 	    // Read
 	    public List<GoodReceivedDto> getAllGoodReceived() {
 	        List<GoodReceivedEntity> goodReceivedEntities = goodReceivedRepository.findAll();

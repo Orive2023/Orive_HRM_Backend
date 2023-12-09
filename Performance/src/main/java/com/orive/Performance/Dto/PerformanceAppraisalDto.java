@@ -1,10 +1,13 @@
 package com.orive.Performance.Dto;
 
+import java.time.LocalDate;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -15,19 +18,21 @@ import lombok.ToString;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class PerformanceAppraisalDto {
 	
-	private Long performanceAppraisalId;
+    private Long performanceAppraisalId;
 	private String employeeName;
-	private String employeeId;
+	private Long employeeId;
 	private String departmentName;
-	private String jobTitle;
-	private String appraisalPeriod;
+	private String position;
+	private LocalDate appraisalPeriod;
 	private int qualityOfWorkRating;
 	private String qualityOfWorkComments;
-	private Long qualityOfWorkRatingScore;
+	private Long qualityOfWorkScore;
 	private int jobKnowledgeRating;
 	private String jobKnowledgeComments;
+	private Long jobKnowledgeScore;
 	private int communicationSkillsRating;
 	private String communicationSkillsComments;
 	private Long communicationSkillsScore;
@@ -50,7 +55,5 @@ public class PerformanceAppraisalDto {
 	private String employeesSelfAssessment;
 	private String goalsAchieved;
 	private String developmentPlan;
-	private String managersComments;
-
-
+	private String managersComments;	
 }

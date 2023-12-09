@@ -1,5 +1,7 @@
 package com.orive.Procurement.Service;
 
+import java.io.IOException;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -9,10 +11,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.orive.Procurement.Dto.CommitteesDto;
 import com.orive.Procurement.Entity.CommitteesEntity;
+import com.orive.Procurement.Entity.GoodReceivedEntity;
+import com.orive.Procurement.Entity.GoodReceivedListEntity;
 import com.orive.Procurement.Repository.CommitteesRepository;
+import com.orive.Procurement.Util.PhotoUtils;
 
 @Service
 public class CommitteesService {
@@ -26,13 +32,35 @@ public class CommitteesService {
 	private ModelMapper modelMapper;
 	
 	// Create
-			 public CommitteesDto createCommittees(CommitteesDto committeesDto) {
-				 CommitteesEntity committeesEntity = convertToEntity(committeesDto);
-				 CommitteesEntity savedCommittees = committeesRepository.save(committeesEntity);
-			        logger.info("Created Committees with ID: {}", savedCommittees.getCommitteesId());
-			        return convertToDTO(savedCommittees);
-			    }
+//			 public CommitteesDto createCommittees(CommitteesDto committeesDto) {
+//				 CommitteesEntity committeesEntity = convertToEntity(committeesDto);
+//				 CommitteesEntity savedCommittees = committeesRepository.save(committeesEntity);
+//			        logger.info("Created Committees with ID: {}", savedCommittees.getCommitteesId());
+//			        return convertToDTO(savedCommittees);
+//			    }
+	
+	
+	// Create
+			 public String uploadImage(
+					 String name,
+					 MultipartFile file) throws IOException {
 
+				 CommitteesEntity imageData = committeesRepository.save(CommitteesEntity.builder()
+			                .name(name)
+			                .signature(PhotoUtils.compressImage(file.getBytes())).build());
+			        if (imageData != null) {
+			            return "file uploaded successfully : " + file.getOriginalFilename();
+			        }
+			        return null;
+			    }
+			 
+			 //Download Logo
+			 public byte[] downloadImage(String name){
+			        Optional<CommitteesEntity> dbImageData = committeesRepository.findByName(name);
+			        byte[] images=PhotoUtils.decompressImage(dbImageData.get().getSignature());
+			        return images;
+			    }
+		
 		    // Read
 		    public List<CommitteesDto> getAllCommittees() {
 		        List<CommitteesEntity> committeesEntities = committeesRepository.findAll();
@@ -58,7 +86,7 @@ public class CommitteesService {
 		        Optional<CommitteesEntity> existingCommitteesOptional = committeesRepository.findById(committeesId);
 		        if (existingCommitteesOptional.isPresent()) {
 		        	CommitteesEntity existingCommittees = existingCommitteesOptional.get();
-		            existingCommittees.setName(committeesDto.getName());   	
+//		            existingCommittees.setName(committeesDto.getName());   	
 		        	modelMapper.map(committeesDto, existingCommitteesOptional);
 		            CommitteesEntity updatedCommittees = committeesRepository.save(existingCommittees);
 		            logger.info("Updated Committees with ID: {}", updatedCommittees.getCommitteesId());

@@ -1,12 +1,16 @@
 package com.orive.Procurement.Controller;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ContentDisposition;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -16,9 +20,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.orive.Procurement.Dto.BidAnalysisDto;
+import com.orive.Procurement.Entity.CommitteeListEntity;
+import com.orive.Procurement.Entity.CompanyListEntity;
 import com.orive.Procurement.Service.BidAnalysisService;
 
 
@@ -35,13 +43,50 @@ public class BidAnalysisController {
     
     
  // Create a new BidAnalysis
-    @PostMapping("/create/bidAnalysis")
-    public ResponseEntity<BidAnalysisDto> createBidAnalysis(@RequestBody BidAnalysisDto bidAnalysisDto) {
-    	BidAnalysisDto createdBidAnalysis= bidAnalysisService.createBidAnalysis(bidAnalysisDto);
-        logger.info("Created BidAnalysis with name: {}", createdBidAnalysis.getLocation());
-        return new ResponseEntity<>(createdBidAnalysis, HttpStatus.CREATED);
-    }
+//    @PostMapping("/create/bidAnalysis")
+//    public ResponseEntity<BidAnalysisDto> createBidAnalysis(@RequestBody BidAnalysisDto bidAnalysisDto) {
+//    	BidAnalysisDto createdBidAnalysis= bidAnalysisService.createBidAnalysis(bidAnalysisDto);
+//        logger.info("Created BidAnalysis with name: {}", createdBidAnalysis.getLocation());
+//        return new ResponseEntity<>(createdBidAnalysis, HttpStatus.CREATED);
+//    }
 
+    
+ // Create a new BidAnalysis
+    @PostMapping("/create/bidAnalysis")
+    public ResponseEntity<String> saveBidAnalysisEntity(
+    		 @RequestParam String location,
+    		 @RequestParam LocalDate date,
+    		 @RequestParam  String quotation,
+    		 @RequestParam List<CommitteeListEntity> committeeEntities,
+    		 @RequestParam List<CompanyListEntity> companyListEntities,
+    		 @RequestParam("attachment") MultipartFile file){
+    	
+    	String result = bidAnalysisService.saveBidAnalysisEntity( 
+    			location, date, quotation, committeeEntities,companyListEntities, file );
+    
+    	if(result != null) {
+    		 return new ResponseEntity<>(result, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>("Failed to save BidAnalysis entity", HttpStatus.INTERNAL_SERVER_ERROR);
+       
+    	}
+    }
+    
+ // Get BidAnalysis pdf by id  
+    @GetMapping("/download/{bidAnalysisId}")
+    public ResponseEntity<byte[]> downloadsPdf(@PathVariable Long bidAnalysisId) {
+        byte[] pdf = bidAnalysisService.downloadPdf(bidAnalysisId);
+
+        if (pdf != null) {
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_PDF);
+            headers.setContentDisposition(ContentDisposition.builder("attachment").filename(bidAnalysisId + "_bidAnalysisId.pdf").build());
+            return new ResponseEntity<>(pdf, headers, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+    		
     // Get all BidAnalysis    
     @GetMapping("/get/bidAnalysis")
     public ResponseEntity<List<BidAnalysisDto>> getAllBidAnalysis() {
@@ -86,10 +131,10 @@ public class BidAnalysisController {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 	    
+    //Count the total BidAnalysis
 	    @GetMapping("/count/bidAnalysis")
 	    public long countBidAnalysis()
 	    {
 	    	return bidAnalysisService.countBidAnalysis();
 	    }
-
 }

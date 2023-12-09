@@ -1,5 +1,6 @@
 package com.orive.Procurement.Dto;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -29,6 +30,6 @@ public class PurchaseOrderDto {
 	private String authorizedByName;
 	private String title;
 	private byte[] signatureAndStamp;
-	private Date date;
-	private List<PurchaseOrderListDto> purchaseOrderListDtos;
+	private LocalDate date;
+	private List<PurchaseOrderListDto> purchaseOrderListEntities;
 }

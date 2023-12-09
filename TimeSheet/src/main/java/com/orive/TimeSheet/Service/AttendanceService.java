@@ -137,6 +137,12 @@ public class AttendanceService {
 		 return attendanceRepository.count();
 	 }
     
+    //count the total Attendance of employees present today
+    public long countPresentEmployeesToday()
+	 {
+		 return attendanceRepository.countPresentEmployeesToday();
+	 }
+    
 	// Helper method to convert AttendanceDTo to AttendanceEntity
     private AttendanceEntity convertToEntity(AttendanceDto attendanceDto)
     {

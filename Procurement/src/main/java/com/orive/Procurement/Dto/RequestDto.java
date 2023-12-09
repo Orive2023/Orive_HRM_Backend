@@ -1,5 +1,6 @@
 package com.orive.Procurement.Dto;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -31,13 +32,13 @@ public class RequestDto {
 	
 	private String requestingDepartment;	
 	
-	private String expectedTimeToHaveTheGoodStarts;
+	private LocalDate expectedTimeToHaveTheGoodStarts;
 	
-	private String expectedTimeToHaveTheGoodEnds;
+	private LocalDate expectedTimeToHaveTheGoodEnds;
 	
 	private String reasonForRequesting;
 	
-	private Date createdDate;
+	private LocalDate createdDate;
 	
 	private List<DescriptionOfMaterialListDto> descriptionOfMaterialEntities;
 }

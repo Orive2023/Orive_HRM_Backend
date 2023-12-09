@@ -50,5 +50,4 @@ public class VendorEntity {
 	
 	@Column(name = "previous_balance")
 	private double previousBalance;
-
 }

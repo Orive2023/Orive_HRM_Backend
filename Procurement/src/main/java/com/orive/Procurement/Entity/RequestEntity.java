@@ -1,5 +1,6 @@
 package com.orive.Procurement.Entity;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -40,16 +41,16 @@ public class RequestEntity {
 	private String requestingDepartment;	
 	
 	@Column(name = "expected_time_to_have_the_good_starts")
-	private String expectedTimeToHaveTheGoodStarts;
+	private LocalDate expectedTimeToHaveTheGoodStarts;
 	
 	@Column(name = "expected_time_to_have_the_good_ends")
-	private String expectedTimeToHaveTheGoodEnds;
+	private LocalDate expectedTimeToHaveTheGoodEnds;
 	
 	@Column(name = "reason_for_requesting")
 	private String reasonForRequesting;
 	
 	@Column(name = "created_date")
-	private Date createdDate;
+	private LocalDate createdDate;
 	
 	@OneToMany(targetEntity = DescriptionOfMaterialListEntity.class,cascade = CascadeType.ALL)
 	@JoinColumn(name = "request_description_fk",referencedColumnName = "requestId")

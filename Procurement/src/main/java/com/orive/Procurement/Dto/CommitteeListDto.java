@@ -1,5 +1,6 @@
 package com.orive.Procurement.Dto;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 import jakarta.persistence.Column;
@@ -28,5 +29,5 @@ public class CommitteeListDto {
 	
 	private byte[] signature;
 	
-	private Date date;
+	private LocalDate date;
 }

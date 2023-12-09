@@ -212,10 +212,24 @@ public class EmployeesController {
           return new ResponseEntity<>(HttpStatus.NO_CONTENT);
       }
       
-      // Count the total EmployeeExit 
+      // Count the total Employees 
   	    @GetMapping("/count/employee")
   	    public long countEmployees()
   	    {
   	    	return employeesService.countEmployees();
+  	    }
+  	    
+  	// Count the male from employee
+  	    @GetMapping("/count/malemployee")
+  	    public long countEmployeesByMale()
+  	    {
+  	    	return employeesService.countEmployeesByMale();
+  	    }
+  	    
+  		// Count the Female from employee
+  	    @GetMapping("/count/femalemployee")
+  	    public long countEmployeesByFemale()
+  	    {
+  	    	return employeesService.countEmployeesByFemale();
   	    }
 }

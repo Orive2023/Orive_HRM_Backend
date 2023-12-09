@@ -20,7 +20,7 @@ public class AccountListDto {
 	private String employeeFullName;
 	private Long employeeId;
 	private String department;
-	private String jobTitle;
+	private String position;
 	private String bankName;
 	private String accountHolderName;
 	private Long accountNumber;

@@ -133,10 +133,19 @@ public class AttendanceController {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 	    
+    //count the total Attendance
 	    @GetMapping("/count/attendance")
 	    public long countAttendance()
 	    {
 	    	return attendanceService.countAttendances();
 	    }
 
+	    //count the total Attendance of employees present today
+	    
+	    @GetMapping("/count/present/attendance")
+	    public long countPresentEmployeesToday()
+	    {
+	    	return attendanceService.countPresentEmployeesToday();
+	    }
 }
+

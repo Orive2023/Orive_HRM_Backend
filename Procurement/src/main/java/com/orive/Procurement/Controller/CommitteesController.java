@@ -1,5 +1,7 @@
 package com.orive.Procurement.Controller;
 
+import java.io.IOException;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -7,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -16,9 +19,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.orive.Procurement.Dto.CommitteesDto;
+import com.orive.Procurement.Entity.GoodReceivedListEntity;
 import com.orive.Procurement.Service.CommitteesService;
 
 @RestController
@@ -32,12 +38,41 @@ public class CommitteesController {
 	private CommitteesService committeesService;
 	
 	// Create a new Committees
+//    @PostMapping("/create/committees")
+//    public ResponseEntity<CommitteesDto> createCommittees(@RequestBody CommitteesDto committeesDto) {
+//    	CommitteesDto createdCommittees = committeesService.createCommittees(committeesDto);
+//        logger.info("Created Committees with name: {}", createdCommittees.getName());
+//        return new ResponseEntity<>(createdCommittees, HttpStatus.CREATED);
+//    }
+	
+	
+	// Create a new Committees
     @PostMapping("/create/committees")
-    public ResponseEntity<CommitteesDto> createCommittees(@RequestBody CommitteesDto committeesDto) {
-    	CommitteesDto createdCommittees = committeesService.createCommittees(committeesDto);
-        logger.info("Created Committees with name: {}", createdCommittees.getName());
-        return new ResponseEntity<>(createdCommittees, HttpStatus.CREATED);
-    }
+    public ResponseEntity<?> uploadImage(
+            @RequestParam("name")  String name,
+            @RequestParam("signature") MultipartFile file) {
+                           try {
+                          String uploadImage = committeesService.uploadImage(name,file);
+                        return ResponseEntity.status(HttpStatus.OK).body(uploadImage);
+                         } catch (IOException e) {
+                            e.printStackTrace();
+         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error uploading file");
+         }
+        }
+    
+    
+    
+//Get Committees signature by Name
+    @GetMapping("/download/{name}")
+	public ResponseEntity<?> downloadImage(@PathVariable String name){
+		byte[] imageData=committeesService.downloadImage(name);
+		return ResponseEntity.status(HttpStatus.OK)
+				.contentType(MediaType.valueOf("image/png"))
+				.body(imageData);
+	}   
+	
+	
+	
 
     // Get all Committees
     @GetMapping("/get/committees")

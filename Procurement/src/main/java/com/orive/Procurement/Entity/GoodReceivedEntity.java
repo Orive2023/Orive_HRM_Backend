@@ -1,5 +1,6 @@
 package com.orive.Procurement.Entity;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -45,7 +46,7 @@ public class GoodReceivedEntity {
 	private String vendorName;
 	
 	@Column(name = "date")
-	private Date date;
+	private LocalDate date;
 	
 	@Column(name = "received_by_name")
 	private String receivedByName;

@@ -1,5 +1,6 @@
 package com.orive.Procurement.Dto;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -26,9 +27,9 @@ public class GoodReceivedDto {
 	private String purchaseOrder;
 	private String paymentSource;
 	private String vendorName;
-	private Date date;
+	private LocalDate date;
 	private String receivedByName;
 	private String title;
 	private byte[] signatureAndStamp;
-	private List<GoodReceivedListDto> goodReceivedListDtos;
+	private List<GoodReceivedListDto> goodReceivedListEntities;
 }

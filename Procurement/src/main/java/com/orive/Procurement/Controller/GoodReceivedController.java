@@ -1,5 +1,7 @@
 package com.orive.Procurement.Controller;
 
+import java.io.IOException;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -7,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -16,9 +19,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.orive.Procurement.Dto.GoodReceivedDto;
+import com.orive.Procurement.Entity.GoodReceivedListEntity;
 import com.orive.Procurement.Service.GoodReceivedService;
 
 
@@ -35,12 +41,45 @@ public class GoodReceivedController {
     
     
  // Create a new GoodReceived
+//    @PostMapping("/create/goodreceived")
+//    public ResponseEntity<GoodReceivedDto> createGoodReceived(@RequestBody GoodReceivedDto goodReceivedDto) {
+//    	GoodReceivedDto createdGoodReceived = goodReceivedService.createGoodReceived(goodReceivedDto);
+//        logger.info("Created GoodReceived with name: {}", createdGoodReceived.getPurchaseOrder());
+//        return new ResponseEntity<>(createdGoodReceived, HttpStatus.CREATED);
+//    }
+    
+    
+  	// Create a new GoodReceived
     @PostMapping("/create/goodreceived")
-    public ResponseEntity<GoodReceivedDto> createGoodReceived(@RequestBody GoodReceivedDto goodReceivedDto) {
-    	GoodReceivedDto createdGoodReceived = goodReceivedService.createGoodReceived(goodReceivedDto);
-        logger.info("Created GoodReceived with name: {}", createdGoodReceived.getPurchaseOrder());
-        return new ResponseEntity<>(createdGoodReceived, HttpStatus.CREATED);
-    }
+    public ResponseEntity<?> uploadImage(
+            @RequestParam("purchaseOrder")  String purchaseOrder,
+            @RequestParam("paymentSource") String paymentSource,
+            @RequestParam("vendorName") String vendorName,
+            @RequestParam("date")  LocalDate date,
+            @RequestParam("receivedByName") String receivedByName,
+            @RequestParam("title")  String title,
+            @RequestParam("goodReceivedListEntities") List<GoodReceivedListEntity> goodReceivedListEntities,
+            @RequestParam("signatureAndStamp") MultipartFile file) {
+                           try {
+                          String uploadImage = goodReceivedService.uploadImage(purchaseOrder,paymentSource
+                          		,vendorName,date,receivedByName,title,goodReceivedListEntities,file);
+                        return ResponseEntity.status(HttpStatus.OK).body(uploadImage);
+                         } catch (IOException e) {
+                            e.printStackTrace();
+         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error uploading file");
+         }
+        }
+    
+    
+    
+//Get GoodReceived signatureAndStamp by VendorName
+    @GetMapping("/download/{vendorName}")
+	public ResponseEntity<?> downloadImage(@PathVariable String vendorName){
+		byte[] imageData=goodReceivedService.downloadImage(vendorName);
+		return ResponseEntity.status(HttpStatus.OK)
+				.contentType(MediaType.valueOf("image/png"))
+				.body(imageData);
+	}   
 
     // Get all GoodReceived   
     @GetMapping("/get/goodreceived")
@@ -86,6 +125,7 @@ public class GoodReceivedController {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 	    
+    //Count the total GoodReceived
 	    @GetMapping("/count/goodreceived")
 	    public long countGoodReceived()
 	    {
