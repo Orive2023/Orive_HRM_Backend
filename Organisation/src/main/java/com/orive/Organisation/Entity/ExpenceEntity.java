@@ -16,6 +16,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.Lob;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -56,7 +57,10 @@ public class ExpenceEntity {
 //	@Column(name = "approved_by")
 //	private String approvedBy;
 	
-	@OneToMany(targetEntity =ExpenseListEntity.class,cascade = CascadeType.ALL)
-	@JoinColumn(name = "expence_list_fk",referencedColumnName = "expenceId")
-	private List<ExpenseListEntity> expenseListEntities;
+//	@OneToMany(targetEntity =ExpenseListEntity.class,cascade = CascadeType.ALL)
+//	@JoinColumn(name = "expence_list_fk",referencedColumnName = "expenceId")
+//	private List<ExpenseListEntity> expenseListEntities;
+	
+	@Transient
+	private List<ExpenseListEntity> expenseListEntity;
 }

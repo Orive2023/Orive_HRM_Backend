@@ -1,5 +1,6 @@
 package com.orive.project.Entity;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -10,6 +11,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -20,6 +22,7 @@ import lombok.ToString;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 @Entity
 @Table(name = "projects")
 public class ProjectEntity {
@@ -38,10 +41,10 @@ public class ProjectEntity {
 	private String companyName;
 	
 	@Column(name = "start_date")
-	private Date startDate;
+	private LocalDate startDate;
 	
 	@Column(name = "end_date" )
-	private Date endDate;
+	private LocalDate endDate;
 	
 	@Column(name = "priority")
 	private String priority;

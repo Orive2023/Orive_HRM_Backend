@@ -31,6 +31,8 @@ public class ExpenseListEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long expenceListId;
 	
+//	private Long expenceId;
+	
 	@Column(name = "purchase_date")
 	private LocalDate purchaseDate;
 	

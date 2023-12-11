@@ -39,5 +39,5 @@ public class ExpenceDto {
 	private byte[] uploadDocument;
 //	private String status;
 //	private String approvedBy;
-	private List<ExpenseListDto> expenseListEntities;
+//	private List<ExpenseListDto> expenseListEntities;
 }
