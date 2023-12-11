@@ -26,6 +26,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.orive.Organisation.Dto.ExpenceDto;
+import com.orive.Organisation.Entity.ExpenceEntity;
 import com.orive.Organisation.Entity.ExpenseListEntity;
 import com.orive.Organisation.Service.ExpenceService;
 
@@ -41,27 +42,18 @@ public class ExpenceController {
     @Autowired
     private ExpenceService expenceService;
 
-  
-//  	// Create a new Expence
-//      @PostMapping("/create/expence")
-//      public ResponseEntity<ExpenceDto> createExpence(@RequestBody ExpenceDto expenceDto) {
-//    	  ExpenceDto createdExpence = expenceService.createExpence(expenceDto);
-//          logger.info("Created Expence with id: {}", createdExpence.getExpenceType());
-//          return new ResponseEntity<>(createdExpence, HttpStatus.CREATED);
-//      }
-    
-    
+ 
     // Create a new Expence
     @PostMapping("/create/expence")
     public ResponseEntity<String> saveExpenceEntity(
-    		 @RequestParam String expenceType,
-    		 @RequestParam LocalDate createdDate,
-    		 @RequestParam  Long total,
-    		 @RequestParam List<ExpenseListEntity> expenseListEntities,
-    		 @RequestParam("uploadDocument") MultipartFile fileDocument){
+            @RequestParam("expenceType") String expenceType,
+            @RequestParam("createdDate") LocalDate createdDate,
+            @RequestParam("total") Long total,
+            @RequestParam(value = "uploadDocument", required = false) MultipartFile fileDocument
+    ){
     	
     	String result = expenceService.saveExpenceEntity( 
-    			expenceType, createdDate, total, expenseListEntities, fileDocument );
+    			expenceType, createdDate, total,  fileDocument );
     
     	if(result != null) {
     		 return new ResponseEntity<>(result, HttpStatus.OK);
@@ -94,31 +86,15 @@ public class ExpenceController {
           return new ResponseEntity<>(expence, HttpStatus.OK);
       }
 
-      // Get Expence by ID
       @GetMapping("/get/{expenceId}")
-      public ResponseEntity<ExpenceDto> getExpenceById(@PathVariable Long expenceId) {
-          Optional<ExpenceDto> expence = expenceService.getExpenceById(expenceId);
-          if (expence.isPresent()) {
-              logger.info("Retrieved Expence with ID: {}", expenceId);
-              return new ResponseEntity<>(expence.get(), HttpStatus.OK);
-          } else {
-              logger.warn("Expence with ID {} not found", expenceId);
-              return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-          }
+      public ResponseEntity<ExpenceEntity> getExpenceByExpenceId(@PathVariable Long expenceId) {
+    	  logger.info("Received request to get expense by ID: {}", expenceId);
+          ExpenceEntity expence = expenceService.getByCareerSiteId(expenceId);
+          logger.info("Fetched expense details: {}", expence);
+          return ResponseEntity.ok(expence);
       }
 
-      // Update Expence by ID
-      @PutMapping("/update/{expenceId}")
-      public ResponseEntity<ExpenceDto> updateExpence(@PathVariable Long expenceId, @RequestBody ExpenceDto updatedExpenceDto) {
-    	  ExpenceDto updatedExpence = expenceService.updateExpence(expenceId, updatedExpenceDto);
-          if (updatedExpence != null) {
-              logger.info("Updated Expence with ID: {}", expenceId);
-              return new ResponseEntity<>(updatedExpence, HttpStatus.OK);
-          } else {
-              logger.warn("Expence with ID {} not found for update", expenceId);
-              return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-          }
-      }
+     
       
 
       // Delete Expence by ID

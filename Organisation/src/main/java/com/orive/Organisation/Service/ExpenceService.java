@@ -2,6 +2,7 @@ package com.orive.Organisation.Service;
 
 import java.time.LocalDate;
 import java.time.ZonedDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -11,6 +12,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.orive.Organisation.Dto.ExpenceDto;
@@ -35,20 +37,15 @@ private static final Logger logger=LoggerFactory.getLogger(ExpenceService.class)
 	@Autowired
 	private ModelMapper modelMapper;
 	
-//	
-//	// Create
-//    public ExpenceDto createExpence(ExpenceDto expenceDto) {
-//    	ExpenceEntity expenceEntity = convertToEntity(expenceDto);
-//    	ExpenceEntity savedExpence = expenceRepository.save(expenceEntity);
-//        logger.info("Created Expence with ID: {}", savedExpence.getExpenceId());
-//        return convertToDTO(savedExpence);
-//    }
+	@Autowired
+	private RestTemplate restTemplate;
+	
+
 	
 	public String saveExpenceEntity(
 			String expenceType,
 			LocalDate createdDate,
 			Long total,
-			List<ExpenseListEntity> expenseListEntities,
 			MultipartFile fileDocument) {
 		
 		try {
@@ -56,7 +53,6 @@ private static final Logger logger=LoggerFactory.getLogger(ExpenceService.class)
 					.expenceType(expenceType)
 					.createdDate(createdDate)
 					.total(total)
-					.expenseListEntities(expenseListEntities)
 					.uploadDocument(UploadDocumentUtils.compressPdf(fileDocument.getBytes()))
 					.build());
 			
@@ -94,49 +90,34 @@ private static final Logger logger=LoggerFactory.getLogger(ExpenceService.class)
                 .collect(Collectors.toList());
     }
     
-    //get by ExpenceId
-    public Optional<ExpenceDto> getExpenceById(Long expenceId) {
-        Optional<ExpenceEntity> expence = expenceRepository.findById(expenceId);
-        if (expence.isPresent()) {
-            return Optional.of(convertToDTO(expence.get()));
-        } else {
-            logger.warn("Expence with ID {} not found", expenceId);
-            return Optional.empty();
-        }
+    //get by AddBankId
+    public ExpenceEntity getByCareerSiteId(Long expenceId) {
+        //get user from database with the help  of user repository
+    	ExpenceEntity user = expenceRepository.findById(expenceId).orElseThrow(() -> new ResourceNotFoundException("User with given id is not found on server !! : " + expenceId));
+        // fetch rating of the above  user from RATING SERVICE
+        //http://localhost:8083/ratings/users/47e38dac-c7d0-4c40-8582-11d15f185fad
+
+        ArrayList<ExpenseListEntity> ratingsOfUser = restTemplate.getForObject("http://localhost:8081/expencelist/" + user.getExpenceId(), ArrayList.class);
+        logger.info("{} ", ratingsOfUser);
+//        List<Rating> ratings = Arrays.stream(ratingsOfUser).toList();
+//        List<Rating> ratingList = ratings.stream().map(rating -> {
+//            //api call to hotel service to get the hotel
+//            //http://localhost:8082/hotels/1cbaf36d-0b28-4173-b5ea-f1cb0bc0a791
+//            //ResponseEntity<Hotel> forEntity = restTemplate.getForEntity("http://HOTEL-SERVICE/hotels/"+rating.getHotelId(), Hotel.class);
+//            Hotel hotel = hotelService.getHotel(rating.getHotelId());
+//            // logger.info("response status code: {} ",forEntity.getStatusCode());
+//            //set the hotel to rating
+//            rating.setHotel(hotel);
+//            //return the rating
+//            return rating;
+//        }).collect(Collectors.toList());
+
+        user.setExpenseListEntities(ratingsOfUser);
+
+        return user;
     }
     
- // Update list by id
-    public ExpenceDto updateExpence(Long expenceId, ExpenceDto expenceDto) {
-        Optional<ExpenceEntity> existingExpenceOptional = expenceRepository.findById(expenceId);
-
-        if (existingExpenceOptional.isPresent()) {
-            ExpenceEntity existingExpence = existingExpenceOptional.get();
-
-            // Assuming there is only one ExpenseListEntity in the list for simplicity
-            List<ExpenseListDto> expenseListDtos = expenceDto.getExpenseListEntities();
-            if (expenseListDtos != null && !expenseListDtos.isEmpty()) {
-                ExpenseListDto expenseListDto = expenseListDtos.get(0);
-
-                // Update fields in associated ExpenseListEntity
-                List<ExpenseListEntity> expenseListEntities = existingExpence.getExpenseListEntities();
-                if (expenseListEntities != null && !expenseListEntities.isEmpty()) {
-                    ExpenseListEntity expenseListEntity = expenseListEntities.get(0);
-                    expenseListEntity.setPurchaseDate(expenseListDto.getPurchaseDate());
-                    expenseListEntity.setDescription(expenseListDto.getDescription());
-                    expenseListEntity.setPurchasedBy(expenseListDto.getPurchasedBy());
-                    expenseListEntity.setAmount(expenseListDto.getAmount());
-                }
-            }
-
-            ExpenceEntity updatedExpence = expenceRepository.save(existingExpence);
-            logger.info("Updated Expence with ID: {}", updatedExpence.getExpenceId());
-
-            return convertToDTO(updatedExpence);
-        } else {
-            logger.warn("Expence with ID {} not found for update", expenceId);
-            throw new ResourceNotFoundException("Expence with ID " + expenceId + " not found");
-        }
-    }
+ 
     
     // Delete
     public void deleteExpence(Long expenceId) {
@@ -161,3 +142,6 @@ private static final Logger logger=LoggerFactory.getLogger(ExpenceService.class)
         return modelMapper.map(expenceEntity, ExpenceDto.class);
     } 
 }
+
+ 
+

@@ -25,23 +25,23 @@ import lombok.ToString;
 @Builder
 @Entity
 @Table(name = "expencelist")
-public class ExpenseListEntity {
-
+public class ExpenseListEntity {	
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long expenceListId;
 	
-//	private Long expenceId;
+	private Long expenceId;
 	
 	@Column(name = "purchase_date")
 	private LocalDate purchaseDate;
 	
-	@Column(name = "description", length = 100000)
+	@Column(name = "description")
 	private String description;
 	
 	@Column(name = "purchased_by")
 	private String purchasedBy;
 	
 	@Column(name = "amount")
-	private Long amount;		
+	private double amount;	
 }

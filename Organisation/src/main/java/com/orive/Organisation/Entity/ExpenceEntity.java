@@ -33,7 +33,7 @@ import lombok.ToString;
 @Entity
 @Table(name = "expence")
 public class ExpenceEntity {
-
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long expenceId;
@@ -59,8 +59,9 @@ public class ExpenceEntity {
 	
 //	@OneToMany(targetEntity =ExpenseListEntity.class,cascade = CascadeType.ALL)
 //	@JoinColumn(name = "expence_list_fk",referencedColumnName = "expenceId")
-//	private List<ExpenseListEntity> expenseListEntities;
+//	private List<ExpenseListEntity> expenseListEntities=new ArrayList<>();
 	
 	@Transient
-	private List<ExpenseListEntity> expenseListEntity;
+	private List<ExpenseListEntity> expenseListEntities=new ArrayList<>();
+	
 }
