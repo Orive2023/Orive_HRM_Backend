@@ -1,5 +1,7 @@
 package com.orive.TimeSheet.Controller;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -51,12 +53,12 @@ public class AttendanceController {
 	    		@RequestParam String employeeName,
 	    		@RequestParam String clockIn,
 	    		@RequestParam String clockOut,
-	    		@RequestParam int late,
-	    		@RequestParam int earlyLeaving,
-	    		@RequestParam int overTime,
-	    		@RequestParam int totalWork,
-	    		@RequestParam int totalRest,
-	    		@RequestParam String date,
+	    		@RequestParam Long late,
+	    		@RequestParam Long earlyLeaving,
+	    		@RequestParam Long overTime,
+	    		@RequestParam Long totalWork,
+	    		@RequestParam Long totalRest,
+	    		@RequestParam LocalDate date,
 	    	    @RequestParam("file") MultipartFile file){
 	    	
 	    	String result = attendanceService.saveAttendanceEntity( 
@@ -140,8 +142,7 @@ public class AttendanceController {
 	    	return attendanceService.countAttendances();
 	    }
 
-	    //count the total Attendance of employees present today
-	    
+	    //count the total Attendance of employees present today    
 	    @GetMapping("/count/present/attendance")
 	    public long countPresentEmployeesToday()
 	    {

@@ -1,5 +1,7 @@
 package com.orive.TimeSheet.Entity;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Date;
 
 import jakarta.persistence.Column;
@@ -40,22 +42,22 @@ public class AttendanceEntity {
 	private String clockOut;
 	
 	@Column(name = "late")
-	private int late;
+	private Long late;
 	
 	@Column(name = "early_leaving")
-	private int earlyLeaving;
+	private Long earlyLeaving;
 	
 	@Column(name = "over_time")
-	private int overTime;
+	private Long overTime;
 	
 	@Column(name = "total_work")
-	private int totalWork;
+	private Long totalWork;
 	
 	@Column(name ="total_rest" )
-	private int totalRest;
+	private Long totalRest;
 	
 	@Column(name = "date")
-	private String date;
+	private LocalDate date;
 	
 	@Lob
 	@Column(name = "upload_doc",  length = 100000)

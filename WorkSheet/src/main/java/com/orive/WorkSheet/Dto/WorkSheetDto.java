@@ -1,9 +1,11 @@
 package com.orive.WorkSheet.Dto;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 import jakarta.persistence.Column;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -14,12 +16,13 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
+@Builder
 public class WorkSheetDto {
 
-	private Long workSheetId;
+    private Long workSheetId;
 	private String workSheetTitle;
-	private Date startDate;
-	private Date endDate;
+	private LocalDate startDate;
+	private LocalDate endDate;
 	private double estimateHour;
 	private String project;
 	private String employeeName;
@@ -28,5 +31,5 @@ public class WorkSheetDto {
 	private String taskName;
 	private String challangePart;
 	private String workProgress;
-	private Date createdDate;
+	private LocalDate createdDate;
 }

@@ -1,5 +1,6 @@
 package com.orive.TimeSheet.Entity;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 import jakarta.persistence.Column;
@@ -9,6 +10,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -19,6 +21,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
+@Builder
 @Entity
 @Table(name = "office_shift")
 public class OfficeShiftsEntity {
@@ -28,10 +31,10 @@ public class OfficeShiftsEntity {
 	private Long OfficeShiftsId;
 	
 	@Column(name = "created_date")
-	private Date createdDate;
+	private LocalDate createdDate;
 	
 	@Column(name = "day")
-	private Date day;
+	private String day;
 	
 	@Column(name = "monday")
 	private String monday;

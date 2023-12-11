@@ -1,5 +1,7 @@
 package com.orive.TimeSheet.Service;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -42,12 +44,12 @@ public class AttendanceService {
 			String employeeName,
 			String clockIn,
 			String clockOut,
-			int late,
-			int earlyLeaving,
-			int overTime,
-			int totalWork,
-			int totalRest,
-			String date,
+			Long late,
+			Long earlyLeaving,
+			Long overTime,
+			Long totalWork,
+			Long totalRest,
+			LocalDate date,
 			MultipartFile file) {
 		
 		try {

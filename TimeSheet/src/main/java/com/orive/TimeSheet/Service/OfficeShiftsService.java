@@ -67,7 +67,7 @@ public class OfficeShiftsService {
 	           existingOfficeShifts.setThursday(officeShiftsDto.getThursday());
 	           existingOfficeShifts.setFriday(officeShiftsDto.getFriday());
 	           existingOfficeShifts.setSaturday(officeShiftsDto.getSaturday());
-	           existingOfficeShifts.setSunday(officeShiftsDto.getSunday());
+//	           existingOfficeShifts.setSunday(officeShiftsDto.getSunday());
 	        	modelMapper.map(officeShiftsDto, existingofficeShiftsOptional);
 	            OfficeShiftsEntity updatedOfficeShifts = officeShiftsRepository.save(existingOfficeShifts);
 	            logger.info("Updated OfficeShifts with ID: {}", updatedOfficeShifts.getOfficeShiftsId());
