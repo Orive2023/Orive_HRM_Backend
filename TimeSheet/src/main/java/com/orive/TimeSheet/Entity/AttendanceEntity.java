@@ -36,10 +36,10 @@ public class AttendanceEntity {
 	private String employeeName;
 	
 	@Column(name = "clock_in")
-	private String clockIn;
+	private LocalTime clockIn;
 	
 	@Column(name = "clock_out")
-	private String clockOut;
+	private LocalTime clockOut;
 	
 	@Column(name = "late")
 	private Long late;

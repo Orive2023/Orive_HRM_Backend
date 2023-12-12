@@ -51,8 +51,8 @@ public class AttendanceController {
 	  @PostMapping("/create/attendance")
 	    public ResponseEntity<String> saveAttendanceEntity(
 	    		@RequestParam String employeeName,
-	    		@RequestParam String clockIn,
-	    		@RequestParam String clockOut,
+	    		@RequestParam LocalTime clockIn,
+	    		@RequestParam LocalTime clockOut,
 	    		@RequestParam Long late,
 	    		@RequestParam Long earlyLeaving,
 	    		@RequestParam Long overTime,

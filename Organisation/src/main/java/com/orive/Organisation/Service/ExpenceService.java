@@ -53,12 +53,12 @@ private static final Logger logger=LoggerFactory.getLogger(ExpenceService.class)
 					.expenceType(expenceType)
 					.createdDate(createdDate)
 					.total(total)
-					.uploadDocument(UploadDocumentUtils.compressPdf(fileDocument.getBytes()))
-					.build());
-			
-			 if (pdfData != null) {
-		            return "File uploaded successfully: " + fileDocument.getOriginalFilename();
-		        }
+					 .uploadDocument(fileDocument != null ? UploadDocumentUtils.compressPdf(fileDocument.getBytes()) : null)
+	                    .build());
+
+	            if (pdfData != null) {
+	                return "File uploaded successfully: " + (fileDocument != null ? fileDocument.getOriginalFilename() : "No file attached");
+	            }
 			
 		}catch (Exception e) {
 			// Handle the IOException appropriately (e.g., log it, return an error message)

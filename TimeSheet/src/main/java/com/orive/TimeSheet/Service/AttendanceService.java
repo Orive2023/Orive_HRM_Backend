@@ -42,8 +42,8 @@ public class AttendanceService {
 	
 	public String saveAttendanceEntity(
 			String employeeName,
-			String clockIn,
-			String clockOut,
+			LocalTime clockIn,
+			LocalTime clockOut,
 			Long late,
 			Long earlyLeaving,
 			Long overTime,

@@ -58,7 +58,7 @@ public class PoliciesController {
     		 @RequestParam String title,
     		 @RequestParam  String description,
     		 @RequestParam LocalDate createdDate,
-    		 @RequestParam("file") MultipartFile file){
+    		 @RequestParam("uploadPdf") MultipartFile file){
     	
     	String result = policiesService.savePoliciesEntity( 
     			companyName, title, description, createdDate, file );

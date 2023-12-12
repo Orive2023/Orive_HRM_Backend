@@ -23,8 +23,8 @@ public class AttendanceDto {
  	
 	private Long attendanceId;
 	private String employeeName;
-	private String clockIn;
-	private String clockOut;
+	private LocalTime clockIn;
+	private LocalTime clockOut;
 	private Long late;
 	private Long earlyLeaving;
 	private Long overTime;
