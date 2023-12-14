@@ -95,12 +95,7 @@ public class CompanyService {
 //	        return null;
 //	    }
 //	 
-//	 //Download Logo
-//	 public byte[] downloadImage(String companyName){
-//	        Optional<CompanyEntity> dbImageData = companyRepository.findByCompanyName(companyName);
-//	        byte[] images=ImageUtils.decompressImage(dbImageData.get().getUploadLogo());
-//	        return images;
-//	    }
+
 	
 	
 	// Create
@@ -133,6 +128,15 @@ public class CompanyService {
 		    }
 		}
 
+		
+		
+		 //Download Logo
+		 public byte[] downloadImage(String companyName){
+		        Optional<CompanyEntity> dbImageData = companyRepository.findByCompanyName(companyName);
+		        byte[] images=ImageUtils.decompressImage(dbImageData.get().getFile());
+		        return images;
+		
+		 }
 
     // Read
     public List<CompanyDto> getAllCompany() {

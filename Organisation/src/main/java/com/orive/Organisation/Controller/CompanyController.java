@@ -78,20 +78,7 @@ public class CompanyController {
 //          }
 //      
 //      
-//      
-//// Get companies logo by name
-//      @GetMapping("/{companyName}")
-////      @PreAuthorize("hasRole('client_admin')")
-//  	public ResponseEntity<?> downloadImage(@PathVariable String companyName){
-//  		byte[] imageData=companyService.downloadImage(companyName);
-//  		return ResponseEntity.status(HttpStatus.OK)
-//  				.contentType(MediaType.valueOf("image/png"))
-//  				.body(imageData);
-//
-//  	}
-
-    
-    
+//          
  // Create a new Company
     @PostMapping("/create/company")
 //    @PreAuthorize("hasRole('client_admin')")
@@ -109,7 +96,18 @@ public class CompanyController {
         }
     }
       
-      
+    
+ // Get companies logo by name
+    @GetMapping("/{companyName}")
+//    @PreAuthorize("hasRole('client_admin')")
+	public ResponseEntity<?> downloadImage(@PathVariable String companyName){
+		byte[] imageData=companyService.downloadImage(companyName);
+		return ResponseEntity.status(HttpStatus.OK)
+				.contentType(MediaType.valueOf("image/png"))
+				.body(imageData);
+	}
+     
+    
  // Get all companies  
       @GetMapping("/get/company")
 //      @PreAuthorize("hasRole('client_user')")
