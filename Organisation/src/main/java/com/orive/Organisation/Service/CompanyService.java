@@ -47,86 +47,87 @@ public class CompanyService {
 	private JavaMailSender javaMailSender;
 	
 	
-//	// Create
-//	 public String uploadImage(
-//			 String companyName,
-//			 String companyType,
-//			 String legalOrTradingName,
-//			 String address,
-//			 String registrationNumber,
-//			 Long contactNumber,
-//			 String email,
-//			 String website,
-//			 String city,
-//			 String state,
-//			 int zipCode,
-//			 String country,
-//			 String cin,
-//			 String gst,
-//			 String uan,
-//			 LocalDate createdDate,
-////			 String status,
-////			 String approvedBy,
-//			 MultipartFile file) throws IOException {
-//
-//	        CompanyEntity imageData = companyRepository.save(CompanyEntity.builder()
-//	                .companyName(companyName)
-//	                .companyType(companyType)
-//	                .legalOrTradingName(legalOrTradingName)
-//	                .address(address)
-//	                .registrationNumber(registrationNumber)
-//	                .contactNumber(contactNumber)
-//	                .email(email)
-//	                .website(website)
-//	                .city(city)
-//	                .state(state)
-//	                .zipCode(zipCode)
-//	                .country(country)              
-//	                .cin(cin)
-//	                .gst(gst)
-//	                .uan(uan)
-//	                .createdDate(createdDate)
-////	                .status(status)
-////	                .approvedBy(approvedBy)
-//	                .uploadLogo(ImageUtils.compressImage(file.getBytes())).build());
-//	        if (imageData != null) {
-//	            return "file uploaded successfully : " + file.getOriginalFilename();
-//	        }
-//	        return null;
-//	    }
-//	 
-
-	
-	
 	// Create
-		public String uploadImage(CompanyDto companyDTO) throws IOException {
-		    try {
-		    	logger.info("Received request to upload file for company: {}", companyDTO.getCompanyName());
+	 public String uploadImage(
+			 String companyName,
+			 String companyType,
+			 String legalOrTradingName,
+			 String address,
+			 String registrationNumber,
+			 Long contactNumber,
+			 String email,
+			 String website,
+			 String city,
+			 String state,
+			 int zipCode,
+			 String country,
+			 String cin,
+			 String gst,
+			 String uan,
+			 LocalDate createdDate,
+//			 String status,
+//			 String approvedBy,
+			 MultipartFile file) throws IOException {
 
-		        CompanyEntity companyEntity = convertToEntity(companyDTO);
-		        logger.info("Converted CompanyDto to CompanyEntity: {}", companyEntity);
+	        CompanyEntity imageData = companyRepository.save(CompanyEntity.builder()
+	                .address(address)
+	                .cin(cin)
+	                .city(city)
+	                .companyName(companyName)
+	                .companyType(companyType)
+	                .contactNumber(contactNumber)
+	                .country(country)     
+	                .createdDate(createdDate)
+	                .email(email)
+	                .file(ImageUtils.compressImage(file.getBytes()))
+	                .gst(gst)
+	                .legalOrTradingName(legalOrTradingName)
+	                .registrationNumber(registrationNumber)
+	                .state(state)
+	                .uan(uan)
+	                .website(website)
+	                .zipCode(zipCode)                    
+//	                .status(status)
+//	                .approvedBy(approvedBy)
+	                .build());
+	        if (imageData != null) {
+	            return "file uploaded successfully : " + file.getOriginalFilename();
+	        }
+	        return null;
+	    }
+	 
 
-		        byte[] compressedImage = ImageUtils.compressImage(companyDTO.getFile().getBytes());
-		        logger.info("Compressed image data: {}", compressedImage);
-
-		        companyEntity.setFile(compressedImage);
-		        logger.info("Set compressed image data to CompanyEntity");
-
-		        CompanyEntity savedEntity = companyRepository.save(companyEntity);
-
-		        if (savedEntity != null) {
-		        	logger.info("File uploaded successfully. Company ID: {}", savedEntity.getCompanyId());
-		            sendEmail(savedEntity.getEmail(), savedEntity.getCompanyName());
-		            return "File uploaded successfully: " + companyDTO.getFile().getOriginalFilename();
-		        } else {
-		        	logger.warn("Saved entity is null after upload");
-		            return null;
-		        }
-		    } catch (Exception e) {
-		    	logger.error("Error uploading file: {}", e.getMessage(), e);
-		        return "Error uploading file: " + e.getMessage();
-		    }
-		}
+	
+	
+//	// Create
+//		public String uploadImage(CompanyDto companyDTO) throws IOException {
+//		    try {
+//		    	logger.info("Received request to upload file for company: {}", companyDTO.getCompanyName());
+//
+//		        CompanyEntity companyEntity = convertToEntity(companyDTO);
+//		        logger.info("Converted CompanyDto to CompanyEntity: {}", companyEntity);
+//
+//		        byte[] compressedImage = ImageUtils.compressImage(companyDTO.getFile().getBytes());
+//		        logger.info("Compressed image data: {}", compressedImage);
+//
+//		        companyEntity.setFile(compressedImage);
+//		        logger.info("Set compressed image data to CompanyEntity");
+//
+//		        CompanyEntity savedEntity = companyRepository.save(companyEntity);
+//
+//		        if (savedEntity != null) {
+//		        	logger.info("File uploaded successfully. Company ID: {}", savedEntity.getCompanyId());
+//		            sendEmail(savedEntity.getEmail(), savedEntity.getCompanyName());
+//		            return "File uploaded successfully: " + companyDTO.getFile().getOriginalFilename();
+//		        } else {
+//		        	logger.warn("Saved entity is null after upload");
+//		            return null;
+//		        }
+//		    } catch (Exception e) {
+//		    	logger.error("Error uploading file: {}", e.getMessage(), e);
+//		        return "Error uploading file: " + e.getMessage();
+//		    }
+//		}
 
 		
 		

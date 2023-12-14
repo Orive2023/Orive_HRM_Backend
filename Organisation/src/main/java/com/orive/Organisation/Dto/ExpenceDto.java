@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import com.orive.Organisation.Entity.ExpenceEntity;
 import com.orive.Organisation.Entity.ExpenseListEntity;
 
@@ -36,7 +38,7 @@ public class ExpenceDto {
 	private String expenceType;
 	private LocalDate createdDate;
 	private Long total;
-	private byte[] uploadDocument;
+	private MultipartFile uploadDocument;
 //	private String status;
 //	private String approvedBy;
 	//private List<ExpenseListDto> expenseListEntities;

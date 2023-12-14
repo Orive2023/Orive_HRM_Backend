@@ -1,5 +1,6 @@
 package com.orive.Organisation.Service;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
@@ -15,12 +16,15 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.orive.Organisation.Dto.CompanyDto;
 import com.orive.Organisation.Dto.ExpenceDto;
 import com.orive.Organisation.Dto.ExpenseListDto;
+import com.orive.Organisation.Entity.CompanyEntity;
 import com.orive.Organisation.Entity.ExpenceEntity;
 import com.orive.Organisation.Entity.ExpenseListEntity;
 import com.orive.Organisation.Exceptions.ResourceNotFoundException;
 import com.orive.Organisation.Repository.ExpenceRepository;
+import com.orive.Organisation.Util.ImageUtils;
 import com.orive.Organisation.Util.UploadDocumentUtils;
 import com.orive.Organisation.Util.UploadPdfUtils;
 
@@ -42,32 +46,62 @@ private static final Logger logger=LoggerFactory.getLogger(ExpenceService.class)
 	
 
 	
-	public String saveExpenceEntity(
-			String expenceType,
-			LocalDate createdDate,
-			Long total,
-			MultipartFile fileDocument) {
+//	public String saveExpenceEntity(
+//			String expenceType,
+//			LocalDate createdDate,
+//			Long total,
+//			MultipartFile fileDocument) {
+//		
+//		try {
+//			ExpenceEntity pdfData = expenceRepository.save(ExpenceEntity.builder()
+//					.expenceType(expenceType)
+//					.createdDate(createdDate)
+//					.total(total)
+//					 .uploadDocument(fileDocument != null ? UploadDocumentUtils.compressPdf(fileDocument.getBytes()) : null)
+//	                    .build());
+//
+//	            if (pdfData != null) {
+//	                return "File uploaded successfully: " + (fileDocument != null ? fileDocument.getOriginalFilename() : "No file attached");
+//	            }
+//			
+//		}catch (Exception e) {
+//			// Handle the IOException appropriately (e.g., log it, return an error message)
+//	        return "Error uploading file: " + e.getMessage();
+//		}
+//		
+//		return null;
+//	}
 		
-		try {
-			ExpenceEntity pdfData = expenceRepository.save(ExpenceEntity.builder()
-					.expenceType(expenceType)
-					.createdDate(createdDate)
-					.total(total)
-					 .uploadDocument(fileDocument != null ? UploadDocumentUtils.compressPdf(fileDocument.getBytes()) : null)
-	                    .build());
+	
+	// Create
+	public String uploadPdf(ExpenceDto expenceDto) throws IOException {
+	    try {
+	    	logger.info("Received request to upload file for expense: {}", expenceDto.getExpenceType());
 
-	            if (pdfData != null) {
-	                return "File uploaded successfully: " + (fileDocument != null ? fileDocument.getOriginalFilename() : "No file attached");
-	            }
-			
-		}catch (Exception e) {
-			// Handle the IOException appropriately (e.g., log it, return an error message)
+	    	ExpenceEntity expenceEntity = convertToEntity(expenceDto);
+	        logger.info("Converted ExpenceDto to ExpenceEntity: {}", expenceEntity);
+
+	        byte[] compressedDocument = UploadPdfUtils.compressPdf(expenceDto.getUploadDocument().getBytes());
+	        logger.info("Compressed pdf data: {}", compressedDocument);
+
+	        expenceEntity.setUploadDocument(compressedDocument);
+	        logger.info("Set compressed pdf data to ExpenceEntity");
+
+	        ExpenceEntity savedEntity = expenceRepository.save(expenceEntity);
+
+	        if (savedEntity != null) {
+	        	logger.info("File uploaded successfully. Expence ID: {}", savedEntity.getExpenceId());
+	            return "File uploaded successfully: " + expenceDto.getUploadDocument().getOriginalFilename();
+	        } else {
+	        	logger.warn("Saved entity is null after upload");
+	            return null;
+	        }
+	    } catch (Exception e) {
+	    	logger.error("Error uploading file: {}", e.getMessage(), e);
 	        return "Error uploading file: " + e.getMessage();
-		}
-		
-		return null;
+	    }
 	}
-		
+
 	
 	//Download pdf
 	public byte[] downloadPdf(Long expenceId) {

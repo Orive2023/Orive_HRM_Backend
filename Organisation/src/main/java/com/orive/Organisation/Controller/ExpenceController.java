@@ -1,5 +1,6 @@
 package com.orive.Organisation.Controller;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.ZonedDateTime;
 import java.util.List;
@@ -16,6 +17,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -25,6 +27,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.orive.Organisation.Dto.CompanyDto;
 import com.orive.Organisation.Dto.ExpenceDto;
 import com.orive.Organisation.Entity.ExpenceEntity;
 import com.orive.Organisation.Entity.ExpenseListEntity;
@@ -43,25 +46,47 @@ public class ExpenceController {
     private ExpenceService expenceService;
 
  
-    // Create a new Expence
-    @PostMapping("/create/expence")
-    public ResponseEntity<String> saveExpenceEntity(
-            @RequestParam("expenceType") String expenceType,
-            @RequestParam("createdDate") LocalDate createdDate,
-            @RequestParam("total") Long total,
-            @RequestParam(value = "uploadDocument", required = false) MultipartFile fileDocument
-    ){
-    	
-    	String result = expenceService.saveExpenceEntity( 
-    			expenceType, createdDate, total,  fileDocument );
+//    // Create a new Expence
+//    @PostMapping("/create/expence")
+//    public ResponseEntity<String> saveExpenceEntity(
+//            @RequestParam("expenceType") String expenceType,
+//            @RequestParam("createdDate") LocalDate createdDate,
+//            @RequestParam("total") Long total,
+//            @RequestParam(value = "uploadDocument", required = false) MultipartFile fileDocument
+//    ){
+//    	
+//    	String result = expenceService.saveExpenceEntity( 
+//    			expenceType, createdDate, total,  fileDocument );
+//    
+//    	if(result != null) {
+//    		 return new ResponseEntity<>(result, HttpStatus.OK);
+//        } else {
+//            return new ResponseEntity<>("Failed to save Expence entity", HttpStatus.INTERNAL_SERVER_ERROR);
+//       
+//    	}
+//    }
     
-    	if(result != null) {
-    		 return new ResponseEntity<>(result, HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>("Failed to save Expence entity", HttpStatus.INTERNAL_SERVER_ERROR);
-       
-    	}
+    
+    // Create a new Company
+    @PostMapping("/create/expence")
+//    @PreAuthorize("hasRole('client_admin')")
+    //@PostMapping("/uploadImage")
+    public ResponseEntity<String> uploadPdf(@ModelAttribute ExpenceDto expenceDto) {
+  	  try {
+            String result = expenceService.uploadPdf(expenceDto);
+            if (result != null) {
+                return ResponseEntity.ok(result);
+            } else {
+                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to upload pdf");
+            }
+        } catch (IOException e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error uploading pdf: " + e.getMessage());
+        }
     }
+    
+    
+    
+    
     
  // Get Expence pdf by id  
     @GetMapping("/download/{expenceId}")
