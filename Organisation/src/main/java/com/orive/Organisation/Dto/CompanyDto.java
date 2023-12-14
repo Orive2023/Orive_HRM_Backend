@@ -46,6 +46,6 @@ public class CompanyDto {
 	private LocalDate createdDate;
 //	private String status;
 //	private String approvedBy;
-	private byte[] file;
+	private MultipartFile file;
 //	private List<LocationEntity> locationEntities=new ArrayList<>();
 }
