@@ -29,7 +29,6 @@ public class CompanyDto {
 	
 	private Long companyId;
 	private String companyName;
-//	private String incomeTaxNumber;
 	private String companyType;
 	private String legalOrTradingName;
 	private String address;
@@ -47,5 +46,6 @@ public class CompanyDto {
 	private LocalDate createdDate;
 //	private String status;
 //	private String approvedBy;
-	private byte[] uploadLogo;
+	private byte[] file;
+//	private List<LocationEntity> locationEntities=new ArrayList<>();
 }

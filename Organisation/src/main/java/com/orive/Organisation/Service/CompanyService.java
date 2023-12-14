@@ -13,6 +13,8 @@ import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
 
@@ -41,61 +43,95 @@ public class CompanyService {
 	@Autowired
 	private RestTemplate restTemplate;
 	
+	@Autowired
+	private JavaMailSender javaMailSender;
+	
+	
+//	// Create
+//	 public String uploadImage(
+//			 String companyName,
+//			 String companyType,
+//			 String legalOrTradingName,
+//			 String address,
+//			 String registrationNumber,
+//			 Long contactNumber,
+//			 String email,
+//			 String website,
+//			 String city,
+//			 String state,
+//			 int zipCode,
+//			 String country,
+//			 String cin,
+//			 String gst,
+//			 String uan,
+//			 LocalDate createdDate,
+////			 String status,
+////			 String approvedBy,
+//			 MultipartFile file) throws IOException {
+//
+//	        CompanyEntity imageData = companyRepository.save(CompanyEntity.builder()
+//	                .companyName(companyName)
+//	                .companyType(companyType)
+//	                .legalOrTradingName(legalOrTradingName)
+//	                .address(address)
+//	                .registrationNumber(registrationNumber)
+//	                .contactNumber(contactNumber)
+//	                .email(email)
+//	                .website(website)
+//	                .city(city)
+//	                .state(state)
+//	                .zipCode(zipCode)
+//	                .country(country)              
+//	                .cin(cin)
+//	                .gst(gst)
+//	                .uan(uan)
+//	                .createdDate(createdDate)
+////	                .status(status)
+////	                .approvedBy(approvedBy)
+//	                .uploadLogo(ImageUtils.compressImage(file.getBytes())).build());
+//	        if (imageData != null) {
+//	            return "file uploaded successfully : " + file.getOriginalFilename();
+//	        }
+//	        return null;
+//	    }
+//	 
+//	 //Download Logo
+//	 public byte[] downloadImage(String companyName){
+//	        Optional<CompanyEntity> dbImageData = companyRepository.findByCompanyName(companyName);
+//	        byte[] images=ImageUtils.decompressImage(dbImageData.get().getUploadLogo());
+//	        return images;
+//	    }
+	
 	
 	// Create
-	 public String uploadImage(
-			 String companyName,
-			 String companyType,
-			 String legalOrTradingName,
-			 String address,
-			 String registrationNumber,
-			 Long contactNumber,
-			 String email,
-			 String website,
-			 String city,
-			 String state,
-			 int zipCode,
-			 String country,
-			 String cin,
-			 String gst,
-			 String uan,
-			 LocalDate createdDate,
-//			 String status,
-//			 String approvedBy,
-			 MultipartFile file) throws IOException {
+		public String uploadImage(CompanyDto companyDTO) throws IOException {
+		    try {
+		    	logger.info("Received request to upload file for company: {}", companyDTO.getCompanyName());
 
-	        CompanyEntity imageData = companyRepository.save(CompanyEntity.builder()
-	                .companyName(companyName)
-	                .companyType(companyType)
-	                .legalOrTradingName(legalOrTradingName)
-	                .address(address)
-	                .registrationNumber(registrationNumber)
-	                .contactNumber(contactNumber)
-	                .email(email)
-	                .website(website)
-	                .city(city)
-	                .state(state)
-	                .zipCode(zipCode)
-	                .country(country)              
-	                .cin(cin)
-	                .gst(gst)
-	                .uan(uan)
-	                .createdDate(createdDate)
-//	                .status(status)
-//	                .approvedBy(approvedBy)
-	                .uploadLogo(ImageUtils.compressImage(file.getBytes())).build());
-	        if (imageData != null) {
-	            return "file uploaded successfully : " + file.getOriginalFilename();
-	        }
-	        return null;
-	    }
-	 
-	 //Download Logo
-	 public byte[] downloadImage(String companyName){
-	        Optional<CompanyEntity> dbImageData = companyRepository.findByCompanyName(companyName);
-	        byte[] images=ImageUtils.decompressImage(dbImageData.get().getUploadLogo());
-	        return images;
-	    }
+		        CompanyEntity companyEntity = convertToEntity(companyDTO);
+		        logger.info("Converted CompanyDto to CompanyEntity: {}", companyEntity);
+
+		        byte[] compressedImage = ImageUtils.compressImage(companyDTO.getFile().getBytes());
+		        logger.info("Compressed image data: {}", compressedImage);
+
+		        companyEntity.setFile(compressedImage);
+		        logger.info("Set compressed image data to CompanyEntity");
+
+		        CompanyEntity savedEntity = companyRepository.save(companyEntity);
+
+		        if (savedEntity != null) {
+		        	logger.info("File uploaded successfully. Company ID: {}", savedEntity.getCompanyId());
+		            sendEmail(savedEntity.getEmail(), savedEntity.getCompanyName());
+		            return "File uploaded successfully: " + companyDTO.getFile().getOriginalFilename();
+		        } else {
+		        	logger.warn("Saved entity is null after upload");
+		            return null;
+		        }
+		    } catch (Exception e) {
+		    	logger.error("Error uploading file: {}", e.getMessage(), e);
+		        return "Error uploading file: " + e.getMessage();
+		    }
+		}
 
 
     // Read
@@ -170,6 +206,8 @@ public class CompanyService {
 	 {
 		 return companyRepository.count();
 	 }
+    
+    
 //    //ALL DETAILS BY COMAPNYNAME
 //    public List<CompanyEntity> getAllLocationsByCompanyName(String companyName) {
 //    	logger.info("Request to get all Company for companyname: " + companyName);
@@ -185,12 +223,18 @@ public class CompanyService {
 //        return locations;
 //    }
     
-    
-    
-    
-    
-    
-    
+    private void sendEmail(String recipientEmail, String companyName) {
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setFrom("your-email@gmail.com"); // Replace with your email address
+        message.setTo(recipientEmail);
+        message.setSubject("Company Data Saved");
+        message.setText("Dear " + companyName + ",\n\nYour company data has been successfully saved.");
+
+        javaMailSender.send(message);
+
+        System.out.println("Email sent successfully!");
+    }
+      
     
 	// Helper method to convert CompanyDTo to CompanyEntity
     private CompanyEntity convertToEntity(CompanyDto companyDto)

@@ -91,8 +91,8 @@ public class CompanyEntity {
 //	private String approvedBy;
 	
 	@Lob
-	@Column(name = "upload_logo",length = 100000)
-	private byte[] uploadLogo;
+	@Column(name = "file",length = 100000)
+	private byte[] file;
 	
 //	@Transient
 //	private List<LocationEntity> locationEntities=new ArrayList<>();
