@@ -33,16 +33,7 @@ public class PoliciesService {
 	@Autowired
 	private ModelMapper modelMapper;
 	
-	
-	// Create
-//    public PoliciesDto createPolicies(PoliciesDto policiesDto) {
-//    	PoliciesEntity policiesEntity = convertToEntity(policiesDto);
-//    	PoliciesEntity savedPolicies = policiesRepository.save(policiesEntity);
-//        logger.info("Created Policies with ID: {}", savedPolicies.getPoliciesId());
-//        return convertToDTO(savedPolicies);
-//    }
-	
-	
+		
 	public String savePoliciesEntity(
 			String companyName,
 			String title,
@@ -56,12 +47,12 @@ public class PoliciesService {
 					.title(title)
 					.description(description)
 					.createdDate(createdDate)
-					.uploadPdf(UploadPdfUtils.compressPdf(file.getBytes()))
+					.uploadPdf( file != null ? UploadPdfUtils.compressPdf(file.getBytes()) : null)
 					.build());
 			
 			 if (pdfData != null) {
-		            return "File uploaded successfully: " + file.getOriginalFilename();
-		        }
+	                return "File uploaded successfully: " + (file != null ? file.getOriginalFilename() : "No file attached");
+	            }
 			
 		}catch (Exception e) {
 			// Handle the IOException appropriately (e.g., log it, return an error message)

@@ -20,10 +20,12 @@ import org.springframework.stereotype.Service;
 
 import com.orive.Organisation.Dto.CompanyDto;
 import com.orive.Organisation.Entity.CompanyEntity;
+import com.orive.Organisation.Entity.ExpenceEntity;
 import com.orive.Organisation.Entity.LocationEntity;
 import com.orive.Organisation.Exceptions.ResourceNotFoundException;
 import com.orive.Organisation.Repository.CompanyRepository;
 import com.orive.Organisation.Util.ImageUtils;
+import com.orive.Organisation.Util.UploadDocumentUtils;
 
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
@@ -46,90 +48,60 @@ public class CompanyService {
 	@Autowired
 	private JavaMailSender javaMailSender;
 	
-	
-	// Create
-	 public String uploadImage(
-			 String companyName,
-			 String companyType,
-			 String legalOrTradingName,
-			 String address,
-			 String registrationNumber,
-			 Long contactNumber,
-			 String email,
-			 String website,
-			 String city,
-			 String state,
-			 int zipCode,
-			 String country,
-			 String cin,
-			 String gst,
-			 String uan,
-			 LocalDate createdDate,
-//			 String status,
-//			 String approvedBy,
-			 MultipartFile file) throws IOException {
-
-	        CompanyEntity imageData = companyRepository.save(CompanyEntity.builder()
-	                .address(address)
-	                .cin(cin)
-	                .city(city)
-	                .companyName(companyName)
-	                .companyType(companyType)
-	                .contactNumber(contactNumber)
-	                .country(country)     
-	                .createdDate(createdDate)
-	                .email(email)
-	                .file(ImageUtils.compressImage(file.getBytes()))
-	                .gst(gst)
-	                .legalOrTradingName(legalOrTradingName)
-	                .registrationNumber(registrationNumber)
-	                .state(state)
-	                .uan(uan)
-	                .website(website)
-	                .zipCode(zipCode)                    
-//	                .status(status)
-//	                .approvedBy(approvedBy)
-	                .build());
-	        if (imageData != null) {
-	            return "file uploaded successfully : " + file.getOriginalFilename();
-	        }
-	        return null;
-	    }
-	 
-
-	
-	
-//	// Create
-//		public String uploadImage(CompanyDto companyDTO) throws IOException {
-//		    try {
-//		    	logger.info("Received request to upload file for company: {}", companyDTO.getCompanyName());
-//
-//		        CompanyEntity companyEntity = convertToEntity(companyDTO);
-//		        logger.info("Converted CompanyDto to CompanyEntity: {}", companyEntity);
-//
-//		        byte[] compressedImage = ImageUtils.compressImage(companyDTO.getFile().getBytes());
-//		        logger.info("Compressed image data: {}", compressedImage);
-//
-//		        companyEntity.setFile(compressedImage);
-//		        logger.info("Set compressed image data to CompanyEntity");
-//
-//		        CompanyEntity savedEntity = companyRepository.save(companyEntity);
-//
-//		        if (savedEntity != null) {
-//		        	logger.info("File uploaded successfully. Company ID: {}", savedEntity.getCompanyId());
-//		            sendEmail(savedEntity.getEmail(), savedEntity.getCompanyName());
-//		            return "File uploaded successfully: " + companyDTO.getFile().getOriginalFilename();
-//		        } else {
-//		        	logger.warn("Saved entity is null after upload");
-//		            return null;
-//		        }
-//		    } catch (Exception e) {
-//		    	logger.error("Error uploading file: {}", e.getMessage(), e);
-//		        return "Error uploading file: " + e.getMessage();
-//		    }
-//		}
-
 		
+	
+	//create
+		public String saveCompanyEntity(
+				String address,
+				String cin,
+				String city,
+				String companyName,
+				String companyType,
+				Long contactNumber,
+				String country,
+                LocalDate createdDate,
+                String email,
+                MultipartFile fileDocument,
+                String gst,
+                String legalOrTradingName,
+                String registrationNumber,
+                String state,
+                String uan,
+                String website,
+                int zipCode) {
+			
+			try {
+				CompanyEntity uploadImage = companyRepository.save(CompanyEntity.builder()
+						.address(address)
+						.cin(cin)
+						.city(city)
+						.companyName(companyName)
+						.companyType(companyType)
+						.contactNumber(contactNumber)
+						.country(country)
+						.createdDate(createdDate)
+						.email(email)
+						.file(fileDocument != null ? UploadDocumentUtils.compressPdf(fileDocument.getBytes()) : null)
+						.gst(gst)
+						.legalOrTradingName(legalOrTradingName)
+						.registrationNumber(registrationNumber)
+						.state(state)
+						.uan(uan)
+						.website(website)
+						.zipCode(zipCode)
+		                .build());
+
+		            if (uploadImage != null) {
+		                return "File uploaded successfully: " + (fileDocument != null ? fileDocument.getOriginalFilename() : "No file attached");
+		            }
+				
+			}catch (Exception e) {
+				// Handle the IOException appropriately (e.g., log it, return an error message)
+		        return "Error uploading file: " + e.getMessage();
+			}
+			
+			return null;
+		}
 		
 		 //Download Logo
 		 public byte[] downloadImage(String companyName){

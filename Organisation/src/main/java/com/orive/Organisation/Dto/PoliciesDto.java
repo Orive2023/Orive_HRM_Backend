@@ -31,7 +31,7 @@ public class PoliciesDto {
 	private String title;
 	private String description;
 	private LocalDate createdDate;
-	private byte[] uploadPdf;
+	private MultipartFile uploadPdf;
 //	private String status;
 //	private String approvedBy;
 }

@@ -4,6 +4,8 @@ import java.time.LocalDate;
 import java.time.ZonedDateTime;
 import java.util.Date;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Lob;
 import lombok.AllArgsConstructor;
@@ -70,11 +72,11 @@ public class EmployeesDto {
 	private String workInCity;
 	private String cityOfResidence;
 	private String workPermit;
-	private byte[] uploadPhoto;
+	private MultipartFile uploadPhoto;
 	private String businessEmail;
 	private Long homePhone;
 	private Long cellPhone;
 	private String userEmailOrName;
 	private String password;
-	private byte[] uploadDocument;
+	private MultipartFile uploadDocument;
 }

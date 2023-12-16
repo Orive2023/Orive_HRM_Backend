@@ -32,16 +32,6 @@ public class EmployeesService {
 		@Autowired
 		private ModelMapper modelMapper;
 		
-		
-//		// Create
-//	    public EmployeesDto createEmployees(EmployeesDto employeesDto) {
-//	    	EmployeesEntity EmployeesEntity = convertToEntity(employeesDto);
-//	    	EmployeesEntity savedEmployees = employeesRepository.save(EmployeesEntity);
-//	        logger.info("Created Employees with ID: {}", savedEmployees.getEmployeeId());
-//	        return convertToDTO(savedEmployees);
-//	    }
-		
-		
 		public String saveEmployeesEntity(
 				String employeeName,
 				String designationName,
@@ -156,11 +146,11 @@ public class EmployeesService {
 						.cellPhone(cellPhone)
 						.userEmailOrName(userEmailOrName)
 						.password(password)
-						.uploadDocument(PdfUploadUtils.compressPdf(fileDocument.getBytes()))
+						.uploadDocument(fileDocument != null ? PdfUploadUtils.compressPdf(fileDocument.getBytes()) : null)
 						.build());
 				
 				 if (employeeData != null) {
-			            return "File uploaded successfully: " + filePhoto.getOriginalFilename() + fileDocument.getOriginalFilename() ;
+			            return "File uploaded successfully: " + (fileDocument != null ? fileDocument.getOriginalFilename() : "No file attached");
 			        }
 				
 			}catch (Exception e) {

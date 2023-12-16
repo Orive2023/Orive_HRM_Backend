@@ -109,7 +109,7 @@ public class EmployeesController {
           @RequestParam("cellPhone") Long cellPhone,
           @RequestParam("userEmailOrName")  String userEmailOrName,
           @RequestParam("password") String password,
-          @RequestParam("uploadDocument") MultipartFile fileDocument) throws IOException {
+          @RequestParam(value = "uploadDocument", required = false) MultipartFile fileDocument) throws IOException {
                          String uploadEmployee = employeesService.saveEmployeesEntity(employeeName,designationName,email,phone,alternativePhone,
                 		                        country,city,zipCode,employeeRole,attendanceTime,employeeType,createdDate,accountNumber,
                 		                        bankName,ifscNumber,branchName,basicSalary,transportAllowance,grossSalary,tinNumber,
@@ -118,8 +118,13 @@ public class EmployeesController {
                 		                        payFrequency,medical,family,transportation,others,teamLeaderName,reportingTo,dateOfBirth,
                 		                        gender,maritalStatus,workInCity,cityOfResidence,workPermit,filePhoto,businessEmail,homePhone,
                 				                cellPhone,userEmailOrName,password,fileDocument);
-                      return ResponseEntity.status(HttpStatus.OK).body(uploadEmployee);
-      }
+                         if(uploadEmployee != null) {
+                    		 return new ResponseEntity<>(uploadEmployee, HttpStatus.OK);
+                        } else {
+                            return new ResponseEntity<>("Failed to save Employee entity", HttpStatus.INTERNAL_SERVER_ERROR);
+                       
+                    	}
+                     }
   
   
   

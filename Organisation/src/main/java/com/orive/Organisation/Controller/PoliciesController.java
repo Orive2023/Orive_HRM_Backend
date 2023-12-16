@@ -40,16 +40,6 @@ public class PoliciesController {
 
     @Autowired
     private PoliciesService policiesService;
-
-  
-  	// Create a new Policies
-//      @PostMapping("/create/policies")
-//      public ResponseEntity<PoliciesDto> createPolicies(@RequestBody PoliciesDto policiesDto) {
-//    	  PoliciesDto createdPolicies = policiesService.createPolicies(policiesDto);
-//          logger.info("Created Policies with name: {}", createdPolicies.getCompanyName());
-//          return new ResponseEntity<>(createdPolicies, HttpStatus.CREATED);
-//      }
-    
     
  // Create a new policies
     @PostMapping("/create/policies")
@@ -58,7 +48,7 @@ public class PoliciesController {
     		 @RequestParam String title,
     		 @RequestParam  String description,
     		 @RequestParam LocalDate createdDate,
-    		 @RequestParam("uploadPdf") MultipartFile file){
+    		 @RequestParam(value = "uploadPdf", required = false) MultipartFile file){
     	
     	String result = policiesService.savePoliciesEntity( 
     			companyName, title, description, createdDate, file );

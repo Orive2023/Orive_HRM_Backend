@@ -46,46 +46,26 @@ public class ExpenceController {
     private ExpenceService expenceService;
 
  
-//    // Create a new Expence
-//    @PostMapping("/create/expence")
-//    public ResponseEntity<String> saveExpenceEntity(
-//            @RequestParam("expenceType") String expenceType,
-//            @RequestParam("createdDate") LocalDate createdDate,
-//            @RequestParam("total") Long total,
-//            @RequestParam(value = "uploadDocument", required = false) MultipartFile fileDocument
-//    ){
-//    	
-//    	String result = expenceService.saveExpenceEntity( 
-//    			expenceType, createdDate, total,  fileDocument );
-//    
-//    	if(result != null) {
-//    		 return new ResponseEntity<>(result, HttpStatus.OK);
-//        } else {
-//            return new ResponseEntity<>("Failed to save Expence entity", HttpStatus.INTERNAL_SERVER_ERROR);
-//       
-//    	}
-//    }
-    
-    
-    // Create a new Company
+    // Create a new Expence
     @PostMapping("/create/expence")
-//    @PreAuthorize("hasRole('client_admin')")
-    //@PostMapping("/uploadImage")
-    public ResponseEntity<String> uploadPdf(@ModelAttribute ExpenceDto expenceDto) {
-  	  try {
-            String result = expenceService.uploadPdf(expenceDto);
-            if (result != null) {
-                return ResponseEntity.ok(result);
-            } else {
-                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Failed to upload pdf");
-            }
-        } catch (IOException e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error uploading pdf: " + e.getMessage());
-        }
+//  @PreAuthorize("hasRole('client_admin')")
+    public ResponseEntity<String> saveExpenceEntity(
+            @RequestParam("expenceType") String expenceType,
+            @RequestParam("createdDate") LocalDate createdDate,
+            @RequestParam("total") Long total,
+            @RequestParam(value = "uploadDocument", required = false) MultipartFile fileDocument
+    ){
+    	
+    	String result = expenceService.saveExpenceEntity( 
+    			expenceType, createdDate, total,  fileDocument );
+    
+    	if(result != null) {
+    		 return new ResponseEntity<>(result, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>("Failed to save Expence entity", HttpStatus.INTERNAL_SERVER_ERROR);
+       
+    	}
     }
-    
-    
-    
     
     
  // Get Expence pdf by id  
