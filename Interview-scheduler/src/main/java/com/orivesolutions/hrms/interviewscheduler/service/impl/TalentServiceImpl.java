@@ -33,11 +33,11 @@ public class TalentServiceImpl implements TalentService {
         Talent talent = talentRepository.findById(talentId).orElseThrow(() -> new ResourceNotFoundException("Talent not found", HttpStatus.NOT_FOUND));
         return talent;
     }
-
+    
     @Override
     public List<TalentDto> findAll() {
         List<Talent> talents = talentRepository.findAll();
-
-        return null;
+        List<TalentDto> talentDtos = talentMapper.toTalentDtos(talents);
+        return talentDtos;
     }
 }

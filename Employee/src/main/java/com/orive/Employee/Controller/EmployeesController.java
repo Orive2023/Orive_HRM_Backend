@@ -64,6 +64,7 @@ public class EmployeesController {
           @RequestParam("city") String city,
           @RequestParam("zipCode") int zipCode,
           @RequestParam("employeeRole") String employeeRole,
+          @RequestParam("companyType") String companyType,
           @RequestParam("attendanceTime") String attendanceTime,
           @RequestParam("employeeType") String employeeType,
           @RequestParam("createdDate") LocalDate createdDate,
@@ -111,7 +112,7 @@ public class EmployeesController {
           @RequestParam("password") String password,
           @RequestParam(value = "uploadDocument", required = false) MultipartFile fileDocument) throws IOException {
                          String uploadEmployee = employeesService.saveEmployeesEntity(employeeName,designationName,email,phone,alternativePhone,
-                		                        country,city,zipCode,employeeRole,attendanceTime,employeeType,createdDate,accountNumber,
+                		                        country,city,zipCode,employeeRole,companyType,attendanceTime,employeeType,createdDate,accountNumber,
                 		                        bankName,ifscNumber,branchName,basicSalary,transportAllowance,grossSalary,tinNumber,
                 		                        hraAllowances,otherAllowances,pfAllowances,daAllowances,medicalAllowances,otherInsurance,tax,
                 		                        subDepartment,position,dutyType, hireDate,joiningDate,rateType,rateNumber,monthlyWorkHours,

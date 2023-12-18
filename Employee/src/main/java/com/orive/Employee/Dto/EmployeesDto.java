@@ -33,6 +33,7 @@ public class EmployeesDto {
 	private String city;
 	private int zipCode;
 	private String employeeRole;
+	private String companyType;
 	private String attendanceTime;
 	private String employeeType;
 	private LocalDate createdDate;
@@ -72,11 +73,11 @@ public class EmployeesDto {
 	private String workInCity;
 	private String cityOfResidence;
 	private String workPermit;
-	private MultipartFile uploadPhoto;
+	private byte[] uploadPhoto;
 	private String businessEmail;
 	private Long homePhone;
 	private Long cellPhone;
 	private String userEmailOrName;
 	private String password;
-	private MultipartFile uploadDocument;
+	private byte[] uploadDocument;
 }

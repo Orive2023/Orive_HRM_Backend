@@ -23,7 +23,7 @@ public class EmployeesExitDto {
 	private LocalDate exitDate;
 	private String typeOfExit;
 	private String exitInterview;
-	private Long inactivateEmployeeAccount;
+	private String inactivateEmployeeAccount;
 	private String description;
 
 }

@@ -42,6 +42,7 @@ public class EmployeesService {
 				String city,
 				int zipCode,
 				String employeeRole,
+				String companyType,
 				String attendanceTime,
 				String employeeType,
 				LocalDate createdDate,
@@ -101,6 +102,7 @@ public class EmployeesService {
 						.city(city)
 						.zipCode(zipCode)
 						.employeeRole(employeeRole)
+						.companyType(companyType)
 						.attendanceTime(attendanceTime)
 						.employeeType(employeeType)
 						.createdDate(createdDate)

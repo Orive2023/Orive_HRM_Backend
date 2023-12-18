@@ -38,7 +38,7 @@ public class ExpenceDto {
 	private String expenceType;
 	private LocalDate createdDate;
 	private Long total;
-	private MultipartFile uploadDocument;
+	private byte[] uploadDocument;
 //	private String status;
 //	private String approvedBy;
 	//private List<ExpenseListDto> expenseListEntities;

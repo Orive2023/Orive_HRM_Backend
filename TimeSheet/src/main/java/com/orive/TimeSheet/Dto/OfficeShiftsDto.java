@@ -22,11 +22,18 @@ public class OfficeShiftsDto {
 	private Long OfficeShiftsId;
 	private LocalDate createdDate;
 	private String day;
-	private String monday;
-	private String tuesday;
-	private String wednesday;
-	private String thursday;
-	private String friday;
-	private String saturday;
-	private String sunday;
+	private String mondayInTime;
+	private String mondayOutTime;
+	private String tuesdayInTime;
+	private String tuesdayOutTime;
+	private String wednesdayInTime;
+	private String wednesdayOutTime;
+	private String thursdayInTime;
+	private String thursdayOutTime;
+	private String fridayInTime;
+	private String fridayOutTime;
+	private String saturdayInTime;
+	private String saturdayOutTime;
+	private String sundayInTime;
+	private String sundayOutTime;
 }

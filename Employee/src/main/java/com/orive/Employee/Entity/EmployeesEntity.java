@@ -59,6 +59,9 @@ public class EmployeesEntity {
 	@Column(name = "employee_role")
 	private String employeeRole;
 	
+	@Column(name = "company_type")
+	private String companyType;
+	
 	@Column(name = "attendance_time")
 	private String attendanceTime;
 	

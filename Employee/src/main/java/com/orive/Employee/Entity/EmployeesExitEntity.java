@@ -44,7 +44,7 @@ public class EmployeesExitEntity {
 	private String exitInterview;
 	
 	@Column(name = "inactivate_employee_account")
-	private Long inactivateEmployeeAccount;
+	private String inactivateEmployeeAccount;
 	
 	@Column(name = "description")
 	private String description;

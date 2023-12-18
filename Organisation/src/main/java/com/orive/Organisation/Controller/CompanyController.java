@@ -115,7 +115,7 @@ public class CompanyController {
       
 
    // Update company by ID
-      @PatchMapping("/{companyId}")
+      @PatchMapping("/update/{companyId}")
       public ResponseEntity<Void> partialUpdateCompany(
               @PathVariable Long companyId,
               @RequestBody CompanyEntity companyEntity) {
