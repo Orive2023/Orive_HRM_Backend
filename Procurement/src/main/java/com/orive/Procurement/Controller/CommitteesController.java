@@ -45,22 +45,25 @@ public class CommitteesController {
 //        return new ResponseEntity<>(createdCommittees, HttpStatus.CREATED);
 //    }
 	
+
 	
-	// Create a new Committees
-    @PostMapping("/create/committees")
-    public ResponseEntity<?> uploadImage(
-            @RequestParam("name")  String name,
-            @RequestParam("signature") MultipartFile file) {
-                           try {
-                          String uploadImage = committeesService.uploadImage(name,file);
-                        return ResponseEntity.status(HttpStatus.OK).body(uploadImage);
-                         } catch (IOException e) {
-                            e.printStackTrace();
-         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error uploading file");
-         }
-        }
+ 	// Create a new Committees
+    @PostMapping("/create/company")
+//    @PreAuthorize("hasRole('client_admin')")
+    public ResponseEntity<?> saveCompanyEntity(
+  		  @RequestParam("name") String name,
+          @RequestParam(value = "signature", required = false) MultipartFile file) {
+  	  String result = committeesService.saveCommitteesEntity( 
+  			name,file );
     
-    
+    	if(result != null) {
+    		 return new ResponseEntity<>(result, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>("Failed to save Committees entity", HttpStatus.INTERNAL_SERVER_ERROR);
+       
+    	}
+        }      
+     
     
 //Get Committees signature by Name
     @GetMapping("/download/{name}")

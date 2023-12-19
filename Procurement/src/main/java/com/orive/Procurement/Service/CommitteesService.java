@@ -40,19 +40,30 @@ public class CommitteesService {
 //			    }
 	
 	
-	// Create
-			 public String uploadImage(
-					 String name,
-					 MultipartFile file) throws IOException {
+	
+	//create
+	public String saveCommitteesEntity(
+			String name,		
+			MultipartFile file) {
+		
+		try {
+			CommitteesEntity uploadImage = committeesRepository.save(CommitteesEntity.builder()
+					.name(name)
+					.signature(file != null ? PhotoUtils.compressImage(file.getBytes()) : null)
+	                .build());
 
-				 CommitteesEntity imageData = committeesRepository.save(CommitteesEntity.builder()
-			                .name(name)
-			                .signature(PhotoUtils.compressImage(file.getBytes())).build());
-			        if (imageData != null) {
-			            return "file uploaded successfully : " + file.getOriginalFilename();
-			        }
-			        return null;
-			    }
+	            if (uploadImage != null) {
+	                return "File uploaded successfully: " + (file != null ? file.getOriginalFilename() : "No file attached");
+	            }
+			
+		}catch (Exception e) {
+			// Handle the IOException appropriately (e.g., log it, return an error message)
+	        return "Error uploading file: " + e.getMessage();
+		}
+		
+		return null;
+	}
+	
 			 
 			 //Download Logo
 			 public byte[] downloadImage(String name){

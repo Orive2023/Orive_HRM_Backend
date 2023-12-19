@@ -85,19 +85,15 @@ public class QuotationController {
           return new ResponseEntity<>(quotation, HttpStatus.OK);
       }
 
-
-      // Get QuotationbyId
       @GetMapping("/get/{quotationId}")
-      public ResponseEntity<QuotationDto> getQuotationById(@PathVariable Long quotationId) {
-          Optional<QuotationDto> quotation = quotationService.getQuotationById(quotationId);
-          if (quotation.isPresent()) {
-              logger.info("Retrieved Quotation with ID: {}", quotationId);
-              return new ResponseEntity<>(quotation.get(), HttpStatus.OK);
-          } else {
-              logger.warn("Quotation with ID {} not found", quotationId);
-              return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-          }
+      public ResponseEntity<QuotationEntity> getQuotationByQuotationId(@PathVariable Long quotationId) {
+    	  logger.info("Received Quotation to get Quotation by ID: {}", quotationId);
+    	  QuotationEntity quotation = quotationService.getByQuotationId(quotationId);
+          logger.info("Fetched expense details: {}", quotation);
+          return ResponseEntity.ok(quotation);
       }
+
+   
    
 
       // Delete Quotation by ID

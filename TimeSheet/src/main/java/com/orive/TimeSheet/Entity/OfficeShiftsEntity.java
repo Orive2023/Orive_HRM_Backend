@@ -28,7 +28,7 @@ public class OfficeShiftsEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long OfficeShiftsId;
+	private Long officeShiftsId;
 	
 	@Column(name = "created_date")
 	private LocalDate createdDate;

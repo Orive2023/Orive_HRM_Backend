@@ -11,13 +11,15 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
 
 
-import com.orive.Procurement.Dto.BidAnalysisDto;
 import com.orive.Procurement.Dto.QuotationDto;
 import com.orive.Procurement.Entity.BidAnalysisEntity;
 import com.orive.Procurement.Entity.QuotationEntity;
+import com.orive.Procurement.Entity.QuotationListEntity;
+import com.orive.Procurement.Exceptions.ResourceNotFoundException;
 import com.orive.Procurement.Repository.QuotationRepository;
 import com.orive.Procurement.Util.PdfUtils;
 
@@ -31,6 +33,10 @@ public class QuotationService {
 	
 	@Autowired
 	private ModelMapper modelMapper;
+	
+	@Autowired
+	private RestTemplate restTemplate;
+	
 	
 	//create
 		public String saveQuotationEntity(
@@ -88,17 +94,21 @@ public class QuotationService {
 	                .collect(Collectors.toList());
 	    }
 	    
-	    //get by QuotationId
-	    public Optional<QuotationDto> getQuotationById(Long quotationId) {
-	        Optional<QuotationEntity> quotation = quotationRepository.findById(quotationId);
-	        if (quotation.isPresent()) {
-	            return Optional.of(convertToDTO(quotation.get()));
-	        } else {
-	            logger.warn("Quotation with ID {} not found", quotationId);
-	            return Optional.empty();
-	        }
-	    }
+
 	    
+	    
+	    //get by QuotationId
+	    public QuotationEntity getByQuotationId(Long QuotationId) {
+	        //get Quotation from database with the help  of QuotationList repository
+	    	QuotationEntity quotation = quotationRepository.findById(QuotationId).orElseThrow(() -> new ResourceNotFoundException("Quotation with given id is not found on server !! : " + QuotationId));
+	        
+
+	        ArrayList<QuotationListEntity> quotationList = restTemplate.getForObject("http://localhost:8094/quotationlist/" + quotation.getQuotationId(), ArrayList.class);
+	        logger.info("{} ", quotationList);
+	        quotation.setQuotationListEntities(quotationList);
+
+	        return quotation;
+	    }
 	    
 	    
 	    // Delete

@@ -57,8 +57,8 @@ private static final Logger logger=LoggerFactory.getLogger(ExpenceService.class)
 					.expenceType(expenceType)
 					.createdDate(createdDate)
 					.total(total)
-					 .uploadDocument(fileDocument != null ? UploadDocumentUtils.compressPdf(fileDocument.getBytes()) : null)
-	                    .build());
+					.uploadDocument(fileDocument != null ? UploadDocumentUtils.compressPdf(fileDocument.getBytes()) : null)
+	                .build());
 
 	            if (pdfData != null) {
 	                return "File uploaded successfully: " + (fileDocument != null ? fileDocument.getOriginalFilename() : "No file attached");

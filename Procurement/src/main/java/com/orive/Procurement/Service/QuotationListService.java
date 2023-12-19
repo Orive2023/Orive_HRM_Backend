@@ -48,7 +48,7 @@ private  static final Logger logger=LoggerFactory.getLogger(QuotationListService
 	    }
 
 	    // Get QuotationList by quotationListId
-	    public QuotationListEntity getQuotationListByquotationId(Long quotationListId) {
+	    public QuotationListEntity getQuotationListByquotationListId(Long quotationListId) {
 	    	logger.info("Fetching QuotationList for quotationListId: {}", quotationListId);
 	    	QuotationListEntity quotationList = quotationListRepository.findById(quotationListId)
 	                .orElseThrow(() -> {
@@ -60,22 +60,22 @@ private  static final Logger logger=LoggerFactory.getLogger(QuotationListService
 	    }
 	    
 	    
-//	 // Update list by id
-//	    public QuotationListEntity updateLocation(Long expenceListId, ExpenseListEntity updatedLocation) {
-//	    	QuotationListEntity existingLocation = expenseListRepository.findById(expenceListId)
+	 // Update list by id
+//	    public QuotationListEntity updateQuotationList(Long quotationListId, QuotationListEntity updatedQuotationList) {
+//	    	QuotationListEntity existingQuotationList = quotationListRepository.findById(quotationListId)
 //	                .orElse(null);
 //
-//	        if (existingLocation != null) {
-//	            existingLocation.setPurchaseDate(updatedLocation.getPurchaseDate());
-//	            existingLocation.setPurchasedBy(updatedLocation.getPurchasedBy());
-//	            existingLocation.setDescription(updatedLocation.getDescription());
-//	            existingLocation.setAmount(updatedLocation.getAmount());
+//	        if (existingQuotationList != null) {
+//	        	existingQuotationList.setname(updatedLocation.getPurchaseDate());
+//	        	existingQuotationList.setPurchasedBy(updatedLocation.getPurchasedBy());
+//	        	existingQuotationList.setDescription(updatedLocation.getDescription());
+//	        	existingQuotationList.setAmount(updatedLocation.getAmount());
 //
 //	            ExpenseListEntity updatedLocationEntity = expenseListRepository.save(existingLocation);
 //	            logger.info("Updated QuotationList with ID: {}", updatedLocationEntity.getExpenceListId());
 //	            return updatedLocationEntity;
 //	        } else {
-//	            logger.warn("QuotationList with ID {} not found for update", expenceListId);
+//	            logger.warn("QuotationList with ID {} not found for update", quotationListId);
 //	            return null;
 //	        }
 //	    }

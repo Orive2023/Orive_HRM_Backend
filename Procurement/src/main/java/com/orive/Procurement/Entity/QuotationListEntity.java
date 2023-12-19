@@ -29,6 +29,8 @@ public class QuotationListEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long quotationListId;
 	
+	private Long quotationId;
+	
 	@Column(name = "description_of_materials")
 	private String descriptionOfMaterials;
 	

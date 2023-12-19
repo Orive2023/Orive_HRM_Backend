@@ -19,6 +19,7 @@ import lombok.ToString;
 public class QuotationListDto {
 
     private Long quotationListId;
+    private Long quotationId;
 	private String descriptionOfMaterials;
 	private String unitName;
 	private Long quantity;
