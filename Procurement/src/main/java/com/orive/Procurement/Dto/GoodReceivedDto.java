@@ -1,6 +1,7 @@
 package com.orive.Procurement.Dto;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -31,5 +32,5 @@ public class GoodReceivedDto {
 	private String receivedByName;
 	private String title;
 	private byte[] signatureAndStamp;
-	private List<GoodReceivedListDto> goodReceivedListEntities;
+	private List<GoodReceivedListDto> goodReceivedListDtos=new ArrayList<>();
 }

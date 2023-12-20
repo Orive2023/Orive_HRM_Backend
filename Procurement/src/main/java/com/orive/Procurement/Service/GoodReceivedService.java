@@ -2,6 +2,7 @@ package com.orive.Procurement.Service;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -11,13 +12,18 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
 
 
 import com.orive.Procurement.Dto.GoodReceivedDto;
 import com.orive.Procurement.Entity.GoodReceivedEntity;
 import com.orive.Procurement.Entity.GoodReceivedListEntity;
+import com.orive.Procurement.Entity.QuotationEntity;
+import com.orive.Procurement.Entity.QuotationListEntity;
+import com.orive.Procurement.Exceptions.ResourceNotFoundException;
 import com.orive.Procurement.Repository.GoodReceivedRepository;
+import com.orive.Procurement.Util.PdfUtils;
 import com.orive.Procurement.Util.PhotoUtils;
 
 @Service
@@ -31,40 +37,45 @@ private static final Logger logger= LoggerFactory.getLogger(GoodReceivedService.
 	@Autowired
 	private ModelMapper  modelMapper;
 	
-	// Create
-//		 public GoodReceivedDto createGoodReceived(GoodReceivedDto goodReceivedDto) {
-//			 GoodReceivedEntity goodReceivedEntity = convertToEntity(goodReceivedDto);
-//			 GoodReceivedEntity savedGoodReceived = goodReceivedRepository.save(goodReceivedEntity);
-//		        logger.info("Created GoodReceived with ID: {}", savedGoodReceived.getGoodReceivedId());
-//		        return convertToDTO(savedGoodReceived);
-//		    }
-
+	@Autowired
+	private RestTemplate restTemplate;
 	
-	// Create
-		 public String uploadImage(
-				 String purchaseOrder,
-				 String paymentSource,
-				 String vendorName,
-				 LocalDate date,
-				 String receivedByName,
-				 String title,
-				 List<GoodReceivedListEntity> goodReceivedListEntities,
-				 MultipartFile file) throws IOException {
+	
+	
+	//create
+			public String saveGoodReceivedEntity(
+					String purchaseOrder,
+					String paymentSource,
+					String vendorName,
+					LocalDate date,
+					String receivedByName,
+					String title,
+					MultipartFile file) {
+				
+				try {
+					GoodReceivedEntity pdfData = goodReceivedRepository.save(GoodReceivedEntity.builder()
+							.purchaseOrder(purchaseOrder)
+							.paymentSource(paymentSource)
+							.vendorName(vendorName)
+							.date(date)
+							.receivedByName(receivedByName)
+							.title(title)
+							.signatureAndStamp(file != null ? PhotoUtils.compressImage(file.getBytes()) : null)
+			                .build());
 
-			 GoodReceivedEntity imageData = goodReceivedRepository.save(GoodReceivedEntity.builder()
-		                .purchaseOrder(purchaseOrder)
-		                .paymentSource(paymentSource)
-		                .vendorName(vendorName)
-		                .date(date)
-		                .receivedByName(receivedByName)
-		                .title(title)
-		                .goodReceivedListEntities(goodReceivedListEntities)
-		                .signatureAndStamp(PhotoUtils.compressImage(file.getBytes())).build());
-		        if (imageData != null) {
-		            return "file uploaded successfully : " + file.getOriginalFilename();
-		        }
-		        return null;
-		    }
+			            if (pdfData != null) {
+			                return "Signature uploaded successfully: " + (file != null ? file.getOriginalFilename() : "No Signature attached");
+			            }
+					
+				}catch (Exception e) {
+					// Handle the IOException appropriately (e.g., log it, return an error message)
+			        return "Error uploading file: " + e.getMessage();
+				}
+				
+				return null;
+			}
+	
+	
 		 
 		 //Download Logo
 		 public byte[] downloadImage(String vendorName){
@@ -83,16 +94,21 @@ private static final Logger logger= LoggerFactory.getLogger(GoodReceivedService.
 	                .collect(Collectors.toList());
 	    }
 	    
+	    
+	    
 	    //get by GoodReceivedId
-	    public Optional<GoodReceivedDto> getGoodReceivedById(Long goodReceivedId) {
-	        Optional<GoodReceivedEntity> goodReceived = goodReceivedRepository.findById(goodReceivedId);
-	        if (goodReceived.isPresent()) {
-	            return Optional.of(convertToDTO(goodReceived.get()));
-	        } else {
-	            logger.warn("GoodReceived with ID {} not found", goodReceivedId);
-	            return Optional.empty();
-	        }
+	    public GoodReceivedEntity getByGoodReceivedId(Long goodReceivedId) {
+	        //get GoodReceived from database with the help  of GoodReceivedList repository
+	    	GoodReceivedEntity goodReceived = goodReceivedRepository.findById(goodReceivedId).orElseThrow(() -> new ResourceNotFoundException("GoodReceived with given id is not found on server !! : " + goodReceivedId));
+	        
+
+	        ArrayList<GoodReceivedListEntity> goodReceivedList = restTemplate.getForObject("http://localhost:8094/goodreceivedlist/" + goodReceived.getGoodReceivedId(), ArrayList.class);
+	        logger.info("{} ", goodReceivedList);
+	        goodReceived.setGoodReceivedListEntities(goodReceivedList);
+
+	        return goodReceived;
 	    }
+	    
 	    
 	 // Update list by id
 	    public GoodReceivedDto updateGoodReceived(Long goodReceivedId, GoodReceivedDto goodReceivedDto) {

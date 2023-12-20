@@ -57,7 +57,7 @@ private  static final Logger logger=LoggerFactory.getLogger(QuotationListControl
 
     @GetMapping("/detail/{quotationListId}")
     public QuotationListEntity getQuotationListDetails(@PathVariable Long quotationListId) {
-    	logger.info("Received request to fetch QuotationList details for expenceListId: {}", quotationListId);
+    	logger.info("Received request to fetch QuotationList details for quotationListId: {}", quotationListId);
     	QuotationListEntity quotationList = quotationListService.getQuotationListByquotationListId(quotationListId);
         logger.info("Fetched Quotation details: {}", quotationList);
         return quotationList;

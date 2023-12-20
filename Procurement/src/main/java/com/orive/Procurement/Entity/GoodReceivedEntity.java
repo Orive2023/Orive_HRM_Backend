@@ -1,6 +1,7 @@
 package com.orive.Procurement.Entity;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -14,6 +15,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.Lob;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -58,8 +60,11 @@ public class GoodReceivedEntity {
 	@Column(name = "signature_and_stamp", length = 100000)
 	private byte[] signatureAndStamp;
 	
-	@OneToMany(targetEntity = GoodReceivedListEntity.class,cascade = CascadeType.ALL)
-	@JoinColumn(name = "goodReceived_list_fk",referencedColumnName = "goodReceivedId")
-	private List<GoodReceivedListEntity> goodReceivedListEntities;
+	@Transient
+	private List<GoodReceivedListEntity> goodReceivedListEntities= new ArrayList<>();
+
+//	@OneToMany(targetEntity = GoodReceivedListEntity.class,cascade = CascadeType.ALL)
+//	@JoinColumn(name = "goodReceived_list_fk",referencedColumnName = "goodReceivedId")
+//	private List<GoodReceivedListEntity> goodReceivedListEntities;
 
 }

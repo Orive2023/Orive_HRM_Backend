@@ -27,6 +27,8 @@ public class GoodReceivedListEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long goodReceivedListId;
 	
+	private Long goodReceivedId;
+	
 	@Column(name = "description")
 	private String description;
 	

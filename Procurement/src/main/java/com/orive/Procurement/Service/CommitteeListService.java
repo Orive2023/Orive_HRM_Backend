@@ -25,12 +25,7 @@ private  static final Logger logger=LoggerFactory.getLogger(CommitteeListService
 	
 	@Autowired
 	private CommitteeListRepository committeeListRepository;
-		
-	@Autowired
-	private ModelMapper  modelMapper;
 	
-	@Autowired
-	private RestTemplate restTemplate;
 	
 	//create
 	

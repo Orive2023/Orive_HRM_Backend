@@ -19,6 +19,7 @@ import lombok.ToString;
 public class GoodReceivedListDto {
 	
     private Long goodReceivedListId;
+    private Long goodReceivedId;
 	private String description;
 	private String unitName;
 	private int quantity;

@@ -23,12 +23,7 @@ private  static final Logger logger=LoggerFactory.getLogger(CompanyListService.c
 	@Autowired
 	private CompanyListRepository companyListRepository;
 	
-	@Autowired
-	private ModelMapper  modelMapper;
-	
-	@Autowired
-	private RestTemplate restTemplate;
-	
+
 	//create
 	 public void saveCompanyList(CompanyListEntity companyList ) {
 	        try {

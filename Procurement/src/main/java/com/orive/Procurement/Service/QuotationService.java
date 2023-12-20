@@ -98,9 +98,9 @@ public class QuotationService {
 	    
 	    
 	    //get by QuotationId
-	    public QuotationEntity getByQuotationId(Long QuotationId) {
+	    public QuotationEntity getByQuotationId(Long quotationId) {
 	        //get Quotation from database with the help  of QuotationList repository
-	    	QuotationEntity quotation = quotationRepository.findById(QuotationId).orElseThrow(() -> new ResourceNotFoundException("Quotation with given id is not found on server !! : " + QuotationId));
+	    	QuotationEntity quotation = quotationRepository.findById(quotationId).orElseThrow(() -> new ResourceNotFoundException("Quotation with given id is not found on server !! : " + quotationId));
 	        
 
 	        ArrayList<QuotationListEntity> quotationList = restTemplate.getForObject("http://localhost:8094/quotationlist/" + quotation.getQuotationId(), ArrayList.class);
