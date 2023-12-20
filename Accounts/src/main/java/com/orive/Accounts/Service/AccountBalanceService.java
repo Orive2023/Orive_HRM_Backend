@@ -60,7 +60,7 @@ public class AccountBalanceService {
         Optional<AccountBalancesEntity> existingAccountBalanceOptional = accountBalanceRepository.findById(accountBalanceId);
         if (existingAccountBalanceOptional.isPresent()) {
         	AccountBalancesEntity existingAccountBalance = existingAccountBalanceOptional.get();
-        	existingAccountBalance.setEmployeeFullName(accountBalanceDto.getEmployeeFullName());
+        	existingAccountBalance.setEmployeeName(accountBalanceDto.getEmployeeName());
         	existingAccountBalance.setHsaBalance(accountBalanceDto.getHsaBalance());
         	existingAccountBalance.setFsaBalance(accountBalanceDto.getFsaBalance());
             modelMapper.map(accountBalanceDto, existingAccountBalanceOptional);

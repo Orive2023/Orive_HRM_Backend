@@ -27,14 +27,14 @@ public class AccountBalancesEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long accountBalancesId;
 	
-	@Column(name = "employee_full_name")
-	private String employeeFullName;
+	@Column(name = "employee_name")
+	private String employeeName;
 	
 	@Column(name = "employee_id")
 	private Long employeeId;
 	
-	@Column(name = "department")
-	private String department;
+	@Column(name = "department_name")
+	private String departmentName;
 	
 	@Column(name = "position")
 	private String position;

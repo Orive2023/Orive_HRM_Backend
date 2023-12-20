@@ -19,7 +19,8 @@ import lombok.ToString;
 @Builder
 public class CompanyListDto {
 
-	private Long CompanyListId;
+	private Long companyListId;
+	private Long bidAnalysisId;
 	private String company;
 	private String description;
 	private String reasonOfChoosing;

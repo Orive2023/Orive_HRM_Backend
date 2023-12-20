@@ -53,24 +53,24 @@ public class BidAnalysisController {
     
  // Create a new BidAnalysis
     @PostMapping("/create/bidAnalysis")
+//  @PreAuthorize("hasRole('client_admin')")
     public ResponseEntity<String> saveBidAnalysisEntity(
-    		 @RequestParam String location,
-    		 @RequestParam LocalDate date,
-    		 @RequestParam  String quotation,
-    		 @RequestParam List<CommitteeListEntity> committeeEntities,
-    		 @RequestParam List<CompanyListEntity> companyListEntities,
-    		 @RequestParam("attachment") MultipartFile file){
+    		@RequestParam String location,
+   		    @RequestParam LocalDate date,
+   		    @RequestParam String quotation,
+            @RequestParam(value = "attachment", required = false) MultipartFile file){
     	
     	String result = bidAnalysisService.saveBidAnalysisEntity( 
-    			location, date, quotation, committeeEntities,companyListEntities, file );
+    			location, date, quotation, file );
     
     	if(result != null) {
     		 return new ResponseEntity<>(result, HttpStatus.OK);
         } else {
-            return new ResponseEntity<>("Failed to save BidAnalysis entity", HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>("Failed to save BidAnalysis Entity", HttpStatus.INTERNAL_SERVER_ERROR);
        
     	}
     }
+    
     
  // Get BidAnalysis pdf by id  
     @GetMapping("/download/{bidAnalysisId}")

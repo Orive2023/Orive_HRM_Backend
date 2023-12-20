@@ -23,11 +23,9 @@ import lombok.ToString;
 public class CommitteeListDto {
 	
 
-	private Long committeeId;
-	
-	private String name;
-	
-	private byte[] signature;
-	
+	private Long committeeListId;	
+	private Long bidAnalysisId;	
+	private String name;	
+	private byte[] signature;	
 	private LocalDate date;
 }

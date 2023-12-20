@@ -17,9 +17,9 @@ import lombok.ToString;
 public class AccountBalanceDto {
 	
 	private Long accountBalancesId;
-	private String employeeFullName;
+	private String employeeName;
 	private Long employeeId;
-	private String department;
+	private String departmentName;
 	private String position;
 	private double hsaBalance;
 	private double fsaBalance;

@@ -30,7 +30,9 @@ public class CommitteeListEntity {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long committeeId;
+	private Long committeeListId;
+	
+	private Long bidAnalysisId;
 	
 	@Column(name = "name")
 	private String name;

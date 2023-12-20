@@ -37,7 +37,7 @@ public class AccountListController {
     @PostMapping("/create/accountlist")
     public ResponseEntity<AccountListDto> createAccountList(@RequestBody AccountListDto accountListDto) {
     	AccountListDto createdAccountList = accountListService.createAccountList(accountListDto);
-        logger.info("Created AccountList with name: {}", createdAccountList.getEmployeeFullName());
+        logger.info("Created AccountList with name: {}", createdAccountList.getEmployeeName());
         return new ResponseEntity<>(createdAccountList, HttpStatus.CREATED);
     }
 

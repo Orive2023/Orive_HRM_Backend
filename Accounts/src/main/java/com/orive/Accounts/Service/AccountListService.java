@@ -58,7 +58,7 @@ public class AccountListService {
         Optional<AccountListEntity> existingAccountListOptional = accountListRepository.findById(accountListId);
         if (existingAccountListOptional.isPresent()) {
         	AccountListEntity existingAccountList = existingAccountListOptional.get();
-        	existingAccountList.setEmployeeFullName(accountListDto.getEmployeeFullName());
+        	existingAccountList.setEmployeeName(accountListDto.getEmployeeName());
         	existingAccountList.setBankName(accountListDto.getBankName());
         	existingAccountList.setEmailAddress(accountListDto.getEmailAddress());
         	existingAccountList.setUserName(accountListDto.getUserName());

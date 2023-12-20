@@ -84,9 +84,9 @@ private  static final Logger logger=LoggerFactory.getLogger(QuotationListService
 
 	    
 	    // Delete
-	    public void deleteQuotationList(Long QuotationList) {
-	    	quotationListRepository.deleteById(QuotationList);
-	        logger.info("Deleted QuotationList with ID: {}", QuotationList);
+	    public void deleteQuotationList(Long quotationListId) {
+	    	quotationListRepository.deleteById(quotationListId);
+	        logger.info("Deleted QuotationList with ID: {}", quotationListId);
 	    }
 
 }

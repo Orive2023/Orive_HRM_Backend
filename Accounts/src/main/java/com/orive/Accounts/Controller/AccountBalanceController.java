@@ -35,7 +35,7 @@ public class AccountBalanceController {
     @PostMapping("/create/accountbalance")
     public ResponseEntity<AccountBalanceDto> createAccountBalance(@RequestBody AccountBalanceDto accountBalanceDto) {
     	AccountBalanceDto createdAccountBalance = accountBalanceService.createAccountBalance(accountBalanceDto);
-        logger.info("Created AccountBalance with name: {}", createdAccountBalance.getEmployeeFullName());
+        logger.info("Created AccountBalance with name: {}", createdAccountBalance.getEmployeeName());
         return new ResponseEntity<>(createdAccountBalance, HttpStatus.CREATED);
     }
 

@@ -41,7 +41,7 @@ public class QuotationController {
     // Create a new Quotation
     @PostMapping("/create/quotation")
 //  @PreAuthorize("hasRole('client_admin')")
-    public ResponseEntity<String> saveExpenceEntity(
+    public ResponseEntity<String> saveQuotationEntity(
             @RequestParam("nameOfCompany") String nameOfCompany,
             @RequestParam("address") String address,
             @RequestParam("pinOrEquivalent") Long pinOrEquivalent,
@@ -70,7 +70,7 @@ public class QuotationController {
         if (pdf != null) {
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_PDF);
-            headers.setContentDisposition(ContentDisposition.builder("attachment").filename(quotationId + "QuotationId.pdf").build());
+            headers.setContentDisposition(ContentDisposition.builder("signatureAndStamp").filename(quotationId + "QuotationId.pdf").build());
             return new ResponseEntity<>(pdf, headers, HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -85,6 +85,7 @@ public class QuotationController {
           return new ResponseEntity<>(quotation, HttpStatus.OK);
       }
 
+      // Get quotationId
       @GetMapping("/get/{quotationId}")
       public ResponseEntity<QuotationEntity> getQuotationByQuotationId(@PathVariable Long quotationId) {
     	  logger.info("Received Quotation to get Quotation by ID: {}", quotationId);

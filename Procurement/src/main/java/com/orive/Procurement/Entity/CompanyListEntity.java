@@ -25,7 +25,9 @@ public class CompanyListEntity {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long CompanyListId;
+	private Long companyListId;
+	
+	private Long bidAnalysisId;
 	
 	@Column(name = "company")
 	private String company;

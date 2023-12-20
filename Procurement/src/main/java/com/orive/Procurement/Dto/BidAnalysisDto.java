@@ -1,6 +1,7 @@
 package com.orive.Procurement.Dto;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -36,6 +37,6 @@ public class BidAnalysisDto {
 	private LocalDate date;
 	private String quotation;
 	private byte[] attachment;
-	private List<CommitteeListDto> committeeEntities;
-	private List<CompanyListDto> companyListEntities;
+	private List<CommitteeListDto> committeeListDtos = new ArrayList<>();
+	private List<CompanyListDto> companyListDtos= new ArrayList<>();
 }
