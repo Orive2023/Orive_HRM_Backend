@@ -63,18 +63,18 @@ private  static final Logger logger=LoggerFactory.getLogger(GoodReceivedListCont
     }
     
     
-//    @PutMapping("/{quotationListId}")
-//    public ResponseEntity<ExpenseListEntity> updateExpenseList(
-//            @PathVariable Long expenceListId,
-//            @RequestBody ExpenseListEntity updatedLocation) {
+//    @PutMapping("/{goodReceivedListId}")
+//    public ResponseEntity<GoodReceivedListEntity> updateGoodReceivedList(
+//            @PathVariable Long goodReceivedListId,
+//            @RequestBody GoodReceivedListEntity updatedUnit) {
 //
-//        ExpenseListEntity updatedExpenseList = expenseListService.updateLocation(expenceListId, updatedLocation);
+//        GoodReceivedListEntity updatedGoodReceivedList = goodReceivedListService.updatedUnit(goodReceivedListId, updatedUnit);
 //
-//        if (updatedExpenseList != null) {
-//        	logger.info("Update QuotationList successfully by  expenceListId: {}", expenceListId);
-//            return ResponseEntity.ok(updatedExpenseList);    
+//        if (updatedGoodReceivedList != null) {
+//        	logger.info("Update GoodReceivedList successfully by  goodReceivedListId: {}", goodReceivedListId);
+//            return ResponseEntity.ok(updatedGoodReceivedList);    
 //        } else {
-//        	logger.info("QuotationList with ID {} not found for update expenceListId: {}", expenceListId);
+//        	logger.info("GoodReceivedList with ID {} not found for update goodReceivedListId: {}", goodReceivedListId);
 //            return ResponseEntity.notFound().build();
 //        }
 //    }

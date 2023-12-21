@@ -8,6 +8,8 @@ import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ContentDisposition;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -67,17 +69,33 @@ public class GoodReceivedController {
        
     	}
     }
+       
+    
+////Get GoodReceived signatureAndStamp by VendorName
+//    @GetMapping("/download/{vendorName}")
+//	public ResponseEntity<?> downloadImage(@PathVariable String vendorName){
+//		byte[] imageData=goodReceivedService.downloadImage(vendorName);
+//		return ResponseEntity.status(HttpStatus.OK)
+//				.contentType(MediaType.valueOf("image/png"))
+//				.body(imageData);
+//	}   
     
     
-    
-//Get GoodReceived signatureAndStamp by VendorName
+//Get GoodReceived signatureAndStamp by VendorName  
     @GetMapping("/download/{vendorName}")
-	public ResponseEntity<?> downloadImage(@PathVariable String vendorName){
-		byte[] imageData=goodReceivedService.downloadImage(vendorName);
-		return ResponseEntity.status(HttpStatus.OK)
-				.contentType(MediaType.valueOf("image/png"))
-				.body(imageData);
-	}   
+    public ResponseEntity<byte[]> downloadsPdf(@PathVariable String vendorName) {
+        byte[] pdf = goodReceivedService.downloadPdf(vendorName);
+
+        if (pdf != null) {
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_PDF);
+            headers.setContentDisposition(ContentDisposition.builder("signatureAndStamp").filename(vendorName + "vendorName.pdf").build());
+            return new ResponseEntity<>(pdf, headers, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+    
 
     // Get all GoodReceived   
     @GetMapping("/get/goodreceived")
@@ -86,6 +104,7 @@ public class GoodReceivedController {
         logger.info("Retrieved {} GoodReceived from the database", goodReceived.size());
         return new ResponseEntity<>(goodReceived, HttpStatus.OK);
     }
+    
 
     // Get GoodReceivedbyId
 //    @GetMapping("/get/{goodReceivedId}")

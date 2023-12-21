@@ -27,6 +27,8 @@ public class PurchaseOrderListEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long purchaseOrderListId;
 	
+	private Long purchaseOrderId;
+	
 	@Column(name = "description")
 	private String description;
 	

@@ -19,12 +19,9 @@ import org.springframework.web.multipart.MultipartFile;
 import com.orive.Procurement.Dto.GoodReceivedDto;
 import com.orive.Procurement.Entity.GoodReceivedEntity;
 import com.orive.Procurement.Entity.GoodReceivedListEntity;
-import com.orive.Procurement.Entity.QuotationEntity;
-import com.orive.Procurement.Entity.QuotationListEntity;
 import com.orive.Procurement.Exceptions.ResourceNotFoundException;
 import com.orive.Procurement.Repository.GoodReceivedRepository;
 import com.orive.Procurement.Util.PdfUtils;
-import com.orive.Procurement.Util.PhotoUtils;
 
 @Service
 public class GoodReceivedService {
@@ -60,7 +57,7 @@ private static final Logger logger= LoggerFactory.getLogger(GoodReceivedService.
 							.date(date)
 							.receivedByName(receivedByName)
 							.title(title)
-							.signatureAndStamp(file != null ? PhotoUtils.compressImage(file.getBytes()) : null)
+							.signatureAndStamp(file != null ? PdfUtils.compressPdf(file.getBytes()) : null)
 			                .build());
 
 			            if (pdfData != null) {
@@ -77,13 +74,24 @@ private static final Logger logger= LoggerFactory.getLogger(GoodReceivedService.
 	
 	
 		 
-		 //Download Logo
-		 public byte[] downloadImage(String vendorName){
-		        Optional<GoodReceivedEntity> dbImageData = goodReceivedRepository.findByVendorName(vendorName);
-		        byte[] images=PhotoUtils.decompressImage(dbImageData.get().getSignatureAndStamp());
-		        return images;
-		    }
+//		 //Download Logo
+//		 public byte[] downloadImage(String vendorName){
+//		        Optional<GoodReceivedEntity> dbImageData = goodReceivedRepository.findByVendorName(vendorName);
+//		        byte[] images=PhotoUtils.decompressImage(dbImageData.get().getSignatureAndStamp());
+//		        return images;
+//		    }
 	
+			//Download pdf
+			public byte[] downloadPdf(String vendorName) {
+				Optional<GoodReceivedEntity> dbPdfData = goodReceivedRepository.findByVendorName(vendorName);
+			    
+			    if (dbPdfData.isPresent()) {
+			        return PdfUtils.decompressPdf(dbPdfData.get().getSignatureAndStamp());
+			    } else {
+			        // Handle the case where the PurchaseOrder profile is not found
+			        return null;
+			    }
+			}
 	
 	    // Read
 	    public List<GoodReceivedDto> getAllGoodReceived() {

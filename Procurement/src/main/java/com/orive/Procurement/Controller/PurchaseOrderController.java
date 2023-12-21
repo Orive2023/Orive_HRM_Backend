@@ -1,12 +1,16 @@
 package com.orive.Procurement.Controller;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ContentDisposition;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -16,15 +20,18 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.orive.Procurement.Dto.PurchaseOrderDto;
+import com.orive.Procurement.Entity.PurchaseOrderEntity;
 import com.orive.Procurement.Service.PurchaseOrderService;
 
 
 
 @RestController
-@RequestMapping(value = " purchaseOrder")
+@RequestMapping(value = "purchaseOrder")
 @CrossOrigin(origins = "*")
 public class PurchaseOrderController {
 	
@@ -34,13 +41,48 @@ public class PurchaseOrderController {
     private  PurchaseOrderService purchaseOrderService;
     
     
- // Create a new PurchaseOrder
+    
+    // Create a new PurchaseOrder
     @PostMapping("/create/purchaseOrder")
-    public ResponseEntity<PurchaseOrderDto> createPurchaseOrder(@RequestBody PurchaseOrderDto purchaseOrderDto) {
-    	PurchaseOrderDto createdPurchaseOrder= purchaseOrderService.createPurchaseOrder(purchaseOrderDto);
-        logger.info("Created PurchaseOrder with name: {}", createdPurchaseOrder.getLocation());
-        return new ResponseEntity<>(createdPurchaseOrder, HttpStatus.CREATED);
+//  @PreAuthorize("hasRole('client_admin')")
+    public ResponseEntity<String> savePurchaseOrderEntity(
+            @RequestParam("quotation")String quotation,
+            @RequestParam("location") String location,
+            @RequestParam("vendorName") String vendorName,
+            @RequestParam("address") String address,
+            @RequestParam("notes") String notes,
+            @RequestParam("authorizedByName") String authorizedByName,
+            @RequestParam("title") String title,
+            @RequestParam(value = "signatureAndStamp", required = false) MultipartFile fileDocument,
+            @RequestParam("date") LocalDate date){
+    	
+    	String result = purchaseOrderService.savePurchaseOrderEntity( 
+    			quotation, location, vendorName, address, notes, authorizedByName, title, fileDocument,  date);
+    
+    	if(result != null) {
+    		 return new ResponseEntity<>(result, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>("Failed to save PurchaseOrder entity", HttpStatus.INTERNAL_SERVER_ERROR);
+       
+    	}
     }
+    
+    
+ // Get Quotation pdf by id  
+    @GetMapping("/download/{purchaseOrderId}")
+    public ResponseEntity<byte[]> downloadsPdf(@PathVariable Long purchaseOrderId) {
+        byte[] pdf = purchaseOrderService.downloadPdf(purchaseOrderId);
+
+        if (pdf != null) {
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_PDF);
+            headers.setContentDisposition(ContentDisposition.builder("signatureAndStamp").filename(purchaseOrderId + "purchaseOrderId.pdf").build());
+            return new ResponseEntity<>(pdf, headers, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+    
 
     // Get all PurchaseOrder    
     @GetMapping("/get/purchaseOrder")
@@ -50,21 +92,32 @@ public class PurchaseOrderController {
         return new ResponseEntity<>(purchaseOrder, HttpStatus.OK);
     }
 
-    // Get PurchaseOrderbyId
-    @GetMapping("/get/{bidAnalysisId}")
-    public ResponseEntity<PurchaseOrderDto> getPurchaseOrderbyId(@PathVariable Long purchaseOrderId) {
-        Optional<PurchaseOrderDto> purchaseOrder = purchaseOrderService.getPurchaseOrderById(purchaseOrderId);
-        if (purchaseOrder.isPresent()) {
-            logger.info("Retrieved PurchaseOrder with ID: {}", purchaseOrderId);
-            return new ResponseEntity<>(purchaseOrder.get(), HttpStatus.OK);
-        } else {
-            logger.warn("PurchaseOrder with ID {} not found", purchaseOrderId);
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
+//    // Get PurchaseOrderbyId
+//    @GetMapping("/get/{bidAnalysisId}")
+//    public ResponseEntity<PurchaseOrderDto> getPurchaseOrderbyId(@PathVariable Long purchaseOrderId) {
+//        Optional<PurchaseOrderDto> purchaseOrder = purchaseOrderService.getPurchaseOrderById(purchaseOrderId);
+//        if (purchaseOrder.isPresent()) {
+//            logger.info("Retrieved PurchaseOrder with ID: {}", purchaseOrderId);
+//            return new ResponseEntity<>(purchaseOrder.get(), HttpStatus.OK);
+//        } else {
+//            logger.warn("PurchaseOrder with ID {} not found", purchaseOrderId);
+//            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+//        }
+//    }
+
+    
+    // Get PurchaseOrderId
+    @GetMapping("/get/{purchaseOrderId}")
+    public ResponseEntity<PurchaseOrderEntity> getPurchaseOrderByPurchaseOrderId(@PathVariable Long purchaseOrderId) {
+  	  logger.info("Received PurchaseOrder to get PurchaseOrder by ID: {}", purchaseOrderId);
+  	PurchaseOrderEntity purchaseOrder = purchaseOrderService.getByPurchaseOrderId(purchaseOrderId);
+        logger.info("Fetched PurchaseOrder details: {}", purchaseOrder);
+        return ResponseEntity.ok(purchaseOrder);
     }
 
+    
     // Update PurchaseOrder by ID
-    @PutMapping("/update/{bidAnalysisId}")
+    @PutMapping("/update/{purchaseOrderId}")
     public ResponseEntity<PurchaseOrderDto> updatePurchaseOrder(@PathVariable Long purchaseOrderId, @RequestBody PurchaseOrderDto updatedPurchaseOrderDto) {
     	PurchaseOrderDto updatedPurchaseOrder= purchaseOrderService.updatePurchaseOrder(purchaseOrderId, updatedPurchaseOrderDto);
         if (updatedPurchaseOrder != null) {
@@ -79,7 +132,7 @@ public class PurchaseOrderController {
 
 
     // Delete PurchaseOrder by ID
-    @DeleteMapping("/delete/{bidAnalysisId}")
+    @DeleteMapping("/delete/{purchaseOrderId}")
     public ResponseEntity<Void> deletePurchaseOrder(@PathVariable Long purchaseOrderId) {
   	  purchaseOrderService.deletePurchaseOrder(purchaseOrderId);
         logger.info("Deleted PurchaseOrder with ID: {}", purchaseOrderId);
@@ -87,7 +140,7 @@ public class PurchaseOrderController {
     }
 	    
     //count the total PurchaseOrder
-	    @GetMapping("/count/bidAnalysis")
+	    @GetMapping("/count/purchaseOrder")
 	    public long countPurchaseOrder()
 	    {
 	    	return purchaseOrderService.countPurchaseOrder();

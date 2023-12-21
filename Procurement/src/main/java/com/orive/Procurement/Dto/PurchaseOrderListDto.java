@@ -19,6 +19,7 @@ import lombok.ToString;
 public class PurchaseOrderListDto {
 	
 	private Long purchaseOrderListId;
+	private Long purchaseOrderId;
 	private String description;
 	private String unitName;
 	private int quantity;

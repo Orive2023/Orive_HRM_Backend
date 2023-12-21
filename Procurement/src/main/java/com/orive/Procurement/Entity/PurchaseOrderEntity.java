@@ -1,6 +1,7 @@
 package com.orive.Procurement.Entity;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -14,6 +15,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.Lob;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -63,7 +65,10 @@ public class PurchaseOrderEntity {
 	@Column(name = "date")
 	private LocalDate date;
 	
-	@OneToMany(targetEntity = PurchaseOrderListEntity.class,cascade = CascadeType.ALL)
-	@JoinColumn(name = "purchaseOrder_list_fk",referencedColumnName = "purchaseOrderId")
-	private List<PurchaseOrderListEntity> purchaseOrderListEntities;
+	@Transient
+	private List<PurchaseOrderListEntity> purchaseOrderListEntities = new ArrayList<>();
+	
+//	@OneToMany(targetEntity = PurchaseOrderListEntity.class,cascade = CascadeType.ALL)
+//	@JoinColumn(name = "purchaseOrder_list_fk",referencedColumnName = "purchaseOrderId")
+//	private List<PurchaseOrderListEntity> purchaseOrderListEntities;
 }
