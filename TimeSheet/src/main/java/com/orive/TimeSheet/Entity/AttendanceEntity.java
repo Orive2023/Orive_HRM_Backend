@@ -37,10 +37,10 @@ public class AttendanceEntity {
 	private String employeeName;
 	
 	@Column(name = "clock_in")
-	private LocalTime clockIn;
+	private String clockIn;
 	
 	@Column(name = "clock_out")
-	private LocalTime clockOut;
+	private String clockOut;
 	
 	@Column(name = "late")
 	private Long late;
@@ -60,7 +60,7 @@ public class AttendanceEntity {
 	@Column(name = "date")
 	private LocalDate date;
 	
-	@Lob
-	@Column(name = "upload_doc",  length = 100000)
-	private byte[] uploadDoc;
+//	@Lob
+//	@Column(name = "upload_doc",  length = 100000)
+//	private byte[] uploadDoc;
 }

@@ -7,6 +7,12 @@ spring:
   application:
     name: TIMESHEET-SERVICE
 
+# File configuration
+
+  servlet:
+    multipart:
+      max-file-size: 3MB
+      max-request-size: 3MB
 
   jpa:
     show-sql: true

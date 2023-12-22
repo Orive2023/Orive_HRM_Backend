@@ -1,5 +1,6 @@
 package com.orive.TimeSheet.Service;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
@@ -18,6 +19,7 @@ import com.orive.TimeSheet.Dto.AttendanceDto;
 import com.orive.TimeSheet.Dto.HolidaysDto;
 import com.orive.TimeSheet.Entity.AttendanceEntity;
 import com.orive.TimeSheet.Entity.HolidaysEntity;
+import com.orive.TimeSheet.ExcelToDatabase.Help.ExcelHelper;
 import com.orive.TimeSheet.Repository.AttendanceRepository;
 import com.orive.TimeSheet.Util.UploadDocUtil;
 
@@ -32,61 +34,86 @@ public class AttendanceService {
 	@Autowired
 	private ModelMapper modelMapper;
 	
-//	// Create
-//    public AttendanceDto createsAttendances(AttendanceDto attendanceDto) {
-//    	AttendanceEntity attendanceEntity = convertToEntity(attendanceDto);
-//    	AttendanceEntity savedAttendances = attendanceRepository.save(attendanceEntity);
-//        logger.info("Created Attendance with ID: {}", savedAttendances.getAttendanceId());
-//        return convertToDTO(savedAttendances);
-//    }
+	// Create
+    public AttendanceDto createsAttendances(AttendanceDto attendanceDto) {
+    	AttendanceEntity attendanceEntity = convertToEntity(attendanceDto);
+    	AttendanceEntity savedAttendances = attendanceRepository.save(attendanceEntity);
+        logger.info("Created Attendance with ID: {}", savedAttendances.getAttendanceId());
+        return convertToDTO(savedAttendances);
+    }
 	
-	public String saveAttendanceEntity(
-			String employeeName,
-			LocalTime clockIn,
-			LocalTime clockOut,
-			Long late,
-			Long earlyLeaving,
-			Long overTime,
-			Long totalWork,
-			Long totalRest,
-			LocalDate date,
-			MultipartFile file) {
-		
+	
+//	
+//	public String saveAttendanceEntity(
+//			String employeeName,
+//			LocalTime clockIn,
+//			LocalTime clockOut,
+//			Long late,
+//			Long earlyLeaving,
+//			Long overTime,
+//			Long totalWork,
+//			Long totalRest,
+//			LocalDate date,
+//			MultipartFile file) {
+//		
+//
+//        try {
+//        	byte[] compressedFile = ExcelHelper.compressExcel(file.getBytes()); // Use your Excel compression logic
+//
+//            AttendanceEntity docData = attendanceRepository.save(AttendanceEntity.builder()
+//                    .employeeName(employeeName)
+//                    .clockIn(clockIn)
+//                    .clockOut(clockOut)
+//                    .late(late)
+//                    .earlyLeaving(earlyLeaving)
+//                    .overTime(overTime)
+//                    .totalWork(totalWork)
+//                    .totalRest(totalRest)
+//                    .date(date)
+//                    .uploadDoc(compressedFile)
+//                    .build());
+//
+//            if (docData != null) {
+//                return "File uploaded successfully: " + file.getOriginalFilename();
+//            }
+//        } catch (IOException e) {
+//            // Handle the IOException appropriately (e.g., log it, return an error message)
+//            return "Error uploading file: " + e.getMessage();
+//        }
+//
+//        return null;
+//    }
+//	
+//	//Download excel file
+//	public byte[] downloadExcel(Long attendanceId) {
+//	    Optional<AttendanceEntity> dbDocData = attendanceRepository.findById(attendanceId);
+//
+//	    if (dbDocData.isPresent()) {
+//	        return dbDocData.get().getUploadDoc();
+//	    } else {
+//	        // Handle the case where the attendance data is not found
+//	        return null;
+//	    }
+//	}
+    
+    
+    //upload excelsheet
+    
+    public void save(MultipartFile file)
+	{
 		try {
-			AttendanceEntity docData = attendanceRepository.save(AttendanceEntity.builder()
-					.employeeName(employeeName)
-					.clockIn(clockIn)
-					.clockOut(clockOut)
-					.late(late)
-					.earlyLeaving(earlyLeaving)
-					.overTime(overTime)
-					.totalWork(totalWork)
-					.totalRest(totalRest)
-					.date(date)
-					.uploadDoc(UploadDocUtil.compressPdf(file.getBytes()))
-					.build());
-			
-			 if (docData != null) {
-		            return "File uploaded successfully: " + file.getOriginalFilename();
-		        }
-			
-		}catch (Exception e) {
-			// Handle the IOException appropriately (e.g., log it, return an error message)
-	        return "Error uploading file: " + e.getMessage();
-		}
+		List<AttendanceEntity> attendanceEntities=ExcelHelper.convertExcelToListOfAttendance(file.getInputStream());
+		this.attendanceRepository.saveAll(attendanceEntities);
 		
-		return null;
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
-			
-	public byte[] downloadPdf(Long attendanceId) {
-		 Optional<AttendanceEntity> dbDocData = attendanceRepository.findById(attendanceId);
-	    
-	    if (dbDocData.isPresent()) {
-	        return UploadDocUtil.decompressPdf(dbDocData.get().getUploadDoc());
-	    } else {
-	        // Handle the case where the candidate profile is not found
-	        return null;
-	    }
+	
+	public List<AttendanceEntity> getAllAttendancesEntities()
+	{
+		return this.attendanceRepository.findAll();
+		
 	}
 
     // Read
@@ -157,3 +184,6 @@ public class AttendanceService {
     } 
 
 }
+
+
+

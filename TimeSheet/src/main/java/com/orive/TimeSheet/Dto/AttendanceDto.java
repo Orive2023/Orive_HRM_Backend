@@ -23,13 +23,13 @@ public class AttendanceDto {
  	
 	private Long attendanceId;
 	private String employeeName;
-	private LocalTime clockIn;
-	private LocalTime clockOut;
+	private String clockIn;
+	private String clockOut;
 	private Long late;
 	private Long earlyLeaving;
 	private Long overTime;
 	private Long totalWork;
 	private Long totalRest;
 	private LocalDate date;
-	private byte[] uploadDoc;
+//	private byte[] uploadDoc;
 }

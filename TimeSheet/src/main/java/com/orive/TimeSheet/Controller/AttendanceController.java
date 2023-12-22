@@ -3,6 +3,7 @@ package com.orive.TimeSheet.Controller;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.slf4j.Logger;
@@ -27,6 +28,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.orive.TimeSheet.Dto.AttendanceDto;
 import com.orive.TimeSheet.Dto.HolidaysDto;
+import com.orive.TimeSheet.Entity.AttendanceEntity;
+import com.orive.TimeSheet.ExcelToDatabase.Help.ExcelHelper;
 import com.orive.TimeSheet.Service.AttendanceService;
 
 @RestController
@@ -39,57 +42,77 @@ public class AttendanceController {
 	@Autowired
 	private AttendanceService attendanceService;
 	
-	// Create a new Attendance
-//    @PostMapping("/create/attendance")
-//    public ResponseEntity<AttendanceDto> createAttendance(@RequestBody AttendanceDto attendanceDto) {
-//    	AttendanceDto createdAttendance = attendanceService.createsAttendances(attendanceDto);
-//        logger.info("Created Attendance with name: {}", createdAttendance.getEmployeeName());
-//        return new ResponseEntity<>(createdAttendance, HttpStatus.CREATED);
-//    }
+	 //Create a new Attendance
+    @PostMapping("/create/attendance")
+    public ResponseEntity<AttendanceDto> createAttendance(@RequestBody AttendanceDto attendanceDto) {
+    	AttendanceDto createdAttendance = attendanceService.createsAttendances(attendanceDto);
+        logger.info("Created Attendance with name: {}", createdAttendance.getEmployeeName());
+        return new ResponseEntity<>(createdAttendance, HttpStatus.CREATED);
+    }
 	
 	
-	  @PostMapping("/create/attendance")
-	    public ResponseEntity<String> saveAttendanceEntity(
-	    		@RequestParam String employeeName,
-	    		@RequestParam LocalTime clockIn,
-	    		@RequestParam LocalTime clockOut,
-	    		@RequestParam Long late,
-	    		@RequestParam Long earlyLeaving,
-	    		@RequestParam Long overTime,
-	    		@RequestParam Long totalWork,
-	    		@RequestParam Long totalRest,
-	    		@RequestParam LocalDate date,
-	    	    @RequestParam("file") MultipartFile file){
-	    	
-	    	String result = attendanceService.saveAttendanceEntity( 
-	    			employeeName, clockIn, clockOut, late, earlyLeaving, overTime, totalWork, totalRest, date, file );
-	    
-	    	if(result != null) {
-	    		 return new ResponseEntity<>(result, HttpStatus.OK);
-	        } else {
-	            return new ResponseEntity<>("Failed to save Attendance entity", HttpStatus.INTERNAL_SERVER_ERROR);
-	       
-	    	}
-	    }
-	    
-	    
-	    @GetMapping("/download/{attendanceId}")
-	    public ResponseEntity<byte[]> downloadsDocs(@PathVariable Long attendanceId) {
-	        byte[] doc = attendanceService.downloadPdf(attendanceId);
+//	 @PostMapping("/upload/attendance")
+//	    public ResponseEntity<String> uploadExcel(
+//	            @RequestParam String employeeName,
+//	            @RequestParam LocalTime clockIn,
+//	            @RequestParam LocalTime clockOut,
+//	            @RequestParam Long late,
+//	            @RequestParam Long earlyLeaving,
+//	            @RequestParam Long overTime,
+//	            @RequestParam Long totalWork,
+//	            @RequestParam Long totalRest,
+//	            @RequestParam LocalDate date,
+//	            @RequestParam("uploadDoc") MultipartFile file) {
+//	        try {
+//	            String result = attendanceService.saveAttendanceEntity(
+//	                    employeeName, clockIn, clockOut, late, earlyLeaving, overTime, totalWork, totalRest, date, file);
+//	            return new ResponseEntity<>(result, HttpStatus.OK);
+//	        } catch (Exception e) {
+//	            return new ResponseEntity<>("Error uploading Excel file: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+//	        }
+//	    }
+//
+//	    @GetMapping("/download/excel/{attendanceId}")
+//	    public ResponseEntity<byte[]> downloadExcel(@RequestParam Long attendanceId) {
+//	        byte[] excelData = attendanceService.downloadExcel(attendanceId);
+//
+//	        if (excelData != null) {
+//	            HttpHeaders headers = new HttpHeaders();
+//	            headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+//	            headers.setContentDisposition(ContentDisposition.builder("attachment").filename(attendanceId + "_attendance.xlsx").build());
+//	            return new ResponseEntity<>(excelData, headers, HttpStatus.OK);
+//	        } else {
+//	            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+//	        }
+//	    }
+//	
+//	
+    
+    
+    
+//Get excelsheet
+    
+    
+    @PostMapping("/product/upload")
+	public ResponseEntity<?> upload(@RequestParam("file") MultipartFile file)
+	{
+		if(ExcelHelper.chechExcelFormat(file))
+		{
+			//true
+			this.attendanceService.save(file);
+			return ResponseEntity.ok(Map.of("message", "File is uploaded and data is saved to database"));
+		}
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("please upload excel file ");
+	}
+	
+	
+	@GetMapping("/get/product")
+	public List<AttendanceEntity> getAllAttendanceEntities()
+	{
+		return this.attendanceService.getAllAttendancesEntities();
+	}
 
-	        if (doc != null) {
-	            HttpHeaders headers = new HttpHeaders();
-	            headers.setContentType(MediaType.APPLICATION_PDF);
-	            headers.setContentDisposition(ContentDisposition.builder("attachment").filename(attendanceId + "_attendance.pdf").build());
-	            return new ResponseEntity<>(doc, headers, HttpStatus.OK);
-	        } else {
-	            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-	        }
-	    }
-	
-	
-	
-	
+    
 
     // Get all Attendance   
     @GetMapping("/get/attendance")
