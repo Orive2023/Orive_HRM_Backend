@@ -27,15 +27,17 @@ private  static final Logger logger=LoggerFactory.getLogger(CommitteeListService
 	private CommitteeListRepository committeeListRepository;
 	
 	
-	//create
-	
+	//create	
 	public String saveCommitteeListEntity(
+			Long bidAnalysisId,
 			String name,
 			MultipartFile filePhoto,
 			LocalDate date) {
 				
 	try {
 		CommitteeListEntity imageData = committeeListRepository.save(CommitteeListEntity.builder()
+				
+			.bidAnalysisId(bidAnalysisId)
 			.name(name)
 			.signature(filePhoto != null ? PhotoUtils.compressImage(filePhoto.getBytes()) : null)
 			.date(date)

@@ -22,7 +22,6 @@ import lombok.ToString;
 @Builder
 public class CommitteeListDto {
 	
-
 	private Long committeeListId;	
 	private Long bidAnalysisId;	
 	private String name;	

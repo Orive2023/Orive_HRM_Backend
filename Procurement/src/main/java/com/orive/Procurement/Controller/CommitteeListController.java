@@ -49,12 +49,13 @@ private  static final Logger logger=LoggerFactory.getLogger(CommitteeListControl
     @PostMapping("/create/committeelist")
 //  @PreAuthorize("hasRole('client_admin')")
     public ResponseEntity<String> saveCommitteeListEntity(
+    		@RequestParam("bidAnalysisId") Long bidAnalysisId,
             @RequestParam("name") String name,
             @RequestParam(value = "signature", required = false) MultipartFile filePhoto,
             @RequestParam("date") LocalDate date){
     	
     	String result = committeeListService.saveCommitteeListEntity( 
-    			name,filePhoto,date );
+    			bidAnalysisId,name,filePhoto,date );
     
     	if(result != null) {
     		 return new ResponseEntity<>(result, HttpStatus.OK);

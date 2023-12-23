@@ -57,7 +57,7 @@ public class PurchaseOrderController {
             @RequestParam("date") LocalDate date){
     	
     	String result = purchaseOrderService.savePurchaseOrderEntity( 
-    			quotation, location, vendorName, address, notes, authorizedByName, title, fileDocument,  date);
+    			quotation, location, vendorName, address, notes, authorizedByName, title, fileDocument, date);
     
     	if(result != null) {
     		 return new ResponseEntity<>(result, HttpStatus.OK);

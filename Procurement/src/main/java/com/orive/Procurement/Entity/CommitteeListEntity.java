@@ -25,7 +25,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @Builder
 @Entity
-@Table(name = "committee")
+@Table(name = "committee_list")
 public class CommitteeListEntity {
 	
 	@Id

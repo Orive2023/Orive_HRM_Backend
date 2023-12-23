@@ -25,8 +25,10 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.orive.Procurement.Dto.BidAnalysisDto;
+import com.orive.Procurement.Entity.BidAnalysisEntity;
 import com.orive.Procurement.Entity.CommitteeListEntity;
 import com.orive.Procurement.Entity.CompanyListEntity;
+import com.orive.Procurement.Exceptions.ResourceNotFoundException;
 import com.orive.Procurement.Service.BidAnalysisService;
 
 
@@ -95,19 +97,32 @@ public class BidAnalysisController {
         return new ResponseEntity<>(bidAnalysis, HttpStatus.OK);
     }
 
-    // Get BidAnalysisbyId
-    @GetMapping("/get/{bidAnalysisId}")
-    public ResponseEntity<BidAnalysisDto> getBidAnalysisbyId(@PathVariable Long bidAnalysisId) {
-        Optional<BidAnalysisDto> bidAnalysis = bidAnalysisService.getBidAnalysisById(bidAnalysisId);
-        if (bidAnalysis.isPresent()) {
-            logger.info("Retrieved BidAnalysis with ID: {}", bidAnalysisId);
-            return new ResponseEntity<>(bidAnalysis.get(), HttpStatus.OK);
-        } else {
-            logger.warn("BidAnalysis with ID {} not found", bidAnalysisId);
+//    // Get BidAnalysisbyId
+//    @GetMapping("/get/{bidAnalysisId}")
+//    public ResponseEntity<BidAnalysisDto> getBidAnalysisbyId(@PathVariable Long bidAnalysisId) {
+//        Optional<BidAnalysisDto> bidAnalysis = bidAnalysisService.getBidAnalysisById(bidAnalysisId);
+//        if (bidAnalysis.isPresent()) {
+//            logger.info("Retrieved BidAnalysis with ID: {}", bidAnalysisId);
+//            return new ResponseEntity<>(bidAnalysis.get(), HttpStatus.OK);
+//        } else {
+//            logger.warn("BidAnalysis with ID {} not found", bidAnalysisId);
+//            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+//        }
+//    }
+
+    @GetMapping("/{bidAnalysisId}/combined-data")
+    public ResponseEntity<BidAnalysisEntity> getCombinedData(@PathVariable Long bidAnalysisId) {
+        try {
+            BidAnalysisEntity combinedData = bidAnalysisService.getCombinedDataByBidAnalysisId(bidAnalysisId);
+            return new ResponseEntity<>(combinedData, HttpStatus.OK);
+        } catch (ResourceNotFoundException e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-
+    
+    
     // Update BidAnalysis by ID
     @PutMapping("/update/{bidAnalysisId}")
     public ResponseEntity<BidAnalysisDto> updateBidAnalysis(@PathVariable Long bidAnalysisId, @RequestBody BidAnalysisDto updatedBidAnalysisDto) {

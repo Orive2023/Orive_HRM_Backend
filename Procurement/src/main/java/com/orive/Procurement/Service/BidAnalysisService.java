@@ -88,39 +88,60 @@ public class BidAnalysisService {
 	                .map(this::convertToDTO)
 	                .collect(Collectors.toList());
 	    }
+	
+	
+	
+//	    //get by BidAnalysisId
+//	    public Optional<BidAnalysisDto> getBidAnalysisById(Long bidAnalysisId) {
+//	        Optional<BidAnalysisEntity> bidAnalysis = bidAnalysisRepository.findById(bidAnalysisId);
+//	        if (bidAnalysis.isPresent()) {
+//	            return Optional.of(convertToDTO(bidAnalysis.get()));
+//	        } else {
+//	            logger.warn("BidAnalysis with ID {} not found", bidAnalysisId);
+//	            return Optional.empty();
+//	        }
+//	    }
 	    
-	    //get by BidAnalysisId
-	    public Optional<BidAnalysisDto> getBidAnalysisById(Long bidAnalysisId) {
-	        Optional<BidAnalysisEntity> bidAnalysis = bidAnalysisRepository.findById(bidAnalysisId);
-	        if (bidAnalysis.isPresent()) {
-	            return Optional.of(convertToDTO(bidAnalysis.get()));
-	        } else {
-	            logger.warn("BidAnalysis with ID {} not found", bidAnalysisId);
-	            return Optional.empty();
-	        }
-	    }
+	    
+//	    //get Company by BidAnalysisId
+//	    public BidAnalysisEntity getCompanyByBidAnalysisId(Long bidAnalysisId) {
+//	        //get BidAnalysis from database with the help  of CompanyList repository
+//	    	BidAnalysisEntity bidAnalysis = bidAnalysisRepository.findById(bidAnalysisId).orElseThrow(() -> new ResourceNotFoundException("BidAnalysis with given id is not found on server !! : " + bidAnalysisId));
+//	        ArrayList<CompanyListEntity> companyList = restTemplate.getForObject("http://localhost:8094/companylist/" + bidAnalysis.getBidAnalysisId(), ArrayList.class);
+//	        logger.info("{} ", companyList);
+//	        bidAnalysis.setCompanyListEntities(companyList);
+//	        return bidAnalysis;
+//	    }
+//	    
+//	  //get Committee by BidAnalysisId
+//	    public BidAnalysisEntity getCommitteeByBidAnalysisId(Long bidAnalysisId) {
+//	        //get BidAnalysis from database with the help  of CommitteeList repository
+//	    	BidAnalysisEntity bidAnalysis = bidAnalysisRepository.findById(bidAnalysisId).orElseThrow(() -> new ResourceNotFoundException("BidAnalysis with given id is not found on server !! : " + bidAnalysisId));
+//	        ArrayList<CommitteeListEntity> committeeList = restTemplate.getForObject("http://localhost:8094/committeelist/" + bidAnalysis.getBidAnalysisId(), ArrayList.class);
+//	        logger.info("{} ", committeeList);
+//	        bidAnalysis.setCommitteeListEntities(committeeList);
+//	        return bidAnalysis;
+//	    }
 	    
 	    
-	    //get Company by BidAnalysisId
-	    public BidAnalysisEntity getCompanyByBidAnalysisId(Long bidAnalysisId) {
-	        //get BidAnalysis from database with the help  of CompanyList repository
-	    	BidAnalysisEntity bidAnalysis = bidAnalysisRepository.findById(bidAnalysisId).orElseThrow(() -> new ResourceNotFoundException("BidAnalysis with given id is not found on server !! : " + bidAnalysisId));
-	        ArrayList<CompanyListEntity> companyList = restTemplate.getForObject("http://localhost:8094/companylist/" + bidAnalysis.getBidAnalysisId(), ArrayList.class);
-	        logger.info("{} ", companyList);
+	    public BidAnalysisEntity getCombinedDataByBidAnalysisId(Long bidAnalysisId) {
+	        BidAnalysisEntity bidAnalysis = bidAnalysisRepository.findById(bidAnalysisId)
+	                .orElseThrow(() -> new ResourceNotFoundException("BidAnalysis with given id is not found on server !! : " + bidAnalysisId));
+
+	        // Get CompanyListEntities
+	        ArrayList<CompanyListEntity> companyList = restTemplate.getForObject(
+	                "http://localhost:8094/companylist/" + bidAnalysis.getBidAnalysisId(), ArrayList.class);
+	        logger.info("Company List: {}", companyList);
 	        bidAnalysis.setCompanyListEntities(companyList);
-	        return bidAnalysis;
-	    }
-	    
-	  //get Committee by BidAnalysisId
-	    public BidAnalysisEntity getCommitteeByBidAnalysisId(Long bidAnalysisId) {
-	        //get BidAnalysis from database with the help  of CommitteeList repository
-	    	BidAnalysisEntity bidAnalysis = bidAnalysisRepository.findById(bidAnalysisId).orElseThrow(() -> new ResourceNotFoundException("BidAnalysis with given id is not found on server !! : " + bidAnalysisId));
-	        ArrayList<CommitteeListEntity> committeeList = restTemplate.getForObject("http://localhost:8094/committeelist/" + bidAnalysis.getBidAnalysisId(), ArrayList.class);
-	        logger.info("{} ", committeeList);
+
+	        // Get CommitteeListEntities
+	        ArrayList<CommitteeListEntity> committeeList = restTemplate.getForObject(
+	                "http://localhost:8094/committeelist/" + bidAnalysis.getBidAnalysisId(), ArrayList.class);
+	        logger.info("Committee List: {}", committeeList);
 	        bidAnalysis.setCommitteeListEntities(committeeList);
+
 	        return bidAnalysis;
 	    }
-	    
 	    
 	    
 	 // Update list by id
