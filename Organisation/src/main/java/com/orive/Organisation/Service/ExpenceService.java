@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -12,6 +13,9 @@ import org.modelmapper.ModelMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
@@ -86,7 +90,7 @@ private static final Logger logger=LoggerFactory.getLogger(ExpenceService.class)
 	    }
 	}
 	
-    // Read
+     //Read
     public List<ExpenceDto> getAllExpence() {
         List<ExpenceEntity> expenceEntities = expenceRepository.findAll();
         logger.info("Retrieved {} Expence from the database", expenceEntities.size());
@@ -94,6 +98,44 @@ private static final Logger logger=LoggerFactory.getLogger(ExpenceService.class)
                 .map(this::convertToDTO)
                 .collect(Collectors.toList());
     }
+	
+	
+//	// Read
+//	public List<ExpenceEntity> getAllExpence() {
+//	    try {
+//	        // Your existing code to retrieve ExpenceEntity list
+//	        List<ExpenceEntity> expenceEntities = expenceRepository.findAll();
+//	        logger.info("Retrieved {} Expence from the database", expenceEntities.size());
+//
+//	        // Use RestTemplate to fetch data from ExpenseList
+//	        String expenseListUrl = "http://localhost:8081/expencelist/all";
+//	        ResponseEntity<List<ExpenseListEntity>> expenseListResponse = restTemplate.exchange(
+//	                expenseListUrl,
+//	                HttpMethod.GET,
+//	                null,
+//	                new ParameterizedTypeReference<List<ExpenseListEntity>>() {});
+//
+//	        if (expenseListResponse.getStatusCode().is2xxSuccessful()) {
+//	            List<ExpenseListEntity> expenseList = expenseListResponse.getBody();
+//
+//	            // Log the fetched expenses from ExpenseList
+//	            logger.info("Fetched {} expenses from ExpenseList.", expenseList.size());
+//
+//	            // Your existing code to return ExpenceEntity list
+//	            return expenceEntities;
+//	        } else {
+//	            logger.error("Failed to fetch expenses from ExpenseList. Status code: {}",
+//	                    expenseListResponse.getStatusCode());
+//	            return Collections.emptyList();
+//	        }
+//	    } catch (Exception e) {
+//	        logger.error("An error occurred while fetching expenses from ExpenseList", e);
+//	        return Collections.emptyList();
+//	    }
+//	}
+
+
+	
     
     //get by AddBankId
     public ExpenceEntity getByCareerSiteId(Long expenceId) {

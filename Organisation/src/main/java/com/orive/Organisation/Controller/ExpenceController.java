@@ -82,8 +82,10 @@ public class ExpenceController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
+    
+    
     		
-      // Get all Expence
+    // Get all Expence
       @GetMapping("/get/expence")
       public ResponseEntity<List<ExpenceDto>> getAllExpence() {
           List<ExpenceDto> expence = expenceService.getAllExpence();
@@ -91,6 +93,14 @@ public class ExpenceController {
           return new ResponseEntity<>(expence, HttpStatus.OK);
       }
 
+    
+//    // Get all Expence
+//    @GetMapping("/get/expence")
+//    public List<ExpenceEntity> getAllExpenses() {
+//        return expenceService.getAllExpence();
+//    }
+    
+    // Get all ExpenceId
       @GetMapping("/get/{expenceId}")
       public ResponseEntity<ExpenceEntity> getExpenceByExpenceId(@PathVariable Long expenceId) {
     	  logger.info("Received request to get expense by ID: {}", expenceId);
