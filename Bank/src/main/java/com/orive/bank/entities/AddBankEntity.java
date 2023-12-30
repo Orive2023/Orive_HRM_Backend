@@ -1,6 +1,9 @@
 package com.orive.bank.entities;
 
+import com.orive.bank.configuration.AesEncryptor;
+
 import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -28,17 +31,22 @@ public class AddBankEntity {
 	private Long addBankId;
 	
 	@Column(name = "bank_name")
+	@Convert(converter = AesEncryptor.class)
 	private String bankName;
 	
 	@Column(name = "account_name")
+	@Convert(converter = AesEncryptor.class)
 	private String accountName;
 	
 	@Column(name = "account_number")
+	@Convert(converter = AesEncryptor.class)
 	private Long accountNumber;
 	
 	@Column(name = "branch_name")
+	@Convert(converter = AesEncryptor.class)
 	private String branchName;
 	
 	@Column(name = "account_type")
+	@Convert(converter = AesEncryptor.class)
 	private String accountType;
 }
