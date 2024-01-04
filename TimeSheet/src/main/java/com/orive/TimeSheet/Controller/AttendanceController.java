@@ -149,6 +149,21 @@ public class AttendanceController {
     }
     
 
+    // Update Attendance by Name And Date
+    @PutMapping("/update/{employeeName}/{date}")
+    public ResponseEntity<AttendanceDto> updateAttendance(@PathVariable String employeeName, @PathVariable LocalDate date, @RequestBody AttendanceDto updatedAttendanceDto) {
+    	AttendanceDto updatedAttendance = attendanceService.updateAttendances(employeeName, date, updatedAttendanceDto);
+        if (updatedAttendance != null) {
+            logger.info("Updated Attendance with name and date: {}", employeeName,date);
+            return new ResponseEntity<>(updatedAttendance, HttpStatus.OK);
+        } else {
+            logger.warn("Attendance with name and date {} not found for update", employeeName,date);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+    
+    
+    
 
     // Delete Attendance by ID
     @DeleteMapping("/delete/{attendanceId}")

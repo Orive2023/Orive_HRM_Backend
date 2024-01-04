@@ -154,6 +154,28 @@ public class AttendanceService {
         }
     }
     
+    
+    
+    // Update list by Name And Date
+    public AttendanceDto updateAttendances(String employeeName, LocalDate date, AttendanceDto attendanceDto) {
+        Optional<AttendanceEntity> existingAttendanceOptional = attendanceRepository.findByEmployeeNameAndDate(employeeName,date);
+        if (existingAttendanceOptional.isPresent()) {
+        	AttendanceEntity existingAttendance = existingAttendanceOptional.get();
+            existingAttendance.setClockIn(attendanceDto.getClockIn());
+            existingAttendance.setClockOut(attendanceDto.getClockOut());
+            existingAttendance.setDate(attendanceDto.getDate());
+        	modelMapper.map(attendanceDto, existingAttendanceOptional);
+            AttendanceEntity updatedAttendance= attendanceRepository.save(existingAttendance);
+            logger.info("Updated Attendance with name and date: {}", updatedAttendance.getAttendanceId());
+            return convertToDTO(updatedAttendance);
+        } else {
+            logger.warn("Attendance with name and date {} not found for update", employeeName);
+            return null;
+        }
+    }
+    
+    
+    
     // Delete
     public void deleteAttendances(Long attendanceId) {
     	attendanceRepository.deleteById(attendanceId);

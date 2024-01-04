@@ -27,7 +27,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-//import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.access.prepost.PreAuthorize;
 import com.orive.Organisation.Dto.CompanyDto;
 import com.orive.Organisation.Dto.LocationDto;
 import com.orive.Organisation.Entity.CompanyEntity;
@@ -46,7 +46,7 @@ public class CompanyController {
   
  	// Create a new Company
       @PostMapping("/create/company")
-//      @PreAuthorize("hasRole('client_admin')")
+      @PreAuthorize("hasRole('client_admin')")
       public ResponseEntity<?> saveCompanyEntity(
     		  @RequestParam("address") String address,
     		  @RequestParam("cin") String cin,
@@ -82,7 +82,7 @@ public class CompanyController {
     
  // Get companies logo by name
     @GetMapping("/{companyName}")
-//    @PreAuthorize("hasRole('client_admin')")
+    @PreAuthorize("hasRole('client_admin')")
 	public ResponseEntity<?> downloadImage(@PathVariable String companyName){
 		byte[] imageData=companyService.downloadImage(companyName);
 		return ResponseEntity.status(HttpStatus.OK)
@@ -93,7 +93,7 @@ public class CompanyController {
     
  // Get all companies  
       @GetMapping("/get/company")
-//      @PreAuthorize("hasRole('client_user')")
+      @PreAuthorize("hasRole('client_user')")
       public ResponseEntity<List<CompanyDto>> getAllCompany() {
           List<CompanyDto> companies = companyService.getAllCompany();
           logger.info("Retrieved {} companies from the database", companies.size());
@@ -135,7 +135,7 @@ public class CompanyController {
   	    
       //Count the total Company
   	    @GetMapping("/count/company")
-//  	  @PreAuthorize("hasRole('client_admin')")
+  	  @PreAuthorize("hasRole('client_admin')")
   	    public long countCompany()
   	    {
   	    	return companyService.countCompany();

@@ -26,12 +26,12 @@ spring:
           auth: true
           starttls:
             enable: true
-#  security:
-#    oauth2:
-#      resourceserver:
-#        jwt:
-#          issuer-uri: http://localhost:8081/realms/springboot
-#          jwk-set-uri: ${spring.security.oauth2.resourceserver.jwt.issuer-uri}/protocol/openid-connect/certs      
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:9078/realms/OriveHrm
+          jwk-set-uri: ${spring.security.oauth2.resourceserver.jwt.issuer-uri}/protocol/openid-connect/certs      
 
 #eureka:
 #  instance:
@@ -43,8 +43,8 @@ spring:
 #      defaultZone: http://localhost:8761/eureka
 server:
   port: 8081
-#jwt:
-#  auth:
-#    converter:
-#      resource-id: keycloak-springboot
-#      principle-attribute: preferred_username
+jwt:
+  auth:
+    converter:
+      resource-id: orive-hrms
+      principle-attribute: preferred_username
