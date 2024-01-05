@@ -31,5 +31,7 @@ public class AttendanceDto {
 	private Long totalWork;
 	private Long totalRest;
 	private LocalDate date;
+	private String ClockInLocation;
+	private String ClockOutLocation;
 //	private byte[] uploadDoc;
 }

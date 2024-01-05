@@ -144,6 +144,7 @@ public class AttendanceService {
 //            existingAttendance.setClockIn(attendanceDto.getClockIn());
             existingAttendance.setClockOut(attendanceDto.getClockOut());
             existingAttendance.setDate(attendanceDto.getDate());
+            existingAttendance.setClockOutLocation(attendanceDto.getClockOutLocation());
         	modelMapper.map(attendanceDto, existingAttendanceOptional);
             AttendanceEntity updatedAttendance= attendanceRepository.save(existingAttendance);
             logger.info("Updated Attendance with ID: {}", updatedAttendance.getAttendanceId());
@@ -164,6 +165,7 @@ public class AttendanceService {
 //            existingAttendance.setClockIn(attendanceDto.getClockIn());
             existingAttendance.setClockOut(attendanceDto.getClockOut());
             existingAttendance.setDate(attendanceDto.getDate());
+            existingAttendance.setClockOutLocation(attendanceDto.getClockOutLocation());
         	modelMapper.map(attendanceDto, existingAttendanceOptional);
             AttendanceEntity updatedAttendance= attendanceRepository.save(existingAttendance);
             logger.info("Updated Attendance with name and date: {}", updatedAttendance.getAttendanceId());

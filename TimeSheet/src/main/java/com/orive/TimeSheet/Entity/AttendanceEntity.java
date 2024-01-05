@@ -60,6 +60,12 @@ public class AttendanceEntity {
 	@Column(name = "date")
 	private LocalDate date;
 	
+	@Column(name = "clock_in_location")
+	private String ClockInLocation;
+	
+	@Column(name = "clock_out_location")
+	private String ClockOutLocation;
+	
 //	@Lob
 //	@Column(name = "upload_doc",  length = 100000)
 //	private byte[] uploadDoc;
