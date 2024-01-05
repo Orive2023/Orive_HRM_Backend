@@ -141,7 +141,7 @@ public class AttendanceService {
         Optional<AttendanceEntity> existingAttendanceOptional = attendanceRepository.findById(attendanceId);
         if (existingAttendanceOptional.isPresent()) {
         	AttendanceEntity existingAttendance = existingAttendanceOptional.get();
-            existingAttendance.setClockIn(attendanceDto.getClockIn());
+//            existingAttendance.setClockIn(attendanceDto.getClockIn());
             existingAttendance.setClockOut(attendanceDto.getClockOut());
             existingAttendance.setDate(attendanceDto.getDate());
         	modelMapper.map(attendanceDto, existingAttendanceOptional);
@@ -161,7 +161,7 @@ public class AttendanceService {
         Optional<AttendanceEntity> existingAttendanceOptional = attendanceRepository.findByEmployeeNameAndDate(employeeName,date);
         if (existingAttendanceOptional.isPresent()) {
         	AttendanceEntity existingAttendance = existingAttendanceOptional.get();
-            existingAttendance.setClockIn(attendanceDto.getClockIn());
+//            existingAttendance.setClockIn(attendanceDto.getClockIn());
             existingAttendance.setClockOut(attendanceDto.getClockOut());
             existingAttendance.setDate(attendanceDto.getDate());
         	modelMapper.map(attendanceDto, existingAttendanceOptional);
