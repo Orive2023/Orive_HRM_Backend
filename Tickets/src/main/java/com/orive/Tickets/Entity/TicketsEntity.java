@@ -39,6 +39,9 @@ public class TicketsEntity {
 	@Column(name = "employee_name")
 	private String employeeName;
 	
+	@Column(name = "employee_id")
+	private Long employeeId;
+	
 	@Column(name = "priority")
 	private String priority;
 	
@@ -48,6 +51,9 @@ public class TicketsEntity {
 	@Column(name = "date")
 	private LocalDate date;
 	
-	@Column(name = "project")
-	private String project;
+	@Column(name = "project_title")
+	private String projectTitle;
+	
+	@Column(name = "description")
+	private String description;
 }

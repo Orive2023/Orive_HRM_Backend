@@ -19,12 +19,14 @@ import lombok.ToString;
 @Builder
 public class TicketsDto {
 
-	private Long ticketsId;
+    private Long ticketsId;	
 	private String ticketsCode;
 	private String subject;
 	private String employeeName;
+	private Long employeeId;
 	private String priority;
 	private String createdBy;
 	private LocalDate date;
-	private String project;
+	private String projectTitle;
+	private String description;
 }
