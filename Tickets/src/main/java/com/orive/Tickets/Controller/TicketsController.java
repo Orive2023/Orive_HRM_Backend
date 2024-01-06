@@ -51,7 +51,7 @@ public class TicketsController {
 
 	  // Get Tickets by ID
 	  @GetMapping("/get/{ticketsId}")
-	  public ResponseEntity<TicketsDto> getTicketsDtoId(@PathVariable Long ticketsId) {
+	  public ResponseEntity<TicketsDto> getTicketsId(@PathVariable Long ticketsId) {
 	      Optional<TicketsDto> tickets = ticketsService.getTicketsId(ticketsId);
 	      if (tickets.isPresent()) {
 	          logger.info("Retrieved Tickets with ID: {}", ticketsId);
@@ -62,6 +62,19 @@ public class TicketsController {
 	      }
 	  }
 
+	// Get Employee by ID
+		  @GetMapping("/employee/get/{employeeId}")
+		  public ResponseEntity<TicketsDto> getEmployeeId(@PathVariable Long employeeId) {
+		      Optional<TicketsDto> employee = ticketsService.getEmployeeId(employeeId);
+		      if (employee.isPresent()) {
+		          logger.info("Retrieved Tickets with ID: {}", employeeId);
+		          return new ResponseEntity<>(employee.get(), HttpStatus.OK);
+		      } else {
+		          logger.warn("Tickets with ID {} not found", employeeId);
+		          return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		      }
+		  }
+	  
 	  // Update Tickets by ID
 	  @PutMapping("/update/{ticketsId}")
 	  public ResponseEntity<TicketsDto> updateTickets(@PathVariable Long ticketsId, @RequestBody TicketsDto updatedTicketsDto) {

@@ -55,6 +55,17 @@ public class TicketsService {
         }
     }
     
+  //get by employeeId
+    public Optional<TicketsDto> getEmployeeId(Long employeeId) {
+        Optional<TicketsEntity> employee = ticketsRepository.findByEmployeeId(employeeId);
+        if (employee.isPresent()) {
+            return Optional.of(convertToDTO(employee.get()));
+        } else {
+            logger.warn("Tickets with ID {} not found", employeeId);
+            return Optional.empty();
+        }
+    }
+    
  // Update list by id
     public TicketsDto updateTickets(Long TicketsId, TicketsDto ticketsDto) {
         Optional<TicketsEntity> existingTicketsOptional = ticketsRepository.findById(TicketsId);
