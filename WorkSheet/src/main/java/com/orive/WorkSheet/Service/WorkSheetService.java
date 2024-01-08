@@ -1,5 +1,6 @@
 package com.orive.WorkSheet.Service;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -52,6 +53,23 @@ public class WorkSheetService {
             return Optional.empty();
         }
     }
+    
+    
+    
+    //get by employeeId
+    public List<WorkSheetDto> getEmployeeId(Long employeeId) {
+        List<WorkSheetEntity> employees = workSheetRepository.findByEmployeeId(employeeId);
+
+        if (employees.isEmpty()) {
+            logger.warn("WorkSheet with ID {} not found", employeeId);
+            return Collections.emptyList();
+        }
+
+        return employees.stream()
+                .map(this::convertToDTO)
+                .collect(Collectors.toList());
+    } 
+    
     
  // Update list by id
     public WorkSheetDto updateWorkSheet(Long WorkSheetId, WorkSheetDto workSheetDto) {

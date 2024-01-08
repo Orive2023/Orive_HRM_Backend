@@ -48,6 +48,9 @@ public class WorkSheetEntity {
 	@Column(name = "employee_name")
 	private String employeeName;
 	
+	@Column(name = "employee_id")
+	private Long employeeId;
+	
 	@Column(name = "assigned_to")
 	private String assignedTo;
 	

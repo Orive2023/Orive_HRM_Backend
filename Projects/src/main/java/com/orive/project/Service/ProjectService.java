@@ -56,20 +56,31 @@ public class ProjectService {
     }
     
     
-    //get by employeeId
-    public List<ProjectDto> getEmployeeId(Long employeeId) {
-        List<ProjectEntity> employees = projectRepository.findByEmployeeId(employeeId);
-
-        if (employees.isEmpty()) {
-            logger.warn("Project with ID {} not found", employeeId);
-            return Collections.emptyList();
-        }
-
-        return employees.stream()
-                .map(this::convertToDTO)
-                .collect(Collectors.toList());
-    }
+//    //get by employeeId
+//    public List<ProjectDto> getEmployeeId(Long employeeId) {
+//        List<ProjectEntity> employees = projectRepository.findByEmployeeId(employeeId);
+//
+//        if (employees.isEmpty()) {
+//            logger.warn("Project with ID {} not found", employeeId);
+//            return Collections.emptyList();
+//        }
+//
+//        return employees.stream()
+//                .map(this::convertToDTO)
+//                .collect(Collectors.toList());
+//    }
     
+    
+    //get by employeeId
+    public Optional<ProjectDto> getProjectsByEmployeeId(Long employeeId) {
+        List<ProjectEntity> projects = projectRepository.findByEmployeeProjectManagementEntities_EmployeeId(employeeId);
+        if (projects.isEmpty()) {
+            return Optional.empty();
+        } else {
+            // Assuming you want to return the first project for simplicity
+            return Optional.of(convertToDTO(projects.get(0)));
+        }
+    }
     
     
  // Update list by id

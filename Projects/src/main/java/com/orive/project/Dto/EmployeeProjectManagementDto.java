@@ -1,8 +1,6 @@
 package com.orive.project.Dto;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import com.orive.project.Entity.EmployeeProjectManagementEntity;
@@ -10,6 +8,7 @@ import com.orive.project.Entity.EmployeeProjectManagementEntity;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.Lob;
 import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -24,19 +23,14 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class ProjectDto {
+public class EmployeeProjectManagementDto {
+
 	
-	private long projectsId;
-	private String projectTitle;
-//	private Long employeeId;
-	private String clientName;
-	private String companyName;
-	private LocalDate startDate;
-	private LocalDate endDate;
-	private String priority;
-	private double budget;
-	private String projectManagers;
-	private String summary;
-	private String description;
-    private List<EmployeeProjectManagementDto> employeeProjectManagementEntities;
+    private long employeeProjectManagementId;
+	private Long employeeId;
+	private String projectName;
+	private String employeeName;
+	private String taskAssignedFor;
+	private String typeTheTaskHere;
+   
 }

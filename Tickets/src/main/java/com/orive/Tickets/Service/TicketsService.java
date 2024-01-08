@@ -71,6 +71,7 @@ public class TicketsService {
                 .collect(Collectors.toList());
     } 
     
+    
  // Update list by id
     public TicketsDto updateTickets(Long TicketsId, TicketsDto ticketsDto) {
         Optional<TicketsEntity> existingTicketsOptional = ticketsRepository.findById(TicketsId);

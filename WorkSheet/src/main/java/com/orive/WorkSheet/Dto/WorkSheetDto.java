@@ -26,6 +26,7 @@ public class WorkSheetDto {
 	private double estimateHour;
 	private String project;
 	private String employeeName;
+	private Long employeeId;
 	private String assignedTo;
 	private String description;
 	private String taskName;

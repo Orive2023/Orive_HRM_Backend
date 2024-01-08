@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+
 import com.orive.WorkSheet.Dto.WorkSheetDto;
 import com.orive.WorkSheet.Service.WorkSheetService;
 
@@ -60,7 +61,22 @@ public class WorkSheetController {
 		          return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		      }
 		  }
+		  
+		  
+		// Get Employee by ID
+		  @GetMapping("/{employeeId}")
+		    public ResponseEntity<List<WorkSheetDto>> getWorkSheetsByEmployeeId(@PathVariable Long employeeId) {
+		        List<WorkSheetDto> workSheet = workSheetService.getEmployeeId(employeeId);
 
+		        if (workSheet.isEmpty()) {
+		            return ResponseEntity.notFound().build();
+		        } else {
+		            return ResponseEntity.ok(workSheet);
+		        }
+		    }
+		  
+		  
+		  
 		  // Update WorkSheet by ID
 		  @PutMapping("/update/{workSheetId}")
 		  public ResponseEntity<WorkSheetDto> updateWorkSheet(@PathVariable Long workSheetId, @RequestBody WorkSheetDto updatedWorkSheetDto) {

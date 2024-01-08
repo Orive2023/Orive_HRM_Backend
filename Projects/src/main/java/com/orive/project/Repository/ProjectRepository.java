@@ -11,6 +11,8 @@ import com.orive.project.Entity.ProjectEntity;
 
 public interface ProjectRepository extends JpaRepository<ProjectEntity, Long> {
 
-	@Query("SELECT p FROM ProjectEntity p WHERE p.employeeId = :employeeId")
-	List<ProjectEntity> findByEmployeeId(@Param("employeeId") Long employeeId);
+//	@Query("SELECT p FROM ProjectEntity p WHERE p.employeeId = :employeeId")
+//	List<ProjectEntity> findByEmployeeId(@Param("employeeId") Long employeeId);
+	
+	List<ProjectEntity> findByEmployeeProjectManagementEntities_EmployeeId(Long employeeId);
 }

@@ -66,17 +66,26 @@ public class ProjectController {
     }
     
     
+// // Get Employee by ID
+// 	  @GetMapping("/{employeeId}")
+// 	    public ResponseEntity<List<ProjectDto>> getProjectsByEmployeeId(@PathVariable Long employeeId) {
+// 	        List<ProjectDto> tickets = projectService.getEmployeeId(employeeId);
+//
+// 	        if (tickets.isEmpty()) {
+// 	            return ResponseEntity.notFound().build();
+// 	        } else {
+// 	            return ResponseEntity.ok(tickets);
+// 	        }
+// 	    }
+    
  // Get Employee by ID
- 	  @GetMapping("/{employeeId}")
- 	    public ResponseEntity<List<ProjectDto>> getProjectsByEmployeeId(@PathVariable Long employeeId) {
- 	        List<ProjectDto> tickets = projectService.getEmployeeId(employeeId);
+    @GetMapping("/employee/{employeeId}")
+    public ResponseEntity<ProjectDto> getProjectsByEmployeeId(@PathVariable Long employeeId) {
+        Optional<ProjectDto> projects = projectService.getProjectsByEmployeeId(employeeId);
 
- 	        if (tickets.isEmpty()) {
- 	            return ResponseEntity.notFound().build();
- 	        } else {
- 	            return ResponseEntity.ok(tickets);
- 	        }
- 	    }
+        return projects.map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
+    }
     
 
     // Update project by ID
