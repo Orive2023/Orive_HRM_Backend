@@ -90,9 +90,7 @@ public class AttendanceController {
     
     
     
-//Get excelsheet
-    
-    
+//Get excelsheet   
     @PostMapping("/product/upload")
 	public ResponseEntity<?> upload(@RequestParam("file") MultipartFile file)
 	{
@@ -151,8 +149,8 @@ public class AttendanceController {
 
     // Update Attendance by Name And Date
     @PutMapping("/update/{employeeName}/{date}")
-    public ResponseEntity<AttendanceDto> updateAttendance(@PathVariable String employeeName, @PathVariable LocalDate date, @RequestBody AttendanceDto updatedAttendanceDto) {
-    	AttendanceDto updatedAttendance = attendanceService.updateAttendances(employeeName, date, updatedAttendanceDto);
+    public ResponseEntity<AttendanceDto> updateAttendanceByEmployeeNameAndDate(@PathVariable String employeeName, @PathVariable LocalDate date, @RequestBody AttendanceDto updatedAttendanceDto) {
+    	AttendanceDto updatedAttendance = attendanceService.updateAttendancesByEmployeeNameAndDate(employeeName, date, updatedAttendanceDto);
         if (updatedAttendance != null) {
             logger.info("Updated Attendance with name and date: {}", employeeName,date);
             return new ResponseEntity<>(updatedAttendance, HttpStatus.OK);
@@ -163,8 +161,20 @@ public class AttendanceController {
     }
     
     
+ // Update Attendance by Id And Date
+    @PutMapping("/update/Id/{employeeId}/{date}")
+    public ResponseEntity<AttendanceDto> updateAttendanceByEmployeeIdAndDate(@PathVariable Long employeeId, @PathVariable LocalDate date, @RequestBody AttendanceDto updatedAttendanceDto) {
+    	AttendanceDto updatedAttendance = attendanceService.updateAttendancesByEmployeeIdAndDate(employeeId, date, updatedAttendanceDto);
+        if (updatedAttendance != null) {
+            logger.info("Updated Attendance with name and date: {}", employeeId,date);
+            return new ResponseEntity<>(updatedAttendance, HttpStatus.OK);
+        } else {
+            logger.warn("Attendance with name and date {} not found for update", employeeId,date);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
     
-
+    
     // Delete Attendance by ID
     @DeleteMapping("/delete/{attendanceId}")
     public ResponseEntity<Void> deleteAttendance(@PathVariable Long attendanceId) {

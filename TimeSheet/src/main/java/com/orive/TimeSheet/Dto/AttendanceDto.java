@@ -23,6 +23,7 @@ public class AttendanceDto {
  	
 	private Long attendanceId;
 	private String employeeName;
+	private Long employeeId;
 	private String clockIn;
 	private String clockOut;
 	private Long late;
@@ -31,7 +32,7 @@ public class AttendanceDto {
 	private Long totalWork;
 	private Long totalRest;
 	private LocalDate date;
-	private String ClockInLocation;
-	private String ClockOutLocation;
+	private String clockInLocation;
+	private String clockOutLocation;
 //	private byte[] uploadDoc;
 }

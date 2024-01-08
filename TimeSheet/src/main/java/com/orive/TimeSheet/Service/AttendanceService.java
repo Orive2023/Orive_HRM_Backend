@@ -97,8 +97,7 @@ public class AttendanceService {
 //	}
     
     
-    //upload excelsheet
-    
+    //upload excelsheet   
     public void save(MultipartFile file)
 	{
 		try {
@@ -158,7 +157,7 @@ public class AttendanceService {
     
     
     // Update list by Name And Date
-    public AttendanceDto updateAttendances(String employeeName, LocalDate date, AttendanceDto attendanceDto) {
+    public AttendanceDto updateAttendancesByEmployeeNameAndDate(String employeeName, LocalDate date, AttendanceDto attendanceDto) {
         Optional<AttendanceEntity> existingAttendanceOptional = attendanceRepository.findByEmployeeNameAndDate(employeeName,date);
         if (existingAttendanceOptional.isPresent()) {
         	AttendanceEntity existingAttendance = existingAttendanceOptional.get();
@@ -176,6 +175,25 @@ public class AttendanceService {
         }
     }
     
+    
+    // Update list by EmployeeId And Date
+    public AttendanceDto updateAttendancesByEmployeeIdAndDate(Long employeeId, LocalDate date, AttendanceDto attendanceDto) {
+        Optional<AttendanceEntity> existingAttendanceOptional = attendanceRepository.findByEmployeeIdAndDate(employeeId,date);
+        if (existingAttendanceOptional.isPresent()) {
+        	AttendanceEntity existingAttendance = existingAttendanceOptional.get();
+//            existingAttendance.setClockIn(attendanceDto.getClockIn());
+            existingAttendance.setClockOut(attendanceDto.getClockOut());
+            existingAttendance.setDate(attendanceDto.getDate());
+            existingAttendance.setClockOutLocation(attendanceDto.getClockOutLocation());
+        	modelMapper.map(attendanceDto, existingAttendanceOptional);
+            AttendanceEntity updatedAttendance= attendanceRepository.save(existingAttendance);
+            logger.info("Updated Attendance with name and date: {}", updatedAttendance.getAttendanceId());
+            return convertToDTO(updatedAttendance);
+        } else {
+            logger.warn("Attendance with name and date {} not found for update", employeeId);
+            return null;
+        }
+    }
     
     
     // Delete

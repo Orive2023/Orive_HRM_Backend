@@ -36,6 +36,9 @@ public class AttendanceEntity {
 	@Column(name = "employee_name")
 	private String employeeName;
 	
+	@Column(name = "employee_id")
+	private Long employeeId;
+	
 	@Column(name = "clock_in")
 	private String clockIn;
 	
@@ -61,10 +64,10 @@ public class AttendanceEntity {
 	private LocalDate date;
 	
 	@Column(name = "clock_in_location")
-	private String ClockInLocation;
+	private String clockInLocation;
 	
 	@Column(name = "clock_out_location")
-	private String ClockOutLocation;
+	private String clockOutLocation;
 	
 //	@Lob
 //	@Column(name = "upload_doc",  length = 100000)

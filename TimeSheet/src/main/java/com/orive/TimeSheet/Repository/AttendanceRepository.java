@@ -14,12 +14,11 @@ public interface AttendanceRepository extends JpaRepository<AttendanceEntity, Lo
 //Count the employees present today
 	@Query("SELECT COUNT(a) FROM AttendanceEntity a WHERE a.date = CURRENT_DATE()")
 	long countPresentEmployeesToday();
-	
-//	@Query("SELECT l FROM AttendanceEntity l WHERE l.employeeName = :employeeName AND 1.date = :date")
-//	Optional<AttendanceEntity> findByEmployeeNameAndDate(String employeeName, LocalDate date);
-	
-	
+		
 	@Query("SELECT a FROM AttendanceEntity a WHERE a.employeeName = :employeeName AND a.date = :date")
 	Optional<AttendanceEntity> findByEmployeeNameAndDate(@Param("employeeName") String employeeName, @Param("date") LocalDate date);
+	
+	@Query("SELECT a FROM AttendanceEntity a WHERE a.employeeId = :employeeId AND a.date = :date")
+	Optional<AttendanceEntity> findByEmployeeIdAndDate(@Param("employeeId") Long employeeId, @Param("date") LocalDate date);
 	
 }
