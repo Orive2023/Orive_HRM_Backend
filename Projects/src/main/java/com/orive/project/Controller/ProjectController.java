@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+
 import com.orive.project.Dto.ProjectDto;
 import com.orive.project.Service.ProjectService;
 
@@ -63,6 +64,20 @@ public class ProjectController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
+    
+    
+ // Get Employee by ID
+ 	  @GetMapping("/{employeeId}")
+ 	    public ResponseEntity<List<ProjectDto>> getProjectsByEmployeeId(@PathVariable Long employeeId) {
+ 	        List<ProjectDto> tickets = projectService.getEmployeeId(employeeId);
+
+ 	        if (tickets.isEmpty()) {
+ 	            return ResponseEntity.notFound().build();
+ 	        } else {
+ 	            return ResponseEntity.ok(tickets);
+ 	        }
+ 	    }
+    
 
     // Update project by ID
     @PutMapping("/update/{projectsId}")

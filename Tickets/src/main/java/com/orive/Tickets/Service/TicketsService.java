@@ -1,5 +1,6 @@
 package com.orive.Tickets.Service;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -55,16 +56,20 @@ public class TicketsService {
         }
     }
     
+ 
   //get by employeeId
-    public Optional<TicketsDto> getEmployeeId(Long employeeId) {
-        Optional<TicketsEntity> employee = ticketsRepository.findByEmployeeId(employeeId);
-        if (employee.isPresent()) {
-            return Optional.of(convertToDTO(employee.get()));
-        } else {
+    public List<TicketsDto> getEmployeeId(Long employeeId) {
+        List<TicketsEntity> employees = ticketsRepository.findByEmployeeId(employeeId);
+
+        if (employees.isEmpty()) {
             logger.warn("Tickets with ID {} not found", employeeId);
-            return Optional.empty();
+            return Collections.emptyList();
         }
-    }
+
+        return employees.stream()
+                .map(this::convertToDTO)
+                .collect(Collectors.toList());
+    } 
     
  // Update list by id
     public TicketsDto updateTickets(Long TicketsId, TicketsDto ticketsDto) {

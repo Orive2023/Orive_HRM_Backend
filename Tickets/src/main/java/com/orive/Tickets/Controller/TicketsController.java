@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.orive.Tickets.Dto.TicketsDto;
+import com.orive.Tickets.Entity.TicketsEntity;
 import com.orive.Tickets.Service.TicketsService;
 
 @RestController
@@ -62,18 +63,19 @@ public class TicketsController {
 	      }
 	  }
 
+	  
 	// Get Employee by ID
-		  @GetMapping("/employee/get/{employeeId}")
-		  public ResponseEntity<TicketsDto> getEmployeeId(@PathVariable Long employeeId) {
-		      Optional<TicketsDto> employee = ticketsService.getEmployeeId(employeeId);
-		      if (employee.isPresent()) {
-		          logger.info("Retrieved Tickets with ID: {}", employeeId);
-		          return new ResponseEntity<>(employee.get(), HttpStatus.OK);
-		      } else {
-		          logger.warn("Tickets with ID {} not found", employeeId);
-		          return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-		      }
-		  }
+	  @GetMapping("/{employeeId}")
+	    public ResponseEntity<List<TicketsDto>> getTicketsByEmployeeId(@PathVariable Long employeeId) {
+	        List<TicketsDto> tickets = ticketsService.getEmployeeId(employeeId);
+
+	        if (tickets.isEmpty()) {
+	            return ResponseEntity.notFound().build();
+	        } else {
+	            return ResponseEntity.ok(tickets);
+	        }
+	    }
+	  
 	  
 	  // Update Tickets by ID
 	  @PutMapping("/update/{ticketsId}")

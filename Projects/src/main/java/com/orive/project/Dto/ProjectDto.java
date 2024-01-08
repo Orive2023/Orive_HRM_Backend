@@ -22,6 +22,7 @@ public class ProjectDto {
 	
 	private long projectsId;
 	private String projectTitle;
+	private Long employeeId;
 	private String clientName;
 	private String companyName;
 	private LocalDate startDate;

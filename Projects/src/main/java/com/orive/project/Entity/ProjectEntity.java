@@ -34,6 +34,9 @@ public class ProjectEntity {
 	@Column(name = "project_title")
 	private String projectTitle;
 	
+	@Column(name = "employee_id")
+	private Long employeeId;
+	
 	@Column(name = "client_name")
 	private String clientName;
 	

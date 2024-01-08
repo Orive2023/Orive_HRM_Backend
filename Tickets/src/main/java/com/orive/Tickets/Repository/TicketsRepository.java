@@ -12,8 +12,11 @@ import com.orive.Tickets.Entity.TicketsEntity;
 
 public interface TicketsRepository extends JpaRepository<TicketsEntity, Long> {
 	
-	@Query("SELECT t FROM TicketsEntity t WHERE t.employeeId = :employeeId")
-	Optional<TicketsEntity> findByEmployeeId(Long employeeId);
+//	@Query("SELECT t FROM TicketsEntity t WHERE t.employeeId = :employeeId")
 //	Optional<TicketsEntity> findByEmployeeId(@Param("employeeId") Long employeeId);
 
+
+	
+	@Query("SELECT t FROM TicketsEntity t WHERE t.employeeId = :employeeId")
+	List<TicketsEntity> findByEmployeeId(@Param("employeeId") Long employeeId);
 }

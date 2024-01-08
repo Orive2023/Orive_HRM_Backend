@@ -1,5 +1,6 @@
 package com.orive.project.Service;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -53,6 +54,23 @@ public class ProjectService {
             return Optional.empty();
         }
     }
+    
+    
+    //get by employeeId
+    public List<ProjectDto> getEmployeeId(Long employeeId) {
+        List<ProjectEntity> employees = projectRepository.findByEmployeeId(employeeId);
+
+        if (employees.isEmpty()) {
+            logger.warn("Project with ID {} not found", employeeId);
+            return Collections.emptyList();
+        }
+
+        return employees.stream()
+                .map(this::convertToDTO)
+                .collect(Collectors.toList());
+    }
+    
+    
     
  // Update list by id
     public ProjectDto updateProject(Long projectsId, ProjectDto projectDto) {
